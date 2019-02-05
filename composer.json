@@ -1,0 +1,14 @@
+{
+    "name": "mauricewijnia/laraberg",
+    "description": "A Gutenberg implementation for Laravel",
+    "type": "project",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Maurice Wijnia",
+            "email": "mauricewijnia@live.nl"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
