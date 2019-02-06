@@ -12,14 +12,24 @@
     "minimum-stability": "dev",
     "prefer-stable" : true,
     "require": {},
-    "autoload": {
-        "psr-4": {
-            "mauricewijnia\\Laraberg\\": "src",
-            "mauricewijnia\\Laraberg\\Test\\": "tests"
-        }
-    },
     "require-dev": {
         "orchestra/testbench": "^3.7",
         "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MauriceWijnia\\Laraberg\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MauriceWijnia\\Laraberg\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": "MauriceWijnia\\Laraberg\\LarabergServiceProvider"
+        }
     }
+
 }

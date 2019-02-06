@@ -1,6 +1,6 @@
 <?php
 
-namespace mauricewijnia\Laraberg;
+namespace MauriceWijnia\Laraberg;
 
 use Illuminate\Support\Facades\Facade;
 

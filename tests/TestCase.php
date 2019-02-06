@@ -1,16 +1,16 @@
 <?php
 
-namespace mauricewijnia\Laraberg\Test;
+namespace MauriceWijnia\Laraberg\Test;
 
-use mauricewijnia\Laraberg\LarabergFacade;
-use mauricewijnia\Laraberg\LarabergServiceProvider;
+use MauriceWijnia\Laraberg\LarabergFacade;
+use MauriceWijnia\Laraberg\LarabergServiceProvider;
 use Orchestra\Testbench\Testcase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase {
       /**
      * Load package service provider
      * @param  \Illuminate\Foundation\Application $app
-     * @return mauricewijnia\Laraberg\LarabergServiceProvider
+     * @return MauriceWijnia\Laraberg\LarabergServiceProvider
      */
     protected function getPackageProviders($app)
     {

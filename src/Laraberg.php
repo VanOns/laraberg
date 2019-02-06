@@ -1,12 +1,12 @@
 <?php
-namespace mauricewijnia\Laraberg;
+namespace MauriceWijnia\Laraberg;
 
 class Laraberg {
   /**
    * Does stuff
-   * @return void
+   * @return string
    */
-  public function doStuff() {
+  public static function doStuff() {
     return 'Did stuff';
   }
 }

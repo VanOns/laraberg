@@ -1,0 +1,31 @@
+{
+  "name": "laraberg",
+  "version": "0.0.1",
+  "description": "A Gutenberg implementation for Laravel",
+  "main": "src/resources/laraberg.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "development": "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.js",
+    "dev": "npm run development",
+    "watch": "npm run development -- --watch",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mauricewijnia/laraberg.git"
+  },
+  "author": "Maurice Wijnia",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/mauricewijnia/laraberg/issues"
+  },
+  "homepage": "https://github.com/mauricewijnia/laraberg#readme",
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "webpack": "^4.29.2",
+    "webpack-cli": "^3.2.3"
+  }
+}

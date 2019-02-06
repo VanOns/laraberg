@@ -1,9 +1,9 @@
 <?php
 
-namespace mauricewijnia\Laraberg\Test;
+namespace MauriceWijnia\Laraberg\Test;
 
 use Laraberg;
-use mauricewijnia\Laraberg\Test\TestCase;
+use MauriceWijnia\Laraberg\Test\TestCase;
 
 class LarabergTest extends TestCase {
   /**
