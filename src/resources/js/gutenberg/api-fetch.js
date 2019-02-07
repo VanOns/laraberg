@@ -78,7 +78,9 @@ function getPage() {
     },
     templates: "",
     parent: 0,
-    permalink_template: "",
+    link: `${window.location.origin}/preview`,
+    permalink_template: `${window.location.origin}/preview`,
+    preview_link: `${window.location.origin}/preview`,
     type: 'page',
     status: 'draft',
     id: 1, // Only matters if we want to do saves through API calls

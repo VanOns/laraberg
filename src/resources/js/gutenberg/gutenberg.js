@@ -4,7 +4,7 @@ import './settings'
 // Importing domReady and editPost modules
 import { domReady, editPost } from '@frontkom/gutenberg-js';
 
-// Don't forget to import the style
+// Gutenberg JS Style
 import '@frontkom/gutenberg-js/build/css/block-library/style.css';
 import '@frontkom/gutenberg-js/build/css/style.css';
 
