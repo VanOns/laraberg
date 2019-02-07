@@ -1,5 +1,3 @@
-function larabergWorks() {
-  console.log('Laraberg works')
-}
+import './gutenberg/gutenberg'
 
-larabergWorks()
+console.log('test')

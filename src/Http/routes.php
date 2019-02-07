@@ -1,7 +1,7 @@
 <?php
 
 Route::get('laraberg', function() {
-  return view('laraberg::editor');
+  return view('laraberg::index');
 });
 
 Route::get('laraberg/wp/v2/types', function() {
