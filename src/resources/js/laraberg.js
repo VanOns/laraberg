@@ -1,3 +1,2 @@
 import './gutenberg/gutenberg'
-
-console.log('test')
+import './../scss/laraberg.scss'

@@ -12,8 +12,8 @@ import '@frontkom/gutenberg-js/build/css/style.css';
 const target = 'laraberg-editor';
 
 // Post properties
-const postType = 'post'; // or 'page'
-const postId = 123;
+const postType = 'page'; // or 'post'
+const postId = 1; // Only matters if we want to do saves through API calls
 
 // Some editor settings
 const settings = {
@@ -38,12 +38,28 @@ const settings = {
   mediaLibrary: false, // to disable the Media Library feature (default: true)
 };
 
+const editorSettings = { 
+  alignWide: true,
+  availableTemplates: [],
+  allowedBlockTypes: true, 
+  disableCustomColors: false, 
+  disablePostFormats: false,
+  mediaLibrary: false,
+  titlePlaceholder: "Add title",
+  bodyPlaceholder: "Write your story",
+  isRTL: false,
+  autosaveInterval: 0,
+  canAutosave: false, // to disable Editor Autosave featured (default: true)
+  canPublish: false,  // to disable Editor Publish featured (default: true)
+  canSave: false,     // to disable Editor Save featured (default: true)    };
+};
+
 // Post properties to override
 const overridePost = {};
 
 //Initializing the editor!
 window._wpLoadGutenbergEditor = new Promise(function (resolve) {
   domReady(function () {
-      resolve(editPost.initializeEditor(target, postType, postId, settings, overridePost))
+    resolve(editPost.initializeEditor(target, postType, postId, editorSettings, overridePost))
   })
 })
