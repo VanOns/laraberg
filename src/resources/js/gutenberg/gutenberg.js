@@ -33,8 +33,8 @@ const settings = {
   },
   // @frontkom/gutenberg-js settings
   canAutosave: false,  // to disable the Editor Autosave feature (default: true)
-  canPublish: false,   // to disable the Editor Publish feature (default: true)
-  canSave: false,      // to disable the Editor Save feature (default: true)
+  canPublish: true,   // to disable the Editor Publish feature (default: true)
+  canSave: true,      // to disable the Editor Save feature (default: true)
   mediaLibrary: false, // to disable the Media Library feature (default: true)
 };
 
@@ -63,3 +63,6 @@ window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     resolve(editPost.initializeEditor(target, postType, postId, editorSettings, overridePost))
   })
 })
+
+//Load reusable blocks
+

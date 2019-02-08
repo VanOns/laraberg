@@ -40,6 +40,8 @@
   },
   "dependencies": {
     "@frontkom/gutenberg-js": "^3.0.1",
+    "axios": "^0.18.0",
+    "normalize.css": "^8.0.1",
     "sass-loader": "^7.1.0"
   }
 }

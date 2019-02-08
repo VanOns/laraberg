@@ -13,6 +13,7 @@ class LarabergServiceProvider extends ServiceProvider {
     public function boot() {
         require __DIR__ . '/Http/routes.php';
         $this->loadViewsFrom(__DIR__.'/resources/views', 'laraberg');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->publishes([__DIR__.'/../public' => public_path('vendor/laraberg')], 'public');
     }
     /**

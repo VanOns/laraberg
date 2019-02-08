@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const types = {
   page: {
     labels: {},
@@ -18,8 +20,8 @@ const types = {
       extras: false,
     },
     viewable: false,
-    saveable: false,
-    publishable: false,
+    saveable: true,
+    publishable: true,
     autosaveable: false
   },
   block: {
@@ -29,11 +31,36 @@ const types = {
       title: true,
       editor: true
     },
-    viewable: false
+    viewable: true
   }
 }
 
 const requests = {
+  getBlock: {
+    method: 'GET',
+    regex: /\/wp\/v2\/blocks\/(\d*)/g,
+    run: getBlock
+  },
+  getBlocks: {
+    method: 'GET',
+    regex: /\/wp\/v2\/blocks.*/g,
+    run: getBlocks
+  },
+  postBlocks: {
+    method: 'POST',
+    regex: /\/wp\/v2\/blocks.*/g,
+    run: postBlocks
+  },
+  putBlock: {
+    method: 'PUT',
+    regex: /\/wp\/v2\/blocks\/(\d*)/g,
+    run: putBlock
+  },
+  optionsMedia: {
+    method: 'OPTIONS',
+    regex: /\/wp\/v2\/media/g,
+    run: optionsMedia
+  },
   getPage: {
     method: 'GET',
     regex: /\/wp\/v2\/pages\/(\d*)/g,
@@ -69,6 +96,43 @@ const requests = {
     regex: /\/wp\/v2\/users\/\?(.*)/g,
     run: getUsers
   }
+}
+
+function getBlock(options, matches) {
+  let id = matches[1]
+  return axios.get(`/laraberg/blocks/${id}`)
+    .then(response => response.data)
+}
+
+function getBlocks() {
+  return axios.get('/laraberg/blocks')
+    .then(response => response.data)
+}
+
+function postBlocks(options) {
+  return axios.post('/laraberg/blocks', options.data)
+    .then(response => response.data)
+}
+
+function putBlock(options, matches) {
+  let id = matches[1]
+  return axios.put(`laraberg/blocks/${id}`, options.data)
+    .then(response => response.data)
+}
+
+function optionsMedia() {
+  let res = {
+    headers: {
+        get: value => {
+            if (value === 'allow') {
+                return [ 'POST' ]
+            }
+        },
+    },
+  }
+  return new Promise(resolve => {
+    resolve(res)
+  })
 }
 
 function getPage() {
@@ -136,9 +200,12 @@ function matchPath(options) {
   let promise
   Object.keys(requests).forEach((key) => {
     let request = requests[key]
+    // Reset lastIndex so regex starts matching from the first character
+    request.regex.lastIndex = 0
     let matches = request.regex.exec(options.path)
-    if ((options.method === request.method || request.method === 'GET') && matches && matches.length > 0) {
-      promise = request.run()
+    if ((options.method === request.method || (!options.method && request.method === 'GET')) && matches && matches.length > 0) {
+      promise = request.run(options, matches)
+        .catch(error=> console.log(error.response))
     }
   })
 
@@ -149,6 +216,7 @@ function matchPath(options) {
         message: 'API handler not found.',
         data: {
           path: options.path,
+          options: options,
           status: 404
         }
       })
