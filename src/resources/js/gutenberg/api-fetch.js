@@ -154,6 +154,12 @@ function getPage() {
   })
 }
 
+export function postPage(options) {
+  console.log(options)
+  return axios.post('/laraberg/pages', options.data)
+    .then(response => response.data)
+}
+
 function getTaxonomies() {
   return new Promise(resolve => {
     resolve('ok')

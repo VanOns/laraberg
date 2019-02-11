@@ -1,10 +1,10 @@
 <?php
 
-namespace MauriceWijnia\Laraberg\Models;
+namespace MauriceWijnia\Laraberg\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use MauriceWijnia\Laraberg\Database\Models\Base;
 
-class Block extends Model {
+class Block extends Base {
   protected $table = 'lb_blocks';
 
   protected $casts = [
@@ -35,18 +35,6 @@ class Block extends Model {
    */
   public function updateSlug() {
     $this->slug = $this->title['raw'];
-  }
-
-  /**
-   * Returns only the permitted parameters for given data
-   * @param array $data
-   * @return array
-   */
-  public static function permittedParams($data) {
-    $permitted = self::permitted;
-    return array_filter($data,  function($key) use ($permitted) {
-      return in_array($key, $permitted);
-    }, ARRAY_FILTER_USE_KEY);
   }
 
   /**

@@ -9,8 +9,8 @@ class ApplicationController extends BaseController {
     return $this->response($data, $code);
   }
 
-  public function notFound($data, $code = 404) {
-    return $this.response(['message' => 'not_found'], $code);
+  public function notFound($code = 404) {
+    return $this->response(['message' => 'not_found'], $code);
   }
 
   public function response($data, $code) {
