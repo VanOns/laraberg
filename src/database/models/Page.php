@@ -20,9 +20,7 @@ class Page extends Base {
    * @return Page
    */
   public static function create($data) {
-    error_log(print_r($data, TRUE));
     $params = self::permittedParams($data);
-    error_log(print_r($params, TRUE));
     $page = new Page;
     $page->content = $params['content'];
     return $page;
