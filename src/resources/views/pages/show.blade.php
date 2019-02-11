@@ -9,6 +9,8 @@
   <title>Page: {{$page->id}}</title>
 </head>
 <body>
-  {!! $page->render() !!}
+  <main class="content">
+    {!! $page->render() !!}
+  </main>
 </body>
 </html>
