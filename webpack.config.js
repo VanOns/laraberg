@@ -1,5 +1,5 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -19,20 +19,18 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(s*)css$/,
         use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" }
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" },
-          { loader: "sass-loader" }
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          "css-loader",
+          "sass-loader"
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({filename: '../css/laraberg.css'})
+  ]
 };

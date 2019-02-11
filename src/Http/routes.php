@@ -7,3 +7,4 @@ Route::get('laraberg', function() {
 
 Route::apiResource('laraberg/blocks', $namespace.'BlockController');
 Route::apiResource('laraberg/pages', $namespace.'PageController');
+Route::resource('laraberg/ui/pages', $namespace.'UI\PageController');

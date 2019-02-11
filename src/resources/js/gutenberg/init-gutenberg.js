@@ -16,6 +16,7 @@ function submitPage(event) {
       content: content
     }
   })
+  .then(data => window.location.href = `/laraberg/ui/pages`)
   .catch(() => event.target.disabled = false)
   
 }

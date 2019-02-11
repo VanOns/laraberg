@@ -14,7 +14,7 @@ class Page extends Base {
   protected const permitted = ['content'];
   protected $fillable = self::permitted;
 
-    /**
+  /**
    * Creates a page instance with the provided data
    * @param array $data - The content of the body sent by the Gutenberg editor
    * @return Page
@@ -31,5 +31,19 @@ class Page extends Base {
    */
   function setContentAttribute($content) {
     $this->attributes['content'] = json_encode([ 'raw' => $content ]);
+  }
+
+  /**
+   * Renders the HTML of the page object
+   */
+  function render() {
+    return $this->renderBlocks();
+  }
+
+  function renderBlocks() {
+    $split = preg_replace_callback('/<!-- wp:block {"ref":(\d*)} \/-->/', function($matches) {
+      return $matches[0] . "\n" . Block::find($matches[1])->content['raw'];
+    }, $this->content['raw']);
+    return $split;
   }
 }
