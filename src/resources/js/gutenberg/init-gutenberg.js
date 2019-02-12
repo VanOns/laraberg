@@ -1,31 +1,46 @@
 import { domReady, editPost, data } from '@frontkom/gutenberg-js';
-import { postPage } from './api-fetch';
+import { postPage, putPage } from './api-fetch';
 
-function setupSubmit() {
-  const buttonContainer = document.getElementsByClassName('edit-post-header__settings')[0]
-  let button = document.createElement('div')
-  button.innerHTML = `<button id="submit-page-button" class="components-button editor-post-publish-button is-button is-default is-primary is-large">Submit</button>`
-  button.addEventListener('click', submitPage)
-  buttonContainer.prepend(button)
+function setupSubmit(pageId) {
+  let buttonContainer
+  let headerExists = setInterval(() => {
+    buttonContainer = document.getElementsByClassName('edit-post-header__settings')[0]
+    if(buttonContainer) {
+      let button = document.createElement('div')
+      button.innerHTML = `<button id="submit-page-button" class="components-button editor-post-publish-button is-button is-default is-primary is-large">Submit</button>`
+      if (pageId) {
+        button.addEventListener('click', (event) => updatePage(event, pageId))
+      } else {
+        button.addEventListener('click', submitPage)
+      }
+
+      buttonContainer.prepend(button)
+      clearInterval(headerExists)
+    }
+  }, 100)
 }
 
 function submitPage(event) {
   event.target.disabled = true
   const content = data.select('core/editor').getEditedPostContent()
-  postPage({data: {
-      content: content
-    }
-  })
-  .then(data => window.location.href = `/laraberg/ui/pages`)
-  .catch(() => event.target.disabled = false)
-  
+  postPage({data: { content: content }})
+    .then(data => window.location.href = `/laraberg/ui/pages`)
+    .catch(() => event.target.disabled = false)
+}
+
+function updatePage(event, pageId) {
+  event.target.disabled = true
+  const content = data.select('core/editor').getEditedPostContent()
+  putPage({ data: { content: content }, id: pageId })
+    .then(data => window.location.href = `/laraberg/ui/pages/${pageId}`)
+    .catch(() => event.target.disabled = false)
 }
 
 /**
  * Initialize the Gutenberg editor
  * @param {string} target the element ID to render the gutenberg editor in 
  */
-export default function initGutenberg(target) {
+export default function initGutenberg(target, pageId) {
   // Some editor settings
   const editorSettings = { 
     alignWide: true,
@@ -48,13 +63,14 @@ export default function initGutenberg(target) {
 
   // Post properties
   const postType = 'page'; // or 'post'
-  const postId = 1; // Only matters if we want to do saves through API calls
+  const postId = pageId || 0
+  //const postId = 0
 
   //Initializing the editor!
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(function () {
       resolve(editPost.initializeEditor(target, postType, postId, editorSettings, overridePost))
     })
-    domReady(setupSubmit)
+    domReady(() => setupSubmit(pageId))
   })
 }

@@ -19,12 +19,18 @@ class PageController extends ApplicationController {
   }
 
   public function show($id) {
-    $page = Page::find($id) ?: $this->notFound();
+    $page = Page::find($id);
+    if (!$page) {
+      return $this->notFound();
+    }
     return $this->ok($page);
   }
 
   public function update(Request $request, $id) {
-    $page = Page::find($id) ?: $this->notFound();;
+    $page = Page::find($id);
+    if (!$page) {
+      return $this->notFound();
+    }
     $page->update(Page::permittedParams($request->all()));
     return $this->ok($page);
   }

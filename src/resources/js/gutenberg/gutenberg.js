@@ -7,6 +7,5 @@ import '@frontkom/gutenberg-js/build/css/block-library/style.css';
 import '@frontkom/gutenberg-js/build/css/style.css';
 
 // DOM element id where editor will be displayed
-const target = 'laraberg-editor';
-initGutenberg(target)
+initGutenberg('laraberg-editor')
 

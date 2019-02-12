@@ -22,13 +22,14 @@ class PageController extends ApplicationController {
     return view('laraberg::pages/create');
   }
 
-  public function show($id) {
+  public function show(Request $request, $id) {
     $page = Page::find($id) ?: $this->notFound();
     return view('laraberg::pages/show', ['page' => $page]);
   }
 
   public function edit(Request $request, $id) {
-    return $this->toIndex();
+    $page = Page::find($id) ?: $this->notFound();
+    return view('laraberg::pages/edit', ['page' => $page]);
   }
 
   public function update(Request $request, $id) {

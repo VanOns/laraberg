@@ -1,6 +1,13 @@
-// Import javascript
-import './gutenberg/gutenberg'
+// Gutenberg imports
+import './gutenberg/settings'
+import initGutenberg from './gutenberg/init-gutenberg'
 
-// Import stylesheets
 import 'normalize.css'
+
+// Gutenberg JS Style
+import '@frontkom/gutenberg-js/build/css/block-library/style.css';
+import '@frontkom/gutenberg-js/build/css/style.css';
+
 import './../scss/laraberg.scss'
+
+window.initGutenberg = initGutenberg

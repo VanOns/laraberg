@@ -135,8 +135,8 @@ function optionsMedia() {
   })
 }
 
-function getPage() {
-  let data = {
+function getPage(options, matches) {
+  let mockData = {
     content: {
       raw: ""
     },
@@ -147,16 +147,20 @@ function getPage() {
     preview_link: `${window.location.origin}/preview`,
     type: 'page',
     status: 'draft',
-    id: 1, // Only matters if we want to do saves through API calls
+    id: 0, // Only matters if we want to do saves through API calls
   };
-  return new Promise(resolve => {
-    resolve(data)
-  })
+  return axios.get(`/laraberg/pages/${matches[1]}`)
+    .then(response => { return {...mockData, ...response.data}})
+    .catch(() => mockData)
 }
 
 export function postPage(options) {
-  console.log(options)
   return axios.post('/laraberg/pages', options.data)
+    .then(response => response.data)
+}
+
+export function putPage(options) {
+  return axios.put(`/laraberg/pages/${options.id}`, options.data)
     .then(response => response.data)
 }
 

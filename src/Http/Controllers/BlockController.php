@@ -18,13 +18,19 @@ class BlockController extends ApplicationController {
     return $this->ok($block->toJson(), 201);
   }
 
-  public function show($id) {
-    $block = Block::find($id) ?: $this->notFound();
+  public function show(Request $request, $id) {
+    $block = Block::find($id);
+    if (!$block) {
+      return $this->notFound();
+    }
     return $this->ok($block);
   }
 
   public function update(Request $request, $id) {
-    $block = Block::find($id) ?: $this->notFound();
+    $block = Block::find($id);
+    if (!$block) {
+      return $this->notFound();
+    }
     $block->slug = $request->title;
     $block->update(Block::permittedParams($request->all()));
     return $this->ok($block);
