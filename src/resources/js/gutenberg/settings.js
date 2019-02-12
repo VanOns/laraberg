@@ -14,3 +14,23 @@ window.userSettings = {
 window.wpApiSettings = {
   root: '/'
 };
+
+// Some editor settings
+export const editorSettings = { 
+  alignWide: true,
+  availableTemplates: [],
+  allowedBlockTypes: true,
+  disableCustomColors: false,
+  disablePostFormats: false,
+  mediaLibrary: false,
+  titlePlaceholder: "Add title",
+  bodyPlaceholder: "Write your story",
+  isRTL: false,
+  autosaveInterval: 0,
+  canAutosave: false, // to disable Editor Autosave featured (default: true)
+  canPublish: false,  // to disable Editor Publish featured (default: true)
+  canSave: true,     // to disable Editor Save featured (default: true)    };
+};
+
+// Post properties to override
+export const overridePost = {};

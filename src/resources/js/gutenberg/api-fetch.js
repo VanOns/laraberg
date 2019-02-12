@@ -1,54 +1,5 @@
 import axios from 'axios'
-
-const types = {
-  page: {
-    labels: {},
-    name: 'Page', rest_base: 'pages', slug: 'page',
-    supports: {
-      author: false,
-      comments: false, // hide discussion-panel
-      'custom-fields': true,
-      document: true, // * hide document tab
-      editor: true,
-      'media-library': false, // * hide media library
-      'page-attributes': false, // hide page-attributes panel
-      posts: false, // * hide posts-panel
-      revisions: false,
-      'template-settings': false, // * hide template-settings panel
-      thumbnail: false, // featured-image panel
-      title: true, // show title on editor
-      extras: false,
-    },
-    viewable: false,
-    saveable: true,
-    publishable: true,
-    autosaveable: false
-  },
-  block: {
-    name: 'Blocks', rest_base: 'blocks', slug: 'wp_block',
-    description: '',
-    supports: {
-      title: true,
-      editor: true
-    },
-    viewable: true
-  }
-}
-
-const pageData = {
-  content: {
-    raw: ""
-  },
-  title: "",
-  templates: "",
-  parent: 0,
-  link: `${window.location.origin}/preview`,
-  permalink_template: `${window.location.origin}/preview`,
-  preview_link: `${window.location.origin}/preview`,
-  type: 'page',
-  status: 'pending',
-  id: 0, // Only matters if we want to do saves through API calls
-};
+import { types, pageData, mediaResponse } from './mock-data'
 
 const requests = {
   getBlock: {
@@ -146,17 +97,8 @@ function putBlock(options, matches) {
 }
 
 function optionsMedia() {
-  let res = {
-    headers: {
-        get: value => {
-            if (value === 'allow') {
-                return [ 'POST' ]
-            }
-        },
-    },
-  }
   return new Promise(resolve => {
-    resolve(res)
+    resolve(mediaResponse)
   })
 }
 
@@ -168,17 +110,6 @@ function getPage(options, matches) {
 
 export function postPage(options) {
   return axios.post('/laraberg/pages', options.data)
-    .then(response => { return {...pageData, ...response.data}})
-}
-
-export function newPage(options) {
-  let data
-  if (options && options.data) {
-    data = options.data
-  } else {
-    data = { content: "test", title: "New page" }
-  }
-  return axios.post('/laraberg/pages', data)
     .then(response => { return {...pageData, ...response.data}})
 }
 
