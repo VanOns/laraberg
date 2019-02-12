@@ -1,5 +1,5 @@
 import { domReady, editPost, data } from '@frontkom/gutenberg-js';
-import { postPage, putPage } from './api-fetch';
+import { postPage } from './api-fetch';
 import { editorSettings, overridePost } from './settings'
 
 /**
@@ -27,16 +27,41 @@ function setupSubmit(isNew) {
 }
 
 /**
+ * Replaces the default Gutenberg delete button behaviour
+ * @param {int} pageId 
+ */
+function setupDelete(pageId) {
+  let button
+  let buttonExists = setInterval(() => {
+    button = document.getElementsByClassName('editor-post-trash')[0]
+    if (button) {
+      button.addEventListener('click', function(event) {
+        data.dispatch('core/editor').trashPost(pageId, 'page');
+        window.location.href = '/laraberg/ui/pages'
+        event.stopPropagation();
+      }, true)
+      clearInterval(buttonExists)
+    }
+  })
+}
+
+/**
  * Gets the content + title and makes a post call to the API
  * @param {event} event 
  */
 function submitPage(event) {
-  // Disable to prevent multiple submits
-  event.target.disabled = true
+  // Disable save button to prevent multiple submits
+  //event.target.disabled = true
   const content = data.select('core/editor').getEditedPostContent()
   const title = data.select('core/editor').getEditedPostAttribute('title')
+
   postPage({data: { content: content, title: title }})
-    .then(data => window.location.href = `/laraberg/ui/pages/${data.id}`)
+    .then(data => {
+      // Remove body on success to prevent 'onunload' messages from showing
+      // there probably is a better way to do this, but I do not know how.
+      document.getElementsByTagName('body')[0].remove()
+      window.location.href = `/laraberg/ui/pages/${data.id}`
+    })
     .catch(() => event.target.disabled = false)
 }
 
@@ -62,5 +87,6 @@ export default function initGutenberg(target, pageId) {
     attach(target, 0, true)
   } else {
     attach(target, pageId)
+    setupDelete(pageId)
   }
 }

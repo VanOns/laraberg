@@ -1,4 +1,6 @@
+const webpack = require('webpack')
 const path = require('path');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
@@ -8,7 +10,7 @@ module.exports = {
     filename: 'laraberg.js',
     path: path.resolve(__dirname, 'public/js')
   },
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {
