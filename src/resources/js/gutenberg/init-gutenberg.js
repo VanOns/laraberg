@@ -1,16 +1,23 @@
 import { domReady, editPost, data } from '@frontkom/gutenberg-js';
 import { postPage, putPage, newPage } from './api-fetch';
 
-function setupSubmit() {
-  window.test = data
+window.test = data
+
+function setupSubmit(isNew) {
   let buttonContainer
+  let settingsButton
   let headerExists = setInterval(() => {
     buttonContainer = document.getElementsByClassName('edit-post-header__settings')[0]
-    if(buttonContainer) {
+    settingsButton = document.getElementsByClassName('dashicons-admin-generic')[0].parentNode.parentNode
+    if(settingsButton && buttonContainer) {
       let button = document.createElement('div')
-      button.innerHTML = `<button id="submit-page-button" class="components-button editor-post-publish-button is-button is-default is-primary is-large">Submit</button>`
-      button.addEventListener('click', submitPage)
-      buttonContainer.prepend(button)
+      button.innerHTML = `<button id="submit-page-button" class="components-button editor-post-publish-button is-button is-default is-primary is-large">Save</button>`
+      if (isNew) {
+        button.addEventListener('click', submitPage)
+      } else {
+        button.addEventListener('click', data.dispatch('core/editor').savePost)
+      }
+      buttonContainer.append(button)
       clearInterval(headerExists)
     }
   }, 100)
@@ -47,7 +54,7 @@ const editorSettings = {
   isRTL: false,
   autosaveInterval: 0,
   canAutosave: false, // to disable Editor Autosave featured (default: true)
-  canPublish: true,  // to disable Editor Publish featured (default: true)
+  canPublish: false,  // to disable Editor Publish featured (default: true)
   canSave: true,     // to disable Editor Save featured (default: true)    };
 };
 
@@ -61,9 +68,7 @@ function attach(target, postId, isNew) {
       resolve(editPost.initializeEditor(target, 'page', postId, editorSettings, overridePost))
     })
     domReady(() => {
-      if (isNew) {
-        setupSubmit()
-      }
+      setupSubmit(isNew)
     })
   })
 }
@@ -74,7 +79,6 @@ function attach(target, postId, isNew) {
  */
 export default function initGutenberg(target, pageId) {
   if (!pageId) {
-    editorSettings.canPublish = false
     editorSettings.canSave = false
     attach(target, 0, true)
   } else {
