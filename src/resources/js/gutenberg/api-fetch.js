@@ -16,7 +16,7 @@ const types = {
       revisions: false,
       'template-settings': false, // * hide template-settings panel
       thumbnail: false, // featured-image panel
-      title: false, // show title on editor
+      title: true, // show title on editor
       extras: false,
     },
     viewable: false,
@@ -34,6 +34,21 @@ const types = {
     viewable: true
   }
 }
+
+const pageData = {
+  content: {
+    raw: ""
+  },
+  title: "",
+  templates: "",
+  parent: 0,
+  link: `${window.location.origin}/preview`,
+  permalink_template: `${window.location.origin}/preview`,
+  preview_link: `${window.location.origin}/preview`,
+  type: 'page',
+  status: 'pending',
+  id: 0, // Only matters if we want to do saves through API calls
+};
 
 const requests = {
   getBlock: {
@@ -65,6 +80,16 @@ const requests = {
     method: 'GET',
     regex: /\/wp\/v2\/pages\/(\d*)/g,
     run: getPage
+  },
+  putPage: {
+    method: 'PUT',
+    regex: /\/wp\/v2\/pages\/(\d*)/g,
+    run: putPage
+  },
+  deletePage: {
+    method: 'DELETE',
+    regex: /\/wp\/v2\/pages\/(\d*)/g,
+    run: deletePage
   },
   getTaxonomies: {
     method: 'GET',
@@ -116,7 +141,7 @@ function postBlocks(options) {
 
 function putBlock(options, matches) {
   let id = matches[1]
-  return axios.put(`laraberg/blocks/${id}`, options.data)
+  return axios.put(`/laraberg/blocks/${id}`, options.data)
     .then(response => response.data)
 }
 
@@ -136,32 +161,42 @@ function optionsMedia() {
 }
 
 function getPage(options, matches) {
-  let mockData = {
-    content: {
-      raw: ""
-    },
-    templates: "",
-    parent: 0,
-    link: `${window.location.origin}/preview`,
-    permalink_template: `${window.location.origin}/preview`,
-    preview_link: `${window.location.origin}/preview`,
-    type: 'page',
-    status: 'draft',
-    id: 0, // Only matters if we want to do saves through API calls
-  };
   return axios.get(`/laraberg/pages/${matches[1]}`)
-    .then(response => { return {...mockData, ...response.data}})
-    .catch(() => mockData)
+    .then(response => { return {...pageData, ...response.data}})
+    .catch(() => pageData)
 }
 
 export function postPage(options) {
   return axios.post('/laraberg/pages', options.data)
-    .then(response => response.data)
+    .then(response => { return {...pageData, ...response.data}})
 }
 
-export function putPage(options) {
-  return axios.put(`/laraberg/pages/${options.id}`, options.data)
+export function newPage(options) {
+  let data
+  if (options && options.data) {
+    data = options.data
+  } else {
+    data = { content: "test", title: "New page" }
+  }
+  return axios.post('/laraberg/pages', data)
+    .then(response => { return {...pageData, ...response.data}})
+}
+
+export function putPage(options, matches) {
+  let id
+  if (matches && matches[1]) {
+    id = matches[1]
+  } else {
+    id = options.id
+  }
+  return axios.put(`/laraberg/pages/${id}`, options.data)
+    .then(response => { return {...pageData, ...response.data}})
+}
+
+function deletePage(options, matches) {
+  return axios.delete(`/laraberg/pages/${matches[1]}`)
     .then(response => response.data)
+    .then(() => window.history.back())
 }
 
 function getTaxonomies() {

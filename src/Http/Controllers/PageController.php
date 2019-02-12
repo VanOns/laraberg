@@ -35,7 +35,9 @@ class PageController extends ApplicationController {
     return $this->ok($page);
   }
 
-  public function destroy() {
-    return $this->notFound();
+  public function destroy(Request $request, $id) {
+    $page = Page::find($id) ?: $this->notFound();
+    $page->delete();
+    return $this->ok();
   }
 }

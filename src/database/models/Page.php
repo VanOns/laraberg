@@ -11,7 +11,7 @@ class Page extends Base {
     'content' => 'array'
   ];
 
-  protected const permitted = ['content'];
+  protected const permitted = ['title', 'content'];
   protected $fillable = self::permitted;
 
   /**
@@ -22,6 +22,7 @@ class Page extends Base {
   public static function create($data) {
     $params = self::permittedParams($data);
     $page = new Page;
+    $page->title = $params['title'];
     $page->content = $params['content'];
     return $page;
   } 
@@ -31,6 +32,18 @@ class Page extends Base {
    */
   function setContentAttribute($content) {
     $this->attributes['content'] = json_encode([ 'raw' => $content ]);
+  }
+
+  /**
+   * Transform content to empty string if null
+   * because Gutenberg cannot handle null values
+   */
+  function getContentAttribute() {
+    $content = json_decode($this->attributes['content'], true);
+    if ($content['raw'] == null) {
+      $content['raw'] = "";
+    }
+    return $content;
   }
 
   /**

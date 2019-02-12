@@ -21,7 +21,8 @@
 
     @foreach ($pages as $page)
       <div class="page-item">
-        <div class="bold">{{ $page->id }}</div>
+        <div>{{ $page->id }}</div>
+        <div class="bold">{{ $page->title }}</div>
         <div>{{ $page->created_at }}</div>
         <div>
           <a href="/laraberg/ui/pages/{{$page->id}}" class="button bg-color-primary"><i class="fa fa-eye"></i></a>

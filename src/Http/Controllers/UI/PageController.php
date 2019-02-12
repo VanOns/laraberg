@@ -23,22 +23,34 @@ class PageController extends ApplicationController {
   }
 
   public function show(Request $request, $id) {
-    $page = Page::find($id) ?: $this->notFound();
+    $page = Page::find($id);
+    if (!$page) {
+      return $this->notFound();
+    }
     return view('laraberg::pages/show', ['page' => $page]);
   }
 
   public function edit(Request $request, $id) {
-    $page = Page::find($id) ?: $this->notFound();
+    $page = Page::find($id);
+    if (!$page) {
+      return $this->notFound();
+    }
     return view('laraberg::pages/edit', ['page' => $page]);
   }
 
   public function update(Request $request, $id) {
-    $page = Page::find($id) ?: $this->notFound();
+    $page = Page::find($id);
+    if (!$page) {
+      return $this->notFound();
+    }
     return $this->notFound();
   }
 
   public function destroy(Request $request, $id) {
-    $page = Page::find($id) ?: $this->notFound();
+    $page = Page::find($id);
+    if (!$page) {
+      return $this->notFound();
+    }
     $page->delete();
     return $this->toIndex();
   }
