@@ -65,11 +65,17 @@ function submitPage(event) {
     .catch(() => event.target.disabled = false)
 }
 
-function attach(target, postId, isNew) {
+/**
+ * 
+ * @param {string} target element ID to attach editor to
+ * @param {int} pageId ID of the page to edit (0 if page is new)
+ * @param {boolean} isNew True if creating a new page
+ */
+function attach(target, pageId, isNew) {
   //Initializing the editor!
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(function () {
-      resolve(editPost.initializeEditor(target, 'page', postId, editorSettings, overridePost))
+      resolve(editPost.initializeEditor(target, 'page', pageId, editorSettings, overridePost))
     })
     domReady(() => {
       setupSubmit(isNew)

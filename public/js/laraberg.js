@@ -4079,12 +4079,19 @@ function submitPage(event) {
     return event.target.disabled = false;
   });
 }
+/**
+ * 
+ * @param {string} target element ID to attach editor to
+ * @param {int} pageId ID of the page to edit (0 if page is new)
+ * @param {boolean} isNew True if creating a new page
+ */
 
-function attach(target, postId, isNew) {
+
+function attach(target, pageId, isNew) {
   //Initializing the editor!
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     Object(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["domReady"])(function () {
-      resolve(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["editPost"].initializeEditor(target, 'page', postId, _settings__WEBPACK_IMPORTED_MODULE_2__["editorSettings"], _settings__WEBPACK_IMPORTED_MODULE_2__["overridePost"]));
+      resolve(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["editPost"].initializeEditor(target, 'page', pageId, _settings__WEBPACK_IMPORTED_MODULE_2__["editorSettings"], _settings__WEBPACK_IMPORTED_MODULE_2__["overridePost"]));
     });
     Object(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["domReady"])(function () {
       setupSubmit(isNew);
@@ -4244,7 +4251,10 @@ var editorSettings = {
   titlePlaceholder: "Add title",
   bodyPlaceholder: "Write your story",
   isRTL: false,
-  autosaveInterval: 0,
+  postLock: {
+    isLocked: false
+  },
+  autosaveInterval: 10,
   canAutosave: false,
   // to disable Editor Autosave featured (default: true)
   canPublish: false,
