@@ -6,10 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="{{ asset('vendor/laraberg/css/laraberg.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <title>Edit - {{$page->title}}</title>
 </head>
 <body>
-<h1>Header</h1>
   <div id="laraberg-editor" class="gutenberg__editor block-editor__container"></div>
   <script src="https://unpkg.com/react@16.6.3/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16.6.3/umd/react-dom.production.min.js"></script>
