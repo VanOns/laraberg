@@ -25,6 +25,13 @@ export const pageData = {
   id: 0
 }
 
+export const themesData = [{
+  theme_supports: {
+    formats: [ 'standard', 'aside', 'image', 'video', 'quote', 'link', 'gallery', 'audio' ],
+    'post-thumbnails': true
+  }
+}]
+
 export const types = {
   page: {
     labels: {},

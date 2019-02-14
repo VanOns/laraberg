@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { types, pageData, mediaResponse } from './mock-data'
+import { types, pageData, themesData, mediaResponse } from './mock-data'
 
 const requests = {
   getBlock: {
@@ -74,32 +74,30 @@ const requests = {
   }
 }
 
-function getBlock (options, matches) {
+async function getBlock (options, matches) {
   let id = matches[1]
-  return axios.get(`/laraberg/blocks/${id}`)
-    .then(response => response.data)
+  let response = await axios.get(`/laraberg/blocks/${id}`)
+  return response.data
 }
 
-function getBlocks () {
-  return axios.get('/laraberg/blocks')
-    .then(response => response.data)
+async function getBlocks () {
+  let response = await axios.get('/laraberg/blocks')
+  return response.data
 }
 
-function postBlocks (options) {
-  return axios.post('/laraberg/blocks', options.data)
-    .then(response => response.data)
+async function postBlocks (options) {
+  let response = await axios.post('/laraberg/blocks', options.data)
+  return response.data
 }
 
-function putBlock (options, matches) {
+async function putBlock (options, matches) {
   let id = matches[1]
-  return axios.put(`/laraberg/blocks/${id}`, options.data)
-    .then(response => response.data)
+  let response = await axios.put(`/laraberg/blocks/${id}`, options.data)
+  return response.data
 }
 
-function optionsMedia () {
-  return new Promise(resolve => {
-    resolve(mediaResponse)
-  })
+async function optionsMedia () {
+  return mediaResponse
 }
 
 function getPage (options, matches) {
@@ -124,52 +122,34 @@ export function putPage (options, matches) {
     .then(response => { return { ...pageData, ...response.data } })
 }
 
-function deletePage (options, matches) {
-  return axios.delete(`/laraberg/pages/${matches[1]}`)
-    .then(response => response.data)
-    .then(() => window.history.back())
+async function deletePage (options, matches) {
+  let response = await axios.delete(`/laraberg/pages/${matches[1]}`)
+  window.history.back()
+  return response.data
 }
 
-function getTaxonomies () {
-  return new Promise(resolve => {
-    resolve('ok')
-  })
+async function getTaxonomies () {
+  return 'ok'
 }
 
-function getThemes () {
-  let data = [{
-    theme_supports: {
-      formats: [ 'standard', 'aside', 'image', 'video', 'quote', 'link', 'gallery', 'audio' ],
-      'post-thumbnails': true
-    }
-  }]
-  return new Promise(resolve => {
-    resolve(data)
-  })
+async function getThemes () {
+  return themesData
 }
 
-function getTypeBlock () {
-  return new Promise(resolve => {
-    resolve(types.block)
-  })
+async function getTypeBlock () {
+  return types.block
 }
 
-function getTypePage () {
-  return new Promise(resolve => {
-    resolve(types.page)
-  })
+async function getTypePage () {
+  return types.page
 }
 
-function getTypes () {
-  return new Promise(resolve => {
-    resolve(types)
-  })
+async function getTypes () {
+  return types
 }
 
-function getUsers () {
-  return new Promise(resolve => {
-    resolve('ok')
-  })
+async function getUsers () {
+  return 'ok'
 }
 
 function matchPath (options) {
