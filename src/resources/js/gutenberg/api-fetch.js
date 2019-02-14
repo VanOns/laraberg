@@ -74,46 +74,46 @@ const requests = {
   }
 }
 
-function getBlock(options, matches) {
+function getBlock (options, matches) {
   let id = matches[1]
   return axios.get(`/laraberg/blocks/${id}`)
     .then(response => response.data)
 }
 
-function getBlocks() {
+function getBlocks () {
   return axios.get('/laraberg/blocks')
     .then(response => response.data)
 }
 
-function postBlocks(options) {
+function postBlocks (options) {
   return axios.post('/laraberg/blocks', options.data)
     .then(response => response.data)
 }
 
-function putBlock(options, matches) {
+function putBlock (options, matches) {
   let id = matches[1]
   return axios.put(`/laraberg/blocks/${id}`, options.data)
     .then(response => response.data)
 }
 
-function optionsMedia() {
+function optionsMedia () {
   return new Promise(resolve => {
     resolve(mediaResponse)
   })
 }
 
-function getPage(options, matches) {
+function getPage (options, matches) {
   return axios.get(`/laraberg/pages/${matches[1]}`)
-    .then(response => { return {...pageData, ...response.data}})
+    .then(response => { return { ...pageData, ...response.data } })
     .catch(() => pageData)
 }
 
-export function postPage(options) {
+export function postPage (options) {
   return axios.post('/laraberg/pages', options.data)
-    .then(response => { return {...pageData, ...response.data}})
+    .then(response => { return { ...pageData, ...response.data } })
 }
 
-export function putPage(options, matches) {
+export function putPage (options, matches) {
   let id
   if (matches && matches[1]) {
     id = matches[1]
@@ -121,26 +121,26 @@ export function putPage(options, matches) {
     id = options.id
   }
   return axios.put(`/laraberg/pages/${id}`, options.data)
-    .then(response => { return {...pageData, ...response.data}})
+    .then(response => { return { ...pageData, ...response.data } })
 }
 
-function deletePage(options, matches) {
+function deletePage (options, matches) {
   return axios.delete(`/laraberg/pages/${matches[1]}`)
     .then(response => response.data)
     .then(() => window.history.back())
 }
 
-function getTaxonomies() {
+function getTaxonomies () {
   return new Promise(resolve => {
     resolve('ok')
   })
 }
 
-function getThemes() {
+function getThemes () {
   let data = [{
     theme_supports: {
       formats: [ 'standard', 'aside', 'image', 'video', 'quote', 'link', 'gallery', 'audio' ],
-      'post-thumbnails': true,
+      'post-thumbnails': true
     }
   }]
   return new Promise(resolve => {
@@ -148,31 +148,31 @@ function getThemes() {
   })
 }
 
-function getTypeBlock() {
+function getTypeBlock () {
   return new Promise(resolve => {
     resolve(types.block)
   })
 }
 
-function getTypePage() {
+function getTypePage () {
   return new Promise(resolve => {
     resolve(types.page)
   })
 }
 
-function getTypes() {
+function getTypes () {
   return new Promise(resolve => {
     resolve(types)
   })
 }
 
-function getUsers() {
+function getUsers () {
   return new Promise(resolve => {
     resolve('ok')
   })
 }
 
-function matchPath(options) {
+function matchPath (options) {
   let promise
   Object.keys(requests).forEach((key) => {
     let request = requests[key]
@@ -181,7 +181,7 @@ function matchPath(options) {
     let matches = request.regex.exec(options.path)
     if ((options.method === request.method || (!options.method && request.method === 'GET')) && matches && matches.length > 0) {
       promise = request.run(options, matches)
-        .catch(error=> console.log(error.response))
+        .catch(error => console.log(error.response))
     }
   })
 
@@ -206,7 +206,7 @@ function matchPath(options) {
   return promise
 }
 
-export default function apiFetch(options) {
+export default function apiFetch (options) {
   console.log('apiFetchRequest:\n', options)
   return matchPath(options)
 }

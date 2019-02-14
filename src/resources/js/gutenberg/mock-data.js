@@ -2,20 +2,20 @@
 
 export const mediaResponse = {
   headers: {
-      get: value => {
-          if (value === 'allow') {
-              return [ 'POST' ]
-          }
-      },
+    get: value => {
+      if (value === 'allow') {
+        return [ 'POST' ]
+      }
+    }
   }
 }
 
 export const pageData = {
   content: {
-    raw: ""
+    raw: ''
   },
-  title: "",
-  templates: "",
+  title: '',
+  templates: '',
   parent: 0,
   link: `${window.location.origin}/preview`,
   permalink_template: `${window.location.origin}/preview`,
@@ -28,7 +28,9 @@ export const pageData = {
 export const types = {
   page: {
     labels: {},
-    name: 'Page', rest_base: 'pages', slug: 'page',
+    name: 'Page',
+    rest_base: 'pages',
+    slug: 'page',
     supports: {
       author: false,
       comments: false, // hide discussion-panel
@@ -42,7 +44,7 @@ export const types = {
       'template-settings': false, // * hide template-settings panel
       thumbnail: false, // featured-image panel
       title: true, // show title on editor
-      extras: false,
+      extras: false
     },
     viewable: false,
     saveable: true,
@@ -50,7 +52,9 @@ export const types = {
     autosaveable: false
   },
   block: {
-    name: 'Blocks', rest_base: 'blocks', slug: 'wp_block',
+    name: 'Blocks',
+    rest_base: 'blocks',
+    slug: 'wp_block',
     description: '',
     supports: {
       title: true,

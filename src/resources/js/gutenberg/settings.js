@@ -15,36 +15,36 @@ import apiFetch from './api-fetch'
 window.wp = {
   apiFetch,
   url: { addQueryArgs }
-};
+}
 
 window.userSettings = {
-  uid: 2, // Among other things, this uid is used to identify and store editor user preferences in localStorage
-};
+  uid: 2 // Among other things, this uid is used to identify and store editor user preferences in localStorage
+}
 
 // set your root path
 window.wpApiSettings = {
   root: '/'
-};
+}
 
 // Some editor settings
-export const editorSettings = { 
+export const editorSettings = {
   alignWide: true,
   availableTemplates: [],
   allowedBlockTypes: true,
   disableCustomColors: false,
   disablePostFormats: false,
   mediaLibrary: false,
-  titlePlaceholder: "Add title",
-  bodyPlaceholder: "Write your story",
+  titlePlaceholder: 'Add title',
+  bodyPlaceholder: 'Write your story',
   isRTL: false,
   postLock: {
-    isLocked: false,
+    isLocked: false
   },
   autosaveInterval: 10,
   canAutosave: false, // to disable Editor Autosave featured (default: true)
-  canPublish: false,  // to disable Editor Publish featured (default: true)
-  canSave: true,     // to disable Editor Save featured (default: true)    };
-};
+  canPublish: false, // to disable Editor Publish featured (default: true)
+  canSave: true // to disable Editor Save featured (default: true)    };
+}
 
 // Post properties to override
-export const overridePost = {};
+export const overridePost = {}

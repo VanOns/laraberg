@@ -3722,22 +3722,22 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
- * External dependencies
- */
+* External dependencies
+*/
 
 
 /**
- * Appends arguments to the query string of the url
- *
- * @param  {String} url   URL
- * @param  {Object} args  Query Args
- *
- * @return {String}       Updated URL
- */
+* Appends arguments to the query string of the url
+*
+* @param  {String} url   URL
+* @param  {Object} args  Query Args
+*
+* @return {String}       Updated URL
+*/
 
 function addQueryArgs(url, args) {
   var queryStringIndex = url.indexOf('?');
-  var query = queryStringIndex !== -1 ? Object(url__WEBPACK_IMPORTED_MODULE_0__["parse"])(url.substr(queryStringIndex + 1)) : {};
+  var query = queryStringIndex !== -1 ? url__WEBPACK_IMPORTED_MODULE_0___default()(url.substr(queryStringIndex + 1)) : {};
   var baseUrl = queryStringIndex !== -1 ? url.substr(0, queryStringIndex) : url;
   return baseUrl + '?' + Object(querystring__WEBPACK_IMPORTED_MODULE_1__["stringify"])(_objectSpread({}, query, args));
 }
@@ -4035,7 +4035,7 @@ function setupSubmit(isNew) {
 }
 /**
  * Replaces the default Gutenberg delete button behaviour
- * @param {int} pageId 
+ * @param {int} pageId
  */
 
 
@@ -4056,13 +4056,13 @@ function setupDelete(pageId) {
 }
 /**
  * Gets the content + title and makes a post call to the API
- * @param {event} event 
+ * @param {event} event
  */
 
 
 function submitPage(event) {
   // Disable save button to prevent multiple submits
-  //event.target.disabled = true
+  // event.target.disabled = true
   var content = _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].select('core/editor').getEditedPostContent();
   var title = _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].select('core/editor').getEditedPostAttribute('title');
   Object(_api_fetch__WEBPACK_IMPORTED_MODULE_1__["postPage"])({
@@ -4076,11 +4076,11 @@ function submitPage(event) {
     document.getElementsByTagName('body')[0].remove();
     window.location.href = "/laraberg/ui/pages/".concat(data.id);
   }).catch(function () {
-    return event.target.disabled = false;
+    event.target.disabled = false;
   });
 }
 /**
- * 
+ *
  * @param {string} target element ID to attach editor to
  * @param {int} pageId ID of the page to edit (0 if page is new)
  * @param {boolean} isNew True if creating a new page
@@ -4088,7 +4088,7 @@ function submitPage(event) {
 
 
 function attach(target, pageId, isNew) {
-  //Initializing the editor!
+  // Initializing the editor!
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     Object(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["domReady"])(function () {
       resolve(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["editPost"].initializeEditor(target, 'page', pageId, _settings__WEBPACK_IMPORTED_MODULE_2__["editorSettings"], _settings__WEBPACK_IMPORTED_MODULE_2__["overridePost"]));
@@ -4100,7 +4100,7 @@ function attach(target, pageId, isNew) {
 }
 /**
  * Initialize the Gutenberg editor
- * @param {string} target the element ID to render the gutenberg editor in 
+ * @param {string} target the element ID to render the gutenberg editor in
  */
 
 
@@ -4140,10 +4140,10 @@ var mediaResponse = {
 };
 var pageData = {
   content: {
-    raw: ""
+    raw: ''
   },
-  title: "",
-  templates: "",
+  title: '',
+  templates: '',
   parent: 0,
   link: "".concat(window.location.origin, "/preview"),
   permalink_template: "".concat(window.location.origin, "/preview"),
@@ -4234,13 +4234,13 @@ window.wp = {
 };
 window.userSettings = {
   uid: 2 // Among other things, this uid is used to identify and store editor user preferences in localStorage
+  // set your root path
 
-}; // set your root path
-
+};
 window.wpApiSettings = {
-  root: '/'
-}; // Some editor settings
+  root: '/' // Some editor settings
 
+};
 var editorSettings = {
   alignWide: true,
   availableTemplates: [],
@@ -4248,8 +4248,8 @@ var editorSettings = {
   disableCustomColors: false,
   disablePostFormats: false,
   mediaLibrary: false,
-  titlePlaceholder: "Add title",
-  bodyPlaceholder: "Write your story",
+  titlePlaceholder: 'Add title',
+  bodyPlaceholder: 'Write your story',
   isRTL: false,
   postLock: {
     isLocked: false
@@ -4260,9 +4260,9 @@ var editorSettings = {
   canPublish: false,
   // to disable Editor Publish featured (default: true)
   canSave: true // to disable Editor Save featured (default: true)    };
+  // Post properties to override
 
-}; // Post properties to override
-
+};
 var overridePost = {};
 
 /***/ }),
