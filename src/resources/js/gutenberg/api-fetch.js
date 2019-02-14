@@ -187,7 +187,7 @@ function matchPath (options) {
 
   if (!promise) {
     promise = new Promise((resolve, reject) => {
-      return reject({
+      return reject(new FetchError({
         code: 'api_handler_not_found',
         message: 'API handler not found.',
         data: {
@@ -195,9 +195,9 @@ function matchPath (options) {
           options: options,
           status: 404
         }
-      })
+      }))
     }).catch(error => {
-      console.log(error)
+      console.log(error.data)
     })
   }
   promise.then(data => {
@@ -209,4 +209,11 @@ function matchPath (options) {
 export default function apiFetch (options) {
   console.log('apiFetchRequest:\n', options)
   return matchPath(options)
+}
+
+class FetchError extends Error {
+  constructor (object) {
+    super(object.message)
+    this.data = object
+  }
 }
