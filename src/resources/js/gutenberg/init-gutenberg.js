@@ -74,8 +74,17 @@ function submitPage (event) {
 function attach (target, pageId, isNew) {
   // Initializing the editor!
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
-    domReady(function () {
-      resolve(editPost.initializeEditor(target, 'page', pageId, editorSettings, overridePost))
+    domReady(() => {
+      let element = document.getElementById(target)
+
+      // Create Gutenberg container element and insert at place of target
+      let larabergEditor = document.createElement('DIV')
+      larabergEditor.id = 'laraberg__editor'
+      larabergEditor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container')
+      element.parentNode.insertBefore(larabergEditor, element)
+      element.hidden = true
+
+      resolve(editPost.initializeEditor('laraberg__editor', 'page', pageId, editorSettings, overridePost))
     })
     domReady(() => {
       setupSubmit(isNew)

@@ -50,7 +50,7 @@ export const types = {
       revisions: false,
       'template-settings': false, // * hide template-settings panel
       thumbnail: false, // featured-image panel
-      title: true, // show title on editor
+      title: false, // show title on editor
       extras: false
     },
     viewable: false,
