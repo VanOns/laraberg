@@ -2,16 +2,9 @@
 @import './variables.scss';
 
 // TODO: Probably want to remove this when done.
-body {
-  font-family: "Helvetica Neue",sans-serif;
-}
-
-body, html {
-  background-color: $background-color;
-}
-
 .laraberg__editor {
   width: 100%;
+  overflow-y: auto;
   border: 1px solid #e2e4e7;
 }
 
@@ -21,107 +14,4 @@ body, html {
 
 .laraberg__editor .edit-post-layout .edit-post-layout__content {
   height: unset;
-}
-
-form {
-  display: inline-block;
-}
-
-main.content {
-  width: 80vw;
-  min-width: 350px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.content-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.content-header h1 {
-  display: inline-block;
-  margin: 15px 0;
-}
-
-.page-item {
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  box-shadow: 10px 10px 25px 0px rgba(0,0,0,0.1);
-}
-
-.bold {
-  font-weight: 700;
-}
-
-a.button {
-  display: inline-block;
-  text-decoration: none;
-  color: initial;
-}
-
-button, .button {
-  background-color: white;
-  padding: 8px 10px;
-  border-radius: 3px;
-  border-width: 2px;
-  border-style: solid;
-}
-
-.clearfix {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-button:hover, .button:hover {
-  box-shadow: 0 0 0 500px rgba(0, 0, 0, 0.1) inset;
-}
-button:active, .button:active {
-  box-shadow: 0 0 0 500px rgba(0, 0, 0, 0.2) inset;
-}
-
-button:focus {
-  outline: 0;
-}
-
-button.bg-color-primary, .button.bg-color-primary {
-  color: white;
-  border-color: darken($primary-color, 5%);
-}
-
-button.bg-color-secondary, .button.bg-color-secondary {
-  color: white;
-  border-color: darken($secondary-color, 5%);
-}
-
-button.bg-color-accent-1, .button.bg-color-accent-1 {
-  color: white;
-  border-color: darken($accent-color-1, 5%);
-}
-
-button.bg-color-accent-2, .button.bg-color-accent-2 {
-  color: white;
-  border-color: darken($accent-color-2, 5%);
-}
-
-.bg-color-primary {
-  background-color: $primary-color;
-}
-
-.bg-color-secondary {
-  background-color: $secondary-color;
-}
-
-.bg-color-accent-1 {
-  background-color: $accent-color-1;
-}
-
-.bg-color-accent-2 {
-  background-color: $accent-color-2;
 }

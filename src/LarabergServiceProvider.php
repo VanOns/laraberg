@@ -3,6 +3,7 @@
 namespace MauriceWijnia\Laraberg;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class LarabergServiceProvider extends ServiceProvider {
     /**

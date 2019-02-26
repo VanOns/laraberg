@@ -23,8 +23,8 @@ class CreateBlocksPagesTables extends Migration {
 
         Schema::create('lb_pages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title')->nullable($value = true);
             $table->json('content');
+            $table->morphs('pageable');
             $table->string('type')->default('page');
             $table->timestamps();
         });

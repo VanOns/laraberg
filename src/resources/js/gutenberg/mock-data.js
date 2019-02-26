@@ -22,7 +22,13 @@ export const pageData = {
   preview_link: `${window.location.origin}/preview`,
   type: 'page',
   status: 'pending',
-  id: 0
+  id: 0,
+  // functions
+  setContent: (content) => {
+    pageData.content = {
+      raw: content
+    }
+  }
 }
 
 export const themesData = [{

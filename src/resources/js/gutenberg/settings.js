@@ -43,7 +43,7 @@ export const editorSettings = {
   autosaveInterval: 10,
   canAutosave: false, // to disable Editor Autosave featured (default: true)
   canPublish: false, // to disable Editor Publish featured (default: true)
-  canSave: true // to disable Editor Save featured (default: true)    };
+  canSave: false // to disable Editor Save featured (default: true)    };
 }
 
 // Post properties to override
