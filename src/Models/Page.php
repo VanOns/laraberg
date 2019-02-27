@@ -45,6 +45,7 @@ class Page extends Model {
     $split = preg_replace_callback('/<!-- wp:block {"ref":(\d*)} \/-->/', function($matches) {
       return $matches[0] . "\n" . Block::find($matches[1])->content['raw'];
     }, $this->content['raw']);
+    $split = '<div class="gutenberg__content">'.$split.'</div>';
     return $split;
   }
 }

@@ -1,3 +1,6 @@
+
+import 'babel-polyfill'
+
 // Gutenberg imports
 import './gutenberg/settings'
 import initGutenberg from './gutenberg/init-gutenberg'

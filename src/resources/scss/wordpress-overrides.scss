@@ -1,0 +1,18 @@
+.gutenberg__editor .edit-post-visual-editor .editor-post-title, 
+.gutenberg__editor .edit-post-visual-editor .editor-post-title__block, 
+.gutenberg__editor .edit-post-visual-editor .editor-block-list__block, 
+.gutenberg__editor .edit-post-visual-editor .editor-default-block-appender {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.edit-post-layout__content {
+  overflow-y: unset;
+}
+
+@media (min-width: 782px) {
+  .edit-post-layout__content {
+    top: 0;
+    margin-left: 0;
+  }
+}

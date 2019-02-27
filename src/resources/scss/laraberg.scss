@@ -1,7 +1,7 @@
 @import './wordpress.scss';
 @import './variables.scss';
+@import './wordpress-overrides.scss';
 
-// TODO: Probably want to remove this when done.
 .laraberg__editor {
   width: 100%;
   overflow-y: auto;
@@ -14,4 +14,21 @@
 
 .laraberg__editor .edit-post-layout .edit-post-layout__content {
   height: unset;
+}
+
+.gutenberg__content {
+  padding-left: 46px;
+  padding-right: 46px;
+  padding-top: 23px;
+}
+
+.gutenberg__content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 24px;
+  }
 }
