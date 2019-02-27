@@ -4,16 +4,16 @@
 
 .laraberg__editor {
   width: 100%;
-  overflow-y: auto;
+  overflow: hidden;
   border: 1px solid #e2e4e7;
 }
 
-.laraberg__editor .edit-post-sidebar{
-  position: absolute;
+.laraberg__editor .edit-post-header {
+  z-index: 100;
 }
 
-.laraberg__editor .edit-post-layout .edit-post-layout__content {
-  height: unset;
+.laraberg__editor .edit-post-sidebar {
+  position: absolute;
 }
 
 .gutenberg__content {

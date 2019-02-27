@@ -10,8 +10,13 @@
     margin-left: 0;
   }
 
+  .edit-post-layout {
+    overflow: unset;
+    height: unset;
+  }
+  
   .edit-post-layout__content {
-    overflow-y: unset;
+    overflow-y: auto;
     height: unset;
     min-height: 0;
   }
@@ -29,10 +34,6 @@
   }
 
   .components-drop-zone__provider {
-    height: unset;
-  }
-
-  .edit-post-layout, .edit-post-layout__content {
     height: unset;
   }
 }

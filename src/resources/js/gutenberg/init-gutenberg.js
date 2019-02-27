@@ -32,6 +32,19 @@ function clearSubmitFromButtons () {
   }, 100)
 }
 
+function handleElementConfiguration (target, editor) {
+  // Max Height
+  let containerFound = setInterval(() => {
+    const maxHeight = target.dataset.maxHeight
+    const contentContainer = editor.getElementsByClassName('edit-post-layout__content')[0]
+    if (contentContainer) {
+      console.log(contentContainer)
+      contentContainer.style.maxHeight = maxHeight
+      clearInterval(containerFound)
+    }
+  }, 100)
+}
+
 /**
  * Initialize the Gutenberg editor
  * @param {string} target the element ID to render the gutenberg editor in
@@ -39,22 +52,24 @@ function clearSubmitFromButtons () {
 export default function initGutenberg (target) {
   // Initializing the editor!
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
+    let element
+    let larabergEditor
     domReady(() => {
-      let element = document.getElementById(target)
+      element = document.getElementById(target)
       // Set editor content to element's value
       if (element.value.length > 0) {
         pageData.setContent(element.value)
       }
       // Create Gutenberg container element and insert at place of target
-      let larabergEditor = document.createElement('DIV')
+      larabergEditor = document.createElement('DIV')
       larabergEditor.id = 'laraberg__editor'
       larabergEditor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container')
       element.parentNode.insertBefore(larabergEditor, element)
       element.hidden = true
-
       resolve(editPost.initializeEditor('laraberg__editor', 'page', 0, editorSettings, overridePost))
     })
     domReady(() => {
+      handleElementConfiguration(element, larabergEditor)
       setupSubmit(target)
     })
   })
