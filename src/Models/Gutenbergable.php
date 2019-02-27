@@ -24,9 +24,6 @@ trait Gutenbergable {
     return $this->page->content;
   }
 
-  /**
-   * 
-   */
   public function setContent($content, $save = false) {
     $this->page->content = $content;
     if ($save) {

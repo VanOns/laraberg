@@ -1,14 +1,47 @@
-.gutenberg__editor .edit-post-visual-editor .editor-post-title, 
-.gutenberg__editor .edit-post-visual-editor .editor-post-title__block, 
-.gutenberg__editor .edit-post-visual-editor .editor-block-list__block, 
-.gutenberg__editor .edit-post-visual-editor .editor-default-block-appender {
-  margin-right: 0;
-  margin-left: 0;
+
+.gutenberg__editor {
+  min-height: unset;
+
+  .edit-post-visual-editor .editor-post-title, 
+  .edit-post-visual-editor .editor-post-title__block, 
+  .edit-post-visual-editor .editor-block-list__block, 
+  .edit-post-visual-editor .editor-default-block-appender {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .edit-post-layout__content {
+    overflow-y: unset;
+    height: unset;
+    min-height: 0;
+  }
+
+  .editor-writing-flow {
+    height: unset;
+  }
+
+  .edit-post-layout__content .edit-post-visual-editor {
+    flex-basis: unset;
+  }
+
+  .edit-post-visual-editor .editor-writing-flow__click-redirect {
+    display: none;
+  }
+
+  .components-drop-zone__provider {
+    height: unset;
+  }
+
+  .edit-post-layout, .edit-post-layout__content {
+    height: unset;
+  }
 }
 
-.edit-post-layout__content {
-  overflow-y: unset;
+.block-editor__container .components-navigate-regions {
+  height: unset;
 }
+
+
 
 @media (min-width: 782px) {
   .edit-post-layout__content {
