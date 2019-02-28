@@ -40,9 +40,8 @@ function clearSubmitFromButtons () {
   }
 }
 
-async function handleElementConfiguration (target, editor) {
+function handleElementConfiguration (target, editor) {
   // Max Height
-  await editorReady()
   const maxHeight = target.dataset.maxHeight
   const contentContainer = editor.getElementsByClassName('edit-post-layout__content')[0]
   contentContainer.style.maxHeight = maxHeight
