@@ -6,11 +6,12 @@ import { pageData } from './mock-data'
 // Setup sidebar events
 window.customGutenberg = {
   events: {
-    'OPEN_GENERAL_SIDEBAR': function (action, store) {
+    'OPEN_GENERAL_SIDEBAR': async (action, store) => {
       // console.log('OPEN_GENERAL_SIDEBAR', action, store)
-      sidebarReady().then(() => { clearSubmitFromButtons() })
+      await sidebarReady()
+      clearSubmitFromButtons()
     },
-    'CLOSE_GENERAL_SIDEBAR': function (action, store) {
+    'CLOSE_GENERAL_SIDEBAR': async (action, store) => {
       // console.log('CLOSE_GENERAL_SIDEBAR', action, store)
     }
   }
@@ -37,13 +38,12 @@ function clearSubmitFromButtons () {
   }
 }
 
-function handleElementConfiguration (target, editor) {
+async function handleElementConfiguration (target, editor) {
   // Max Height
-  editorReady().then(() => {
-    const maxHeight = target.dataset.maxHeight
-    const contentContainer = editor.getElementsByClassName('edit-post-layout__content')[0]
-    contentContainer.style.maxHeight = maxHeight
-  })
+  await editorReady()
+  const maxHeight = target.dataset.maxHeight
+  const contentContainer = editor.getElementsByClassName('edit-post-layout__content')[0]
+  contentContainer.style.maxHeight = maxHeight
 }
 
 /**
@@ -53,25 +53,23 @@ function handleElementConfiguration (target, editor) {
 export default function initGutenberg (target) {
   // Initializing the editor!
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
-    let element
-    let larabergEditor
-    domReady(() => {
-      element = document.getElementById(target)
+    domReady(async () => {
+      let element = document.getElementById(target)
       // Set editor content to element's value
       if (element.value.length > 0) {
         pageData.setContent(element.value)
       }
       // Create Gutenberg container element and insert at place of target
-      larabergEditor = document.createElement('DIV')
+      let larabergEditor = document.createElement('DIV')
       larabergEditor.id = 'laraberg__editor'
       larabergEditor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container')
       element.parentNode.insertBefore(larabergEditor, element)
       element.hidden = true
+
       resolve(editPost.initializeEditor('laraberg__editor', 'page', 0, editorSettings, overridePost))
-      editorReady().then(() => {
-        handleElementConfiguration(element, larabergEditor)
-        setupSubmit(target)
-      })
+      await editorReady()
+      handleElementConfiguration(element, larabergEditor)
+      setupSubmit(target)
     })
   })
 }
