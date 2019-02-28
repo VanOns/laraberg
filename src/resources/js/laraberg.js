@@ -13,4 +13,7 @@ import '@frontkom/gutenberg-js/build/css/style.css'
 
 import './../scss/laraberg.scss'
 
-window.initGutenberg = initGutenberg
+window.Laraberg = {
+  initGutenberg: initGutenberg,
+  editor: null
+}

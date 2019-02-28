@@ -1,6 +1,7 @@
 import { domReady, editPost, data } from '@frontkom/gutenberg-js'
 import { editorReady, sidebarReady } from './elements-ready'
 import { editorSettings, overridePost } from './settings'
+import configureEditor from './user-configuration'
 import { pageData } from './mock-data'
 
 // Setup sidebar events
@@ -40,18 +41,11 @@ function clearSubmitFromButtons () {
   }
 }
 
-function handleElementConfiguration (target, editor) {
-  // Max Height
-  const maxHeight = target.dataset.maxHeight
-  const contentContainer = editor.getElementsByClassName('edit-post-layout__content')[0]
-  contentContainer.style.maxHeight = maxHeight
-}
-
 /**
  * Initialize the Gutenberg editor
  * @param {string} target the element ID to render the gutenberg editor in
  */
-export default function initGutenberg (target) {
+export default function initGutenberg (target, options) {
   // Initializing the editor!
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(async () => {
@@ -66,10 +60,11 @@ export default function initGutenberg (target) {
       larabergEditor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container')
       element.parentNode.insertBefore(larabergEditor, element)
       element.hidden = true
+      window.Laraberg.editor = larabergEditor
 
       resolve(editPost.initializeEditor('laraberg__editor', 'page', 0, editorSettings, overridePost))
       await editorReady()
-      handleElementConfiguration(element, larabergEditor)
+      configureEditor(options)
       setupSubmit(target)
     })
   })
