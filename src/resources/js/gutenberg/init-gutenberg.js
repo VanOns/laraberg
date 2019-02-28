@@ -30,8 +30,10 @@ function setupSubmit (target) {
   })
 }
 
+/**
+ * Set all editor button types to 'button' to prevent submitting the form
+ */
 function clearSubmitFromButtons () {
-  // Set all button types in the editor to 'button' to prevent submitting the form
   let buttons = document.getElementById('laraberg__editor').getElementsByTagName('button')
   if (buttons.length > 0) {
     Array.from(buttons).forEach(button => { button.type = 'button' })
