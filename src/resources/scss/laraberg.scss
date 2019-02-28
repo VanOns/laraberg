@@ -6,14 +6,18 @@
   width: 100%;
   overflow: hidden;
   border: 1px solid #e2e4e7;
-}
 
-.laraberg__editor .edit-post-header {
-  z-index: 100;
-}
+  .edit-post-header {
+    z-index: 100;
+  }
+  
+  .edit-post-sidebar {
+    position: absolute;
+  }
 
-.laraberg__editor .edit-post-sidebar {
-  position: absolute;
+  iframe {
+    border: 0;
+  }
 }
 
 .gutenberg__content {
