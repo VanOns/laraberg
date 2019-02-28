@@ -1,6 +1,20 @@
 import { domReady, editPost, data } from '@frontkom/gutenberg-js'
+import { editorReady, sidebarReady } from './elements-ready'
 import { editorSettings, overridePost } from './settings'
 import { pageData } from './mock-data'
+
+// Setup sidebar events
+window.customGutenberg = {
+  events: {
+    'OPEN_GENERAL_SIDEBAR': function (action, store) {
+      // console.log('OPEN_GENERAL_SIDEBAR', action, store)
+      sidebarReady().then(() => { clearSubmitFromButtons() })
+    },
+    'CLOSE_GENERAL_SIDEBAR': function (action, store) {
+      // console.log('CLOSE_GENERAL_SIDEBAR', action, store)
+    }
+  }
+}
 
 /**
  * Makes sure the textarea value gets set to editor content on submit
@@ -17,32 +31,19 @@ function setupSubmit (target) {
 
 function clearSubmitFromButtons () {
   // Set all button types in the editor to 'button' to prevent submitting the form
-  let buttonsExist = setInterval(() => {
-    let buttons = document.getElementById('laraberg__editor').getElementsByTagName('button')
-    if (buttons.length > 0) {
-      Array.from(buttons).forEach(button => {
-        // Call this method on every button click in the editor
-        // since opening and closing the settings menu
-        // will rerender the buttons and remove their type
-        button.addEventListener('click', clearSubmitFromButtons)
-        button.type = 'button'
-      })
-      clearInterval(buttonsExist)
-    }
-  }, 100)
+  let buttons = document.getElementById('laraberg__editor').getElementsByTagName('button')
+  if (buttons.length > 0) {
+    Array.from(buttons).forEach(button => { button.type = 'button' })
+  }
 }
 
 function handleElementConfiguration (target, editor) {
   // Max Height
-  let containerFound = setInterval(() => {
+  editorReady().then(() => {
     const maxHeight = target.dataset.maxHeight
     const contentContainer = editor.getElementsByClassName('edit-post-layout__content')[0]
-    if (contentContainer) {
-      console.log(contentContainer)
-      contentContainer.style.maxHeight = maxHeight
-      clearInterval(containerFound)
-    }
-  }, 100)
+    contentContainer.style.maxHeight = maxHeight
+  })
 }
 
 /**
@@ -67,10 +68,10 @@ export default function initGutenberg (target) {
       element.parentNode.insertBefore(larabergEditor, element)
       element.hidden = true
       resolve(editPost.initializeEditor('laraberg__editor', 'page', 0, editorSettings, overridePost))
-    })
-    domReady(() => {
-      handleElementConfiguration(element, larabergEditor)
-      setupSubmit(target)
+      editorReady().then(() => {
+        handleElementConfiguration(element, larabergEditor)
+        setupSubmit(target)
+      })
     })
   })
 }
