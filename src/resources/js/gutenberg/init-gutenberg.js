@@ -57,7 +57,7 @@ export default function initGutenberg (target, options) {
       // Create Gutenberg container element and insert at place of target
       let larabergEditor = document.createElement('DIV')
       larabergEditor.id = 'laraberg__editor'
-      larabergEditor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container')
+      larabergEditor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container', 'wp-embed-responsive')
       element.parentNode.insertBefore(larabergEditor, element)
       element.hidden = true
       window.Laraberg.editor = larabergEditor

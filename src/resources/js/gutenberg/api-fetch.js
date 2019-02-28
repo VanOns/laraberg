@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { types, pageData, themesData, mediaResponse } from './mock-data'
+import { embed, types, pageData, themesData, mediaResponse } from './mock-data'
 
 const requests = {
   getBlock: {
@@ -21,6 +21,11 @@ const requests = {
     method: 'PUT',
     regex: /\/wp\/v2\/blocks\/(\d*)/g,
     run: putBlock
+  },
+  getEmbed: {
+    method: 'GET',
+    regex: /\/oembed\/1\.0\/proxy\?(.*)/g,
+    run: getEmbed
   },
   optionsMedia: {
     method: 'OPTIONS',
@@ -93,6 +98,11 @@ async function postBlocks (options) {
 async function putBlock (options, matches) {
   let id = matches[1]
   let response = await axios.put(`/laraberg/blocks/${id}`, options.data)
+  return response.data
+}
+
+async function getEmbed (options, matches) {
+  let response = await axios.get(`/laraberg/oembed?${matches[1]}`)
   return response.data
 }
 
