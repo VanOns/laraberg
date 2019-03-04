@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { types, pageData, themesData, mediaResponse } from './mock-data'
+import { media, types, pageData, themesData, mediaResponse } from './mock-data'
 
 const requests = {
   getBlock: {
@@ -31,6 +31,11 @@ const requests = {
     method: 'OPTIONS',
     regex: /\/wp\/v2\/media/g,
     run: optionsMedia
+  },
+  postMedia: {
+    method: 'POST',
+    regex: /\/wp\/v2\/media/g,
+    run: postMedia
   },
   getPage: {
     method: 'GET',
@@ -108,6 +113,20 @@ async function getEmbed (options, matches) {
 
 async function optionsMedia () {
   return mediaResponse
+}
+
+async function postMedia (options, matches) {
+  // Get file from body
+  let file
+  for (let pair of options.body.entries()) {
+    if (pair[0] === 'file') {
+      file = pair[1]
+    }
+  }
+  const formData = new FormData()
+  formData.append('file', file)
+  let response = await axios.post(`/laraberg/media`, formData)
+  return { ...response.data }
 }
 
 function getPage (options, matches) {

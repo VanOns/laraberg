@@ -76,3 +76,11 @@ export const types = {
     viewable: true
   }
 }
+
+export const media = {
+  id: 1,
+  link: 'https://www.w3schools.com/w3css/img_lights.jpg',
+  source_url: 'https://www.w3schools.com/w3css/img_lights.jpg',
+  data: {},
+  title: { raw: 'Title', rendered: 'Title' }
+}

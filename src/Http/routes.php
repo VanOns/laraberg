@@ -2,6 +2,7 @@
 $namespace = 'MauriceWijnia\Laraberg\Http\Controllers\\';
 
 Route::apiResource('laraberg/blocks', $namespace.'BlockController');
+Route::apiResource('laraberg/media', $namespace.'MediaController');
 Route::apiResource('laraberg/pages', $namespace.'PageController');
 
 Route::get('laraberg/oembed', $namespace.'OEmbedController');
