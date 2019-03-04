@@ -5,41 +5,46 @@ namespace MauriceWijnia\Laraberg\Models;
 use Illuminate\Database\Eloquent\Model;
 use Embed\Embed;
 
+use MauriceWijnia\Laraberg\Jobs\RenderJob;
+
 class Page extends Model {
   protected $table = 'lb_pages';
-
-  protected $casts = [
-    'content' => 'array'
-  ];
 
   public function pageable() {
     return $this->morphTo();
   }
 
-    /**
-   * Transform content to wordpress content object
-   */
-  function setContentAttribute($content) {
-    $this->attributes['content'] = json_encode([ 'raw' => $content ]);
-  }
+  // /**
+  //  * Transform content to empty string if null
+  //  * because Gutenberg cannot handle null values
+  //  */
+  // function getRawContentAttribute() {
+  //   $content = $this->attributes['raw_content'];
+  //   if ($content == null) {
+  //     $content = "";
+  //   } 
+
+  //   return $content;
+  // }
 
   /**
-   * Transform content to empty string if null
-   * because Gutenberg cannot handle null values
+   * Returns the rendered content of the page
    */
-  function getContentAttribute() {
-    $content = json_decode($this->attributes['content'], true);
-    if ($content['raw'] == null) {
-      $content['raw'] = "";
-    }
-    return $content;
+  function render() {
+    $html = '<div class="gutenberg__content wp-embed-responsive">'.$this->rendered_content.'</div>';
+    return $html;
+  }
+
+  function setContent($content) {
+    $this->raw_content = $content;
+    $this->rendered_content = $this->renderRaw($content);
   }
 
   /**
    * Renders the HTML of the page object
    */
-  function render() {
-    $html = '<div class="gutenberg__content wp-embed-responsive">'.$this->content['raw'].'</div>';
+  function renderRaw($raw) {
+    $html = $raw;
     $html = $this->renderBlocks($html);
     $html = $this->renderEmbeds($html);
     return $html;

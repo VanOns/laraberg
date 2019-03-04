@@ -12,7 +12,7 @@ trait Gutenbergable {
 
   public function createPage($content) {
     $page = new Page;
-    $page->content = $content;
+    $page->setContent($content);
     $this->page()->save($page);
   }
 
@@ -20,12 +20,16 @@ trait Gutenbergable {
     return $this->page->render();
   }
 
-  public function getContent() {
-    return $this->page->content;
+  public function getRawContent() {
+    return $this->page->raw_content;
+  }
+
+  public function getRenderedContent() {
+    return $this->page->rendered_content;
   }
 
   public function setContent($content, $save = false) {
-    $this->page->content = $content;
+    $this->page->setContent($content);
     if ($save) {
       $this->page->save();
     }
