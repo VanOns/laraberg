@@ -76,17 +76,3 @@ export const types = {
     viewable: true
   }
 }
-
-export const embed = {
-  'url': 'https:\/\/twitter.com\/elonmusk\/status\/1100672354932256773',
-  'author_name': 'Elon Tusk',
-  'author_url': 'https:\/\/twitter.com\/elonmusk',
-  'html': '<blockquote class="twitter-tweet" data-width="550" data-dnt="true"><p lang="en" dir="ltr">Some Tesla news<\/p>&mdash; Elon Tusk (@elonmusk) <a href="https:\/\/twitter.com\/elonmusk\/status\/1100672354932256773?ref_src=twsrc%5Etfw">February 27, 2019<\/a><\/blockquote><script async src="https:\/\/platform.twitter.com\/widgets.js" charset="utf-8"><\/script>',
-  'width': 550,
-  'height': 600,
-  'type': 'rich',
-  'cache_age': '3153600000',
-  'provider_name': 'Twitter',
-  'provider_url': 'https:\/\/twitter.com',
-  'version': '1.0'
-}

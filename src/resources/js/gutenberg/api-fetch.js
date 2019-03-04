@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { embed, types, pageData, themesData, mediaResponse } from './mock-data'
+import { types, pageData, themesData, mediaResponse } from './mock-data'
 
 const requests = {
   getBlock: {
