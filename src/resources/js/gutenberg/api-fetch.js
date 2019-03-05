@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { media, types, pageData, themesData, mediaResponse } from './mock-data'
+import { types, pageData, themesData, mediaResponse } from './mock-data'
+import { editorSettings } from './settings'
 
 const requests = {
   getBlock: {
@@ -129,15 +130,23 @@ async function postMedia (options, matches) {
   return { ...response.data }
 }
 
-function getPage (options, matches) {
-  return axios.get(`/laraberg/pages/${matches[1]}`)
-    .then(response => { return { ...pageData, ...response.data } })
-    .catch(() => pageData)
+async function getPage () {
+  let content = document.getElementById(editorSettings.target).value || ''
+  return {
+    ...pageData,
+    content: {
+      raw: content
+    }
+  }
 }
 
-export function postPage (options) {
-  return axios.post('/laraberg/pages', options.data)
-    .then(response => { return { ...pageData, ...response.data } })
+export async function postPage (options) {
+  return {
+    ...pageData,
+    content: {
+      raw: options.data
+    }
+  }
 }
 
 export async function putPage (options) {

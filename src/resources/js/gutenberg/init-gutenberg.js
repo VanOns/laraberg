@@ -52,6 +52,7 @@ export default function initGutenberg (target, options) {
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(async () => {
       let element = document.getElementById(target)
+      editorSettings.target = target
       // Set editor content to element's value
       if (element.value.length > 0) {
         pageData.setContent(element.value)

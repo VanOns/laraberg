@@ -28,6 +28,7 @@ window.wpApiSettings = {
 
 // Some editor settings
 export const editorSettings = {
+  target: null,
   alignWide: true,
   availableTemplates: [],
   allowedBlockTypes: true,
