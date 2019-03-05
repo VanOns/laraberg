@@ -27,9 +27,17 @@
   padding-left: 46px;
   padding-right: 46px;
   padding-top: 23px;
-}
 
-.gutenberg__content {
+  .alignleft {
+    float: left;
+    margin-right: 1rem;
+  }
+
+  .alignright {
+    float: right;
+    margin-left: 1rem;
+  }
+
   h1,
   h2,
   h3,

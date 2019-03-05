@@ -34,8 +34,6 @@ function setupSubmit (target) {
   })
 }
 
-
-
 /**
  * Set all editor button types to 'button' to prevent submitting the form
  */
