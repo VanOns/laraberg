@@ -1,8 +1,10 @@
 <?php
-$namespace = 'MauriceWijnia\Laraberg\Http\Controllers\\';
 
+$namespace = 'MauriceWijnia\Laraberg\Http\Controllers\\';
 Route::apiResource('laraberg/blocks', $namespace.'BlockController');
 Route::apiResource('laraberg/media', $namespace.'MediaController');
-Route::apiResource('laraberg/pages', $namespace.'PageController');
 
 Route::get('laraberg/oembed', $namespace.'OEmbedController');
+
+Route::get('/laravel-filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
+Route::post('/laravel-filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');

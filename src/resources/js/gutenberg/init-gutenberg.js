@@ -2,6 +2,7 @@ import { domReady, editPost, data } from '@frontkom/gutenberg-js'
 import { editorReady, sidebarReady } from './elements-ready'
 import { editorSettings, overridePost } from './settings'
 import configureEditor from './user-configuration'
+import setupLaravelFilemanager from './laravel-filemanager'
 import { pageData } from './mock-data'
 
 // Setup sidebar events
@@ -32,6 +33,8 @@ function setupSubmit (target) {
     return true
   })
 }
+
+
 
 /**
  * Set all editor button types to 'button' to prevent submitting the form
@@ -69,6 +72,7 @@ export default function initGutenberg (target, options) {
       await editorReady()
       configureEditor(options)
       setupSubmit(target)
+      setupLaravelFilemanager()
     })
   })
 }

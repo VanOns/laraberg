@@ -6,7 +6,11 @@ export function sidebarReady () {
   return checkElement('.edit-post-sidebar')
 }
 
-export async function checkElement (selector) {
+export function elementReady (selector) {
+  return checkElement(selector)
+}
+
+async function checkElement (selector) {
   while (document.querySelector(selector) === null) {
     await rafAsync()
   }
