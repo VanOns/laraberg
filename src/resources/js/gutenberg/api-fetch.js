@@ -140,15 +140,13 @@ export function postPage (options) {
     .then(response => { return { ...pageData, ...response.data } })
 }
 
-export function putPage (options, matches) {
-  let id
-  if (matches && matches[1]) {
-    id = matches[1]
-  } else {
-    id = options.id
+export async function putPage (options) {
+  return {
+    ...pageData,
+    content: {
+      raw: options.data
+    }
   }
-  return axios.put(`/laraberg/pages/${id}`, options.data)
-    .then(response => { return { ...pageData, ...response.data } })
 }
 
 async function deletePage (options, matches) {

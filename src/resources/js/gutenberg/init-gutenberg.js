@@ -25,9 +25,11 @@ window.customGutenberg = {
 function setupSubmit (target) {
   clearSubmitFromButtons()
   const textarea = document.getElementById(target)
-  textarea.form.addEventListener('submit', () => {
+  textarea.form.addEventListener('submit', event => {
     textarea.value = data.select('core/editor').getEditedPostContent()
-    console.log(textarea.value)
+    // Clear content "dirty" state.
+    data.dispatch('core/editor').savePost()
+    return true
   })
 }
 
