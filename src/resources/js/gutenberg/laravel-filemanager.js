@@ -1,5 +1,5 @@
-import { elementReady } from './elements-ready'
 import elementAppears from './element-appears'
+import elementReady from './elements-ready'
 
 export default async function setupLaravelFilemanager () {
   elementAppears('.editor-media-placeholder', mediaEditor => {
@@ -51,6 +51,8 @@ async function insertImage (element, url) {
   const urlForm = document.querySelector(formSelector)
   const urlInput = urlForm.querySelector('input')
   urlInput.value = url
+  // For some reason we can not click() the submitButton
+  // if we do not add a space and fire the change event on the input
   urlInput.value += ' '
   fireEvent(urlInput, 'change')
   const submitButton = urlForm.querySelector('button')

@@ -1,8 +1,7 @@
-import { domReady, editPost, data } from '@frontkom/gutenberg-js'
+import configureEditor, { clearSubmitFromButtons } from './configure-editor'
+import { domReady, editPost } from '@frontkom/gutenberg-js'
 import { editorReady, sidebarReady } from './elements-ready'
 import { editorSettings, overridePost } from './settings'
-import configureEditor from './user-configuration'
-import setupLaravelFilemanager from './laravel-filemanager'
 import { pageData } from './mock-data'
 
 // Setup sidebar events
@@ -16,31 +15,6 @@ window.customGutenberg = {
     'CLOSE_GENERAL_SIDEBAR': async (action, store) => {
       // console.log('CLOSE_GENERAL_SIDEBAR', action, store)
     }
-  }
-}
-
-/**
- * Makes sure the textarea value gets set to editor content on submit
- * @param {string} target the textarea to set the value of
- */
-function setupSubmit (target) {
-  clearSubmitFromButtons()
-  const textarea = document.getElementById(target)
-  textarea.form.addEventListener('submit', event => {
-    textarea.value = data.select('core/editor').getEditedPostContent()
-    // Clear content "dirty" state.
-    data.dispatch('core/editor').savePost()
-    return true
-  })
-}
-
-/**
- * Set all editor button types to 'button' to prevent submitting the form
- */
-function clearSubmitFromButtons () {
-  let buttons = document.getElementById('laraberg__editor').getElementsByTagName('button')
-  if (buttons.length > 0) {
-    Array.from(buttons).forEach(button => { button.type = 'button' })
   }
 }
 
@@ -69,8 +43,6 @@ export default function initGutenberg (target, options) {
       resolve(editPost.initializeEditor('laraberg__editor', 'page', 0, editorSettings, overridePost))
       await editorReady()
       configureEditor(options)
-      setupSubmit(target)
-      setupLaravelFilemanager()
     })
   })
 }

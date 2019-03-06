@@ -1,5 +1,5 @@
+import { mediaResponse, pageData, themesData, types } from './mock-data'
 import axios from 'axios'
-import { types, pageData, themesData, mediaResponse } from './mock-data'
 import { editorSettings } from './settings'
 
 const requests = {
@@ -117,17 +117,7 @@ async function optionsMedia () {
 }
 
 async function postMedia (options, matches) {
-  // Get file from body
-  let file
-  for (let pair of options.body.entries()) {
-    if (pair[0] === 'file') {
-      file = pair[1]
-    }
-  }
-  const formData = new FormData()
-  formData.append('file', file)
-  let response = await axios.post(`/laraberg/media`, formData)
-  return { ...response.data }
+  return 'ok'
 }
 
 async function getPage () {
