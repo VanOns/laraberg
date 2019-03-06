@@ -1,5 +1,4 @@
-const webpack = require('webpack')
-const path = require('path');
+const path = require('path')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -17,7 +16,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       },
       {
@@ -26,13 +25,13 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader
           },
-          "css-loader",
-          "sass-loader"
+          'css-loader',
+          'sass-loader'
         ]
       }
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({filename: '../css/laraberg.css'})
+    new MiniCssExtractPlugin({ filename: '../css/laraberg.css' })
   ]
-};
+}
