@@ -1,6 +1,9 @@
 import elementAppears from './element-appears'
 import elementReady from './elements-ready'
 
+/**
+ * Insert the 'File Manager' button whenever a mediablock appears
+ */
 export default async function setupLaravelFilemanager () {
   elementAppears('.editor-media-placeholder', mediaEditor => {
     const lfmButton = document.createElement('button')
@@ -13,38 +16,42 @@ export default async function setupLaravelFilemanager () {
   })
 }
 
-function fireEvent (el, etype) {
-  if (el.fireEvent) {
-    el.fireEvent('on' + etype)
-  } else {
-    var evObj = document.createEvent('Events')
-    evObj.initEvent(etype, true, false)
-    el.dispatchEvent(evObj)
-  }
-}
-
+/**
+ * Event listener for the File Manager button
+ * @param {Event} event
+ */
 function lfmListener (event) {
   const block = event.target.parentNode.parentNode.parentNode
-  console.log(block)
   let type
   if (block.querySelector('.wp-block-image') !== null) {
     type = 'Images'
   } else {
     type = 'Files'
   }
-  lfm({ type: type }, (url, path) => {
-    insertImage(block, url)
+  openFilemanager({ type: type }, (url, path) => {
+    insertMedia(block, url)
   })
 }
 
-function lfm (options, cb) {
+/**
+ * Opens a window with Laravel Filemanager
+ * @param {Object} options
+ * @param {function} cb
+ */
+function openFilemanager (options, cb) {
   let routePrefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager'
   window.open(routePrefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600')
   window.SetUrl = cb
 }
 
-async function insertImage (element, url) {
-  const urlButton = element.querySelector('.editor-media-placeholder__url-input-container').querySelector('button')
+/**
+ * Inserts the media object into the media block
+ * This is done by putting the URL into the 'Insert from URL' field and submitting the field
+ * @param {Element} block the media block to insert the media into
+ * @param {*} url the URL of the media
+ */
+async function insertMedia (block, url) {
+  const urlButton = block.querySelector('.editor-media-placeholder__url-input-container').querySelector('button')
   urlButton.click()
   const formSelector = '.editor-media-placeholder__url-input-form'
   await elementReady(formSelector)
@@ -57,4 +64,19 @@ async function insertImage (element, url) {
   fireEvent(urlInput, 'change')
   const submitButton = urlForm.querySelector('button')
   submitButton.click()
+}
+
+/**
+ * Fires an event for the provided element
+ * @param {Element} el the element to fire the event on
+ * @param {String} etype the event type, eg: 'change', 'click', etc...
+ */
+function fireEvent (el, etype) {
+  if (el.fireEvent) {
+    el.fireEvent('on' + etype)
+  } else {
+    const evObj = document.createEvent('Events')
+    evObj.initEvent(etype, true, false)
+    el.dispatchEvent(evObj)
+  }
 }
