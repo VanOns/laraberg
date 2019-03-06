@@ -3,6 +3,10 @@ import { editorSettings } from './settings'
 import elementAppears from './element-appears'
 import setupLaravelFilemanager from './laravel-filemanager'
 
+/**
+ * Configures the editor according to the provided options object
+ * @param {Object} options
+ */
 export default function configureEditor (options) {
   setupSubmit(editorSettings.target)
   setupMedia(options)
@@ -21,16 +25,28 @@ export function clearSubmitFromButtons () {
   }
 }
 
+/**
+ * Sets the max-height style value
+ * @param {String} maxHeight css value for max-height
+ */
 function setMaxHeight (maxHeight) {
   const contentContainer = window.Laraberg.editor.querySelector('.edit-post-layout__content')
   contentContainer.style.maxHeight = maxHeight
 }
 
+/**
+ * Sets the min-height style value
+ * @param {String} minHeight css value for min-height
+ */
 function setMinHeight (minHeight) {
   const contentContainer = window.Laraberg.editor.querySelector('.edit-post-layout__content')
   contentContainer.style.minHeight = minHeight
 }
 
+/**
+ * Sets the height style value
+ * @param {String} height css value for height
+ */
 function setHeight (height) {
   const contentContainer = window.Laraberg.editor.querySelector('.edit-post-layout__content')
   contentContainer.style.height = height
