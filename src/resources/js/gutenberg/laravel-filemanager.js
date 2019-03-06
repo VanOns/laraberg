@@ -1,5 +1,5 @@
 import elementAppears from './element-appears'
-import elementReady from './elements-ready'
+import { elementReady } from './elements-ready'
 
 export default async function setupLaravelFilemanager () {
   elementAppears('.editor-media-placeholder', mediaEditor => {
