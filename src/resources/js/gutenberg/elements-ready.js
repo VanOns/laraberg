@@ -1,13 +1,13 @@
+export default function elementReady (selector) {
+  return checkElement(selector)
+}
+
 export function editorReady () {
   return checkElement('.edit-post-layout')
 }
 
 export function sidebarReady () {
   return checkElement('.edit-post-sidebar')
-}
-
-export function elementReady (selector) {
-  return checkElement(selector)
 }
 
 async function checkElement (selector) {
