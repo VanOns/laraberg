@@ -5,7 +5,7 @@ namespace MauriceWijnia\Laraberg\Models;
 use Illuminate\Database\Eloquent\Model;
 use Embed\Embed;
 
-use MauriceWijnia\Laraberg\Jobs\RenderJob;
+use MauriceWijnia\Laraberg\Events\ContentRendered;
 
 class Content extends Model {
   protected $table = 'lb_contents';
@@ -34,6 +34,7 @@ class Content extends Model {
     $html = $raw;
     $html = $this->renderBlocks($html);
     $html = $this->renderEmbeds($html);
+    event(new ContentRedender($this));
     return $html;
   }
 

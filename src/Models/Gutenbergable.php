@@ -4,6 +4,7 @@ namespace MauriceWijnia\Laraberg\Models;
 
 use MauriceWijnia\Laraberg\Models\Content;
 use MauriceWijnia\Laraberg\Events\ContentCreated;
+use MauriceWijnia\Laraberg\Events\ContentUpdated;
 
 trait Gutenbergable {
 
@@ -35,5 +36,6 @@ trait Gutenbergable {
     if ($save) {
       $this->content->save();
     }
+    event(new ContentUpdated($this));
   }
 }
