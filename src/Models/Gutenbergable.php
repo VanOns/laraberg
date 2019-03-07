@@ -36,6 +36,6 @@ trait Gutenbergable {
     if ($save) {
       $this->content->save();
     }
-    event(new ContentUpdated($this));
+    event(new ContentUpdated($this->content));
   }
 }

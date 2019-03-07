@@ -34,7 +34,7 @@ class Content extends Model {
     $html = $raw;
     $html = $this->renderBlocks($html);
     $html = $this->renderEmbeds($html);
-    event(new ContentRedender($this));
+    event(new ContentRendered($this));
     return $html;
   }
 
