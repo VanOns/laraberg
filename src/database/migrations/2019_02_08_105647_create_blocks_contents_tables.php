@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlocksPagesTables extends Migration {
+class CreateBlocksContentsTables extends Migration {
     /**
      * Run the migrations.
      *
@@ -20,11 +20,11 @@ class CreateBlocksPagesTables extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('lb_pages', function (Blueprint $table) {
+        Schema::create('lb_contents', function (Blueprint $table) {
             $table->increments('id');
             $table->text('raw_content')->nullable();
             $table->text('rendered_content')->nullable();
-            $table->morphs('pageable');
+            $table->morphs('contentable');
             $table->string('type')->default('page');
             $table->timestamps();
         });
@@ -37,6 +37,6 @@ class CreateBlocksPagesTables extends Migration {
      */
     public function down() {
         Schema::drop('lb_blocks');
-        Schema::drop('lb_pages');
+        Schema::drop('lb_contents');
     }
 }
