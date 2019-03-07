@@ -13,6 +13,7 @@ class CreateBlocksContentsTables extends Migration {
     public function up() {
         Schema::create('lb_blocks', function (Blueprint $table) {
             $table->increments('id');
+            $table->json('title');
             $table->json('content');
             $table->string('status');
             $table->string('slug');

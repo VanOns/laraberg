@@ -4,7 +4,7 @@ namespace MauriceWijnia\Laraberg\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
-use MauriceWijnia\Laraberg\Database\Models\Block;
+use MauriceWijnia\Laraberg\Models\Block;
 
 class BlockController extends ApplicationController {
   public function index() {
@@ -13,7 +13,11 @@ class BlockController extends ApplicationController {
   }
 
   public function store(Request $request) {
-    $block = Block::create($request->all());
+    $block = new Block();
+    $block->slug = $request->title;
+    $block->title = $request->title;
+    $block->content = $request->content;
+    $block->status = $request->status;
     $block->save();
     return $this->ok($block->toJson(), 201);
   }
@@ -32,7 +36,10 @@ class BlockController extends ApplicationController {
       return $this->notFound();
     }
     $block->slug = $request->title;
-    $block->update(Block::permittedParams($request->all()));
+    $block->title = $request->title;
+    $block->content = $request->content;
+    $block->status = $request->status;
+    $block->save();
     return $this->ok($block);
   }
 
