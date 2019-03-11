@@ -10,7 +10,7 @@ const requests = {
   },
   getBlocks: {
     method: 'GET',
-    regex: /\/wp\/v2\/blocks.*/g,
+    regex: /\/wp\/v2\/blocks($|[?].*)/g,
     run: getBlocks
   },
   postBlocks: {
