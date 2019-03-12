@@ -26,6 +26,12 @@ The Gutenberg editor should replace an existing textarea in a form. On submit th
 <input id="[id_here]" type="textarea" name="[name_here]" hidden>
 ```
 
+In order to edit content on an already existing model we have to set the value of the textarea to the raw content that the Gutenberg editor provided.
+
+```html
+<input id="[id_here]" type="textarea" name="[name_here]" value="{{$model->getRawContent()}}" hidden>
+```
+
 To initialize the editor all we have to do is call the initialize function with the id of the textarea. You probably want to do this insde a DOMContentLoaded event.
 
 ```js
@@ -57,6 +63,7 @@ $model->createContent($content);
 // Update the content & (if true is provided) call save() on the content object
 $model->setContent($content, true);
 // Get the rendered HTML inside of a container
+// This is the function you should use for rendering the content on a page
 $model->renderContent();
 // Get the rendered content
 $model->getRenderedContent();
