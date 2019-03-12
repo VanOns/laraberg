@@ -80,7 +80,5 @@ function setupSubmit (target) {
  * Removes the default upload button from media blocks
  */
 function removeUploadButton () {
-  elementRendered('.editor-media-placeholder', mediaEditor => {
-    mediaEditor.querySelector('.components-form-file-upload button').remove()
-  })
+  elementRendered('.components-form-file-upload button', element => element.remove())
 }
