@@ -58,7 +58,7 @@ function setHeight (height) {
  */
 function setupMedia (options) {
   removeUploadButton()
-  if (options.laravelFilemanager) { setupLaravelFilemanager() }
+  if (options.laravelFilemanager) { setupLaravelFilemanager(options.laravelFilemanager) }
 }
 
 /**

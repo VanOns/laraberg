@@ -1,9 +1,11 @@
 import { elementReadyRAF, elementRendered } from './element-ready'
 
+let lfmOptions
 /**
  * Insert the 'File Manager' button whenever a mediablock appears
  */
-export default async function setupLaravelFilemanager () {
+export default async function setupLaravelFilemanager (options) {
+  lfmOptions = options
   elementRendered('.editor-media-placeholder', (mediaEditor) => {
     const lfmButton = document.createElement('button')
     lfmButton.innerHTML = 'File Manager'
@@ -21,13 +23,16 @@ export default async function setupLaravelFilemanager () {
  */
 function lfmListener (event) {
   const block = event.target.parentNode.parentNode.parentNode
-  let type
+
+  let options = {}
   if (block.querySelector('.wp-block-image') !== null) {
-    type = 'Images'
+    options.type = 'Images'
   } else {
-    type = 'Files'
+    options.type = 'Files'
   }
-  openFilemanager({ type: type }, (url, path) => {
+  if (lfmOptions.prefix) { options.prefix = lfmOptions.prefix }
+
+  openFilemanager(options, (url, path) => {
     insertMedia(block, url)
   })
 }
