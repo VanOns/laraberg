@@ -4,9 +4,8 @@
  * @param {String} selector querySelector string
  */
 export function elementReady (selector) {
-  let observer
   return new Promise((resolve, reject) => {
-    observer = new MutationObserver((mutations) => {
+    const observer = new MutationObserver((mutations) => {
       const elements = document.querySelectorAll(selector)
       elements.forEach(element => {
         if (!element.ready) {
