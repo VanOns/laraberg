@@ -12,8 +12,7 @@
     "minimum-stability": "dev",
     "prefer-stable" : true,
     "require": {
-        "embed/embed": "^3.3",
-        "unisharp/laravel-filemanager": "~1.8"
+        "embed/embed": "^3.3"
     },
     "require-dev": {
         "orchestra/testbench": "^3.7",
