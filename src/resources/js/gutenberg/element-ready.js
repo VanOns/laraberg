@@ -11,14 +11,12 @@ export function elementReady (selector) {
       elements.forEach(element => {
         if (!element.ready) {
           element.ready = true
+          observer.disconnect()
           resolve(element)
         }
       })
     })
     observer.observe(document.documentElement, { childList: true, subtree: true })
-  }).then(element => {
-    observer.disconnect()
-    return element
   })
 }
 
