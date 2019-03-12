@@ -8,7 +8,6 @@ use MauriceWijnia\Laraberg\Models\Content;
 
 class ContentCreated {
   use SerializesModels;
-
   public $content;
 
   /**
