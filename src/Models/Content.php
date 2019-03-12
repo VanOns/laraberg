@@ -39,15 +39,23 @@ class Content extends Model {
   }
 
   function renderBlocks($html) {
-    $result = preg_replace_callback('/<!-- wp:block {"ref":(\d*)} \/-->/', function($matches) {
+    $regex = '/<!-- wp:block {"ref":(\d*)} \/-->/';
+    $result = preg_replace_callback($regex, function($matches) {
       try {
-        $content = Block::find($matches[1])->content['raw'];
-        return $content;
+        return $this->renderBlock($matches);
       } catch (Exception $e) {
-        return null;
+        return '';
       }
     }, $html);
     return $result;
+  }
+
+  function renderBlock($matches) {
+    if ($matches) {
+      $content = Block::find($matches[1])->content['raw'];
+      $content = $this->renderBlocks($content);
+      return $content;
+    }
   }
 
   function renderEmbeds($html) {
