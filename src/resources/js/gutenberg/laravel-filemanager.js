@@ -1,11 +1,10 @@
-import elementAppears from './element-appears'
-import elementReady from './elements-ready'
+import { elementReadyRAF, elementRendered } from './element-ready'
 
 /**
  * Insert the 'File Manager' button whenever a mediablock appears
  */
 export default async function setupLaravelFilemanager () {
-  elementAppears('.editor-media-placeholder', mediaEditor => {
+  elementRendered('.editor-media-placeholder', (mediaEditor) => {
     const lfmButton = document.createElement('button')
     lfmButton.innerHTML = 'File Manager'
     lfmButton.classList.add('components-button', 'editor-media-placeholder__button', 'is-button', 'is-default', 'is-large')
@@ -54,7 +53,7 @@ async function insertMedia (block, url) {
   const urlButton = block.querySelector('.editor-media-placeholder__url-input-container').querySelector('button')
   urlButton.click()
   const formSelector = '.editor-media-placeholder__url-input-form'
-  await elementReady(formSelector)
+  await elementReadyRAF(formSelector)
   const urlForm = document.querySelector(formSelector)
   const urlInput = urlForm.querySelector('input')
   urlInput.value = url

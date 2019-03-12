@@ -1,6 +1,6 @@
+import { elementReady, elementRendered } from './element-ready'
 import { data } from '@frontkom/gutenberg-js'
 import { editorSettings } from './settings'
-import elementAppears from './element-appears'
 import setupLaravelFilemanager from './laravel-filemanager'
 
 /**
@@ -80,7 +80,7 @@ function setupSubmit (target) {
  * Removes the default upload button from media blocks
  */
 function removeUploadButton () {
-  elementAppears('.editor-media-placeholder', mediaEditor => {
+  elementRendered('.editor-media-placeholder', mediaEditor => {
     mediaEditor.querySelector('.components-form-file-upload button').remove()
   })
 }
