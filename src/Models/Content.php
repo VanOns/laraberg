@@ -40,7 +40,12 @@ class Content extends Model {
 
   function renderBlocks($html) {
     $result = preg_replace_callback('/<!-- wp:block {"ref":(\d*)} \/-->/', function($matches) {
-      return $matches[0] . "\n" . Block::find($matches[1])->content['raw'];
+      try {
+        $content = Block::find($matches[1])->content['raw'];
+        return $content;
+      } catch (Exception $e) {
+        return null;
+      }
     }, $html);
     return $result;
   }
