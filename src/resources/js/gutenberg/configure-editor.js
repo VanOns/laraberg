@@ -1,6 +1,6 @@
-import { elementReady, elementRendered } from './element-ready'
 import { data } from '@frontkom/gutenberg-js'
 import { editorSettings } from './settings'
+import { elementRendered } from './element-ready'
 import setupLaravelFilemanager from './laravel-filemanager'
 
 /**
