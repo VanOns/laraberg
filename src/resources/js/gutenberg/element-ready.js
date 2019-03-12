@@ -46,11 +46,7 @@ export function elementRendered (selector, callback) {
  * This means that it usually responds faster at the cost of some performance while the function is running.
  * @param {String} selector querySelector string
  */
-export function elementReadyRAF (selector) {
-  return checkElement(selector)
-}
-
-async function checkElement (selector) {
+export async function elementReadyRAF (selector) {
   let element
   while (element == null) {
     element = document.querySelector(selector)
