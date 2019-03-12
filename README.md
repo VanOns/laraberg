@@ -7,7 +7,7 @@ A Gutenberg implementation for Laravel
   - [Models](#models)
 - [Configuration](#configuration)
   - [Styling](#styling)
-  - [Laravel-Filemanager](#laravel-filemanager)
+  - [Laravel File Manager](#laravel-file-manager)
 
 # Installation
 
@@ -91,17 +91,17 @@ Laraberg.initGutenberg('[id_here]', { maxHeight: '500px' })
 Laraberg.initGutenberg('[id_here]', { minHeight: '500px' })
 ```
 
-## Laravel-Filemanager
+## Laravel File Manager
 
-Laraberg supports [laravel-filemanager](https://unisharp.github.io/laravel-filemanager/) for uploading files. To enable uploading media through laravel-filemanager the laravelFilemanager field should be set to true. This will add a 'File Manager' button to the Gutenberg media blocks that will open laravel-filemanager for uploading and selecting media files.
+Laraberg supports [Laravel File Manager](https://unisharp.github.io/laravel-filemanager/) for uploading files. To enable uploading media through Laravel File Manager the laravelFilemanager field should be set to true. This will add a 'File Manager' button to the Gutenberg media blocks that will open Laravel File Manager for uploading and selecting media files.
 
-Note: Laraberg does not do any configuration on your laravel-filemanager setup. By default a lot of media filetypes can not be uploaded unless they are whitelisted in the laravel-filemanager configuration file. For more information on this you can check the [laravel-filemanager documentation](https://unisharp.github.io/laravel-filemanager/config).
+Note: Laraberg does not do any configuration on your Laravel File Manager setup. By default a lot of media filetypes can not be uploaded unless they are whitelisted in the Laravel File Manager configuration file. For more information on this you can check the [Laravel File Manager documentation](https://unisharp.github.io/laravel-filemanager/config).
 
 ```js
 Laraberg.initGutenberg('[id_here]', { laravelFilemanager: true })
 ```
 
-If you are not using the default routes for laravel-filemanager you can provide the location of your laravel-filemanager endpoints in the options object like this:
+If you are not using the default routes for Laravel File Manager you can provide the location of your Laravel File Manager endpoints in the options object like this:
 
 ```js
 Laraberg.initGutenberg('[id_here]', { laravelFilemanager: { prefix: '/[lfm_prefix_here]' } })
