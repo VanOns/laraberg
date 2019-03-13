@@ -1,6 +1,6 @@
 <?php
 
-namespace MauriceWijnia\Laraberg\Models;
+namespace VanOns\Laraberg\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

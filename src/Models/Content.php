@@ -1,11 +1,11 @@
 <?php
 
-namespace MauriceWijnia\Laraberg\Models;
+namespace VanOns\Laraberg\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Embed\Embed;
 
-use MauriceWijnia\Laraberg\Events\ContentRendered;
+use VanOns\Laraberg\Events\ContentRendered;
 
 class Content extends Model {
   protected $table = 'lb_contents';

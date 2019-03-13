@@ -1,10 +1,10 @@
 <?php
 
-namespace MauriceWijnia\Laraberg\Events;
+namespace VanOns\Laraberg\Events;
 
 use Illuminate\Queue\SerializesModels;
 
-use MauriceWijnia\Laraberg\Models\Content;
+use VanOns\Laraberg\Models\Content;
 
 class ContentUpdated {
   use SerializesModels;
@@ -14,7 +14,7 @@ class ContentUpdated {
   /**
    * Create a new event instance
    * 
-   * @param MauriceWijnia\Laraberg\Models\Content $content
+   * @param VanOns\Laraberg\Models\Content $content
    * @return void
    */
   public function __construct(Content $content) {

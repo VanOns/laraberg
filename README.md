@@ -45,7 +45,7 @@ And that's it! The editor will replace the textarea in the DOM and on a form sub
 In order to add the editor content to a model Laraberg provides the 'Gutenbergable' trait.
 
 ```php
-use MauriceWijnia\Laraberg\Models\Gutenbergable;
+use VanOns\Laraberg\Models\Gutenbergable;
 
 class MyModel extends Model {
   use Gutenbergable;

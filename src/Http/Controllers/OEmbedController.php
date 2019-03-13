@@ -1,6 +1,6 @@
 <?php
 
-namespace MauriceWijnia\Laraberg\Http\Controllers;
+namespace VanOns\Laraberg\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Embed\Embed;

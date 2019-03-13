@@ -1,6 +1,6 @@
 <?php
 
-namespace MauriceWijnia\Laraberg;
+namespace VanOns\Laraberg;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;

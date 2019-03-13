@@ -1,6 +1,6 @@
 <?php
 
-namespace MauriceWijnia\Laraberg\Http\Controllers;
+namespace VanOns\Laraberg\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 

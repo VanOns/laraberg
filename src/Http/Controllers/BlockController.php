@@ -1,10 +1,10 @@
 <?php
 
-namespace MauriceWijnia\Laraberg\Http\Controllers;
+namespace VanOns\Laraberg\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
-use MauriceWijnia\Laraberg\Models\Block;
+use VanOns\Laraberg\Models\Block;
 
 class BlockController extends ApplicationController {
   public function index() {
