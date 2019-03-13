@@ -18,7 +18,7 @@ class Content extends Model {
    * Returns the rendered content of the content
    */
   function render() {
-    $html = '<div class="gutenberg__content wp-embed-responsive">'.$this->rendered_content.'</div>';
+    $html = "<div class='gutenberg__content wp-embed-responsive'>$this->rendered_content</div>";
     return $html;
   }
 
