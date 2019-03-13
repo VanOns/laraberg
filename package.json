@@ -24,6 +24,7 @@
     "url": "https://github.com/mauricewijnia/laraberg/issues"
   },
   "homepage": "https://github.com/mauricewijnia/laraberg#readme",
+  "browserslist": "> 0.25%, not dead",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-runtime": "^7.2.0",
