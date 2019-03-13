@@ -18,7 +18,9 @@ class Content extends Model {
    * Returns the rendered content of the content
    */
   function render() {
-    $html = "<div class='gutenberg__content wp-embed-responsive'>$this->rendered_content</div>";
+    $html = $this->rendered_content;
+    $html = $this->renderBlocks($html);
+    $html = "<div class='gutenberg__content wp-embed-responsive'>$html</div>";
     return $html;
   }
 
@@ -32,7 +34,6 @@ class Content extends Model {
    */
   function renderRaw($raw) {
     $html = $raw;
-    $html = $this->renderBlocks($html);
     $html = $this->renderEmbeds($html);
     event(new ContentRendered($this));
     return $html;
