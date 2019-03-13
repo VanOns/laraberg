@@ -81,21 +81,15 @@ It is possible to set the height, maxHeight, and minHeight of the editor by prov
 
 ```js
 Laraberg.initGutenberg('[id_here]', { height: '500px' })
-```
 
-```js
 Laraberg.initGutenberg('[id_here]', { maxHeight: '500px' })
-```
 
-```js
 Laraberg.initGutenberg('[id_here]', { minHeight: '500px' })
 ```
 
 ## Laravel File Manager
 
 Laraberg supports [Laravel File Manager](https://unisharp.github.io/laravel-filemanager/) for uploading files. To enable uploading media through Laravel File Manager the laravelFilemanager field should be set to true. This will add a 'File Manager' button to the Gutenberg media blocks that will open Laravel File Manager for uploading and selecting media files.
-
-Note: Laraberg does not do any configuration on your Laravel File Manager setup. By default a lot of media filetypes can not be uploaded unless they are whitelisted in the Laravel File Manager configuration file. For more information on this you can check the [Laravel File Manager documentation](https://unisharp.github.io/laravel-filemanager/config).
 
 ```js
 Laraberg.initGutenberg('[id_here]', { laravelFilemanager: true })
@@ -106,3 +100,6 @@ If you are not using the default routes for Laravel File Manager you can provide
 ```js
 Laraberg.initGutenberg('[id_here]', { laravelFilemanager: { prefix: '/[lfm_prefix_here]' } })
 ```
+
+> Note: Laraberg does not do any configuration on your Laravel File Manager setup. By default a lot of media filetypes can not be uploaded unless they are whitelisted in the Laravel File Manager configuration file. For more information on this you can check the [Laravel File Manager documentation](https://unisharp.github.io/laravel-filemanager/config).
+> 
