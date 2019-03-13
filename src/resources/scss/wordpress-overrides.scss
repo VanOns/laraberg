@@ -36,6 +36,14 @@
   .components-drop-zone__provider {
     height: unset;
   }
+
+  .components-notice-list {
+    position: relative;
+  }
+
+  .edit-post-header {
+    position: sticky;
+  }
 }
 
 .block-editor__container .components-navigate-regions {
