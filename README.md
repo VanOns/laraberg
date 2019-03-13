@@ -5,6 +5,7 @@ A Gutenberg implementation for Laravel
 - [Installation](#installation)
   - [Initializing the Editor](#initializing-the-editor)
   - [Models](#models)
+    - [Renaming Gutenbergable method names](#renaming-gutenbergable-method-names)
 - [Configuration](#configuration)
   - [Styling](#styling)
   - [Laravel File Manager](#laravel-file-manager)
@@ -70,6 +71,23 @@ $model->getRenderedContent();
 // Get the raw content
 $model->getRawContent();
 ```
+
+### Renaming Gutenbergable method names
+
+There is always the possibility that your model already implements a method with the same name as one of the Gutenbergable methods. Luckily PHP Traits provide an easy way to rename the methods from a trait:
+
+```php
+class MyModel extends Model {
+  use Gutenbergable {
+    renderContent as renderLBContent;
+  }
+
+  public function renderContent() {
+    // Your method
+  }
+}
+```
+In this example you can just call the 'renderLBContent' method to render the content.
 
 # Configuration
 
