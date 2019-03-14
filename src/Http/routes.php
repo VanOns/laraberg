@@ -1,5 +1,6 @@
 <?php
 
-$namespace = 'VanOns\Laraberg\Http\Controllers\\';
-Route::apiResource('laraberg/blocks', $namespace.'BlockController');
-Route::get('laraberg/oembed', $namespace.'OEmbedController');
+Route::group(['prefix' => 'laraberg', 'middleware' => ['web', 'auth']], function() {
+  Route::apiResource('blocks', 'VanOns\Laraberg\Http\Controllers\BlockController');
+  Route::get('oembed', 'VanOns\Laraberg\Http\Controllers\OEmbedController');
+});
