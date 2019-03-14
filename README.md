@@ -143,14 +143,18 @@ $content // This is the raw content from the Gutenberg editor
 $model = new MyModel;
 
 // Add the content to your model
-$model->createContent($content); 
+$model->createContent($content);
+
 // Update the content & (if true is provided) call save() on the content object
 $model->setContent($content, true);
+
 // Get the rendered HTML inside of a container
 // This is the function you should use for rendering the content on a page
 $model->renderContent();
+
 // Get the rendered content
 $model->getRenderedContent();
+
 // Get the raw content
 $model->getRawContent();
 ```
