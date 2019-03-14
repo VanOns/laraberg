@@ -23,6 +23,11 @@ const requests = {
     regex: /\/wp\/v2\/blocks\/(\d*)/g,
     run: putBlock
   },
+  deleteBlock: {
+    method: 'DELETE',
+    regex: /\/wp\/v2\/blocks\/(\d*)/g,
+    run: deleteBlock
+  },
   getEmbed: {
     method: 'GET',
     regex: /\/oembed\/1\.0\/proxy\?(.*)/g,
@@ -104,6 +109,12 @@ async function postBlocks (options) {
 async function putBlock (options, matches) {
   let id = matches[1]
   let response = await axios.put(`/laraberg/blocks/${id}`, options.data)
+  return response.data
+}
+
+async function deleteBlock (options, matches) {
+  let id = matches[1]
+  let response = await axios.delete(`/laraberg/blocks/${id}`)
   return response.data
 }
 

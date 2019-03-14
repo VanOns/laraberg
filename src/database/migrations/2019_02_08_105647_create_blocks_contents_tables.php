@@ -14,7 +14,8 @@ class CreateBlocksContentsTables extends Migration {
         Schema::create('lb_blocks', function (Blueprint $table) {
             $table->increments('id');
             $table->json('title');
-            $table->json('content');
+            $table->text('raw_content')->nullable();
+            $table->text('rendered_content')->nullable();
             $table->string('status');
             $table->string('slug');
             $table->string('type')->default('wp_block');

@@ -6,8 +6,7 @@ use VanOns\Laraberg\Models\Content;
 use VanOns\Laraberg\Events\ContentCreated;
 use VanOns\Laraberg\Events\ContentUpdated;
 
-trait Gutenbergable {
-
+trait Gutenbergable {  
   public function content() {
     return $this->morphOne(Content::class, 'contentable');
   }
