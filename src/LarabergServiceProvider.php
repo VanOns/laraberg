@@ -12,6 +12,7 @@ class LarabergServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
+        $this->publishes([__DIR__.'/config/laraberg.php' => config_path('laraberg.php')]);
         require __DIR__ . '/Http/routes.php';
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->publishes([__DIR__.'/../public' => public_path('vendor/laraberg')], 'public');
