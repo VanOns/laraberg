@@ -16911,7 +16911,11 @@ window.customGutenberg = {
 
 };
 function initGutenberg(target, options) {
-  // Initializing the editor!
+  if (!options) {
+    options = {};
+  } // Initializing the editor!
+
+
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     Object(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__["domReady"])(
     /*#__PURE__*/
