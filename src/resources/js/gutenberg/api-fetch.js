@@ -217,14 +217,10 @@ function matchPath (options) {
       console.log(error.data)
     })
   }
-  promise.then(data => {
-    console.log('apiFetchResponse:\n', data, options)
-  })
   return promise
 }
 
 export default function apiFetch (options) {
-  console.log('apiFetchRequest:\n', options)
   return matchPath(options)
 }
 

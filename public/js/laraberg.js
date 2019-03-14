@@ -16552,14 +16552,10 @@ function matchPath(options) {
     });
   }
 
-  promise.then(function (data) {
-    console.log('apiFetchResponse:\n', data, options);
-  });
   return promise;
 }
 
 function apiFetch(options) {
-  console.log('apiFetchRequest:\n', options);
   return matchPath(options);
 }
 
