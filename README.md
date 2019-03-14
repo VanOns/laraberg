@@ -58,7 +58,7 @@ The Gutenberg editor expects React, ReactDOM, Moment and JQuery to be in the env
 
 # Configuration
 
-When initializing the editor there are a number of configuration options we can provide using a second optional parameter in the initialize function.
+When initializing the editor there are a number of configuration options you can provide. This is still a work in progress!
 
 ## Styling
 
