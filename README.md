@@ -15,6 +15,7 @@ A Gutenberg implementation for Laravel
   - [Models](#models)
     - [Renaming Gutenbergable method names](#renaming-gutenbergable-method-names)
   - [Rendering Gutenberg Content](#rendering-gutenberg-content)
+  - [Events](#events)
 
 # Installation
 
@@ -199,7 +200,6 @@ Rendering the Gutenberg content is very simple and happens like this:
 <div id="your_container"> <!-- The element you want to render the content in -->
   {!! $page->renderContent() !!}
 </div>
-
 ```
 
 Keep in mind that in order to correctly display some of the Wordpress styling the Laraberg CSS has to be present on the page:
@@ -207,3 +207,11 @@ Keep in mind that in order to correctly display some of the Wordpress styling th
 ```html
 <link rel="stylesheet" href="{{asset('vendor/laraberg/css/laraberg.css')}}">
 ```
+
+## Events
+
+Laraberg implements Laravel events that you can use to implement your own listeners. The events contain a 'content' attribute that contains the relevant Content object. 
+
+- VanOns\Laraberg\Events\ContentCreated
+- VanOns\Laraberg\Events\ContentRendered
+- VanOns\Laraberg\Events\ContentUpdated
