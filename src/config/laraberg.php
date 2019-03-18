@@ -12,5 +12,5 @@ return [
   'middlewares' => ['web', 'auth'],
 
   'prefix' => 'laraberg'
-  
+
 ];

@@ -67,4 +67,3 @@ trait Gutenbergable
         event(new ContentUpdated($this->content));
     }
 }
-

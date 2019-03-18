@@ -3,29 +3,32 @@
 namespace VanOns\Laraberg;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
-class LarabergServiceProvider extends ServiceProvider {
+class LarabergServiceProvider extends ServiceProvider
+{
     /**
      * Bootstrap the application services.
      *
      * @return void
      */
-    public function boot() {
-        $this->publishes([__DIR__.'/config/laraberg.php' => config_path('laraberg.php')]);
+    public function boot()
+    {
+        $this->publishes([__DIR__ . '/config/laraberg.php' => config_path('laraberg.php')]);
         require __DIR__ . '/Http/routes.php';
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-        $this->publishes([__DIR__.'/../public' => public_path('vendor/laraberg')], 'public');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->publishes([__DIR__ . '/../public' => public_path('vendor/laraberg')], 'public');
     }
     /**
      * Register the application services.
      *
      * @return void
      */
-    public function register() {
+    public function register()
+    {
         $this->app->singleton(Laraberg::class, function () {
             return new Laraberg();
         });
         $this->app->alias(Laraberg::class, 'laraberg');
     }
 }
+
