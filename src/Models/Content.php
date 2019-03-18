@@ -18,12 +18,17 @@ class Content extends Model {
 
   /**
    * Returns the rendered content of the content
+   * @return String - The completely rendered content
    */
   public function render() {
     $html = BlockHelper::renderBlocks($this->rendered_content);
     return "<div class='gutenberg__content wp-embed-responsive'>$html</div>";
   }
 
+  /**
+   * Sets the raw content and performs some initial rendering
+   * @param String $html
+   */
   public function setContent($html) {
     $this->raw_content = $html;
     $this->renderRaw();

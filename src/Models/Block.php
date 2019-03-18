@@ -20,20 +20,36 @@ class Block extends Model {
     $this->slug = SlugHelper::slugify($this->title['raw']);
   }
 
+  /**
+   * Returns the rendered content of the block
+   * @return String - The completely rendered content
+   */
   public function render() {
     return BlockHelper::renderBlocks($this->rendered_content);
   }
 
+  /**
+   * Renders the content of the Block object
+   * @return String
+   */
   public function renderRaw() {
     $this->rendered_content = EmbedHelper::renderEmbeds($this->raw_content);
     return $this->rendered_content;
   }
 
+  /**
+   * Sets the raw content and performs some initial rendering
+   * @param String $html
+   */
   public function setContent($content) {
     $this->raw_content = $content;
     $this->renderRaw();
   }
 
+  /**
+   * Returns a content object similar to WordPress
+   * @return Array
+   */
   public function getContentAttribute() {
     return [
       'raw' => $this->raw_content,
