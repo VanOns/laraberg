@@ -68,12 +68,14 @@ function setupMedia (options) {
 function setupSubmit (target) {
   clearSubmitFromButtons()
   const textarea = document.getElementById(target)
-  textarea.form.addEventListener('submit', event => {
-    textarea.value = data.select('core/editor').getEditedPostContent()
-    // Clear content "dirty" state.
-    data.dispatch('core/editor').savePost()
-    return true
-  })
+  if (textarea.form) {
+    textarea.form.addEventListener('submit', event => {
+      textarea.value = data.select('core/editor').getEditedPostContent()
+      // Clear content "dirty" state.
+      data.dispatch('core/editor').savePost()
+      return true
+    })
+  }
 }
 
 /**

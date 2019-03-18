@@ -11,6 +11,7 @@ A Gutenberg implementation for Laravel
   - [Laravel File Manager](#laravel-file-manager)
 - [Usage](#usage)
   - [Initializing the Editor](#initializing-the-editor)
+    - [Using the Editor Wihout a Form](#using-the-editor-wihout-a-form)
   - [Models](#models)
     - [Renaming Gutenbergable method names](#renaming-gutenbergable-method-names)
   - [Rendering Gutenberg Content](#rendering-gutenberg-content)
@@ -118,11 +119,19 @@ In order to edit content on an already existing model we have to set the value o
 
 To initialize the editor all we have to do is call the initialize function with the id of the textarea. You probably want to do this insde a DOMContentLoaded event.
 
+And that's it! The editor will replace the textarea in the DOM and on a form submit the editor content will be available in the textarea's value attribute.
+
 ```js
 Laraberg.initGutenberg('[id_here]')
 ```
 
-And that's it! The editor will replace the textarea in the DOM and on a form submit the editor content will be available in the textarea's value attribute.
+### Using the Editor Wihout a Form
+
+If you want to use the editor, but for some reason do not want to deal with submitting forms there is a way to get the content from the editor through JavaScript:
+
+```js
+let content = Laraberg.getContent()
+```
 
 ## Models
 

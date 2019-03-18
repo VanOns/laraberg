@@ -16684,12 +16684,15 @@ function setupMedia(options) {
 function setupSubmit(target) {
   clearSubmitFromButtons();
   var textarea = document.getElementById(target);
-  textarea.form.addEventListener('submit', function (event) {
-    textarea.value = _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].select('core/editor').getEditedPostContent(); // Clear content "dirty" state.
 
-    _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].dispatch('core/editor').savePost();
-    return true;
-  });
+  if (textarea.form) {
+    textarea.form.addEventListener('submit', function (event) {
+      textarea.value = _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].select('core/editor').getEditedPostContent(); // Clear content "dirty" state.
+
+      _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].dispatch('core/editor').savePost();
+      return true;
+    });
+  }
 }
 /**
  * Removes the default upload button from media blocks
@@ -16820,6 +16823,26 @@ function rafAsync() {
   return new Promise(function (resolve) {
     window.requestAnimationFrame(resolve);
   });
+}
+
+/***/ }),
+
+/***/ "./src/resources/js/gutenberg/get-content.js":
+/*!***************************************************!*\
+  !*** ./src/resources/js/gutenberg/get-content.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getContent; });
+/* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @frontkom/gutenberg-js */ "./node_modules/@frontkom/gutenberg-js/build/js/gutenberg-js.js");
+/* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__);
+
+function getContent() {
+  _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].dispatch('core/editor').savePost();
+  return _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].select('core/editor').getEditedPostContent();
 }
 
 /***/ }),
@@ -17295,14 +17318,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../scss/laraberg.scss */ "./src/resources/scss/laraberg.scss");
 /* harmony import */ var _scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _gutenberg_settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gutenberg/settings */ "./src/resources/js/gutenberg/settings.js");
-/* harmony import */ var _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gutenberg/init-gutenberg */ "./src/resources/js/gutenberg/init-gutenberg.js");
+/* harmony import */ var _gutenberg_get_content__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gutenberg/get-content */ "./src/resources/js/gutenberg/get-content.js");
+/* harmony import */ var _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gutenberg/init-gutenberg */ "./src/resources/js/gutenberg/init-gutenberg.js");
 
  // Gutenberg imports
 
 
 
+
 window.Laraberg = {
-  initGutenberg: _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_3__["default"],
+  initGutenberg: _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_4__["default"],
+  getContent: _gutenberg_get_content__WEBPACK_IMPORTED_MODULE_3__["default"],
   editor: null
 };
 
