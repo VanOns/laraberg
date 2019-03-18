@@ -210,7 +210,7 @@ Keep in mind that in order to correctly display some of the Wordpress styling th
 
 ## Events
 
-Laraberg implements Laravel events that you can use to implement your own listeners. The events contain a 'content' attribute that contains the relevant Content object. 
+Laraberg implements Laravel events that you can use to implement your own listeners. The events contain a 'content' attribute that contains the relevant Content object. For information on how Laravel events work you can read the [Laravel documentation](https://laravel.com/docs/5.8/events).
 
 - VanOns\Laraberg\Events\ContentCreated
 - VanOns\Laraberg\Events\ContentRendered
