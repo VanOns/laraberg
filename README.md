@@ -18,7 +18,13 @@ A Gutenberg implementation for Laravel
 
 # Installation
 
-Install package using composer and run:
+Install package using composer:
+
+```bash
+composer require vanons/laraberg
+```
+
+and run:
 
 ```bash
 php artisan vendor:publish --provider='VanOns\Laraberg\LarabergServiceProvider'
