@@ -15,26 +15,26 @@ class Block extends Model
     protected $casts = ['title' => 'array'];
 
     /**
-   * Updates slug according to title
-   */
+     * Updates slug according to title
+     */
     public function updateSlug()
     {
         $this->slug = SlugHelper::slugify($this->title['raw']);
     }
 
     /**
-   * Returns the rendered content of the block
-   * @return String - The completely rendered content
-   */
+     * Returns the rendered content of the block
+     * @return String - The completely rendered content
+     */
     public function render()
     {
         return BlockHelper::renderBlocks($this->rendered_content);
     }
 
     /**
-   * Renders the content of the Block object
-   * @return String
-   */
+     * Renders the content of the Block object
+     * @return String
+     */
     public function renderRaw()
     {
         $this->rendered_content = EmbedHelper::renderEmbeds($this->raw_content);
@@ -42,9 +42,9 @@ class Block extends Model
     }
 
     /**
-   * Sets the raw content and performs some initial rendering
-   * @param String $html
-   */
+     * Sets the raw content and performs some initial rendering
+     * @param String $html
+     */
     public function setContent($content)
     {
         $this->raw_content = $content;
@@ -52,9 +52,9 @@ class Block extends Model
     }
 
     /**
-   * Returns a content object similar to WordPress
-   * @return Array
-   */
+     * Returns a content object similar to WordPress
+     * @return Array
+     */
     public function getContentAttribute()
     {
         return [
@@ -64,9 +64,9 @@ class Block extends Model
     }
 
     /**
-   * Transforms title to wordpress title object
-   * @param string $title
-   */
+     * Transforms title to wordpress title object
+     * @param string $title
+     */
     public function setTitleAttribute($title)
     {
         $this->attributes['title'] = json_encode(['raw' => $title]);

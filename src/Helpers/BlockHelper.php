@@ -7,9 +7,9 @@ use VanOns\Laraberg\Models\Block;
 class BlockHelper
 {
     /**
-   * Renders any blocks in the HTML (recursively)
-   * @param String $html
-   */
+     * Renders any blocks in the HTML (recursively)
+     * @param String $html
+     */
     public static function renderBlocks($html)
     {
         $regex = '/<!-- wp:block {"ref":(\d*)} \/-->/';
@@ -20,9 +20,9 @@ class BlockHelper
     }
 
     /**
-   * Returns the HTML of the Block with $id
-   * @param Int $id
-   */
+     * Returns the HTML of the Block with $id
+     * @param Int $id
+     */
     private static function renderBlock($id)
     {
         $block = Block::find($id);
@@ -33,4 +33,3 @@ class BlockHelper
         }
     }
 }
-

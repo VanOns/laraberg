@@ -5,11 +5,11 @@ namespace VanOns\Laraberg\Helpers;
 class SlugHelper
 {
     /**
-   * Generates a slug from the provided text
-   * @param String $text
-   * 
-   * @return String slug
-   */
+     * Generates a slug from the provided text
+     * @param String $text
+     * 
+     * @return String slug
+     */
     public static function slugify($text)
     {
         // replace non letter or digits by -

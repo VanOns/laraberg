@@ -13,11 +13,11 @@ class ContentRendered
     public $content;
 
     /**
-   * Create a new event instance
-   * 
-   * @param VanOns\Laraberg\Models\Content $content
-   * @return void
-   */
+     * Create a new event instance
+     * 
+     * @param VanOns\Laraberg\Models\Content $content
+     * @return void
+     */
     public function __construct(Content $content)
     {
         $this->content = $content;
