@@ -86,6 +86,27 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+
+module.exports = _arrayWithoutHoles;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
@@ -299,6 +320,36 @@ module.exports = _isNativeFunction;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArray.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArray.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+module.exports = _iterableToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableSpread.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+module.exports = _nonIterableSpread;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/objectSpread.js":
 /*!*************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/objectSpread.js ***!
@@ -371,6 +422,27 @@ function _setPrototypeOf(o, p) {
 }
 
 module.exports = _setPrototypeOf;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/toConsumableArray.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles */ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js");
+
+var iterableToArray = __webpack_require__(/*! ./iterableToArray */ "./node_modules/@babel/runtime/helpers/iterableToArray.js");
+
+var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread */ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js");
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
 
 /***/ }),
 
@@ -16707,6 +16779,52 @@ function removeUploadButton() {
 
 /***/ }),
 
+/***/ "./src/resources/js/gutenberg/custom-blocks.js":
+/*!*****************************************************!*\
+  !*** ./src/resources/js/gutenberg/custom-blocks.js ***!
+  \*****************************************************/
+/*! exports provided: registerBlock, registerCategory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerBlock", function() { return registerBlock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerCategory", function() { return registerCategory; });
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__);
+
+var _window$wp$data = window.wp.data,
+    dispatch = _window$wp$data.dispatch,
+    select = _window$wp$data.select;
+var registerBlockType = window.wp.blocks.registerBlockType;
+/**
+ * Registers a custom block to the editor
+ * @param {string} name The namespaced name of the block (eg: my-module/my-block)
+ * @param {Object} block The Gutenberg block object
+ */
+
+function registerBlock(name, block) {
+  registerBlockType(name, block);
+}
+/**
+ * Adds a category to the category list
+ * @param {String} title - The title for the category (eg: My Category)
+ * @param {String} slug - The slug for the category (eg: my-category)
+ */
+
+function registerCategory(title, slug) {
+  var category = {
+    slug: slug,
+    title: title
+  };
+  var currentCategories = select('core/blocks').getCategories().filter(function (item) {
+    return item.slug !== category.slug;
+  });
+  dispatch('core/blocks').setCategories([category].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(currentCategories)));
+}
+
+/***/ }),
+
 /***/ "./src/resources/js/gutenberg/element-ready.js":
 /*!*****************************************************!*\
   !*** ./src/resources/js/gutenberg/element-ready.js ***!
@@ -17308,7 +17426,7 @@ var overridePost = {};
 /*!**************************************!*\
   !*** ./src/resources/js/laraberg.js ***!
   \**************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17318,19 +17436,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../scss/laraberg.scss */ "./src/resources/scss/laraberg.scss");
 /* harmony import */ var _scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _gutenberg_settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gutenberg/settings */ "./src/resources/js/gutenberg/settings.js");
-/* harmony import */ var _gutenberg_get_content__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gutenberg/get-content */ "./src/resources/js/gutenberg/get-content.js");
-/* harmony import */ var _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gutenberg/init-gutenberg */ "./src/resources/js/gutenberg/init-gutenberg.js");
+/* harmony import */ var _gutenberg_custom_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gutenberg/custom-blocks */ "./src/resources/js/gutenberg/custom-blocks.js");
+/* harmony import */ var _gutenberg_get_content__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gutenberg/get-content */ "./src/resources/js/gutenberg/get-content.js");
+/* harmony import */ var _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./gutenberg/init-gutenberg */ "./src/resources/js/gutenberg/init-gutenberg.js");
 
  // Gutenberg imports
 
 
 
 
-window.Laraberg = {
-  initGutenberg: _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_4__["default"],
-  getContent: _gutenberg_get_content__WEBPACK_IMPORTED_MODULE_3__["default"],
-  editor: null
+
+var Laraberg = {
+  initGutenberg: _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_5__["default"],
+  getContent: _gutenberg_get_content__WEBPACK_IMPORTED_MODULE_4__["default"],
+  editor: null,
+  registerCategory: _gutenberg_custom_blocks__WEBPACK_IMPORTED_MODULE_3__["registerCategory"],
+  registerBlock: _gutenberg_custom_blocks__WEBPACK_IMPORTED_MODULE_3__["registerBlock"]
 };
+window.Laraberg = Laraberg;
+/* harmony default export */ __webpack_exports__["default"] = (Laraberg);
 
 /***/ }),
 
