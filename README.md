@@ -1,4 +1,6 @@
-# Laraberg <!-- omit in toc -->
+
+
+# <img height="300px" src="./logo-text.svg"> <!-- omit in toc -->
 A Gutenberg implementation for Laravel
 
 # Table of Contents <!-- omit in toc -->
