@@ -228,11 +228,11 @@ const myBlock =  {
   category: 'my-category',
 
   edit() {
-    return 'Hello editor.'
+    return <h1>Hello editor.</h1>
   },
 
   save() {
-    return 'Hello saved content.'
+    return <h1>Hello saved content.</h1>
   }
 }
 
