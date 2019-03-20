@@ -1,7 +1,5 @@
-
-
 # <img height="300px" src="./logo-text.svg"> <!-- omit in toc -->
-A Gutenberg implementation for Laravel
+Laraberg aims to provide an easy way to integrate the Gutenberg editor with your Laravel projects. It is built on top of the  [GutenbergJS](https://github.com/front/gutenberg-js) project, implements all the necessary communication and adds an easy to use API.
 
 # Table of Contents <!-- omit in toc -->
 - [Installation](#installation)
@@ -40,7 +38,7 @@ To copy the required JS, CSS and config files to your project.
 In order to store the data for the Gutenberg editor, Laraberg needs to run a database migration:
 
 ```
-php artisan:migrate
+php artisan migrate
 ```
 
 This will create the 'lb_contents' and 'lb_blocks' tables.
