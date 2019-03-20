@@ -17,6 +17,9 @@ A Gutenberg implementation for Laravel
   - [Models](#models)
     - [Renaming Gutenbergable method names](#renaming-gutenbergable-method-names)
   - [Rendering Gutenberg Content](#rendering-gutenberg-content)
+  - [Custom Blocks](#custom-blocks)
+    - [Registering Blocks](#registering-blocks)
+    - [Registering Categories](#registering-categories)
   - [Events](#events)
 
 # Installation
@@ -208,6 +211,42 @@ Keep in mind that in order to correctly display some of the Wordpress styling th
 
 ```html
 <link rel="stylesheet" href="{{asset('vendor/laraberg/css/laraberg.css')}}">
+```
+
+## Custom Blocks
+
+Gutenberg allows developers to create custom blocks. For information on how to create a custom block you should read the [Gutenberg documentation.](https://wordpress.org/gutenberg/handbook/designers-developers/developers/tutorials/block-tutorial/writing-your-first-block-type/)
+
+### Registering Blocks
+
+Registering custom blocks is fairly easy. A Gutenberg block requires the properties `title`, `icon`, and `categories`. It also needs to implement the functions `edit()` and `save()`.
+
+```js
+const myBlock =  {
+  title: 'My First Block!',
+  icon: 'universal-access-alt',
+  category: 'my-category',
+
+  edit() {
+    return 'Hello editor.'
+  },
+
+  save() {
+    return 'Hello saved content.'
+  }
+}
+
+Laraberg.registerBlock('my-namespace/my-block', myBlock)
+```
+
+### Registering Categories
+
+If you want to add your custom block to a new category you need to add that category first:
+
+```js
+let title = 'My Category'
+let slug = 'my-category'
+Laraberg.registerCategory(title, slug)
 ```
 
 ## Events
