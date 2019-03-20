@@ -33,6 +33,7 @@
     "autoprefixer": "^9.4.10",
     "babel-loader": "^8.0.5",
     "babel-polyfill": "^6.26.0",
+    "copy-webpack-plugin": "^5.0.1",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
     "eslint": "^5.13.0",
