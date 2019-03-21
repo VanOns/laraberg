@@ -14,17 +14,6 @@ trait Gutenbergable
         return $this->morphOne(Content::class, 'contentable');
     }
 
-    /**
-     * Creates a content object and associates it with the parent object
-     * @param String $html
-     */
-    public function createContent($html)
-    {
-        $content = new Content;
-        $content->setContent($html);
-        $this->content()->save($content);
-        event(new ContentCreated($content));
-    }
 
     /**
      * Returns the rendered HTML from the Content object
@@ -54,16 +43,28 @@ trait Gutenbergable
     }
 
     /**
-     * Sets the content of the Content object to the provided content
+     * Sets the content object using the raw editor content
      * @param String $content
      * @param String $save - Calls .save() on the Content object if true
      */
     public function setContent($content, $save = false)
-    {
+    {   
+        if (!$this->content) { $this->createContent(); }
+
         $this->content->setContent($content);
-        if ($save) {
-            $this->content->save();
-        }
+        if ($save) { $this->content->save(); }
         event(new ContentUpdated($this->content));
     }
+
+    /**
+     * Creates a content object and associates it with the parent object
+     */
+    private function createContent()
+    {
+        $content = new Content;
+        $this->content()->save($content);
+        $this->content = $content;
+        event(new ContentCreated($content));
+    }
+
 }
