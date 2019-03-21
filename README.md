@@ -161,10 +161,7 @@ This adds multiple methods to your model that will help you with creating/updati
 $content // This is the raw content from the Gutenberg editor
 $model = new MyModel;
 
-// Add the content to your model
-$model->createContent($content);
-
-// Update the content & (if true is provided) call save() on the content object
+// Add or update the content & (if true is provided) call save() on the content object
 $model->setContent($content, true);
 
 // Get the rendered HTML inside of a container
