@@ -66,5 +66,4 @@ trait Gutenbergable
         $this->content = $content;
         event(new ContentCreated($content));
     }
-
 }

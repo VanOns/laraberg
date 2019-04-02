@@ -16049,11 +16049,6 @@ var requests = {
     regex: /\/wp\/v2\/media/g,
     run: optionsMedia
   },
-  postMedia: {
-    method: 'POST',
-    regex: /\/wp\/v2\/media/g,
-    run: postMedia
-  },
   getPage: {
     method: 'GET',
     regex: /\/wp\/v2\/pages\/(\d*)/g,
@@ -16063,11 +16058,6 @@ var requests = {
     method: 'PUT',
     regex: /\/wp\/v2\/pages\/(\d*)/g,
     run: putPage
-  },
-  deletePage: {
-    method: 'DELETE',
-    regex: /\/wp\/v2\/pages\/(\d*)/g,
-    run: deletePage
   },
   getTaxonomies: {
     method: 'GET',
@@ -16093,11 +16083,6 @@ var requests = {
     method: 'GET',
     regex: /\/wp\/v2\/types\?(.*)/g,
     run: getTypes
-  },
-  getUsers: {
-    method: 'GET',
-    regex: /\/wp\/v2\/users\/\?(.*)/g,
-    run: getUsers
   }
 };
 
@@ -16308,30 +16293,6 @@ function _optionsMedia() {
   return _optionsMedia.apply(this, arguments);
 }
 
-function postMedia(_x10, _x11) {
-  return _postMedia.apply(this, arguments);
-}
-
-function _postMedia() {
-  _postMedia = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee8(options, matches) {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee8$(_context8) {
-      while (1) {
-        switch (_context8.prev = _context8.next) {
-          case 0:
-            return _context8.abrupt("return", 'ok');
-
-          case 1:
-          case "end":
-            return _context8.stop();
-        }
-      }
-    }, _callee8, this);
-  }));
-  return _postMedia.apply(this, arguments);
-}
-
 function getPage() {
   return _getPage.apply(this, arguments);
 }
@@ -16339,14 +16300,14 @@ function getPage() {
 function _getPage() {
   _getPage = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee9() {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee8() {
     var content;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee9$(_context9) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee8$(_context8) {
       while (1) {
-        switch (_context9.prev = _context9.next) {
+        switch (_context8.prev = _context8.next) {
           case 0:
             content = document.getElementById(_settings__WEBPACK_IMPORTED_MODULE_10__["editorSettings"].target).value || '';
-            return _context9.abrupt("return", _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _mock_data__WEBPACK_IMPORTED_MODULE_8__["pageData"], {
+            return _context8.abrupt("return", _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _mock_data__WEBPACK_IMPORTED_MODULE_8__["pageData"], {
               content: {
                 raw: content
               }
@@ -16354,20 +16315,48 @@ function _getPage() {
 
           case 2:
           case "end":
-            return _context9.stop();
+            return _context8.stop();
         }
       }
-    }, _callee9, this);
+    }, _callee8, this);
   }));
   return _getPage.apply(this, arguments);
 }
 
-function postPage(_x12) {
+function postPage(_x10) {
   return _postPage.apply(this, arguments);
 }
 
 function _postPage() {
   _postPage = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee9(options) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee9$(_context9) {
+      while (1) {
+        switch (_context9.prev = _context9.next) {
+          case 0:
+            return _context9.abrupt("return", _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _mock_data__WEBPACK_IMPORTED_MODULE_8__["pageData"], {
+              content: {
+                raw: options.data
+              }
+            }));
+
+          case 1:
+          case "end":
+            return _context9.stop();
+        }
+      }
+    }, _callee9, this);
+  }));
+  return _postPage.apply(this, arguments);
+}
+
+function putPage(_x11) {
+  return _putPage.apply(this, arguments);
+}
+
+function _putPage() {
+  _putPage = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee10(options) {
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee10$(_context10) {
@@ -16387,66 +16376,7 @@ function _postPage() {
       }
     }, _callee10, this);
   }));
-  return _postPage.apply(this, arguments);
-}
-
-function putPage(_x13) {
   return _putPage.apply(this, arguments);
-}
-
-function _putPage() {
-  _putPage = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee11(options) {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee11$(_context11) {
-      while (1) {
-        switch (_context11.prev = _context11.next) {
-          case 0:
-            return _context11.abrupt("return", _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _mock_data__WEBPACK_IMPORTED_MODULE_8__["pageData"], {
-              content: {
-                raw: options.data
-              }
-            }));
-
-          case 1:
-          case "end":
-            return _context11.stop();
-        }
-      }
-    }, _callee11, this);
-  }));
-  return _putPage.apply(this, arguments);
-}
-
-function deletePage(_x14, _x15) {
-  return _deletePage.apply(this, arguments);
-}
-
-function _deletePage() {
-  _deletePage = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee12(options, matches) {
-    var response;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee12$(_context12) {
-      while (1) {
-        switch (_context12.prev = _context12.next) {
-          case 0:
-            _context12.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.delete("/laraberg/pages/".concat(matches[1]));
-
-          case 2:
-            response = _context12.sent;
-            window.history.back();
-            return _context12.abrupt("return", response.data);
-
-          case 5:
-          case "end":
-            return _context12.stop();
-        }
-      }
-    }, _callee12, this);
-  }));
-  return _deletePage.apply(this, arguments);
 }
 
 function getTaxonomies() {
@@ -16456,19 +16386,19 @@ function getTaxonomies() {
 function _getTaxonomies() {
   _getTaxonomies = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee13() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee13$(_context13) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee11() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee11$(_context11) {
       while (1) {
-        switch (_context13.prev = _context13.next) {
+        switch (_context11.prev = _context11.next) {
           case 0:
-            return _context13.abrupt("return", 'ok');
+            return _context11.abrupt("return", 'ok');
 
           case 1:
           case "end":
-            return _context13.stop();
+            return _context11.stop();
         }
       }
-    }, _callee13, this);
+    }, _callee11, this);
   }));
   return _getTaxonomies.apply(this, arguments);
 }
@@ -16480,19 +16410,19 @@ function getThemes() {
 function _getThemes() {
   _getThemes = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee14() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee14$(_context14) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee12() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee12$(_context12) {
       while (1) {
-        switch (_context14.prev = _context14.next) {
+        switch (_context12.prev = _context12.next) {
           case 0:
-            return _context14.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["themesData"]);
+            return _context12.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["themesData"]);
 
           case 1:
           case "end":
-            return _context14.stop();
+            return _context12.stop();
         }
       }
-    }, _callee14, this);
+    }, _callee12, this);
   }));
   return _getThemes.apply(this, arguments);
 }
@@ -16504,19 +16434,19 @@ function getTypeBlock() {
 function _getTypeBlock() {
   _getTypeBlock = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee15() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee15$(_context15) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee13() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee13$(_context13) {
       while (1) {
-        switch (_context15.prev = _context15.next) {
+        switch (_context13.prev = _context13.next) {
           case 0:
-            return _context15.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"].block);
+            return _context13.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"].block);
 
           case 1:
           case "end":
-            return _context15.stop();
+            return _context13.stop();
         }
       }
-    }, _callee15, this);
+    }, _callee13, this);
   }));
   return _getTypeBlock.apply(this, arguments);
 }
@@ -16528,19 +16458,19 @@ function getTypePage() {
 function _getTypePage() {
   _getTypePage = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee16() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee16$(_context16) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee14() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee14$(_context14) {
       while (1) {
-        switch (_context16.prev = _context16.next) {
+        switch (_context14.prev = _context14.next) {
           case 0:
-            return _context16.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"].page);
+            return _context14.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"].page);
 
           case 1:
           case "end":
-            return _context16.stop();
+            return _context14.stop();
         }
       }
-    }, _callee16, this);
+    }, _callee14, this);
   }));
   return _getTypePage.apply(this, arguments);
 }
@@ -16552,45 +16482,21 @@ function getTypes() {
 function _getTypes() {
   _getTypes = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee17() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee17$(_context17) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee15() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee15$(_context15) {
       while (1) {
-        switch (_context17.prev = _context17.next) {
+        switch (_context15.prev = _context15.next) {
           case 0:
-            return _context17.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"]);
+            return _context15.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"]);
 
           case 1:
           case "end":
-            return _context17.stop();
+            return _context15.stop();
         }
       }
-    }, _callee17, this);
+    }, _callee15, this);
   }));
   return _getTypes.apply(this, arguments);
-}
-
-function getUsers() {
-  return _getUsers.apply(this, arguments);
-}
-
-function _getUsers() {
-  _getUsers = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee18() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee18$(_context18) {
-      while (1) {
-        switch (_context18.prev = _context18.next) {
-          case 0:
-            return _context18.abrupt("return", 'ok');
-
-          case 1:
-          case "end":
-            return _context18.stop();
-        }
-      }
-    }, _callee18, this);
-  }));
-  return _getUsers.apply(this, arguments);
 }
 
 function matchPath(options) {
@@ -16628,6 +16534,7 @@ function matchPath(options) {
 }
 
 function apiFetch(options) {
+  console.log('APIFetch', options);
   return matchPath(options);
 }
 

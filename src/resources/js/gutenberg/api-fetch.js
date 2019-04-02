@@ -38,11 +38,6 @@ const requests = {
     regex: /\/wp\/v2\/media/g,
     run: optionsMedia
   },
-  postMedia: {
-    method: 'POST',
-    regex: /\/wp\/v2\/media/g,
-    run: postMedia
-  },
   getPage: {
     method: 'GET',
     regex: /\/wp\/v2\/pages\/(\d*)/g,
@@ -52,11 +47,6 @@ const requests = {
     method: 'PUT',
     regex: /\/wp\/v2\/pages\/(\d*)/g,
     run: putPage
-  },
-  deletePage: {
-    method: 'DELETE',
-    regex: /\/wp\/v2\/pages\/(\d*)/g,
-    run: deletePage
   },
   getTaxonomies: {
     method: 'GET',
@@ -82,11 +72,6 @@ const requests = {
     method: 'GET',
     regex: /\/wp\/v2\/types\?(.*)/g,
     run: getTypes
-  },
-  getUsers: {
-    method: 'GET',
-    regex: /\/wp\/v2\/users\/\?(.*)/g,
-    run: getUsers
   }
 }
 
@@ -127,10 +112,6 @@ async function optionsMedia () {
   return mediaResponse
 }
 
-async function postMedia (options, matches) {
-  return 'ok'
-}
-
 async function getPage () {
   let content = document.getElementById(editorSettings.target).value || ''
   return {
@@ -159,12 +140,6 @@ export async function putPage (options) {
   }
 }
 
-async function deletePage (options, matches) {
-  let response = await axios.delete(`/laraberg/pages/${matches[1]}`)
-  window.history.back()
-  return response.data
-}
-
 async function getTaxonomies () {
   return 'ok'
 }
@@ -183,10 +158,6 @@ async function getTypePage () {
 
 async function getTypes () {
   return types
-}
-
-async function getUsers () {
-  return 'ok'
 }
 
 function matchPath (options) {
@@ -221,6 +192,7 @@ function matchPath (options) {
 }
 
 export default function apiFetch (options) {
+  console.log('APIFetch', options)
   return matchPath(options)
 }
 
