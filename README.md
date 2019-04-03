@@ -32,7 +32,7 @@ Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
 Install package using composer:
 
 ```bash
-composer require vanons/laraberg
+composer require van-ons/laraberg
 ```
 
 Add vendor files to your project (CSS, JS & Config):
