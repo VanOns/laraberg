@@ -1,5 +1,11 @@
 # <img height="300px" src="./logo-text.svg"> <!-- omit in toc -->
-Laraberg aims to provide an easy way to integrate the Gutenberg editor with your Laravel projects. It is built on top of the  [GutenbergJS](https://github.com/front/gutenberg-js) project, implements all the necessary communication and adds an easy to use API.
+[![Latest Unstable Version](https://poser.pugx.org/van-ons/laraberg/v/unstable)](https://packagist.org/packages/van-ons/laraberg)
+![License](https://img.shields.io/github/license/VanOns/laraberg.svg)
+[![Gitter](https://badges.gitter.im/laraberg/community.svg)](https://gitter.im/laraberg/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+
+
+Laraberg aims to provide an easy way to integrate the Gutenberg editor with your Laravel projects. It is built on top of the [GutenbergJS](https://github.com/front/gutenberg-js) project, implements all the necessary communication and adds an easy to use API.
 
 # Table of Contents <!-- omit in toc -->
 - [Installation](#installation)
@@ -19,6 +25,7 @@ Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
     - [Registering Blocks](#registering-blocks)
     - [Registering Categories](#registering-categories)
   - [Events](#events)
+- [Contributors](#contributors)
 
 # Installation
 
@@ -28,12 +35,11 @@ Install package using composer:
 composer require vanons/laraberg
 ```
 
-and run:
+Add vendor files to your project (CSS, JS & Config):
 
 ```bash
 php artisan vendor:publish --provider='VanOns\Laraberg\LarabergServiceProvider'
 ```
-To copy the required JS, CSS and config files to your project.
 
 In order to store the data for the Gutenberg editor, Laraberg needs to run a database migration:
 
@@ -251,3 +257,17 @@ Laraberg implements Laravel events that you can use to implement your own listen
 - VanOns\Laraberg\Events\ContentCreated
 - VanOns\Laraberg\Events\ContentRendered
 - VanOns\Laraberg\Events\ContentUpdated
+
+# Contributors
+
+[![Maurice Wijnia](https://github.com/mauricewijnia.png?size=100)](https://github.com/mauricewijnia) |
+--- |
+[Maurice Wijnia](http://mauricewijnia.nl) |
+
+<div align="center">
+	<br><br><br>
+	<a href="https://van-ons.nl">
+		<img src="https://koenect.van-ons.nl/bestanden/VO-logo_final.svg" width="200" alt="Van Ons">
+	</a>
+  <br>
+</div>
