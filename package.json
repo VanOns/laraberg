@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mauricewijnia/laraberg.git"
+    "url": "git+https://github.com/VanOns/laraberg.git"
   },
   "author": "Maurice Wijnia",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/mauricewijnia/laraberg/issues"
+    "url": "https://github.com/VanOns/laraberg/issues"
   },
-  "homepage": "https://github.com/mauricewijnia/laraberg#readme",
+  "homepage": "https://github.com/VanOns/laraberg#readme",
   "browserslist": "> 0.25%, not dead",
   "devDependencies": {
     "@babel/core": "^7.2.2",
