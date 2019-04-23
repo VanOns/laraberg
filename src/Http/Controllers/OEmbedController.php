@@ -10,7 +10,7 @@ class OEmbedController extends ApplicationController
     public function __invoke(Request $request)
     {
         $embed = EmbedHelper::create($request->url);
-        $data = EmbedHelper::serialze($embed);
+        $data = EmbedHelper::serialize($embed);
         if ($data['html'] == null) {
             return $this->notFound();
         }

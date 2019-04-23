@@ -28,7 +28,7 @@ class EmbedHelper
      * @param Embed $embed
      * @return array
      */
-    public static function serialze($embed) {
+    public static function serialize($embed) {
         return [
             'url' => $embed->url,
             'author_name' => $embed->authorName,
