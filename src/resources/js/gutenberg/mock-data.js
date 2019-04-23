@@ -1,6 +1,6 @@
 // Mock data to get the Gutenberg editor to work
 
-export const mediaResponse = {
+export const media = {
   headers: {
     get: value => {
       if (value === 'allow') {
@@ -10,7 +10,7 @@ export const mediaResponse = {
   }
 }
 
-export const pageData = {
+export const page = {
   content: {
     raw: ''
   },
@@ -25,13 +25,13 @@ export const pageData = {
   id: 0,
   // functions
   setContent: (content) => {
-    pageData.content = {
+    page.content = {
       raw: content
     }
   }
 }
 
-export const themesData = [{
+export const themes = [{
   theme_supports: {
     formats: ['standard', 'aside', 'image', 'video', 'quote', 'link', 'gallery', 'audio'],
     'post-thumbnails': true

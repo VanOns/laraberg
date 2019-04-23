@@ -13,7 +13,7 @@ class BlockController extends ApplicationController
         $blocks = Block::all();
         return $this->ok($blocks);
     }
-
+    // PHP
     public function store(Request $request)
     {
         $block = new Block();

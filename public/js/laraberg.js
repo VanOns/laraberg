@@ -16281,7 +16281,7 @@ function _optionsMedia() {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
-            return _context7.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["mediaResponse"]);
+            return _context7.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["media"]);
 
           case 1:
           case "end":
@@ -16307,7 +16307,7 @@ function _getPage() {
         switch (_context8.prev = _context8.next) {
           case 0:
             content = document.getElementById(_settings__WEBPACK_IMPORTED_MODULE_10__["editorSettings"].target).value || '';
-            return _context8.abrupt("return", _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _mock_data__WEBPACK_IMPORTED_MODULE_8__["pageData"], {
+            return _context8.abrupt("return", _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _mock_data__WEBPACK_IMPORTED_MODULE_8__["page"], {
               content: {
                 raw: content
               }
@@ -16335,7 +16335,7 @@ function _postPage() {
       while (1) {
         switch (_context9.prev = _context9.next) {
           case 0:
-            return _context9.abrupt("return", _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _mock_data__WEBPACK_IMPORTED_MODULE_8__["pageData"], {
+            return _context9.abrupt("return", _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _mock_data__WEBPACK_IMPORTED_MODULE_8__["page"], {
               content: {
                 raw: options.data
               }
@@ -16363,7 +16363,7 @@ function _putPage() {
       while (1) {
         switch (_context10.prev = _context10.next) {
           case 0:
-            return _context10.abrupt("return", _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _mock_data__WEBPACK_IMPORTED_MODULE_8__["pageData"], {
+            return _context10.abrupt("return", _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _mock_data__WEBPACK_IMPORTED_MODULE_8__["page"], {
               content: {
                 raw: options.data
               }
@@ -16415,7 +16415,7 @@ function _getThemes() {
       while (1) {
         switch (_context12.prev = _context12.next) {
           case 0:
-            return _context12.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["themesData"]);
+            return _context12.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["themes"]);
 
           case 1:
           case "end":
@@ -16891,8 +16891,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings */ "./src/resources/js/gutenberg/settings.js");
 /* harmony import */ var _element_ready__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./element-ready */ "./src/resources/js/gutenberg/element-ready.js");
-/* harmony import */ var _mock_data__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mock-data */ "./src/resources/js/gutenberg/mock-data.js");
-
 
 
 
@@ -16976,12 +16974,7 @@ function initGutenberg(target, options) {
           switch (_context3.prev = _context3.next) {
             case 0:
               element = document.getElementById(target);
-              _settings__WEBPACK_IMPORTED_MODULE_4__["editorSettings"].target = target; // Set editor content to element's value
-
-              if (element.value.length > 0) {
-                _mock_data__WEBPACK_IMPORTED_MODULE_6__["pageData"].setContent(element.value);
-              } // Create Gutenberg container element and insert at place of target
-
+              _settings__WEBPACK_IMPORTED_MODULE_4__["editorSettings"].target = target; // Create Gutenberg container element and insert at place of target
 
               larabergEditor = document.createElement('DIV');
               larabergEditor.id = 'laraberg__editor';
@@ -16990,13 +16983,13 @@ function initGutenberg(target, options) {
               element.hidden = true;
               window.Laraberg.editor = larabergEditor;
               resolve(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__["editPost"].initializeEditor('laraberg__editor', 'page', 0, _settings__WEBPACK_IMPORTED_MODULE_4__["editorSettings"], _settings__WEBPACK_IMPORTED_MODULE_4__["overridePost"]));
-              _context3.next = 12;
+              _context3.next = 11;
               return Object(_element_ready__WEBPACK_IMPORTED_MODULE_5__["elementReady"])('.edit-post-layout');
 
-            case 12:
+            case 11:
               Object(_configure_editor__WEBPACK_IMPORTED_MODULE_2__["default"])(options);
 
-            case 13:
+            case 12:
             case "end":
               return _context3.stop();
           }
@@ -17168,17 +17161,17 @@ function fireEvent(el, etype) {
 /*!*************************************************!*\
   !*** ./src/resources/js/gutenberg/mock-data.js ***!
   \*************************************************/
-/*! exports provided: mediaResponse, pageData, themesData, types */
+/*! exports provided: media, page, themes, types */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mediaResponse", function() { return mediaResponse; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageData", function() { return pageData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "themesData", function() { return themesData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "media", function() { return media; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "page", function() { return page; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "themes", function() { return themes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "types", function() { return types; });
 // Mock data to get the Gutenberg editor to work
-var mediaResponse = {
+var media = {
   headers: {
     get: function get(value) {
       if (value === 'allow') {
@@ -17187,7 +17180,7 @@ var mediaResponse = {
     }
   }
 };
-var pageData = {
+var page = {
   content: {
     raw: ''
   },
@@ -17202,12 +17195,12 @@ var pageData = {
   id: 0,
   // functions
   setContent: function setContent(content) {
-    pageData.content = {
+    page.content = {
       raw: content
     };
   }
 };
-var themesData = [{
+var themes = [{
   theme_supports: {
     formats: ['standard', 'aside', 'image', 'video', 'quote', 'link', 'gallery', 'audio'],
     'post-thumbnails': true

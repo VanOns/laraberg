@@ -1,4 +1,4 @@
-import { mediaResponse, pageData, themesData, types } from './mock-data'
+import * as MockData from './mock-data'
 import axios from 'axios'
 import { editorSettings } from './settings'
 
@@ -109,13 +109,13 @@ async function getEmbed (options, matches) {
 }
 
 async function optionsMedia () {
-  return mediaResponse
+  return MockData.media
 }
 
 async function getPage () {
   let content = document.getElementById(editorSettings.target).value || ''
   return {
-    ...pageData,
+    ...MockData.page,
     content: {
       raw: content
     }
@@ -124,7 +124,7 @@ async function getPage () {
 
 export async function postPage (options) {
   return {
-    ...pageData,
+    ...MockData.page,
     content: {
       raw: options.data
     }
@@ -133,7 +133,7 @@ export async function postPage (options) {
 
 export async function putPage (options) {
   return {
-    ...pageData,
+    ...MockData.page,
     content: {
       raw: options.data
     }
@@ -145,19 +145,19 @@ async function getTaxonomies () {
 }
 
 async function getThemes () {
-  return themesData
+  return MockData.themes
 }
 
 async function getTypeBlock () {
-  return types.block
+  return MockData.types.block
 }
 
 async function getTypePage () {
-  return types.page
+  return MockData.types.page
 }
 
 async function getTypes () {
-  return types
+  return MockData.types
 }
 
 function matchPath (options) {

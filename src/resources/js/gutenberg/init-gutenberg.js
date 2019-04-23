@@ -2,7 +2,6 @@ import configureEditor, { clearSubmitFromButtons } from './configure-editor'
 import { domReady, editPost } from '@frontkom/gutenberg-js'
 import { editorSettings, overridePost } from './settings'
 import { elementReady } from './element-ready'
-import { pageData } from './mock-data'
 
 // Setup sidebar events
 window.customGutenberg = {
@@ -29,10 +28,6 @@ export default function initGutenberg (target, options) {
     domReady(async () => {
       let element = document.getElementById(target)
       editorSettings.target = target
-      // Set editor content to element's value
-      if (element.value.length > 0) {
-        pageData.setContent(element.value)
-      }
       // Create Gutenberg container element and insert at place of target
       let larabergEditor = document.createElement('DIV')
       larabergEditor.id = 'laraberg__editor'
