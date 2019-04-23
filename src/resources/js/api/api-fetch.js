@@ -1,6 +1,6 @@
 import * as MockData from './mock-data'
 import axios from 'axios'
-import { editorSettings } from './settings'
+import { editorSettings } from '../gutenberg/settings'
 
 const requests = {
   getBlock: {

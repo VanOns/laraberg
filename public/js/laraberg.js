@@ -15929,51 +15929,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./src/resources/js/gutenberg/add-query-args.js":
-/*!******************************************************!*\
-  !*** ./src/resources/js/gutenberg/add-query-args.js ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return addQueryArgs; });
-/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
-/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! url */ "./node_modules/url/url.js");
-/* harmony import */ var url__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(url__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var querystring__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! querystring */ "./node_modules/querystring-es3/index.js");
-/* harmony import */ var querystring__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(querystring__WEBPACK_IMPORTED_MODULE_2__);
-
-
-/**
-* External dependencies
-*/
-
-
-/**
-* Appends arguments to the query string of the url
-*
-* @param  {String} url   URL
-* @param  {Object} args  Query Args
-*
-* @return {String}       Updated URL
-*/
-
-function addQueryArgs(url, args) {
-  var queryStringIndex = url.indexOf('?');
-  var query = queryStringIndex !== -1 ? url__WEBPACK_IMPORTED_MODULE_1___default()(url.substr(queryStringIndex + 1)) : {};
-  var baseUrl = queryStringIndex !== -1 ? url.substr(0, queryStringIndex) : url;
-  return baseUrl + '?' + Object(querystring__WEBPACK_IMPORTED_MODULE_2__["stringify"])(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, query, args));
-}
-
-/***/ }),
-
-/***/ "./src/resources/js/gutenberg/api-fetch.js":
-/*!*************************************************!*\
-  !*** ./src/resources/js/gutenberg/api-fetch.js ***!
-  \*************************************************/
+/***/ "./src/resources/js/api/api-fetch.js":
+/*!*******************************************!*\
+  !*** ./src/resources/js/api/api-fetch.js ***!
+  \*******************************************/
 /*! exports provided: postPage, putPage, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15998,10 +15957,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_wrapNativeSuper__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
 /* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _mock_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./mock-data */ "./src/resources/js/gutenberg/mock-data.js");
+/* harmony import */ var _mock_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./mock-data */ "./src/resources/js/api/mock-data.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./settings */ "./src/resources/js/gutenberg/settings.js");
+/* harmony import */ var _gutenberg_settings__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../gutenberg/settings */ "./src/resources/js/gutenberg/settings.js");
 
 
 
@@ -16306,7 +16265,7 @@ function _getPage() {
       while (1) {
         switch (_context8.prev = _context8.next) {
           case 0:
-            content = document.getElementById(_settings__WEBPACK_IMPORTED_MODULE_10__["editorSettings"].target).value || '';
+            content = document.getElementById(_gutenberg_settings__WEBPACK_IMPORTED_MODULE_10__["editorSettings"].target).value || '';
             return _context8.abrupt("return", _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _mock_data__WEBPACK_IMPORTED_MODULE_8__["page"], {
               content: {
                 raw: content
@@ -16558,10 +16517,537 @@ function (_Error) {
 
 /***/ }),
 
-/***/ "./src/resources/js/gutenberg/configure-editor.js":
-/*!********************************************************!*\
-  !*** ./src/resources/js/gutenberg/configure-editor.js ***!
-  \********************************************************/
+/***/ "./src/resources/js/api/mock-data.js":
+/*!*******************************************!*\
+  !*** ./src/resources/js/api/mock-data.js ***!
+  \*******************************************/
+/*! exports provided: media, page, themes, types */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "media", function() { return media; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "page", function() { return page; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "themes", function() { return themes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "types", function() { return types; });
+// Mock data to get the Gutenberg editor to work
+var media = {
+  headers: {
+    get: function get(value) {
+      if (value === 'allow') {
+        return ['POST'];
+      }
+    }
+  }
+};
+var page = {
+  content: {
+    raw: ''
+  },
+  title: '',
+  templates: '',
+  parent: 0,
+  link: "".concat(window.location.origin, "/preview"),
+  permalink_template: "".concat(window.location.origin, "/preview"),
+  preview_link: "".concat(window.location.origin, "/preview"),
+  type: 'page',
+  status: 'pending',
+  id: 0,
+  // functions
+  setContent: function setContent(content) {
+    page.content = {
+      raw: content
+    };
+  }
+};
+var themes = [{
+  theme_supports: {
+    formats: ['standard', 'aside', 'image', 'video', 'quote', 'link', 'gallery', 'audio'],
+    'post-thumbnails': true
+  }
+}];
+var types = {
+  page: {
+    labels: {},
+    name: 'Page',
+    rest_base: 'pages',
+    slug: 'page',
+    supports: {
+      author: false,
+      comments: false,
+      // hide discussion-panel
+      'custom-fields': true,
+      document: true,
+      // * hide document tab
+      editor: true,
+      'media-library': false,
+      // * hide media library
+      'page-attributes': false,
+      // hide page-attributes panel
+      posts: false,
+      // * hide posts-panel
+      revisions: false,
+      'template-settings': false,
+      // * hide template-settings panel
+      thumbnail: false,
+      // featured-image panel
+      title: false,
+      // show title on editor
+      extras: false
+    },
+    viewable: false,
+    saveable: true,
+    publishable: true,
+    autosaveable: false
+  },
+  block: {
+    name: 'Blocks',
+    rest_base: 'blocks',
+    slug: 'wp_block',
+    description: '',
+    supports: {
+      title: true,
+      editor: true
+    },
+    viewable: true
+  }
+};
+
+/***/ }),
+
+/***/ "./src/resources/js/gutenberg/add-query-args.js":
+/*!******************************************************!*\
+  !*** ./src/resources/js/gutenberg/add-query-args.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return addQueryArgs; });
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! url */ "./node_modules/url/url.js");
+/* harmony import */ var url__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(url__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var querystring__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! querystring */ "./node_modules/querystring-es3/index.js");
+/* harmony import */ var querystring__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(querystring__WEBPACK_IMPORTED_MODULE_2__);
+
+
+/**
+* External dependencies
+*/
+
+
+/**
+* Appends arguments to the query string of the url
+*
+* @param  {String} url   URL
+* @param  {Object} args  Query Args
+*
+* @return {String}       Updated URL
+*/
+
+function addQueryArgs(url, args) {
+  var queryStringIndex = url.indexOf('?');
+  var query = queryStringIndex !== -1 ? url__WEBPACK_IMPORTED_MODULE_1___default()(url.substr(queryStringIndex + 1)) : {};
+  var baseUrl = queryStringIndex !== -1 ? url.substr(0, queryStringIndex) : url;
+  return baseUrl + '?' + Object(querystring__WEBPACK_IMPORTED_MODULE_2__["stringify"])(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, query, args));
+}
+
+/***/ }),
+
+/***/ "./src/resources/js/gutenberg/init-gutenberg.js":
+/*!******************************************************!*\
+  !*** ./src/resources/js/gutenberg/init-gutenberg.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return initGutenberg; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_configure_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/configure-editor */ "./src/resources/js/lib/configure-editor.js");
+/* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @frontkom/gutenberg-js */ "./node_modules/@frontkom/gutenberg-js/build/js/gutenberg-js.js");
+/* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings */ "./src/resources/js/gutenberg/settings.js");
+/* harmony import */ var _lib_element_ready__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/element-ready */ "./src/resources/js/lib/element-ready.js");
+
+
+
+
+
+ // Setup sidebar events
+
+window.customGutenberg = {
+  events: {
+    'OPEN_GENERAL_SIDEBAR': function () {
+      var _OPEN_GENERAL_SIDEBAR = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(action, store) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return Object(_lib_element_ready__WEBPACK_IMPORTED_MODULE_5__["elementReady"])('.edit-post-sidebar');
+
+              case 2:
+                Object(_lib_configure_editor__WEBPACK_IMPORTED_MODULE_2__["clearSubmitFromButtons"])();
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function OPEN_GENERAL_SIDEBAR(_x, _x2) {
+        return _OPEN_GENERAL_SIDEBAR.apply(this, arguments);
+      }
+
+      return OPEN_GENERAL_SIDEBAR;
+    }(),
+    'CLOSE_GENERAL_SIDEBAR': function () {
+      var _CLOSE_GENERAL_SIDEBAR = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(action, store) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function CLOSE_GENERAL_SIDEBAR(_x3, _x4) {
+        return _CLOSE_GENERAL_SIDEBAR.apply(this, arguments);
+      }
+
+      return CLOSE_GENERAL_SIDEBAR;
+    }()
+  }
+  /**
+   * Initialize the Gutenberg editor
+   * @param {string} target the element ID to render the gutenberg editor in
+   */
+
+};
+function initGutenberg(target, options) {
+  if (!options) {
+    options = {};
+  } // Initializing the editor!
+
+
+  window._wpLoadGutenbergEditor = new Promise(function (resolve) {
+    Object(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__["domReady"])(
+    /*#__PURE__*/
+    _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var element, larabergEditor;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              element = document.getElementById(target);
+              _settings__WEBPACK_IMPORTED_MODULE_4__["editorSettings"].target = target; // Create Gutenberg container element and insert at place of target
+
+              larabergEditor = document.createElement('DIV');
+              larabergEditor.id = 'laraberg__editor';
+              larabergEditor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container', 'wp-embed-responsive');
+              element.parentNode.insertBefore(larabergEditor, element);
+              element.hidden = true;
+              window.Laraberg.editor = larabergEditor;
+              resolve(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__["editPost"].initializeEditor('laraberg__editor', 'page', 0, _settings__WEBPACK_IMPORTED_MODULE_4__["editorSettings"], _settings__WEBPACK_IMPORTED_MODULE_4__["overridePost"]));
+              _context3.next = 11;
+              return Object(_lib_element_ready__WEBPACK_IMPORTED_MODULE_5__["elementReady"])('.edit-post-layout');
+
+            case 11:
+              Object(_lib_configure_editor__WEBPACK_IMPORTED_MODULE_2__["default"])(options);
+
+            case 12:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this);
+    })));
+  });
+}
+
+/***/ }),
+
+/***/ "./src/resources/js/gutenberg/settings.js":
+/*!************************************************!*\
+  !*** ./src/resources/js/gutenberg/settings.js ***!
+  \************************************************/
+/*! exports provided: editorSettings, overridePost */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editorSettings", function() { return editorSettings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "overridePost", function() { return overridePost; });
+/* harmony import */ var _add_query_args__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add-query-args */ "./src/resources/js/gutenberg/add-query-args.js");
+/* harmony import */ var _api_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api/api-fetch */ "./src/resources/js/api/api-fetch.js");
+// import React from 'react'
+// import ReactDOM from 'react-dom'
+// import moment from 'moment'
+// import jQuery from 'jquery'
+
+ // Make React, ReactDOM moment and jQuery available in DOM
+// window.React = React
+// window.ReactDOM = ReactDOM
+// window.moment = moment
+// window.jQuery = jQuery
+// window.$ = jQuery
+
+window.wp = {
+  apiFetch: _api_api_fetch__WEBPACK_IMPORTED_MODULE_1__["default"],
+  url: {
+    addQueryArgs: _add_query_args__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+};
+window.userSettings = {
+  uid: 2 // Among other things, this uid is used to identify and store editor user preferences in localStorage
+  // set your root path
+
+};
+window.wpApiSettings = {
+  root: '/' // Some editor settings
+
+};
+var editorSettings = {
+  target: null,
+  alignWide: true,
+  availableTemplates: [],
+  allowedBlockTypes: true,
+  disableCustomColors: false,
+  disablePostFormats: false,
+  mediaLibrary: false,
+  titlePlaceholder: 'Add title',
+  bodyPlaceholder: 'Write your story',
+  isRTL: false,
+  postLock: {
+    isLocked: false
+  },
+  autosaveInterval: 10,
+  canAutosave: false,
+  // to disable Editor Autosave featured (default: true)
+  canPublish: false,
+  // to disable Editor Publish featured (default: true)
+  canSave: false // to disable Editor Save featured (default: true)    };
+  // Post properties to override
+
+};
+var overridePost = {};
+
+/***/ }),
+
+/***/ "./src/resources/js/laraberg.js":
+/*!**************************************!*\
+  !*** ./src/resources/js/laraberg.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var babel_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! babel-polyfill */ "./node_modules/babel-polyfill/lib/index.js");
+/* harmony import */ var babel_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_polyfill__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../scss/laraberg.scss */ "./src/resources/scss/laraberg.scss");
+/* harmony import */ var _scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _gutenberg_settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gutenberg/settings */ "./src/resources/js/gutenberg/settings.js");
+/* harmony import */ var _lib_get_content__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/get-content */ "./src/resources/js/lib/get-content.js");
+/* harmony import */ var _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gutenberg/init-gutenberg */ "./src/resources/js/gutenberg/init-gutenberg.js");
+/* harmony import */ var _lib_custom_blocks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/custom-blocks */ "./src/resources/js/lib/custom-blocks.js");
+
+ // Gutenberg imports
+
+
+
+
+
+var Laraberg = {
+  initGutenberg: _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_4__["default"],
+  getContent: _lib_get_content__WEBPACK_IMPORTED_MODULE_3__["default"],
+  editor: null,
+  registerCategory: _lib_custom_blocks__WEBPACK_IMPORTED_MODULE_5__["registerCategory"],
+  registerBlock: _lib_custom_blocks__WEBPACK_IMPORTED_MODULE_5__["registerBlock"]
+};
+window.Laraberg = Laraberg;
+/* harmony default export */ __webpack_exports__["default"] = (Laraberg);
+
+/***/ }),
+
+/***/ "./src/resources/js/laravel-filemanager/laravel-filemanager.js":
+/*!*********************************************************************!*\
+  !*** ./src/resources/js/laravel-filemanager/laravel-filemanager.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return setupLaravelFilemanager; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_element_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/element-ready */ "./src/resources/js/lib/element-ready.js");
+
+
+
+var lfmOptions;
+/**
+ * Insert the 'File Manager' button whenever a mediablock appears
+ */
+
+function setupLaravelFilemanager(_x) {
+  return _setupLaravelFilemanager.apply(this, arguments);
+}
+/**
+ * Event listener for the File Manager button
+ * @param {Event} event
+ */
+
+function _setupLaravelFilemanager() {
+  _setupLaravelFilemanager = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(options) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            lfmOptions = options;
+            Object(_lib_element_ready__WEBPACK_IMPORTED_MODULE_2__["elementRendered"])('.editor-media-placeholder', function (mediaEditor) {
+              var lfmButton = document.createElement('button');
+              lfmButton.innerHTML = 'File Manager';
+              lfmButton.classList.add('components-button', 'editor-media-placeholder__button', 'is-button', 'is-default', 'is-large');
+              lfmButton.type = 'button';
+              lfmButton.addEventListener('click', lfmListener);
+              var fileUpload = mediaEditor.querySelector('.components-form-file-upload');
+              fileUpload.parentNode.insertBefore(lfmButton, fileUpload.nextSibling);
+            });
+
+          case 2:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, this);
+  }));
+  return _setupLaravelFilemanager.apply(this, arguments);
+}
+
+function lfmListener(event) {
+  var block = event.target.parentNode.parentNode.parentNode;
+  var options = {};
+
+  if (block.querySelector('.wp-block-image') !== null) {
+    options.type = 'Images';
+  } else {
+    options.type = 'Files';
+  }
+
+  if (lfmOptions.prefix) {
+    options.prefix = lfmOptions.prefix;
+  }
+
+  openFilemanager(options, function (url, path) {
+    insertMedia(block, url);
+  });
+}
+/**
+ * Opens a window with Laravel Filemanager
+ * @param {Object} options
+ * @param {function} cb
+ */
+
+
+function openFilemanager(options, cb) {
+  var routePrefix = options && options.prefix ? options.prefix : '/laravel-filemanager';
+  window.open(routePrefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
+  window.SetUrl = cb;
+}
+/**
+ * Inserts the media object into the media block
+ * This is done by putting the URL into the 'Insert from URL' field and submitting the field
+ * @param {Element} block the media block to insert the media into
+ * @param {*} url the URL of the media
+ */
+
+
+function insertMedia(_x2, _x3) {
+  return _insertMedia.apply(this, arguments);
+}
+/**
+ * Fires an event for the provided element
+ * @param {Element} el the element to fire the event on
+ * @param {String} etype the event type, eg: 'change', 'click', etc...
+ */
+
+
+function _insertMedia() {
+  _insertMedia = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(block, url) {
+    var urlButton, formSelector, urlForm, urlInput, submitButton;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            urlButton = block.querySelector('.editor-media-placeholder__url-input-container').querySelector('button');
+            urlButton.click();
+            formSelector = '.editor-media-placeholder__url-input-form';
+            _context2.next = 5;
+            return Object(_lib_element_ready__WEBPACK_IMPORTED_MODULE_2__["elementReadyRAF"])(formSelector);
+
+          case 5:
+            urlForm = document.querySelector(formSelector);
+            urlInput = urlForm.querySelector('input');
+            urlInput.value = url; // For some reason we can not click() the submitButton
+            // if we do not add a space and fire the change event on the input
+
+            urlInput.value += ' ';
+            fireEvent(urlInput, 'change');
+            submitButton = urlForm.querySelector('button');
+            submitButton.click();
+
+          case 12:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, this);
+  }));
+  return _insertMedia.apply(this, arguments);
+}
+
+function fireEvent(el, etype) {
+  if (el.fireEvent) {
+    el.fireEvent('on' + etype);
+  } else {
+    var evObj = document.createEvent('Events');
+    evObj.initEvent(etype, true, false);
+    el.dispatchEvent(evObj);
+  }
+}
+
+/***/ }),
+
+/***/ "./src/resources/js/lib/configure-editor.js":
+/*!**************************************************!*\
+  !*** ./src/resources/js/lib/configure-editor.js ***!
+  \**************************************************/
 /*! exports provided: default, clearSubmitFromButtons */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16571,9 +17057,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearSubmitFromButtons", function() { return clearSubmitFromButtons; });
 /* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @frontkom/gutenberg-js */ "./node_modules/@frontkom/gutenberg-js/build/js/gutenberg-js.js");
 /* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./settings */ "./src/resources/js/gutenberg/settings.js");
-/* harmony import */ var _element_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./element-ready */ "./src/resources/js/gutenberg/element-ready.js");
-/* harmony import */ var _laravel_filemanager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./laravel-filemanager */ "./src/resources/js/gutenberg/laravel-filemanager.js");
+/* harmony import */ var _gutenberg_settings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../gutenberg/settings */ "./src/resources/js/gutenberg/settings.js");
+/* harmony import */ var _element_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./element-ready */ "./src/resources/js/lib/element-ready.js");
+/* harmony import */ var _laravel_filemanager_laravel_filemanager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../laravel-filemanager/laravel-filemanager */ "./src/resources/js/laravel-filemanager/laravel-filemanager.js");
 
 
 
@@ -16584,7 +17070,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 function configureEditor(options) {
-  setupSubmit(_settings__WEBPACK_IMPORTED_MODULE_1__["editorSettings"].target);
+  setupSubmit(_gutenberg_settings__WEBPACK_IMPORTED_MODULE_1__["editorSettings"].target);
   setupMedia(options);
 
   if (options.maxHeight) {
@@ -16651,7 +17137,7 @@ function setupMedia(options) {
   removeUploadButton();
 
   if (options.laravelFilemanager) {
-    Object(_laravel_filemanager__WEBPACK_IMPORTED_MODULE_3__["default"])(options.laravelFilemanager);
+    Object(_laravel_filemanager_laravel_filemanager__WEBPACK_IMPORTED_MODULE_3__["default"])(options.laravelFilemanager);
   }
 }
 /**
@@ -16686,10 +17172,10 @@ function removeUploadButton() {
 
 /***/ }),
 
-/***/ "./src/resources/js/gutenberg/custom-blocks.js":
-/*!*****************************************************!*\
-  !*** ./src/resources/js/gutenberg/custom-blocks.js ***!
-  \*****************************************************/
+/***/ "./src/resources/js/lib/custom-blocks.js":
+/*!***********************************************!*\
+  !*** ./src/resources/js/lib/custom-blocks.js ***!
+  \***********************************************/
 /*! exports provided: registerBlock, registerCategory */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16732,10 +17218,10 @@ function registerCategory(title, slug) {
 
 /***/ }),
 
-/***/ "./src/resources/js/gutenberg/element-ready.js":
-/*!*****************************************************!*\
-  !*** ./src/resources/js/gutenberg/element-ready.js ***!
-  \*****************************************************/
+/***/ "./src/resources/js/lib/element-ready.js":
+/*!***********************************************!*\
+  !*** ./src/resources/js/lib/element-ready.js ***!
+  \***********************************************/
 /*! exports provided: elementReady, elementRendered, elementReadyRAF */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16852,10 +17338,10 @@ function rafAsync() {
 
 /***/ }),
 
-/***/ "./src/resources/js/gutenberg/get-content.js":
-/*!***************************************************!*\
-  !*** ./src/resources/js/gutenberg/get-content.js ***!
-  \***************************************************/
+/***/ "./src/resources/js/lib/get-content.js":
+/*!*********************************************!*\
+  !*** ./src/resources/js/lib/get-content.js ***!
+  \*********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16869,492 +17355,6 @@ function getContent() {
   _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].dispatch('core/editor').savePost();
   return _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].select('core/editor').getEditedPostContent();
 }
-
-/***/ }),
-
-/***/ "./src/resources/js/gutenberg/init-gutenberg.js":
-/*!******************************************************!*\
-  !*** ./src/resources/js/gutenberg/init-gutenberg.js ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return initGutenberg; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _configure_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./configure-editor */ "./src/resources/js/gutenberg/configure-editor.js");
-/* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @frontkom/gutenberg-js */ "./node_modules/@frontkom/gutenberg-js/build/js/gutenberg-js.js");
-/* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings */ "./src/resources/js/gutenberg/settings.js");
-/* harmony import */ var _element_ready__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./element-ready */ "./src/resources/js/gutenberg/element-ready.js");
-
-
-
-
-
- // Setup sidebar events
-
-window.customGutenberg = {
-  events: {
-    'OPEN_GENERAL_SIDEBAR': function () {
-      var _OPEN_GENERAL_SIDEBAR = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(action, store) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return Object(_element_ready__WEBPACK_IMPORTED_MODULE_5__["elementReady"])('.edit-post-sidebar');
-
-              case 2:
-                Object(_configure_editor__WEBPACK_IMPORTED_MODULE_2__["clearSubmitFromButtons"])();
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function OPEN_GENERAL_SIDEBAR(_x, _x2) {
-        return _OPEN_GENERAL_SIDEBAR.apply(this, arguments);
-      }
-
-      return OPEN_GENERAL_SIDEBAR;
-    }(),
-    'CLOSE_GENERAL_SIDEBAR': function () {
-      var _CLOSE_GENERAL_SIDEBAR = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(action, store) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function CLOSE_GENERAL_SIDEBAR(_x3, _x4) {
-        return _CLOSE_GENERAL_SIDEBAR.apply(this, arguments);
-      }
-
-      return CLOSE_GENERAL_SIDEBAR;
-    }()
-  }
-  /**
-   * Initialize the Gutenberg editor
-   * @param {string} target the element ID to render the gutenberg editor in
-   */
-
-};
-function initGutenberg(target, options) {
-  if (!options) {
-    options = {};
-  } // Initializing the editor!
-
-
-  window._wpLoadGutenbergEditor = new Promise(function (resolve) {
-    Object(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__["domReady"])(
-    /*#__PURE__*/
-    _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
-    /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-      var element, larabergEditor;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              element = document.getElementById(target);
-              _settings__WEBPACK_IMPORTED_MODULE_4__["editorSettings"].target = target; // Create Gutenberg container element and insert at place of target
-
-              larabergEditor = document.createElement('DIV');
-              larabergEditor.id = 'laraberg__editor';
-              larabergEditor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container', 'wp-embed-responsive');
-              element.parentNode.insertBefore(larabergEditor, element);
-              element.hidden = true;
-              window.Laraberg.editor = larabergEditor;
-              resolve(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__["editPost"].initializeEditor('laraberg__editor', 'page', 0, _settings__WEBPACK_IMPORTED_MODULE_4__["editorSettings"], _settings__WEBPACK_IMPORTED_MODULE_4__["overridePost"]));
-              _context3.next = 11;
-              return Object(_element_ready__WEBPACK_IMPORTED_MODULE_5__["elementReady"])('.edit-post-layout');
-
-            case 11:
-              Object(_configure_editor__WEBPACK_IMPORTED_MODULE_2__["default"])(options);
-
-            case 12:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3, this);
-    })));
-  });
-}
-
-/***/ }),
-
-/***/ "./src/resources/js/gutenberg/laravel-filemanager.js":
-/*!***********************************************************!*\
-  !*** ./src/resources/js/gutenberg/laravel-filemanager.js ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return setupLaravelFilemanager; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _element_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./element-ready */ "./src/resources/js/gutenberg/element-ready.js");
-
-
-
-var lfmOptions;
-/**
- * Insert the 'File Manager' button whenever a mediablock appears
- */
-
-function setupLaravelFilemanager(_x) {
-  return _setupLaravelFilemanager.apply(this, arguments);
-}
-/**
- * Event listener for the File Manager button
- * @param {Event} event
- */
-
-function _setupLaravelFilemanager() {
-  _setupLaravelFilemanager = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(options) {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            lfmOptions = options;
-            Object(_element_ready__WEBPACK_IMPORTED_MODULE_2__["elementRendered"])('.editor-media-placeholder', function (mediaEditor) {
-              var lfmButton = document.createElement('button');
-              lfmButton.innerHTML = 'File Manager';
-              lfmButton.classList.add('components-button', 'editor-media-placeholder__button', 'is-button', 'is-default', 'is-large');
-              lfmButton.type = 'button';
-              lfmButton.addEventListener('click', lfmListener);
-              var fileUpload = mediaEditor.querySelector('.components-form-file-upload');
-              fileUpload.parentNode.insertBefore(lfmButton, fileUpload.nextSibling);
-            });
-
-          case 2:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, this);
-  }));
-  return _setupLaravelFilemanager.apply(this, arguments);
-}
-
-function lfmListener(event) {
-  var block = event.target.parentNode.parentNode.parentNode;
-  var options = {};
-
-  if (block.querySelector('.wp-block-image') !== null) {
-    options.type = 'Images';
-  } else {
-    options.type = 'Files';
-  }
-
-  if (lfmOptions.prefix) {
-    options.prefix = lfmOptions.prefix;
-  }
-
-  openFilemanager(options, function (url, path) {
-    insertMedia(block, url);
-  });
-}
-/**
- * Opens a window with Laravel Filemanager
- * @param {Object} options
- * @param {function} cb
- */
-
-
-function openFilemanager(options, cb) {
-  var routePrefix = options && options.prefix ? options.prefix : '/laravel-filemanager';
-  window.open(routePrefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
-  window.SetUrl = cb;
-}
-/**
- * Inserts the media object into the media block
- * This is done by putting the URL into the 'Insert from URL' field and submitting the field
- * @param {Element} block the media block to insert the media into
- * @param {*} url the URL of the media
- */
-
-
-function insertMedia(_x2, _x3) {
-  return _insertMedia.apply(this, arguments);
-}
-/**
- * Fires an event for the provided element
- * @param {Element} el the element to fire the event on
- * @param {String} etype the event type, eg: 'change', 'click', etc...
- */
-
-
-function _insertMedia() {
-  _insertMedia = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(block, url) {
-    var urlButton, formSelector, urlForm, urlInput, submitButton;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            urlButton = block.querySelector('.editor-media-placeholder__url-input-container').querySelector('button');
-            urlButton.click();
-            formSelector = '.editor-media-placeholder__url-input-form';
-            _context2.next = 5;
-            return Object(_element_ready__WEBPACK_IMPORTED_MODULE_2__["elementReadyRAF"])(formSelector);
-
-          case 5:
-            urlForm = document.querySelector(formSelector);
-            urlInput = urlForm.querySelector('input');
-            urlInput.value = url; // For some reason we can not click() the submitButton
-            // if we do not add a space and fire the change event on the input
-
-            urlInput.value += ' ';
-            fireEvent(urlInput, 'change');
-            submitButton = urlForm.querySelector('button');
-            submitButton.click();
-
-          case 12:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, this);
-  }));
-  return _insertMedia.apply(this, arguments);
-}
-
-function fireEvent(el, etype) {
-  if (el.fireEvent) {
-    el.fireEvent('on' + etype);
-  } else {
-    var evObj = document.createEvent('Events');
-    evObj.initEvent(etype, true, false);
-    el.dispatchEvent(evObj);
-  }
-}
-
-/***/ }),
-
-/***/ "./src/resources/js/gutenberg/mock-data.js":
-/*!*************************************************!*\
-  !*** ./src/resources/js/gutenberg/mock-data.js ***!
-  \*************************************************/
-/*! exports provided: media, page, themes, types */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "media", function() { return media; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "page", function() { return page; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "themes", function() { return themes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "types", function() { return types; });
-// Mock data to get the Gutenberg editor to work
-var media = {
-  headers: {
-    get: function get(value) {
-      if (value === 'allow') {
-        return ['POST'];
-      }
-    }
-  }
-};
-var page = {
-  content: {
-    raw: ''
-  },
-  title: '',
-  templates: '',
-  parent: 0,
-  link: "".concat(window.location.origin, "/preview"),
-  permalink_template: "".concat(window.location.origin, "/preview"),
-  preview_link: "".concat(window.location.origin, "/preview"),
-  type: 'page',
-  status: 'pending',
-  id: 0,
-  // functions
-  setContent: function setContent(content) {
-    page.content = {
-      raw: content
-    };
-  }
-};
-var themes = [{
-  theme_supports: {
-    formats: ['standard', 'aside', 'image', 'video', 'quote', 'link', 'gallery', 'audio'],
-    'post-thumbnails': true
-  }
-}];
-var types = {
-  page: {
-    labels: {},
-    name: 'Page',
-    rest_base: 'pages',
-    slug: 'page',
-    supports: {
-      author: false,
-      comments: false,
-      // hide discussion-panel
-      'custom-fields': true,
-      document: true,
-      // * hide document tab
-      editor: true,
-      'media-library': false,
-      // * hide media library
-      'page-attributes': false,
-      // hide page-attributes panel
-      posts: false,
-      // * hide posts-panel
-      revisions: false,
-      'template-settings': false,
-      // * hide template-settings panel
-      thumbnail: false,
-      // featured-image panel
-      title: false,
-      // show title on editor
-      extras: false
-    },
-    viewable: false,
-    saveable: true,
-    publishable: true,
-    autosaveable: false
-  },
-  block: {
-    name: 'Blocks',
-    rest_base: 'blocks',
-    slug: 'wp_block',
-    description: '',
-    supports: {
-      title: true,
-      editor: true
-    },
-    viewable: true
-  }
-};
-
-/***/ }),
-
-/***/ "./src/resources/js/gutenberg/settings.js":
-/*!************************************************!*\
-  !*** ./src/resources/js/gutenberg/settings.js ***!
-  \************************************************/
-/*! exports provided: editorSettings, overridePost */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editorSettings", function() { return editorSettings; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "overridePost", function() { return overridePost; });
-/* harmony import */ var _add_query_args__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add-query-args */ "./src/resources/js/gutenberg/add-query-args.js");
-/* harmony import */ var _api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./api-fetch */ "./src/resources/js/gutenberg/api-fetch.js");
-// import React from 'react'
-// import ReactDOM from 'react-dom'
-// import moment from 'moment'
-// import jQuery from 'jquery'
-
- // Make React, ReactDOM moment and jQuery available in DOM
-// window.React = React
-// window.ReactDOM = ReactDOM
-// window.moment = moment
-// window.jQuery = jQuery
-// window.$ = jQuery
-
-window.wp = {
-  apiFetch: _api_fetch__WEBPACK_IMPORTED_MODULE_1__["default"],
-  url: {
-    addQueryArgs: _add_query_args__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }
-};
-window.userSettings = {
-  uid: 2 // Among other things, this uid is used to identify and store editor user preferences in localStorage
-  // set your root path
-
-};
-window.wpApiSettings = {
-  root: '/' // Some editor settings
-
-};
-var editorSettings = {
-  target: null,
-  alignWide: true,
-  availableTemplates: [],
-  allowedBlockTypes: true,
-  disableCustomColors: false,
-  disablePostFormats: false,
-  mediaLibrary: false,
-  titlePlaceholder: 'Add title',
-  bodyPlaceholder: 'Write your story',
-  isRTL: false,
-  postLock: {
-    isLocked: false
-  },
-  autosaveInterval: 10,
-  canAutosave: false,
-  // to disable Editor Autosave featured (default: true)
-  canPublish: false,
-  // to disable Editor Publish featured (default: true)
-  canSave: false // to disable Editor Save featured (default: true)    };
-  // Post properties to override
-
-};
-var overridePost = {};
-
-/***/ }),
-
-/***/ "./src/resources/js/laraberg.js":
-/*!**************************************!*\
-  !*** ./src/resources/js/laraberg.js ***!
-  \**************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var babel_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! babel-polyfill */ "./node_modules/babel-polyfill/lib/index.js");
-/* harmony import */ var babel_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_polyfill__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../scss/laraberg.scss */ "./src/resources/scss/laraberg.scss");
-/* harmony import */ var _scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _gutenberg_settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gutenberg/settings */ "./src/resources/js/gutenberg/settings.js");
-/* harmony import */ var _gutenberg_get_content__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gutenberg/get-content */ "./src/resources/js/gutenberg/get-content.js");
-/* harmony import */ var _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gutenberg/init-gutenberg */ "./src/resources/js/gutenberg/init-gutenberg.js");
-/* harmony import */ var _gutenberg_custom_blocks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./gutenberg/custom-blocks */ "./src/resources/js/gutenberg/custom-blocks.js");
-
- // Gutenberg imports
-
-
-
-
-
-var Laraberg = {
-  initGutenberg: _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_4__["default"],
-  getContent: _gutenberg_get_content__WEBPACK_IMPORTED_MODULE_3__["default"],
-  editor: null,
-  registerCategory: _gutenberg_custom_blocks__WEBPACK_IMPORTED_MODULE_5__["registerCategory"],
-  registerBlock: _gutenberg_custom_blocks__WEBPACK_IMPORTED_MODULE_5__["registerBlock"]
-};
-window.Laraberg = Laraberg;
-/* harmony default export */ __webpack_exports__["default"] = (Laraberg);
 
 /***/ }),
 

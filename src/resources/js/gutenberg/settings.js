@@ -3,7 +3,7 @@
 // import moment from 'moment'
 // import jQuery from 'jquery'
 import addQueryArgs from './add-query-args'
-import apiFetch from './api-fetch'
+import apiFetch from '../api/api-fetch'
 
 // Make React, ReactDOM moment and jQuery available in DOM
 // window.React = React

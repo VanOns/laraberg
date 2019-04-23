@@ -1,7 +1,7 @@
-import configureEditor, { clearSubmitFromButtons } from './configure-editor'
+import configureEditor, { clearSubmitFromButtons } from '../lib/configure-editor'
 import { domReady, editPost } from '@frontkom/gutenberg-js'
 import { editorSettings, overridePost } from './settings'
-import { elementReady } from './element-ready'
+import { elementReady } from '../lib/element-ready'
 
 // Setup sidebar events
 window.customGutenberg = {

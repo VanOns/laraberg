@@ -1,4 +1,4 @@
-import { elementReadyRAF, elementRendered } from './element-ready'
+import { elementReadyRAF, elementRendered } from '../lib/element-ready'
 
 let lfmOptions
 /**

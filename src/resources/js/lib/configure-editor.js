@@ -1,7 +1,7 @@
 import { data } from '@frontkom/gutenberg-js'
-import { editorSettings } from './settings'
+import { editorSettings } from '../gutenberg/settings'
 import { elementRendered } from './element-ready'
-import setupLaravelFilemanager from './laravel-filemanager'
+import setupLaravelFilemanager from '../laravel-filemanager/laravel-filemanager'
 
 /**
  * Configures the editor according to the provided options object
