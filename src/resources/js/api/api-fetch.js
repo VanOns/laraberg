@@ -192,7 +192,6 @@ function matchPath (options) {
 }
 
 export default function apiFetch (options) {
-  console.log('APIFetch', options)
   return matchPath(options)
 }
 
