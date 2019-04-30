@@ -9,6 +9,10 @@
   overflow: hidden;
   border: 1px solid #e2e4e7;
 
+  .components-notice-list {
+    position: sticky;
+  }
+
   .edit-post-header {
     z-index: 100;
   }
