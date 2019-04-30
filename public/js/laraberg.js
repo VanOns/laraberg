@@ -15961,6 +15961,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _gutenberg_settings__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../gutenberg/settings */ "./src/resources/js/gutenberg/settings.js");
+/* harmony import */ var _lib_notices__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../lib/notices */ "./src/resources/js/lib/notices.js");
+
 
 
 
@@ -16467,8 +16469,8 @@ function matchPath(options) {
     var matches = request.regex.exec(options.path);
 
     if ((options.method === request.method || !options.method && request.method === 'GET') && matches && matches.length > 0) {
-      promise = request.run(options, matches).catch(function (error) {
-        return console.log(error.response);
+      promise = request.run(options, matches).catch(function () {
+        return _lib_notices__WEBPACK_IMPORTED_MODULE_11__["error"]('Could not complete request.');
       });
     }
   });
@@ -16485,7 +16487,7 @@ function matchPath(options) {
         }
       }));
     }).catch(function (error) {
-      console.log(error.data);
+      _lib_notices__WEBPACK_IMPORTED_MODULE_11__["error"]("".concat(error.message, " ").concat(error.data.data.path));
     });
   }
 
@@ -16493,7 +16495,6 @@ function matchPath(options) {
 }
 
 function apiFetch(options) {
-  console.log('APIFetch', options);
   return matchPath(options);
 }
 
@@ -17354,6 +17355,59 @@ __webpack_require__.r(__webpack_exports__);
 function getContent() {
   _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].dispatch('core/editor').savePost();
   return _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].select('core/editor').getEditedPostContent();
+}
+
+/***/ }),
+
+/***/ "./src/resources/js/lib/notices.js":
+/*!*****************************************!*\
+  !*** ./src/resources/js/lib/notices.js ***!
+  \*****************************************/
+/*! exports provided: success, info, error, warning, notice */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "success", function() { return success; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "info", function() { return info; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "error", function() { return error; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "warning", function() { return warning; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "notice", function() { return notice; });
+/**
+ * Shows a success message
+ * @param {String} message the message to display
+ */
+function success(message) {
+  notice('success', message);
+}
+/**
+ * Shows an info message
+ * @param {String} message the message to display
+ */
+
+function info(message) {
+  notice('info', message);
+}
+/**
+ * Shows an error message
+ * @param {String} message the message to display
+ */
+
+function error(message) {
+  notice('error', message);
+}
+/**
+ * Shows a warning message
+ * @param {String} message the message to display
+ */
+
+function warning(message) {
+  notice('warning', message);
+}
+function notice(status, message) {
+  if (window.wp && window.wp.data) {
+    window.wp.data.dispatch('core/notices').createNotice(status, message);
+  }
 }
 
 /***/ }),

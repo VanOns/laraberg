@@ -1,6 +1,7 @@
 import * as MockData from './mock-data'
 import axios from 'axios'
 import { editorSettings } from '../gutenberg/settings'
+import * as Notices from '../lib/notices'
 
 const requests = {
   getBlock: {
@@ -169,7 +170,7 @@ function matchPath (options) {
     let matches = request.regex.exec(options.path)
     if ((options.method === request.method || (!options.method && request.method === 'GET')) && matches && matches.length > 0) {
       promise = request.run(options, matches)
-        .catch(error => console.log(error.response))
+        .catch(() => Notices.error('Could not complete request.'))
     }
   })
 
@@ -185,14 +186,13 @@ function matchPath (options) {
         }
       }))
     }).catch(error => {
-      console.log(error.data)
+      Notices.error(`${error.message} ${error.data.data.path}`)
     })
   }
   return promise
 }
 
 export default function apiFetch (options) {
-  console.log('APIFetch', options)
   return matchPath(options)
 }
 
