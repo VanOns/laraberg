@@ -58,7 +58,13 @@ function setHeight (height) {
  */
 function setupMedia (options) {
   removeUploadButton()
-  if (options.laravelFilemanager) { setupLaravelFilemanager(options.laravelFilemanager) }
+  if (options.laravelFilemanager) {
+    setupLaravelFilemanager(options.laravelFilemanager)
+  } else {
+    data.dispatch('core/blocks').removeBlockTypes('core/cover')
+    data.dispatch('core/blocks').removeBlockTypes('core/gallery')
+    data.dispatch('core/blocks').removeBlockTypes('core/media-text')
+  }
 }
 
 /**

@@ -24,6 +24,7 @@ Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
     - [Registering Blocks](#registering-blocks)
     - [Registering Categories](#registering-categories)
   - [Events](#events)
+- [Missing Blocks](#missing-blocks)
 - [Contributors](#contributors)
 
 # Installation
@@ -256,6 +257,15 @@ Laraberg implements Laravel events that you can use to implement your own listen
 - VanOns\Laraberg\Events\ContentCreated
 - VanOns\Laraberg\Events\ContentRendered
 - VanOns\Laraberg\Events\ContentUpdated
+
+# Missing Blocks
+
+Since we disabled direct file-uploading, some of the media blocks require a media library to operate.
+This means that the following blocks will only be enabled when you're using Laravel Filemanager for now:
+
+- Cover
+- Gallery
+- Media & Text
 
 # Contributors
 

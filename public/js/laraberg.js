@@ -233,6 +233,33 @@ module.exports = _construct;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/createClass.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/createClass.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
@@ -16898,150 +16925,119 @@ window.Laraberg = Laraberg;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return setupLaravelFilemanager; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_element_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/element-ready */ "./src/resources/js/lib/element-ready.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
-var lfmOptions;
-/**
- * Insert the 'File Manager' button whenever a mediablock appears
- */
 
-function setupLaravelFilemanager(_x) {
-  return _setupLaravelFilemanager.apply(this, arguments);
-}
-/**
- * Event listener for the File Manager button
- * @param {Event} event
- */
 
-function _setupLaravelFilemanager() {
-  _setupLaravelFilemanager = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+
+/* harmony default export */ __webpack_exports__["default"] = (function (config) {
+  var _window$wp = window.wp,
+      hooks = _window$wp.hooks,
+      element = _window$wp.element;
+  var Component = element.Component;
+
+  var LaravelFilemanager =
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(options) {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            lfmOptions = options;
-            Object(_lib_element_ready__WEBPACK_IMPORTED_MODULE_2__["elementRendered"])('.editor-media-placeholder', function (mediaEditor) {
-              var lfmButton = document.createElement('button');
-              lfmButton.innerHTML = 'File Manager';
-              lfmButton.classList.add('components-button', 'editor-media-placeholder__button', 'is-button', 'is-default', 'is-large');
-              lfmButton.type = 'button';
-              lfmButton.addEventListener('click', lfmListener);
-              var fileUpload = mediaEditor.querySelector('.components-form-file-upload');
-              fileUpload.parentNode.insertBefore(lfmButton, fileUpload.nextSibling);
-            });
+  function (_Component) {
+    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(LaravelFilemanager, _Component);
 
-          case 2:
-          case "end":
-            return _context.stop();
+    function LaravelFilemanager() {
+      var _this;
+
+      _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, LaravelFilemanager);
+
+      _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(LaravelFilemanager).apply(this, arguments));
+      _this.openModal = _this.openModal.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)));
+      _this.onSelect = _this.onSelect.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)));
+      _this.state = {
+        media: []
+      };
+      return _this;
+    }
+
+    _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(LaravelFilemanager, [{
+      key: "getMediaType",
+      value: function getMediaType(path) {
+        var video = ['mp4', 'm4v', 'mov', 'wmv', 'avi', 'mpg', 'ogv', '3gp', '3g2'];
+        var audio = ['mp3', 'm4a', 'ogg', 'wav'];
+        var extension = path.split('.').slice(-1).pop();
+
+        if (video.includes(extension)) {
+          return 'video';
+        } else if (audio.includes(extension)) {
+          return 'audio';
+        } else {
+          return 'image';
         }
       }
-    }, _callee, this);
-  }));
-  return _setupLaravelFilemanager.apply(this, arguments);
-}
+    }, {
+      key: "onSelect",
+      value: function onSelect(url, path) {
+        this.props.value = null;
+        var _this$props = this.props,
+            multiple = _this$props.multiple,
+            onSelect = _this$props.onSelect;
+        var media = {
+          url: url,
+          type: this.getMediaType(path)
+        };
 
-function lfmListener(event) {
-  var block = event.target.parentNode.parentNode.parentNode;
-  var options = {};
+        if (multiple) {
+          this.state.media.push(media);
+        }
 
-  if (block.querySelector('.wp-block-image') !== null) {
-    options.type = 'Images';
-  } else {
-    options.type = 'Files';
-  }
+        onSelect(multiple ? this.state.media : media);
+      }
+    }, {
+      key: "openModal",
+      value: function openModal() {
+        var options = {};
 
-  if (lfmOptions.prefix) {
-    options.prefix = lfmOptions.prefix;
-  }
+        if (this.props.allowedTypes.length === 1 && this.props.allowedTypes[0] === 'image') {
+          options.type = 'image';
+        } else {
+          options.type = 'file';
+        }
 
-  openFilemanager(options, function (url, path) {
-    insertMedia(block, url);
+        this.openLFM(options, this.onSelect);
+      }
+    }, {
+      key: "openLFM",
+      value: function openLFM(options, cb) {
+        var routePrefix = config && config.prefix ? config.prefix : '/laravel-filemanager';
+        window.open(routePrefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
+        window.SetUrl = cb;
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var render = this.props.render;
+        return render({
+          open: this.openModal
+        });
+      }
+    }]);
+
+    return LaravelFilemanager;
+  }(Component);
+
+  hooks.addFilter('editor.MediaUpload', 'core/edit-post/components/media-upload/replace-media-upload', function () {
+    return LaravelFilemanager;
   });
-}
-/**
- * Opens a window with Laravel Filemanager
- * @param {Object} options
- * @param {function} cb
- */
-
-
-function openFilemanager(options, cb) {
-  var routePrefix = options && options.prefix ? options.prefix : '/laravel-filemanager';
-  window.open(routePrefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
-  window.SetUrl = cb;
-}
-/**
- * Inserts the media object into the media block
- * This is done by putting the URL into the 'Insert from URL' field and submitting the field
- * @param {Element} block the media block to insert the media into
- * @param {*} url the URL of the media
- */
-
-
-function insertMedia(_x2, _x3) {
-  return _insertMedia.apply(this, arguments);
-}
-/**
- * Fires an event for the provided element
- * @param {Element} el the element to fire the event on
- * @param {String} etype the event type, eg: 'change', 'click', etc...
- */
-
-
-function _insertMedia() {
-  _insertMedia = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(block, url) {
-    var urlButton, formSelector, urlForm, urlInput, submitButton;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            urlButton = block.querySelector('.editor-media-placeholder__url-input-container').querySelector('button');
-            urlButton.click();
-            formSelector = '.editor-media-placeholder__url-input-form';
-            _context2.next = 5;
-            return Object(_lib_element_ready__WEBPACK_IMPORTED_MODULE_2__["elementReadyRAF"])(formSelector);
-
-          case 5:
-            urlForm = document.querySelector(formSelector);
-            urlInput = urlForm.querySelector('input');
-            urlInput.value = url; // For some reason we can not click() the submitButton
-            // if we do not add a space and fire the change event on the input
-
-            urlInput.value += ' ';
-            fireEvent(urlInput, 'change');
-            submitButton = urlForm.querySelector('button');
-            submitButton.click();
-
-          case 12:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, this);
-  }));
-  return _insertMedia.apply(this, arguments);
-}
-
-function fireEvent(el, etype) {
-  if (el.fireEvent) {
-    el.fireEvent('on' + etype);
-  } else {
-    var evObj = document.createEvent('Events');
-    evObj.initEvent(etype, true, false);
-    el.dispatchEvent(evObj);
-  }
-}
+});
 
 /***/ }),
 
@@ -17139,6 +17135,10 @@ function setupMedia(options) {
 
   if (options.laravelFilemanager) {
     Object(_laravel_filemanager_laravel_filemanager__WEBPACK_IMPORTED_MODULE_3__["default"])(options.laravelFilemanager);
+  } else {
+    _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].dispatch('core/blocks').removeBlockTypes('core/cover');
+    _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].dispatch('core/blocks').removeBlockTypes('core/gallery');
+    _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].dispatch('core/blocks').removeBlockTypes('core/media-text');
   }
 }
 /**
