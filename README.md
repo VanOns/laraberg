@@ -260,7 +260,7 @@ Laraberg implements Laravel events that you can use to implement your own listen
 
 # Missing Blocks
 
-Since we disabled direct file-uploading, some of the media blocks require a media library to operate.
+Since we have disabled direct file uploading, some of the media blocks require a media library to operate.
 This means that the following blocks will only be enabled when you're using Laravel Filemanager for now:
 
 - Cover

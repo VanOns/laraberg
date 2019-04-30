@@ -11,15 +11,17 @@ use VanOns\Laraberg\Helpers\SlugHelper;
 class Block extends Model
 {
     protected $table = 'lb_blocks';
-    protected $appends = ['content'];
-    protected $casts = ['title' => 'array'];
+    protected $appends = ['content', 'title'];
+
+    // TODO: Only here to make migration run, should be cleaned up on release
+    protected $casts = ['old_title' => 'array'];
 
     /**
      * Updates slug according to title
      */
     public function updateSlug()
     {
-        $this->slug = SlugHelper::slugify($this->title['raw']);
+        $this->slug = SlugHelper::slugify($this->raw_title);
     }
 
     /**
@@ -64,12 +66,14 @@ class Block extends Model
     }
 
     /**
-     * Transforms title to wordpress title object
-     * @param string $title
+     * Returns a content object similar to WordPress
+     * @return Array
      */
-    public function setTitleAttribute($title)
+    public function getTitleAttribute()
     {
-        $this->attributes['title'] = json_encode(['raw' => $title]);
+        return [
+            'raw' => $this->raw_title,
+        ];
     }
 }
 
