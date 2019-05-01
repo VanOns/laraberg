@@ -73,6 +73,11 @@ const requests = {
     method: 'GET',
     regex: /\/wp\/v2\/types\?(.*)/g,
     run: getTypes
+  },
+  getUsers: {
+    method: 'GET',
+    regex: /\/wp\/v2\/users\/\?(.*)/g,
+    run: getUsers
   }
 }
 
@@ -159,6 +164,10 @@ async function getTypePage () {
 
 async function getTypes () {
   return MockData.types
+}
+
+async function getUsers () {
+  return 'ok'
 }
 
 function matchPath (options) {

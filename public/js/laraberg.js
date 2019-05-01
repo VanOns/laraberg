@@ -16071,6 +16071,11 @@ var requests = {
     method: 'GET',
     regex: /\/wp\/v2\/types\?(.*)/g,
     run: getTypes
+  },
+  getUsers: {
+    method: 'GET',
+    regex: /\/wp\/v2\/users\/\?(.*)/g,
+    run: getUsers
   }
 };
 
@@ -16485,6 +16490,30 @@ function _getTypes() {
     }, _callee15, this);
   }));
   return _getTypes.apply(this, arguments);
+}
+
+function getUsers() {
+  return _getUsers.apply(this, arguments);
+}
+
+function _getUsers() {
+  _getUsers = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee16() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee16$(_context16) {
+      while (1) {
+        switch (_context16.prev = _context16.next) {
+          case 0:
+            return _context16.abrupt("return", 'ok');
+
+          case 1:
+          case "end":
+            return _context16.stop();
+        }
+      }
+    }, _callee16, this);
+  }));
+  return _getUsers.apply(this, arguments);
 }
 
 function matchPath(options) {
