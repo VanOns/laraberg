@@ -15960,7 +15960,7 @@ module.exports = function(module) {
 /*!*******************************************!*\
   !*** ./src/resources/js/api/api-fetch.js ***!
   \*******************************************/
-/*! exports provided: postPage, putPage, default */
+/*! exports provided: postPage, putPage, default, configureAPI */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15968,6 +15968,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postPage", function() { return postPage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "putPage", function() { return putPage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return apiFetch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "configureAPI", function() { return configureAPI; });
 /* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
 /* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
@@ -16001,6 +16002,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var routePrefix;
 var requests = {
   getBlock: {
     method: 'GET',
@@ -16094,7 +16096,7 @@ function _getBlock() {
           case 0:
             id = matches[1];
             _context.next = 3;
-            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.get("/laraberg/blocks/".concat(id));
+            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.get("".concat(routePrefix, "/blocks/").concat(id));
 
           case 3:
             response = _context.sent;
@@ -16124,7 +16126,7 @@ function _getBlocks() {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.get('/laraberg/blocks');
+            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.get("".concat(routePrefix, "/blocks"));
 
           case 2:
             response = _context2.sent;
@@ -16154,7 +16156,7 @@ function _postBlocks() {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.post('/laraberg/blocks', options.data);
+            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.post("".concat(routePrefix, "/blocks"), options.data);
 
           case 2:
             response = _context3.sent;
@@ -16185,7 +16187,7 @@ function _putBlock() {
           case 0:
             id = matches[1];
             _context4.next = 3;
-            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.put("/laraberg/blocks/".concat(id), options.data);
+            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.put("".concat(routePrefix, "/blocks/").concat(id), options.data);
 
           case 3:
             response = _context4.sent;
@@ -16216,7 +16218,7 @@ function _deleteBlock() {
           case 0:
             id = matches[1];
             _context5.next = 3;
-            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.delete("/laraberg/blocks/".concat(id));
+            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.delete("".concat(routePrefix, "/blocks/").concat(id));
 
           case 3:
             response = _context5.sent;
@@ -16246,7 +16248,7 @@ function _getEmbed() {
         switch (_context6.prev = _context6.next) {
           case 0:
             _context6.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.get("/laraberg/oembed?".concat(matches[1]));
+            return axios__WEBPACK_IMPORTED_MODULE_9___default.a.get("".concat(routePrefix, "/oembed?").concat(matches[1]));
 
           case 2:
             response = _context6.sent;
@@ -16553,6 +16555,9 @@ function matchPath(options) {
 function apiFetch(options) {
   return matchPath(options);
 }
+function configureAPI(options) {
+  routePrefix = options.prefix || '/laraberg';
+}
 
 var FetchError =
 /*#__PURE__*/
@@ -16727,11 +16732,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
 /* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_configure_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/configure-editor */ "./src/resources/js/lib/configure-editor.js");
-/* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @frontkom/gutenberg-js */ "./node_modules/@frontkom/gutenberg-js/build/js/gutenberg-js.js");
-/* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings */ "./src/resources/js/gutenberg/settings.js");
-/* harmony import */ var _lib_element_ready__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/element-ready */ "./src/resources/js/lib/element-ready.js");
+/* harmony import */ var _api_api_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api/api-fetch */ "./src/resources/js/api/api-fetch.js");
+/* harmony import */ var _lib_configure_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/configure-editor */ "./src/resources/js/lib/configure-editor.js");
+/* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @frontkom/gutenberg-js */ "./node_modules/@frontkom/gutenberg-js/build/js/gutenberg-js.js");
+/* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./settings */ "./src/resources/js/gutenberg/settings.js");
+/* harmony import */ var _lib_element_ready__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/element-ready */ "./src/resources/js/lib/element-ready.js");
+
 
 
 
@@ -16750,10 +16757,10 @@ window.customGutenberg = {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return Object(_lib_element_ready__WEBPACK_IMPORTED_MODULE_5__["elementReady"])('.edit-post-sidebar');
+                return Object(_lib_element_ready__WEBPACK_IMPORTED_MODULE_6__["elementReady"])('.edit-post-sidebar');
 
               case 2:
-                Object(_lib_configure_editor__WEBPACK_IMPORTED_MODULE_2__["clearSubmitFromButtons"])();
+                Object(_lib_configure_editor__WEBPACK_IMPORTED_MODULE_3__["clearSubmitFromButtons"])();
 
               case 3:
               case "end":
@@ -16799,8 +16806,9 @@ window.customGutenberg = {
 };
 function init(target) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  Object(_api_api_fetch__WEBPACK_IMPORTED_MODULE_2__["configureAPI"])(options);
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
-    Object(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__["domReady"])(
+    Object(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_4__["domReady"])(
     /*#__PURE__*/
     _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
     /*#__PURE__*/
@@ -16811,12 +16819,12 @@ function init(target) {
           switch (_context3.prev = _context3.next) {
             case 0:
               larabergEditor = createEditorElement(target);
-              resolve(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_3__["editPost"].initializeEditor(larabergEditor.id, 'page', 0, _settings__WEBPACK_IMPORTED_MODULE_4__["editorSettings"], _settings__WEBPACK_IMPORTED_MODULE_4__["overridePost"]));
+              resolve(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_4__["editPost"].initializeEditor(larabergEditor.id, 'page', 0, _settings__WEBPACK_IMPORTED_MODULE_5__["editorSettings"], _settings__WEBPACK_IMPORTED_MODULE_5__["overridePost"]));
               _context3.next = 4;
-              return Object(_lib_element_ready__WEBPACK_IMPORTED_MODULE_5__["elementReady"])('.edit-post-layout');
+              return Object(_lib_element_ready__WEBPACK_IMPORTED_MODULE_6__["elementReady"])('.edit-post-layout');
 
             case 4:
-              Object(_lib_configure_editor__WEBPACK_IMPORTED_MODULE_2__["default"])(options);
+              Object(_lib_configure_editor__WEBPACK_IMPORTED_MODULE_3__["default"])(options);
 
             case 5:
             case "end":
@@ -16840,7 +16848,7 @@ function createEditorElement(target) {
   editor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container', 'wp-embed-responsive');
   element.parentNode.insertBefore(editor, element);
   element.hidden = true;
-  _settings__WEBPACK_IMPORTED_MODULE_4__["editorSettings"].target = target;
+  _settings__WEBPACK_IMPORTED_MODULE_5__["editorSettings"].target = target;
   window.Laraberg.editor = editor;
   return editor;
 }
@@ -16860,17 +16868,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "overridePost", function() { return overridePost; });
 /* harmony import */ var _add_query_args__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add-query-args */ "./src/resources/js/gutenberg/add-query-args.js");
 /* harmony import */ var _api_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api/api-fetch */ "./src/resources/js/api/api-fetch.js");
-// import React from 'react'
-// import ReactDOM from 'react-dom'
-// import moment from 'moment'
-// import jQuery from 'jquery'
 
- // Make React, ReactDOM moment and jQuery available in DOM
-// window.React = React
-// window.ReactDOM = ReactDOM
-// window.moment = moment
-// window.jQuery = jQuery
-// window.$ = jQuery
 
 window.wp = {
   apiFetch: _api_api_fetch__WEBPACK_IMPORTED_MODULE_1__["default"],

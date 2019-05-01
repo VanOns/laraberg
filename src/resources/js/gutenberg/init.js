@@ -1,3 +1,4 @@
+import { configureAPI } from '../api/api-fetch'
 import configureEditor, { clearSubmitFromButtons } from '../lib/configure-editor'
 import { domReady, editPost } from '@frontkom/gutenberg-js'
 import { editorSettings, overridePost } from './settings'
@@ -22,6 +23,7 @@ window.customGutenberg = {
  * @param {string} target the element ID to render the gutenberg editor in
  */
 export default function init (target, options = {}) {
+  configureAPI(options)
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(async () => {
       const larabergEditor = createEditorElement(target)

@@ -3,6 +3,8 @@ import axios from 'axios'
 import { editorSettings } from '../gutenberg/settings'
 import * as Notices from '../lib/notices'
 
+let routePrefix
+
 const requests = {
   getBlock: {
     method: 'GET',
@@ -83,34 +85,34 @@ const requests = {
 
 async function getBlock (options, matches) {
   let id = matches[1]
-  let response = await axios.get(`/laraberg/blocks/${id}`)
+  let response = await axios.get(`${routePrefix}/blocks/${id}`)
   return response.data
 }
 
 async function getBlocks () {
-  let response = await axios.get('/laraberg/blocks')
+  let response = await axios.get(`${routePrefix}/blocks`)
   return response.data
 }
 
 async function postBlocks (options) {
-  let response = await axios.post('/laraberg/blocks', options.data)
+  let response = await axios.post(`${routePrefix}/blocks`, options.data)
   return response.data
 }
 
 async function putBlock (options, matches) {
   let id = matches[1]
-  let response = await axios.put(`/laraberg/blocks/${id}`, options.data)
+  let response = await axios.put(`${routePrefix}/blocks/${id}`, options.data)
   return response.data
 }
 
 async function deleteBlock (options, matches) {
   let id = matches[1]
-  let response = await axios.delete(`/laraberg/blocks/${id}`)
+  let response = await axios.delete(`${routePrefix}/blocks/${id}`)
   return response.data
 }
 
 async function getEmbed (options, matches) {
-  let response = await axios.get(`/laraberg/oembed?${matches[1]}`)
+  let response = await axios.get(`${routePrefix}/oembed?${matches[1]}`)
   return response.data
 }
 
@@ -203,6 +205,10 @@ function matchPath (options) {
 
 export default function apiFetch (options) {
   return matchPath(options)
+}
+
+export function configureAPI (options) {
+  routePrefix = options.prefix || '/laraberg'
 }
 
 class FetchError extends Error {

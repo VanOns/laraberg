@@ -93,6 +93,12 @@ Laraberg.init('[id_here]', { minHeight: '500px' })
 
 After publishing the vendor files you can find the 'laraberg.php' file in your config folder. This file allows you to configure the API Routes. Here you can change the URL prefix and the middleware for the routes.
 
+When you change the route prefix you also have to provide the prefix when you initialize the editor like this:
+
+```js
+Laraberg.init('[id_here]', { prefix: '/[prefix_here]' })
+```
+
 If you wish to define the routes yourself you can do that by setting 'use_package_routes' to 'false' in the config. Then you can take the following routes and make changes as you see fit:
 
 ```php
