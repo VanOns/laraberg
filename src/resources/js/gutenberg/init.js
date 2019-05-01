@@ -21,24 +21,32 @@ window.customGutenberg = {
  * Initialize the Gutenberg editor
  * @param {string} target the element ID to render the gutenberg editor in
  */
-export default function init (target, options) {
-  if (!options) { options = {} }
-  // Initializing the editor!
+export default function init (target, options = {}) {
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(async () => {
-      let element = document.getElementById(target)
-      editorSettings.target = target
-      // Create Gutenberg container element and insert at place of target
-      let larabergEditor = document.createElement('DIV')
-      larabergEditor.id = 'laraberg__editor'
-      larabergEditor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container', 'wp-embed-responsive')
-      element.parentNode.insertBefore(larabergEditor, element)
-      element.hidden = true
-      window.Laraberg.editor = larabergEditor
-
-      resolve(editPost.initializeEditor('laraberg__editor', 'page', 0, editorSettings, overridePost))
+      const larabergEditor = createEditorElement(target)
+      resolve(editPost.initializeEditor(larabergEditor.id, 'page', 0, editorSettings, overridePost))
       await elementReady('.edit-post-layout')
       configureEditor(options)
     })
   })
+}
+
+/**
+ * Creates the element to render the Gutenberg editor inside of
+ * @param {string} target the id of the textarea to render the Editor instead of
+ * @return {element}
+ */
+function createEditorElement (target) {
+  const element = document.getElementById(target)
+  const editor = document.createElement('DIV')
+  editor.id = 'laraberg__editor'
+  editor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container', 'wp-embed-responsive')
+  element.parentNode.insertBefore(editor, element)
+  element.hidden = true
+
+  editorSettings.target = target
+  window.Laraberg.editor = editor
+
+  return editor
 }
