@@ -16684,16 +16684,16 @@ function addQueryArgs(url, args) {
 
 /***/ }),
 
-/***/ "./src/resources/js/gutenberg/init-gutenberg.js":
-/*!******************************************************!*\
-  !*** ./src/resources/js/gutenberg/init-gutenberg.js ***!
-  \******************************************************/
+/***/ "./src/resources/js/gutenberg/init.js":
+/*!********************************************!*\
+  !*** ./src/resources/js/gutenberg/init.js ***!
+  \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return initGutenberg; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return init; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
@@ -16768,7 +16768,7 @@ window.customGutenberg = {
    */
 
 };
-function initGutenberg(target, options) {
+function init(target, options) {
   if (!options) {
     options = {};
   } // Initializing the editor!
@@ -16895,7 +16895,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_laraberg_scss__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _gutenberg_settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gutenberg/settings */ "./src/resources/js/gutenberg/settings.js");
 /* harmony import */ var _lib_get_content__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/get-content */ "./src/resources/js/lib/get-content.js");
-/* harmony import */ var _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gutenberg/init-gutenberg */ "./src/resources/js/gutenberg/init-gutenberg.js");
+/* harmony import */ var _gutenberg_init__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./gutenberg/init */ "./src/resources/js/gutenberg/init.js");
 /* harmony import */ var _lib_custom_blocks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/custom-blocks */ "./src/resources/js/lib/custom-blocks.js");
 
  // Gutenberg imports
@@ -16905,7 +16905,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Laraberg = {
-  initGutenberg: _gutenberg_init_gutenberg__WEBPACK_IMPORTED_MODULE_4__["default"],
+  init: _gutenberg_init__WEBPACK_IMPORTED_MODULE_6__["default"],
+  initGutenberg: _gutenberg_init__WEBPACK_IMPORTED_MODULE_6__["default"],
   getContent: _lib_get_content__WEBPACK_IMPORTED_MODULE_3__["default"],
   editor: null,
   registerCategory: _lib_custom_blocks__WEBPACK_IMPORTED_MODULE_5__["registerCategory"],

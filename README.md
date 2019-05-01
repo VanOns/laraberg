@@ -82,11 +82,11 @@ When initializing the editor there are a number of configuration options you can
 It is possible to set the height, maxHeight, and minHeight of the editor by providing the desired values in the options object:
 
 ```js
-Laraberg.initGutenberg('[id_here]', { height: '500px' })
+Laraberg.init('[id_here]', { height: '500px' })
 
-Laraberg.initGutenberg('[id_here]', { maxHeight: '500px' })
+Laraberg.init('[id_here]', { maxHeight: '500px' })
 
-Laraberg.initGutenberg('[id_here]', { minHeight: '500px' })
+Laraberg.init('[id_here]', { minHeight: '500px' })
 ```
 ## API Routes
 
@@ -106,13 +106,13 @@ Route::group(['prefix' => 'laraberg', 'middleware' => ['web', 'auth']], function
 Laraberg supports [Laravel File Manager](https://unisharp.github.io/laravel-filemanager/) for uploading files. To enable uploading media through Laravel File Manager the laravelFilemanager field should be set to true. This will add a 'File Manager' button to the Gutenberg media blocks that will open Laravel File Manager for uploading and selecting media files.
 
 ```js
-Laraberg.initGutenberg('[id_here]', { laravelFilemanager: true })
+Laraberg.init('[id_here]', { laravelFilemanager: true })
 ```
 
 If you are not using the default routes for Laravel File Manager you can provide the location of your Laravel File Manager endpoints in the options object like this:
 
 ```js
-Laraberg.initGutenberg('[id_here]', { laravelFilemanager: { prefix: '/[lfm_prefix_here]' } })
+Laraberg.init('[id_here]', { laravelFilemanager: { prefix: '/[lfm_prefix_here]' } })
 ```
 
 > Note: Laraberg does not do any configuration on your Laravel File Manager setup. By default a lot of media filetypes can not be uploaded unless they are whitelisted in the Laravel File Manager configuration file. For more information on this you can check the [Laravel File Manager documentation](https://unisharp.github.io/laravel-filemanager/config).
@@ -138,7 +138,7 @@ To initialize the editor all we have to do is call the initialize function with 
 And that's it! The editor will replace the textarea in the DOM and on a form submit the editor content will be available in the textarea's value attribute.
 
 ```js
-Laraberg.initGutenberg('[id_here]')
+Laraberg.init('[id_here]')
 ```
 
 ### Using the Editor Wihout a Form

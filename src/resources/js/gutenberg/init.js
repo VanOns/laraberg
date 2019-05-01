@@ -21,7 +21,7 @@ window.customGutenberg = {
  * Initialize the Gutenberg editor
  * @param {string} target the element ID to render the gutenberg editor in
  */
-export default function initGutenberg (target, options) {
+export default function init (target, options) {
   if (!options) { options = {} }
   // Initializing the editor!
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {

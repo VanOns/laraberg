@@ -5,11 +5,12 @@ import './../scss/laraberg.scss'
 // Gutenberg imports
 import './gutenberg/settings'
 import getContent from './lib/get-content'
-import initGutenberg from './gutenberg/init-gutenberg'
+import init from './gutenberg/init'
 import { registerBlock, registerCategory } from './lib/custom-blocks'
 
 const Laraberg = {
-  initGutenberg: initGutenberg,
+  init: init,
+  initGutenberg: init,
   getContent: getContent,
   editor: null,
   registerCategory: registerCategory,
