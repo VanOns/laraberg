@@ -16994,21 +16994,19 @@ __webpack_require__.r(__webpack_exports__);
     }, {
       key: "openModal",
       value: function openModal() {
-        var options = {};
+        var type = 'file';
 
         if (this.props.allowedTypes.length === 1 && this.props.allowedTypes[0] === 'image') {
-          options.type = 'image';
-        } else {
-          options.type = 'file';
+          type = 'image';
         }
 
-        this.openLFM(options, this.onSelect);
+        this.openLFM(type, this.onSelect);
       }
     }, {
       key: "openLFM",
-      value: function openLFM(options, cb) {
+      value: function openLFM(type, cb) {
         var routePrefix = config && config.prefix ? config.prefix : '/laravel-filemanager';
-        window.open(routePrefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
+        window.open(routePrefix + '?type=' + type, 'FileManager', 'width=900,height=600');
         window.SetUrl = cb;
       }
     }, {

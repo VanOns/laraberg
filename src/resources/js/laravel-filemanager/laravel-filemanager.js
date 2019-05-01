@@ -37,18 +37,16 @@ export default function (config) {
     }
 
     openModal () {
-      let options = {}
+      let type = 'file'
       if (this.props.allowedTypes.length === 1 && this.props.allowedTypes[0] === 'image') {
-        options.type = 'image'
-      } else {
-        options.type = 'file'
+        type = 'image'
       }
-      this.openLFM(options, this.onSelect)
+      this.openLFM(type, this.onSelect)
     }
 
-    openLFM (options, cb) {
+    openLFM (type, cb) {
       let routePrefix = (config && config.prefix) ? config.prefix : '/laravel-filemanager'
-      window.open(routePrefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600')
+      window.open(routePrefix + '?type=' + type, 'FileManager', 'width=900,height=600')
       window.SetUrl = cb
     }
 
