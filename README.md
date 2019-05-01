@@ -25,6 +25,7 @@ Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
     - [Registering Categories](#registering-categories)
   - [Events](#events)
 - [Missing Blocks](#missing-blocks)
+- [Updating from 0.0.1 to 0.0.2-or-later](#updating-from-001-to-002-or-later)
 - [Contributors](#contributors)
 
 # Installation
@@ -266,6 +267,11 @@ This means that the following blocks will only be enabled when you're using Lara
 - Cover
 - Gallery
 - Media & Text
+
+# Updating from 0.0.1 to 0.0.2-or-later
+
+In beta version 0.0.1 we used JSON column types for block titles. This was not supported by MariaDB, so we had to change that.
+In the [releasenotes for beta version 0.0.2](https://github.com/VanOns/laraberg/releases/tag/v0.0.2-beta) you can find how to deal with this problem if you do not want to lose your data from version 0.0.1.
 
 # Contributors
 
