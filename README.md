@@ -124,13 +124,13 @@ Laraberg.init('[id_here]', { laravelFilemanager: { prefix: '/[lfm_prefix_here]' 
 The Gutenberg editor should replace an existing textarea in a form. On submit the raw content from the editor will be put in the 'value' attribute of this textarea.
 
 ```html
-<input id="[id_here]" type="textarea" name="[name_here]" hidden>
+<textarea id="[id_here]" name="[name_here]" hidden></textarea>
 ```
 
 In order to edit content on an already existing model we have to set the value of the textarea to the raw content that the Gutenberg editor provided.
 
 ```html
-<input id="[id_here]" type="textarea" name="[name_here]" value="{{$model->getRawContent()}}" hidden>
+<textarea id="[id_here]" name="[name_here]" hidden>{{$model->getRawContent()}}</textarea>
 ```
 
 To initialize the editor all we have to do is call the initialize function with the id of the textarea. You probably want to do this insde a DOMContentLoaded event.
