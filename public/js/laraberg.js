@@ -16064,7 +16064,7 @@ function _getBlock() {
             return _context.stop();
         }
       }
-    }, _callee, this);
+    }, _callee);
   }));
   return _getBlock.apply(this, arguments);
 }
@@ -16094,7 +16094,7 @@ function _getBlocks() {
             return _context2.stop();
         }
       }
-    }, _callee2, this);
+    }, _callee2);
   }));
   return _getBlocks.apply(this, arguments);
 }
@@ -16124,7 +16124,7 @@ function _postBlocks() {
             return _context3.stop();
         }
       }
-    }, _callee3, this);
+    }, _callee3);
   }));
   return _postBlocks.apply(this, arguments);
 }
@@ -16155,7 +16155,7 @@ function _putBlock() {
             return _context4.stop();
         }
       }
-    }, _callee4, this);
+    }, _callee4);
   }));
   return _putBlock.apply(this, arguments);
 }
@@ -16186,7 +16186,7 @@ function _deleteBlock() {
             return _context5.stop();
         }
       }
-    }, _callee5, this);
+    }, _callee5);
   }));
   return _deleteBlock.apply(this, arguments);
 }
@@ -16216,7 +16216,7 @@ function _getEmbed() {
             return _context6.stop();
         }
       }
-    }, _callee6, this);
+    }, _callee6);
   }));
   return _getEmbed.apply(this, arguments);
 }
@@ -16240,7 +16240,7 @@ function _optionsMedia() {
             return _context7.stop();
         }
       }
-    }, _callee7, this);
+    }, _callee7);
   }));
   return _optionsMedia.apply(this, arguments);
 }
@@ -16270,7 +16270,7 @@ function _getPage() {
             return _context8.stop();
         }
       }
-    }, _callee8, this);
+    }, _callee8);
   }));
   return _getPage.apply(this, arguments);
 }
@@ -16298,7 +16298,7 @@ function _postPage() {
             return _context9.stop();
         }
       }
-    }, _callee9, this);
+    }, _callee9);
   }));
   return _postPage.apply(this, arguments);
 }
@@ -16326,7 +16326,7 @@ function _putPage() {
             return _context10.stop();
         }
       }
-    }, _callee10, this);
+    }, _callee10);
   }));
   return _putPage.apply(this, arguments);
 }
@@ -16350,7 +16350,7 @@ function _getTaxonomies() {
             return _context11.stop();
         }
       }
-    }, _callee11, this);
+    }, _callee11);
   }));
   return _getTaxonomies.apply(this, arguments);
 }
@@ -16374,7 +16374,7 @@ function _getThemes() {
             return _context12.stop();
         }
       }
-    }, _callee12, this);
+    }, _callee12);
   }));
   return _getThemes.apply(this, arguments);
 }
@@ -16398,7 +16398,7 @@ function _getTypeBlock() {
             return _context13.stop();
         }
       }
-    }, _callee13, this);
+    }, _callee13);
   }));
   return _getTypeBlock.apply(this, arguments);
 }
@@ -16422,7 +16422,7 @@ function _getTypePage() {
             return _context14.stop();
         }
       }
-    }, _callee14, this);
+    }, _callee14);
   }));
   return _getTypePage.apply(this, arguments);
 }
@@ -16446,7 +16446,7 @@ function _getTypes() {
             return _context15.stop();
         }
       }
-    }, _callee15, this);
+    }, _callee15);
   }));
   return _getTypes.apply(this, arguments);
 }
@@ -16470,7 +16470,7 @@ function _getUsers() {
             return _context16.stop();
         }
       }
-    }, _callee16, this);
+    }, _callee16);
   }));
   return _getUsers.apply(this, arguments);
 }
@@ -16724,7 +16724,7 @@ window.customGutenberg = {
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee);
       }));
 
       function OPEN_GENERAL_SIDEBAR(_x, _x2) {
@@ -16745,7 +16745,7 @@ window.customGutenberg = {
                 return _context2.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee2);
       }));
 
       function CLOSE_GENERAL_SIDEBAR(_x3, _x4) {
@@ -16788,7 +16788,7 @@ function init(target) {
               return _context3.stop();
           }
         }
-      }, _callee3, this);
+      }, _callee3);
     })));
   });
 }
@@ -16923,10 +16923,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -16942,7 +16942,7 @@ __webpack_require__.r(__webpack_exports__);
   var LaravelFilemanager =
   /*#__PURE__*/
   function (_Component) {
-    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(LaravelFilemanager, _Component);
+    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default()(LaravelFilemanager, _Component);
 
     function LaravelFilemanager() {
       var _this;
@@ -16950,8 +16950,8 @@ __webpack_require__.r(__webpack_exports__);
       _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, LaravelFilemanager);
 
       _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(LaravelFilemanager).apply(this, arguments));
-      _this.openModal = _this.openModal.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)));
-      _this.onSelect = _this.onSelect.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)));
+      _this.openModal = _this.openModal.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+      _this.onSelect = _this.onSelect.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
       _this.state = {
         media: []
       };
@@ -17314,7 +17314,7 @@ function _elementReadyRAF() {
             return _context.stop();
         }
       }
-    }, _callee, this);
+    }, _callee);
   }));
   return _elementReadyRAF.apply(this, arguments);
 }
