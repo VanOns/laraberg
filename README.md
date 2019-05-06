@@ -10,6 +10,7 @@ Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
 - [Installation](#installation)
   - [JavaScript and CSS files](#javascript-and-css-files)
   - [Dependencies](#dependencies)
+- [Updating](#updating)
 - [Configuration](#configuration)
   - [Styling](#styling)
   - [API Routes](#api-routes)
@@ -72,6 +73,13 @@ The Gutenberg editor expects React, ReactDOM, Moment and JQuery to be in the env
 <script src="https://unpkg.com/moment@2.22.1/min/moment.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+```
+
+# Updating
+
+When updating Laraberg you have to publish the vendor files again by running this command:
+```bash
+php artisan vendor:publish --provider='VanOns\Laraberg\LarabergServiceProvider' --force
 ```
 
 # Configuration
