@@ -79,7 +79,7 @@ The Gutenberg editor expects React, ReactDOM, Moment and JQuery to be in the env
 
 When updating Laraberg you have to publish the vendor files again by running this command:
 ```bash
-php artisan vendor:publish --provider='VanOns\Laraberg\LarabergServiceProvider' --force
+php artisan vendor:publish --provider='VanOns\Laraberg\LarabergServiceProvider' --tag="public" --force
 ```
 
 # Configuration
