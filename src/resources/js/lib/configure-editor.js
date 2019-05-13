@@ -1,6 +1,7 @@
 import { data } from '@frontkom/gutenberg-js'
 import { editorSettings } from '../gutenberg/settings'
 import { elementRendered } from './element-ready'
+import sidebar from '../sidebar/sidebar'
 import setupLaravelFilemanager from '../laravel-filemanager/laravel-filemanager'
 
 /**
@@ -8,8 +9,9 @@ import setupLaravelFilemanager from '../laravel-filemanager/laravel-filemanager'
  * @param {Object} options
  */
 export default function configureEditor (options) {
-  setupSubmit(editorSettings.target)
   setupMedia(options)
+  setupSidebar(options)
+  setupSubmit(editorSettings.target)
   if (options.maxHeight) { setMaxHeight(options.maxHeight) }
   if (options.minHeight) { setMinHeight(options.minHeight) }
   if (options.height) { setHeight(options.height) }
@@ -64,6 +66,12 @@ function setupMedia (options) {
     data.dispatch('core/blocks').removeBlockTypes('core/cover')
     data.dispatch('core/blocks').removeBlockTypes('core/gallery')
     data.dispatch('core/blocks').removeBlockTypes('core/media-text')
+  }
+}
+
+function setupSidebar (options) {
+  if (options.sidebar) {
+    sidebar()
   }
 }
 

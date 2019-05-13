@@ -17044,7 +17044,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _gutenberg_settings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../gutenberg/settings */ "./src/resources/js/gutenberg/settings.js");
 /* harmony import */ var _element_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./element-ready */ "./src/resources/js/lib/element-ready.js");
-/* harmony import */ var _laravel_filemanager_laravel_filemanager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../laravel-filemanager/laravel-filemanager */ "./src/resources/js/laravel-filemanager/laravel-filemanager.js");
+/* harmony import */ var _sidebar_sidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../sidebar/sidebar */ "./src/resources/js/sidebar/sidebar.js");
+/* harmony import */ var _laravel_filemanager_laravel_filemanager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../laravel-filemanager/laravel-filemanager */ "./src/resources/js/laravel-filemanager/laravel-filemanager.js");
+
 
 
 
@@ -17055,8 +17057,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 function configureEditor(options) {
-  setupSubmit(_gutenberg_settings__WEBPACK_IMPORTED_MODULE_1__["editorSettings"].target);
   setupMedia(options);
+  setupSidebar(options);
+  setupSubmit(_gutenberg_settings__WEBPACK_IMPORTED_MODULE_1__["editorSettings"].target);
 
   if (options.maxHeight) {
     setMaxHeight(options.maxHeight);
@@ -17122,11 +17125,17 @@ function setupMedia(options) {
   removeUploadButton();
 
   if (options.laravelFilemanager) {
-    Object(_laravel_filemanager_laravel_filemanager__WEBPACK_IMPORTED_MODULE_3__["default"])(options.laravelFilemanager);
+    Object(_laravel_filemanager_laravel_filemanager__WEBPACK_IMPORTED_MODULE_4__["default"])(options.laravelFilemanager);
   } else {
     _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].dispatch('core/blocks').removeBlockTypes('core/cover');
     _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].dispatch('core/blocks').removeBlockTypes('core/gallery');
     _frontkom_gutenberg_js__WEBPACK_IMPORTED_MODULE_0__["data"].dispatch('core/blocks').removeBlockTypes('core/media-text');
+  }
+}
+
+function setupSidebar(options) {
+  if (options.sidebar) {
+    Object(_sidebar_sidebar__WEBPACK_IMPORTED_MODULE_3__["default"])();
   }
 }
 /**
@@ -17397,6 +17406,563 @@ function notice(status, message) {
     window.wp.data.dispatch('core/notices').createNotice(status, message);
   }
 }
+
+/***/ }),
+
+/***/ "./src/resources/js/sidebar/checkbox-input.js":
+/*!****************************************************!*\
+  !*** ./src/resources/js/sidebar/checkbox-input.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CheckboxInput; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./input */ "./src/resources/js/sidebar/input.js");
+
+
+
+
+
+
+var Checkbox = window.wp.components.CheckboxControl;
+
+var CheckboxInput =
+/*#__PURE__*/
+function (_Input) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(CheckboxInput, _Input);
+
+  function CheckboxInput(props) {
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, CheckboxInput);
+
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(CheckboxInput).call(this, props));
+    _this.state = {
+      checked: _this.props.element.checked
+    };
+    return _this;
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(CheckboxInput, [{
+    key: "onChange",
+    value: function onChange(checked) {
+      this.props.element.checked = checked;
+      this.setState({
+        checked: checked
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement(Checkbox, {
+        label: this.getLabel(),
+        value: this.props.element.value,
+        checked: this.state.checked,
+        onChange: this.onChange
+      });
+    }
+  }]);
+
+  return CheckboxInput;
+}(_input__WEBPACK_IMPORTED_MODULE_5__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/resources/js/sidebar/input.js":
+/*!*******************************************!*\
+  !*** ./src/resources/js/sidebar/input.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Input; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+var element = window.wp.element;
+var Component = element.Component;
+
+var Input =
+/*#__PURE__*/
+function (_Component) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default()(Input, _Component);
+
+  function Input(props) {
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, Input);
+
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(Input).call(this, props));
+    _this.getLabel = _this.getLabel.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+    _this.onChange = _this.onChange.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+    _this.state = {
+      value: _this.props.element.value
+    };
+    return _this;
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(Input, [{
+    key: "getLabel",
+    value: function getLabel() {
+      return (this.props.element.labels[0] || {}).innerText || this.props.element.placeholder;
+    }
+  }, {
+    key: "onChange",
+    value: function onChange(content) {
+      this.props.element.value = content;
+      this.setState({
+        value: content
+      });
+    }
+  }]);
+
+  return Input;
+}(Component);
+
+
+
+/***/ }),
+
+/***/ "./src/resources/js/sidebar/radio-input.js":
+/*!*************************************************!*\
+  !*** ./src/resources/js/sidebar/radio-input.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RadioInput; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+var element = window.wp.element;
+var Component = element.Component;
+var Radio = window.wp.components.RadioControl;
+
+var RadioInput =
+/*#__PURE__*/
+function (_Component) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default()(RadioInput, _Component);
+
+  function RadioInput(props) {
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, RadioInput);
+
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(RadioInput).call(this, props));
+    _this.getLabel = _this.getLabel.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+    _this.getOptions = _this.getOptions.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+    _this.getSelected = _this.getSelected.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+    _this.onChange = _this.onChange.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+    _this.state = {
+      options: _this.getOptions(),
+      selected: _this.getSelected()
+    };
+    return _this;
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(RadioInput, [{
+    key: "onChange",
+    value: function onChange(option) {
+      this.props.options.forEach(function (radio) {
+        if (radio.value === option) radio.checked = true;
+      });
+      this.setState({
+        selected: option
+      });
+    }
+  }, {
+    key: "getLabel",
+    value: function getLabel(option) {
+      if (option.labels && option.labels[0]) {
+        return option.labels[0].innerText;
+      } else {
+        return null;
+      }
+    }
+  }, {
+    key: "getOptions",
+    value: function getOptions() {
+      var _this2 = this;
+
+      return this.props.options.map(function (option) {
+        return {
+          label: _this2.getLabel(option),
+          value: option.value
+        };
+      });
+    }
+  }, {
+    key: "getSelected",
+    value: function getSelected() {
+      var options = this.props.options;
+      var selected = null;
+      Object.keys(options).some(function (key) {
+        if (options[key].checked) {
+          selected = options[key].value;
+          return true;
+        }
+      });
+      return selected;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement(Radio, {
+        options: this.state.options,
+        selected: this.state.selected,
+        onChange: this.onChange
+      });
+    }
+  }]);
+
+  return RadioInput;
+}(Component);
+
+
+
+/***/ }),
+
+/***/ "./src/resources/js/sidebar/select-input.js":
+/*!**************************************************!*\
+  !*** ./src/resources/js/sidebar/select-input.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SelectInput; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./input */ "./src/resources/js/sidebar/input.js");
+
+
+
+
+
+
+
+var Select = window.wp.components.SelectControl;
+
+var SelectInput =
+/*#__PURE__*/
+function (_Input) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5___default()(SelectInput, _Input);
+
+  function SelectInput(props) {
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, SelectInput);
+
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(SelectInput).call(this, props));
+    _this.getOptions = _this.getOptions.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this));
+    return _this;
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(SelectInput, [{
+    key: "getOptions",
+    value: function getOptions() {
+      var element = this.props.element;
+      return Object.keys(element.options).map(function (key) {
+        return {
+          label: element[key].text,
+          value: element[key].value
+        };
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement(Select, {
+        label: this.getLabel(),
+        options: this.getOptions(),
+        value: this.state.value,
+        onChange: this.onChange
+      });
+    }
+  }]);
+
+  return SelectInput;
+}(_input__WEBPACK_IMPORTED_MODULE_6__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/resources/js/sidebar/sidebar.js":
+/*!*********************************************!*\
+  !*** ./src/resources/js/sidebar/sidebar.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _checkbox_input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkbox-input */ "./src/resources/js/sidebar/checkbox-input.js");
+/* harmony import */ var _radio_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./radio-input */ "./src/resources/js/sidebar/radio-input.js");
+/* harmony import */ var _select_input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./select-input */ "./src/resources/js/sidebar/select-input.js");
+/* harmony import */ var _text_input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./text-input */ "./src/resources/js/sidebar/text-input.js");
+/* harmony import */ var _textarea_input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./textarea-input */ "./src/resources/js/sidebar/textarea-input.js");
+
+
+
+
+
+var registerPlugin = window.wp.plugins.registerPlugin;
+var PluginSidebar = window.wp.editPost.PluginSidebar;
+var el = window.wp.element.createElement;
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  registerPlugin('laraberg-sidebar', {
+    render: function render() {
+      return el(PluginSidebar, {
+        name: 'laraberg-sidebar',
+        icon: 'media-text',
+        title: 'Laraberg'
+      }, renderElements());
+    }
+  });
+});
+
+function getElements(selector) {
+  return Array.from(document.querySelectorAll(".laraberg-sidebar ".concat(selector)));
+}
+
+function renderInputCheckbox(element, index) {
+  return React.createElement(_checkbox_input__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    key: index,
+    element: element
+  });
+}
+
+function renderInputRadio(elements) {
+  return React.createElement(_radio_input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    key: elements[0].name,
+    options: elements
+  });
+}
+
+function renderInputSelect(element, index) {
+  return React.createElement(_select_input__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    key: index,
+    element: element
+  });
+}
+
+function renderInputText(element, index) {
+  return React.createElement(_text_input__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    key: index,
+    element: element
+  });
+}
+
+function renderInputTextarea(element, index) {
+  return React.createElement(_textarea_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    key: index,
+    element: element
+  });
+}
+
+function getRadios() {
+  var radios = getElements('input[type="radio"]');
+  var result = radios.reduce(function (object, radio) {
+    if (!object[radio.name]) {
+      object[radio.name] = [];
+    }
+
+    object[radio.name].push(radio);
+    return object;
+  }, {});
+  return result;
+}
+
+function renderElements() {
+  var elements = [];
+  elements.push(getElements('input[type="text"]').map(renderInputText));
+  elements.push(getElements('input[type="checkbox"]').map(renderInputCheckbox));
+  elements.push(getElements('textarea').map(renderInputTextarea));
+  elements.push(getElements('select').map(renderInputSelect));
+  var radios = getRadios();
+  elements.push(Object.keys(radios).map(function (key) {
+    return renderInputRadio(radios[key]);
+  }));
+  return el('div', {
+    className: 'plugin-sidebar-content laraberg-sidebar-content'
+  }, elements);
+}
+
+/***/ }),
+
+/***/ "./src/resources/js/sidebar/text-input.js":
+/*!************************************************!*\
+  !*** ./src/resources/js/sidebar/text-input.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TextInput; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./input */ "./src/resources/js/sidebar/input.js");
+
+
+
+
+
+
+var Text = window.wp.components.TextControl;
+
+var TextInput =
+/*#__PURE__*/
+function (_Input) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(TextInput, _Input);
+
+  function TextInput() {
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, TextInput);
+
+    return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(TextInput).apply(this, arguments));
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(TextInput, [{
+    key: "render",
+    value: function render() {
+      return React.createElement(Text, {
+        label: this.getLabel(),
+        value: this.state.value,
+        onChange: this.onChange
+      });
+    }
+  }]);
+
+  return TextInput;
+}(_input__WEBPACK_IMPORTED_MODULE_5__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/resources/js/sidebar/textarea-input.js":
+/*!****************************************************!*\
+  !*** ./src/resources/js/sidebar/textarea-input.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TextareaInput; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./input */ "./src/resources/js/sidebar/input.js");
+
+
+
+
+
+
+var Textarea = window.wp.components.TextareaControl;
+
+var TextareaInput =
+/*#__PURE__*/
+function (_Input) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(TextareaInput, _Input);
+
+  function TextareaInput() {
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, TextareaInput);
+
+    return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(TextareaInput).apply(this, arguments));
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(TextareaInput, [{
+    key: "render",
+    value: function render() {
+      return React.createElement(Textarea, {
+        label: this.getLabel(),
+        value: this.state.value,
+        onChange: this.onChange
+      });
+    }
+  }]);
+
+  return TextareaInput;
+}(_input__WEBPACK_IMPORTED_MODULE_5__["default"]);
+
+
 
 /***/ }),
 

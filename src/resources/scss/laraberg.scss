@@ -25,6 +25,11 @@
     border: 0;
     max-width: 100%;
   }
+
+  .laraberg-sidebar-content {
+    padding: 15px;
+    margin: unset;
+  }
 }
 
 .gutenberg__content {
@@ -74,4 +79,8 @@
   content: "";
   display: block;
   padding-top: 50%;
+}
+
+.laraberg-sidebar {
+  display: none;
 }

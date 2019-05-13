@@ -20583,6 +20583,9 @@ body.toolbar-tray-open.toolbar-vertical.toolbar-fixed {
   .laraberg__editor iframe {
     border: 0;
     max-width: 100%; }
+  .laraberg__editor .laraberg-sidebar-content {
+    padding: 15px;
+    margin: unset; }
 
 .gutenberg__content .alignleft {
   float: left;
@@ -20625,6 +20628,9 @@ body.toolbar-tray-open.toolbar-vertical.toolbar-fixed {
   content: "";
   display: block;
   padding-top: 50%; }
+
+.laraberg-sidebar {
+  display: none; }
 
 
 /*# sourceMappingURL=laraberg.css.map*/

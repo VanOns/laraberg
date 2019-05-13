@@ -25,6 +25,12 @@ Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
     - [Registering Blocks](#registering-blocks)
     - [Registering Categories](#registering-categories)
   - [Events](#events)
+  - [Sidebar](#sidebar)
+  - [Checkbox](#checkbox)
+  - [Radio](#radio)
+  - [Select](#select)
+  - [Text](#text)
+  - [Textarea](#textarea)
 - [Missing Blocks](#missing-blocks)
 - [Updating from 0.0.1 to 0.0.2-or-later](#updating-from-001-to-002-or-later)
 - [Contributors](#contributors)
@@ -272,6 +278,77 @@ Laraberg implements Laravel events that you can use to implement your own listen
 - VanOns\Laraberg\Events\ContentCreated
 - VanOns\Laraberg\Events\ContentRendered
 - VanOns\Laraberg\Events\ContentUpdated
+
+## Sidebar
+
+Laraberg provides a way to put your form fields in a seperate sidebar in the Gutenberg editor. This way you can let the editor take the entire screen while still having a place for your form fields. This is done by putting the input element in a parent element with the `.laraberg-sidebar` class. This is currently supported for the following input types:
+- Checkbox
+- Radio
+- Select
+- Text
+- Textarea
+
+For the labels Laraberg first checks if there is a label assigned to the element and will try to use that. If there is no label assigned it will check if there is a placeholder and use that as the label.
+
+To enable the sidebar set the `sidebar` option to true when initializing Laraberg:
+```js
+Laraberg.init('[id_here]', { sidebar: true })
+```
+
+## Checkbox
+```HTML
+<div class="laraberg-sidebar">
+  ...
+  <label for="article-public">Public</label>
+  <input id="article-public" name="public" type="checkbox">
+</div>
+```
+
+## Radio
+
+```HTML
+<div class="laraberg-sidebar">
+  ...
+  <label for="letter-a">A</label>
+  <input type="radio" name="letter" id="letter-a" value="a" checked> 
+  <label for="letter-b">B</label>
+  <input type="radio" name="letter" id="letter-b" value="b"> 
+  <label for="letter-c">C</label>
+  <input type="radio" name="letter" id="letter-c" value="c">
+</div>
+```
+
+## Select
+```HTML
+<div class="laraberg-sidebar">
+  ...
+  <label for="article-month">Month</label>
+  <select id="article-month" name="month" class="uk-select uk-form-large ">
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4">April</option>
+      ...
+  </select>
+</div>
+```
+
+## Text
+```HTML
+<div class="laraberg-sidebar">
+  ...
+  <input id="article-title" type="text" name="title" placeholder="Title" />
+</div>
+```
+
+## Textarea
+```HTML
+<div class="laraberg-sidebar">
+  ...
+  <textarea name="excerpt" id="article-excerpt" placeholder="Excerpt"></textarea>
+</div>
+```
+
 
 # Missing Blocks
 
