@@ -4,7 +4,7 @@
 [![Gitter](https://badges.gitter.im/VanOns/laraberg.svg)](https://gitter.im/VanOns/laraberg?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 
-Laraberg aims to provide an easy way to integrate the Gutenberg editor with your Laravel projects. It is built on top of the [GutenbergJS](https://github.com/front/gutenberg-js) project, implements all the necessary communication and adds an easy to use API.
+Laraberg aims to provide an easy way to integrate the Gutenberg editor with your Laravel projects. It is built on top of the [GutenbergJS](https://github.com/front/gutenberg-js) project, implements all the necessary communication and adds an easy to use API. A demo can be found at [demo.laraberg.io](http://demo.laraberg.io/). If you would like to see an example of how to implement Laraberg you can take a look at the code from the demo  [over here](https://github.com/VanOns/laraberg-demo).
 
 # Table of Contents <!-- omit in toc -->
 - [Installation](#installation)
