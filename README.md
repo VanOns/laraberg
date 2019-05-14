@@ -26,11 +26,11 @@ Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
     - [Registering Categories](#registering-categories)
   - [Events](#events)
   - [Sidebar](#sidebar)
-  - [Checkbox](#checkbox)
-  - [Radio](#radio)
-  - [Select](#select)
-  - [Text](#text)
-  - [Textarea](#textarea)
+    - [Checkbox](#checkbox)
+    - [Radio](#radio)
+    - [Select](#select)
+    - [Text](#text)
+    - [Textarea](#textarea)
 - [Missing Blocks](#missing-blocks)
 - [Updating from 0.0.1 to 0.0.2-or-later](#updating-from-001-to-002-or-later)
 - [Contributors](#contributors)
@@ -295,7 +295,7 @@ To enable the sidebar set the `sidebar` option to true when initializing Laraber
 Laraberg.init('[id_here]', { sidebar: true })
 ```
 
-## Checkbox
+### Checkbox
 ```HTML
 <div class="laraberg-sidebar">
   ...
@@ -304,7 +304,7 @@ Laraberg.init('[id_here]', { sidebar: true })
 </div>
 ```
 
-## Radio
+### Radio
 
 ```HTML
 <div class="laraberg-sidebar">
@@ -318,7 +318,7 @@ Laraberg.init('[id_here]', { sidebar: true })
 </div>
 ```
 
-## Select
+### Select
 ```HTML
 <div class="laraberg-sidebar">
   ...
@@ -333,7 +333,7 @@ Laraberg.init('[id_here]', { sidebar: true })
 </div>
 ```
 
-## Text
+### Text
 ```HTML
 <div class="laraberg-sidebar">
   ...
@@ -341,7 +341,7 @@ Laraberg.init('[id_here]', { sidebar: true })
 </div>
 ```
 
-## Textarea
+### Textarea
 ```HTML
 <div class="laraberg-sidebar">
   ...
