@@ -5,6 +5,12 @@ import * as Notices from '../lib/notices'
 
 let routePrefix
 
+/**
+ * Requests Gutenberg can make.
+ * Each request has a method and a regex to match with the URL provided by Gutenberg.
+ * When the matchPath() function matches Gutenberg's request with one of the requests in this object
+ * the 'run' function gets executed.
+ */
 const requests = {
   getBlock: {
     method: 'GET',
@@ -83,43 +89,76 @@ const requests = {
   }
 }
 
+/**
+ * Get a reusable block
+ * @param {Object} options
+ * @param {Array} matches
+ */
 async function getBlock (options, matches) {
   let id = matches[1]
   let response = await axios.get(`${routePrefix}/blocks/${id}`)
   return response.data
 }
 
+/**
+ * Get all reusable blocks
+ */
 async function getBlocks () {
   let response = await axios.get(`${routePrefix}/blocks`)
   return response.data
 }
 
+/**
+ * Create a reusable block
+ * @param {Object} options
+ */
 async function postBlocks (options) {
   let response = await axios.post(`${routePrefix}/blocks`, options.data)
   return response.data
 }
 
+/**
+ * Update a reusable block
+ * @param {Object} options
+ * @param {Array} matches
+ */
 async function putBlock (options, matches) {
   let id = matches[1]
   let response = await axios.put(`${routePrefix}/blocks/${id}`, options.data)
   return response.data
 }
 
+/**
+ * Delete a reusable block
+ * @param {Object} options
+ * @param {Array} matches
+ */
 async function deleteBlock (options, matches) {
   let id = matches[1]
   let response = await axios.delete(`${routePrefix}/blocks/${id}`)
   return response.data
 }
 
+/**
+ * Get OEmbed HTML
+ * @param {Object} options
+ * @param {ARRAY} matches
+ */
 async function getEmbed (options, matches) {
   let response = await axios.get(`${routePrefix}/oembed?${matches[1]}`)
   return response.data
 }
 
+/**
+ * Get media mockdata
+ */
 async function optionsMedia () {
   return MockData.media
 }
 
+/**
+ * Get page from mockdata and target value
+ */
 async function getPage () {
   let content = document.getElementById(editorSettings.target).value || ''
   return {
@@ -130,6 +169,10 @@ async function getPage () {
   }
 }
 
+/**
+ * Mock POST page request
+ * @param {Object} options
+ */
 export async function postPage (options) {
   return {
     ...MockData.page,
@@ -139,6 +182,10 @@ export async function postPage (options) {
   }
 }
 
+/**
+ * Mock PUT page request
+ * @param {Object} options
+ */
 export async function putPage (options) {
   return {
     ...MockData.page,
@@ -148,30 +195,53 @@ export async function putPage (options) {
   }
 }
 
+/**
+ * Mock GET taxonomies request
+ */
 async function getTaxonomies () {
   return 'ok'
 }
 
+/**
+ * Mock themes request
+ */
 async function getThemes () {
   return MockData.themes
 }
 
+/**
+ * Mock post types block request
+ */
 async function getTypeBlock () {
   return MockData.types.block
 }
 
+/**
+ * Mock post types page request
+ */
 async function getTypePage () {
   return MockData.types.page
 }
 
+/**
+ * Mock post types request
+ */
 async function getTypes () {
   return MockData.types
 }
 
+/**
+ * Mock users request
+ */
 async function getUsers () {
   return 'ok'
 }
 
+/**
+ * Matches a Gutenberg request to the available requests in the requests variable
+ * @param {Object} options - options object provided by Gutenberg
+ * @returns {Promsie} - promise containing results
+ */
 function matchPath (options) {
   let promise
   Object.keys(requests).forEach((key) => {

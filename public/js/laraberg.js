@@ -15960,6 +15960,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routePrefix;
+/**
+ * Requests Gutenberg can make.
+ * Each request has a method and a regex to match with the URL provided by Gutenberg.
+ * When the matchPath() function matches Gutenberg's request with one of the requests in this object
+ * the 'run' function gets executed.
+ */
+
 var requests = {
   getBlock: {
     method: 'GET',
@@ -16036,11 +16043,21 @@ var requests = {
     regex: /\/wp\/v2\/users\/\?(.*)/g,
     run: getUsers
   }
+  /**
+   * Get a reusable block
+   * @param {Object} options
+   * @param {Array} matches
+   */
+
 };
 
 function getBlock(_x, _x2) {
   return _getBlock.apply(this, arguments);
 }
+/**
+ * Get all reusable blocks
+ */
+
 
 function _getBlock() {
   _getBlock = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16072,6 +16089,11 @@ function _getBlock() {
 function getBlocks() {
   return _getBlocks.apply(this, arguments);
 }
+/**
+ * Create a reusable block
+ * @param {Object} options
+ */
+
 
 function _getBlocks() {
   _getBlocks = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16102,6 +16124,12 @@ function _getBlocks() {
 function postBlocks(_x3) {
   return _postBlocks.apply(this, arguments);
 }
+/**
+ * Update a reusable block
+ * @param {Object} options
+ * @param {Array} matches
+ */
+
 
 function _postBlocks() {
   _postBlocks = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16132,6 +16160,12 @@ function _postBlocks() {
 function putBlock(_x4, _x5) {
   return _putBlock.apply(this, arguments);
 }
+/**
+ * Delete a reusable block
+ * @param {Object} options
+ * @param {Array} matches
+ */
+
 
 function _putBlock() {
   _putBlock = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16163,6 +16197,12 @@ function _putBlock() {
 function deleteBlock(_x6, _x7) {
   return _deleteBlock.apply(this, arguments);
 }
+/**
+ * Get OEmbed HTML
+ * @param {Object} options
+ * @param {ARRAY} matches
+ */
+
 
 function _deleteBlock() {
   _deleteBlock = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16194,6 +16234,10 @@ function _deleteBlock() {
 function getEmbed(_x8, _x9) {
   return _getEmbed.apply(this, arguments);
 }
+/**
+ * Get media mockdata
+ */
+
 
 function _getEmbed() {
   _getEmbed = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16224,6 +16268,10 @@ function _getEmbed() {
 function optionsMedia() {
   return _optionsMedia.apply(this, arguments);
 }
+/**
+ * Get page from mockdata and target value
+ */
+
 
 function _optionsMedia() {
   _optionsMedia = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16248,6 +16296,11 @@ function _optionsMedia() {
 function getPage() {
   return _getPage.apply(this, arguments);
 }
+/**
+ * Mock POST page request
+ * @param {Object} options
+ */
+
 
 function _getPage() {
   _getPage = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16278,6 +16331,10 @@ function _getPage() {
 function postPage(_x10) {
   return _postPage.apply(this, arguments);
 }
+/**
+ * Mock PUT page request
+ * @param {Object} options
+ */
 
 function _postPage() {
   _postPage = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16306,6 +16363,9 @@ function _postPage() {
 function putPage(_x11) {
   return _putPage.apply(this, arguments);
 }
+/**
+ * Mock GET taxonomies request
+ */
 
 function _putPage() {
   _putPage = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16334,6 +16394,10 @@ function _putPage() {
 function getTaxonomies() {
   return _getTaxonomies.apply(this, arguments);
 }
+/**
+ * Mock themes request
+ */
+
 
 function _getTaxonomies() {
   _getTaxonomies = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16358,6 +16422,10 @@ function _getTaxonomies() {
 function getThemes() {
   return _getThemes.apply(this, arguments);
 }
+/**
+ * Mock post types block request
+ */
+
 
 function _getThemes() {
   _getThemes = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16382,6 +16450,10 @@ function _getThemes() {
 function getTypeBlock() {
   return _getTypeBlock.apply(this, arguments);
 }
+/**
+ * Mock post types page request
+ */
+
 
 function _getTypeBlock() {
   _getTypeBlock = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16406,6 +16478,10 @@ function _getTypeBlock() {
 function getTypePage() {
   return _getTypePage.apply(this, arguments);
 }
+/**
+ * Mock post types request
+ */
+
 
 function _getTypePage() {
   _getTypePage = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16430,6 +16506,10 @@ function _getTypePage() {
 function getTypes() {
   return _getTypes.apply(this, arguments);
 }
+/**
+ * Mock users request
+ */
+
 
 function _getTypes() {
   _getTypes = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
@@ -16454,6 +16534,12 @@ function _getTypes() {
 function getUsers() {
   return _getUsers.apply(this, arguments);
 }
+/**
+ * Matches a Gutenberg request to the available requests in the requests variable
+ * @param {Object} options - options object provided by Gutenberg
+ * @returns {Promsie} - promise containing results
+ */
+
 
 function _getUsers() {
   _getUsers = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
