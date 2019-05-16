@@ -12,6 +12,7 @@ class BlockHelper
      */
     public static function renderBlocks($html)
     {
+        // Replace reusable block ID with reusable block HTML
         $regex = '/<!-- wp:block {"ref":(\d*)} \/-->/';
         $result = preg_replace_callback($regex, function ($matches) {
             return self::renderBlock($matches[1]);
