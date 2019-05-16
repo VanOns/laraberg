@@ -21,6 +21,10 @@
     position: absolute;
   }
 
+  .editor-inserter__manage-reusable-blocks {
+    display: none;
+  }
+
   iframe {
     border: 0;
     max-width: 100%;

@@ -17146,6 +17146,7 @@ function configureEditor(options) {
   setupMedia(options);
   setupSidebar(options);
   setupSubmit(_gutenberg_settings__WEBPACK_IMPORTED_MODULE_1__["editorSettings"].target);
+  removeBlockManagement();
 
   if (options.maxHeight) {
     setMaxHeight(options.maxHeight);
@@ -17250,6 +17251,12 @@ function setupSubmit(target) {
 
 function removeUploadButton() {
   Object(_element_ready__WEBPACK_IMPORTED_MODULE_2__["elementRendered"])('.components-form-file-upload button', function (element) {
+    return element.remove();
+  });
+}
+
+function removeBlockManagement() {
+  Object(_element_ready__WEBPACK_IMPORTED_MODULE_2__["elementRendered"])('[aria-label^="Manage All Reusable Blocks"]', function (element) {
     return element.remove();
   });
 }

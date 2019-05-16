@@ -20580,6 +20580,8 @@ body.toolbar-tray-open.toolbar-vertical.toolbar-fixed {
     z-index: 100; }
   .laraberg__editor .edit-post-sidebar {
     position: absolute; }
+  .laraberg__editor .editor-inserter__manage-reusable-blocks {
+    display: none; }
   .laraberg__editor iframe {
     border: 0;
     max-width: 100%; }

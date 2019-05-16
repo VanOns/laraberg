@@ -12,6 +12,7 @@ export default function configureEditor (options) {
   setupMedia(options)
   setupSidebar(options)
   setupSubmit(editorSettings.target)
+  removeBlockManagement()
   if (options.maxHeight) { setMaxHeight(options.maxHeight) }
   if (options.minHeight) { setMinHeight(options.minHeight) }
   if (options.height) { setHeight(options.height) }
@@ -97,4 +98,8 @@ function setupSubmit (target) {
  */
 function removeUploadButton () {
   elementRendered('.components-form-file-upload button', element => element.remove())
+}
+
+function removeBlockManagement () {
+  elementRendered('[aria-label^="Manage All Reusable Blocks"]', element => element.remove())
 }
