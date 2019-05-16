@@ -16428,7 +16428,11 @@ function _getSearch() {
             search = matches[1];
             perPage = matches[2];
             type = matches[3];
-            result = searchCb(search, perPage, type);
+            _context11.next = 7;
+            return searchCb(search, perPage, type);
+
+          case 7:
+            result = _context11.sent;
 
             if (!Array.isArray(result)) {
               _context11.next = 10;

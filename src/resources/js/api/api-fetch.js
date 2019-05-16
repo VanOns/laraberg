@@ -209,16 +209,18 @@ export async function putPage (options) {
  */
 export async function getSearch (options, matches) {
   if (!searchCb) return []
+  
   const search = matches[1]
   const perPage = matches[2]
   const type = matches[3]
-  const result = searchCb(search, perPage, type)
+  const result = await searchCb(search, perPage, type)
+
   if (Array.isArray(result)) {
     return result
-  } else {
-    Notices.error('Search callback must return an Array.')
-    return []
   }
+
+  Notices.error('Search callback must return an Array.')
+  return []
 }
 
 /**

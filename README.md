@@ -31,6 +31,7 @@ Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
     - [Select](#select)
     - [Text](#text)
     - [Textarea](#textarea)
+- [Search Callback](#search-callback)
 - [Missing Blocks](#missing-blocks)
 - [Updating from 0.0.1 to 0.0.2-or-later](#updating-from-001-to-002-or-later)
 - [Contributors](#contributors)
@@ -349,6 +350,23 @@ Laraberg.init('[id_here]', { sidebar: true })
 </div>
 ```
 
+# Search Callback
+
+The **button block** has a field that searches for pages or aritcles. In order to use this functionality you can pass a
+callback function when initializing Laraberg. This callback functions will receive a `search`, `perPage` and `type` parameter. The callback should return an array of objects that contain a title and an URL or a promise that resolves to such an array.
+
+```javascript
+let customSearch = (search, perPage, type) => {
+  return [
+    {
+      title: 'Laraberg Demo',
+      url: 'demo.laraberg.io'
+    }
+  ]
+}
+
+Laraberg.init('content', { searchCb: customSearch })
+```
 
 # Missing Blocks
 
