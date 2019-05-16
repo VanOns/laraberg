@@ -15917,13 +15917,14 @@ module.exports = function(module) {
 /*!*******************************************!*\
   !*** ./src/resources/js/api/api-fetch.js ***!
   \*******************************************/
-/*! exports provided: postPage, putPage, default, configureAPI */
+/*! exports provided: postPage, putPage, getSearch, default, configureAPI */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postPage", function() { return postPage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "putPage", function() { return putPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSearch", function() { return getSearch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return apiFetch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "configureAPI", function() { return configureAPI; });
 /* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
@@ -15960,6 +15961,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routePrefix;
+var searchCb;
 /**
  * Requests Gutenberg can make.
  * Each request has a method and a regex to match with the URL provided by Gutenberg.
@@ -16012,6 +16014,11 @@ var requests = {
     method: 'PUT',
     regex: /\/wp\/v2\/pages\/(\d*)/g,
     run: putPage
+  },
+  getSearch: {
+    method: 'GET',
+    regex: /\/wp\/v2\/search\?search=([^&]*)&per_page=([^&]*)&type=([^&]*)/g,
+    run: getSearch
   },
   getTaxonomies: {
     method: 'GET',
@@ -16364,7 +16371,10 @@ function putPage(_x11) {
   return _putPage.apply(this, arguments);
 }
 /**
- * Mock GET taxonomies request
+ * Returns searchCb result or an empty array
+ * @param {Object} options
+ * @param {Array} matches
+ * @returns {Array}
  */
 
 function _putPage() {
@@ -16391,7 +16401,57 @@ function _putPage() {
   return _putPage.apply(this, arguments);
 }
 
-function getTaxonomies() {
+function getSearch(_x12, _x13) {
+  return _getSearch.apply(this, arguments);
+}
+/**
+ * Mock GET taxonomies request
+ */
+
+function _getSearch() {
+  _getSearch = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee11(options, matches) {
+    var search, perPage, type, result;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee11$(_context11) {
+      while (1) {
+        switch (_context11.prev = _context11.next) {
+          case 0:
+            if (searchCb) {
+              _context11.next = 2;
+              break;
+            }
+
+            return _context11.abrupt("return", []);
+
+          case 2:
+            search = matches[1];
+            perPage = matches[2];
+            type = matches[3];
+            result = searchCb(search, perPage, type);
+
+            if (!Array.isArray(result)) {
+              _context11.next = 10;
+              break;
+            }
+
+            return _context11.abrupt("return", result);
+
+          case 10:
+            _lib_notices__WEBPACK_IMPORTED_MODULE_11__["error"]('Search callback must return an Array.');
+            return _context11.abrupt("return", []);
+
+          case 12:
+          case "end":
+            return _context11.stop();
+        }
+      }
+    }, _callee11);
+  }));
+  return _getSearch.apply(this, arguments);
+}
+
+function getTaxonomies(_x14, _x15) {
   return _getTaxonomies.apply(this, arguments);
 }
 /**
@@ -16402,19 +16462,19 @@ function getTaxonomies() {
 function _getTaxonomies() {
   _getTaxonomies = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee11() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee11$(_context11) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee12(optons, matches) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee12$(_context12) {
       while (1) {
-        switch (_context11.prev = _context11.next) {
+        switch (_context12.prev = _context12.next) {
           case 0:
-            return _context11.abrupt("return", 'ok');
+            return _context12.abrupt("return", 'ok');
 
           case 1:
           case "end":
-            return _context11.stop();
+            return _context12.stop();
         }
       }
-    }, _callee11);
+    }, _callee12);
   }));
   return _getTaxonomies.apply(this, arguments);
 }
@@ -16430,19 +16490,19 @@ function getThemes() {
 function _getThemes() {
   _getThemes = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee12() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee12$(_context12) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee13() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee13$(_context13) {
       while (1) {
-        switch (_context12.prev = _context12.next) {
+        switch (_context13.prev = _context13.next) {
           case 0:
-            return _context12.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["themes"]);
+            return _context13.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["themes"]);
 
           case 1:
           case "end":
-            return _context12.stop();
+            return _context13.stop();
         }
       }
-    }, _callee12);
+    }, _callee13);
   }));
   return _getThemes.apply(this, arguments);
 }
@@ -16458,19 +16518,19 @@ function getTypeBlock() {
 function _getTypeBlock() {
   _getTypeBlock = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee13() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee13$(_context13) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee14() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee14$(_context14) {
       while (1) {
-        switch (_context13.prev = _context13.next) {
+        switch (_context14.prev = _context14.next) {
           case 0:
-            return _context13.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"].block);
+            return _context14.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"].block);
 
           case 1:
           case "end":
-            return _context13.stop();
+            return _context14.stop();
         }
       }
-    }, _callee13);
+    }, _callee14);
   }));
   return _getTypeBlock.apply(this, arguments);
 }
@@ -16486,19 +16546,19 @@ function getTypePage() {
 function _getTypePage() {
   _getTypePage = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee14() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee14$(_context14) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee15() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee15$(_context15) {
       while (1) {
-        switch (_context14.prev = _context14.next) {
+        switch (_context15.prev = _context15.next) {
           case 0:
-            return _context14.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"].page);
+            return _context15.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"].page);
 
           case 1:
           case "end":
-            return _context14.stop();
+            return _context15.stop();
         }
       }
-    }, _callee14);
+    }, _callee15);
   }));
   return _getTypePage.apply(this, arguments);
 }
@@ -16514,19 +16574,19 @@ function getTypes() {
 function _getTypes() {
   _getTypes = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee15() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee15$(_context15) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee16() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee16$(_context16) {
       while (1) {
-        switch (_context15.prev = _context15.next) {
+        switch (_context16.prev = _context16.next) {
           case 0:
-            return _context15.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"]);
+            return _context16.abrupt("return", _mock_data__WEBPACK_IMPORTED_MODULE_8__["types"]);
 
           case 1:
           case "end":
-            return _context15.stop();
+            return _context16.stop();
         }
       }
-    }, _callee15);
+    }, _callee16);
   }));
   return _getTypes.apply(this, arguments);
 }
@@ -16544,19 +16604,19 @@ function getUsers() {
 function _getUsers() {
   _getUsers = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_7___default()(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee16() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee16$(_context16) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee17() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee17$(_context17) {
       while (1) {
-        switch (_context16.prev = _context16.next) {
+        switch (_context17.prev = _context17.next) {
           case 0:
-            return _context16.abrupt("return", 'ok');
+            return _context17.abrupt("return", 'ok');
 
           case 1:
           case "end":
-            return _context16.stop();
+            return _context17.stop();
         }
       }
-    }, _callee16);
+    }, _callee17);
   }));
   return _getUsers.apply(this, arguments);
 }
@@ -16600,6 +16660,7 @@ function apiFetch(options) {
 }
 function configureAPI(options) {
   routePrefix = options.prefix || '/laraberg';
+  searchCb = options.searchCb || null;
 }
 
 var FetchError =
@@ -17254,6 +17315,10 @@ function removeUploadButton() {
     return element.remove();
   });
 }
+/**
+ * Removes block management link in menu
+ */
+
 
 function removeBlockManagement() {
   Object(_element_ready__WEBPACK_IMPORTED_MODULE_2__["elementRendered"])('[aria-label^="Manage All Reusable Blocks"]', function (element) {

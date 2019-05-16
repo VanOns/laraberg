@@ -100,6 +100,9 @@ function removeUploadButton () {
   elementRendered('.components-form-file-upload button', element => element.remove())
 }
 
+/**
+ * Removes block management link in menu
+ */
 function removeBlockManagement () {
   elementRendered('[aria-label^="Manage All Reusable Blocks"]', element => element.remove())
 }

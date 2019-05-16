@@ -4,6 +4,7 @@ import { editorSettings } from '../gutenberg/settings'
 import * as Notices from '../lib/notices'
 
 let routePrefix
+let searchCb
 
 /**
  * Requests Gutenberg can make.
@@ -56,6 +57,11 @@ const requests = {
     method: 'PUT',
     regex: /\/wp\/v2\/pages\/(\d*)/g,
     run: putPage
+  },
+  getSearch: {
+    method: 'GET',
+    regex: /\/wp\/v2\/search\?search=([^&]*)&per_page=([^&]*)&type=([^&]*)/g,
+    run: getSearch
   },
   getTaxonomies: {
     method: 'GET',
@@ -196,9 +202,29 @@ export async function putPage (options) {
 }
 
 /**
+ * Returns searchCb result or an empty array
+ * @param {Object} options
+ * @param {Array} matches
+ * @returns {Array}
+ */
+export async function getSearch (options, matches) {
+  if (!searchCb) return []
+  const search = matches[1]
+  const perPage = matches[2]
+  const type = matches[3]
+  const result = searchCb(search, perPage, type)
+  if (Array.isArray(result)) {
+    return result
+  } else {
+    Notices.error('Search callback must return an Array.')
+    return []
+  }
+}
+
+/**
  * Mock GET taxonomies request
  */
-async function getTaxonomies () {
+async function getTaxonomies (optons, matches) {
   return 'ok'
 }
 
@@ -279,6 +305,7 @@ export default function apiFetch (options) {
 
 export function configureAPI (options) {
   routePrefix = options.prefix || '/laraberg'
+  searchCb = options.searchCb || null
 }
 
 class FetchError extends Error {
