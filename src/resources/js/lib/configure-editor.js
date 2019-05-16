@@ -33,8 +33,13 @@ export function clearSubmitFromButtons () {
  * @param {String} maxHeight css value for max-height
  */
 function setMaxHeight (maxHeight) {
-  const contentContainer = window.Laraberg.editor.querySelector('.edit-post-layout__content')
-  contentContainer.style.maxHeight = maxHeight
+  const editor = window.Laraberg.editor
+  const editPostLayout = editor.querySelector('.edit-post-layout__content')
+
+  editor.style.maxHeight = maxHeight
+
+  editPostLayout.style.maxHeight = `calc(${maxHeight} - 56px)`
+  // editPostLayout.style.overflowY = 'auto'
 }
 
 /**
@@ -42,8 +47,8 @@ function setMaxHeight (maxHeight) {
  * @param {String} minHeight css value for min-height
  */
 function setMinHeight (minHeight) {
-  const contentContainer = window.Laraberg.editor.querySelector('.edit-post-layout__content')
-  contentContainer.style.minHeight = minHeight
+  const editor = window.Laraberg.editor
+  editor.style.minHeight = minHeight
 }
 
 /**
@@ -51,8 +56,9 @@ function setMinHeight (minHeight) {
  * @param {String} height css value for height
  */
 function setHeight (height) {
-  const contentContainer = window.Laraberg.editor.querySelector('.edit-post-layout__content')
-  contentContainer.style.height = height
+  const editor = window.Laraberg.editor
+  editor.classList.add('fixed-height')
+  editor.style.height = height
 }
 
 /**

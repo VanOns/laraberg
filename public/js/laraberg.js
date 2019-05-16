@@ -17244,8 +17244,10 @@ function clearSubmitFromButtons() {
  */
 
 function setMaxHeight(maxHeight) {
-  var contentContainer = window.Laraberg.editor.querySelector('.edit-post-layout__content');
-  contentContainer.style.maxHeight = maxHeight;
+  var editor = window.Laraberg.editor;
+  var editPostLayout = editor.querySelector('.edit-post-layout__content');
+  editor.style.maxHeight = maxHeight;
+  editPostLayout.style.maxHeight = "calc(".concat(maxHeight, " - 56px)"); // editPostLayout.style.overflowY = 'auto'
 }
 /**
  * Sets the min-height style value
@@ -17254,8 +17256,8 @@ function setMaxHeight(maxHeight) {
 
 
 function setMinHeight(minHeight) {
-  var contentContainer = window.Laraberg.editor.querySelector('.edit-post-layout__content');
-  contentContainer.style.minHeight = minHeight;
+  var editor = window.Laraberg.editor;
+  editor.style.minHeight = minHeight;
 }
 /**
  * Sets the height style value
@@ -17264,8 +17266,9 @@ function setMinHeight(minHeight) {
 
 
 function setHeight(height) {
-  var contentContainer = window.Laraberg.editor.querySelector('.edit-post-layout__content');
-  contentContainer.style.height = height;
+  var editor = window.Laraberg.editor;
+  editor.classList.add('fixed-height');
+  editor.style.height = height;
 }
 /**
  * Setup media upload capabilities according to provided options
