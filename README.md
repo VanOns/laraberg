@@ -183,25 +183,26 @@ class MyModel extends Model {
 }
 ```
 
-This adds multiple methods to your model that will help you with creating/updating/rendering the Gutenberg content.
+This adds multiple attributes to your model that will help you with creating/updating/rendering the Gutenberg content.
 
 ```php
 $content // This is the raw content from the Gutenberg editor
 $model = new MyModel;
 
-// Add or update the content & (if true is provided) call save() on the content object
-$model->setContent($content, true);
+// The model has to exist or else the link between your model and the content can't be made
+$model->save();
 
-// Get the rendered HTML inside of a container
-// This is the function you should use for rendering the content on a page
-$model->renderContent();
+// Add or update the content
+$model->lb_content = $content;
 
-// Get the rendered content
-$model->getRenderedContent();
+// Get the rendered HTML
+$model->lb_content;
 
-// Get the raw content
-$model->getRawContent();
+// Get the raw Gutenberg output, this should be in the target textarea when updating content
+$model->lb_raw_content;
 ```
+
+> Note: The old renderContent, getRawContent, getRenderedContent and setContent methods from v0.0.4-beta and lower are deprecated and will be removed in a future release.
 
 ### Renaming Gutenbergable method names
 
@@ -226,7 +227,7 @@ Rendering the Gutenberg content is very simple and happens like this:
 
 ```html
 <div id="your_container"> <!-- The element you want to render the content in -->
-  {!! $page->renderContent() !!}
+  {!! $page->lb_content !!}
 </div>
 ```
 
