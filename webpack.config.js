@@ -11,6 +11,9 @@ module.exports = {
     path: path.resolve(__dirname, 'public/js')
   },
   devtool: 'source-map',
+  optimization: {
+    minimize: false
+  },
   module: {
     rules: [
       {
