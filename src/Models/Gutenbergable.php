@@ -14,6 +14,57 @@ trait Gutenbergable
         return $this->morphOne(Content::class, 'contentable');
     }
 
+    /**
+     * Get the rendered content
+     */
+    public function getLbContentAttribute() {
+        return $this->content->render();
+    }
+
+    /**
+     * Set the content
+     * @param String $content - Gutenberg output
+     */
+    public function setLbContentAttribute($content)
+    {   
+        if (!$this->content) { $this->createContent(); }
+
+        $this->content->setContent($content);
+        $this->content->save();
+        event(new ContentUpdated($this->content));
+    }
+
+    /**
+     * Get the raw gutenberg output
+     */
+    public function getLbRawContentAttribute() {
+        return $this->content->raw_content;
+    }
+
+    /**
+     * Creates a content object and associates it with the parent object
+     */
+    private function createContent()
+    {
+        $content = new Content;
+        $this->content()->save($content);
+        $this->content = $content;
+        event(new ContentCreated($content));
+    }
+
+    /**
+     * Delete content when model gets deleted
+     */
+    protected static function bootGutenbergable()
+    {   
+        self::deleting(function ($model) {
+            $model->content()->delete();
+        });
+    }
+
+    /**
+     * DEPRECATED
+     */
 
     /**
      * Returns the rendered HTML from the Content object
@@ -54,26 +105,5 @@ trait Gutenbergable
         $this->content->setContent($content);
         if ($save) { $this->content->save(); }
         event(new ContentUpdated($this->content));
-    }
-
-    /**
-     * Creates a content object and associates it with the parent object
-     */
-    private function createContent()
-    {
-        $content = new Content;
-        $this->content()->save($content);
-        $this->content = $content;
-        event(new ContentCreated($content));
-    }
-
-    /**
-     * Delete content when model gets deleted
-     */
-    protected static function bootGutenbergable()
-    {   
-        self::deleting(function ($model) {
-            $model->content()->delete();
-        });
     }
 }
