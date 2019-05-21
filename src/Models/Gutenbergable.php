@@ -66,4 +66,14 @@ trait Gutenbergable
         $this->content = $content;
         event(new ContentCreated($content));
     }
+
+    /**
+     * Delete content when model gets deleted
+     */
+    protected static function bootGutenbergable()
+    {   
+        self::deleting(function ($model) {
+            $model->content()->delete();
+        });
+    }
 }
