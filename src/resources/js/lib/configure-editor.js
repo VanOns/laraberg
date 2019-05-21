@@ -12,6 +12,7 @@ export default function configureEditor (options) {
   setupMedia(options)
   setupSidebar(options)
   setupSubmit(editorSettings.target)
+  disableWPBlocks()
   removeBlockManagement()
   if (options.maxHeight) { setMaxHeight(options.maxHeight) }
   if (options.minHeight) { setMinHeight(options.minHeight) }
@@ -26,6 +27,20 @@ export function clearSubmitFromButtons () {
   if (buttons.length > 0) {
     Array.from(buttons).forEach(button => { button.type = 'button' })
   }
+}
+
+function disableWPBlocks () {
+  data.dispatch('core/blocks').removeBlockTypes([
+    'core/archives',
+    'core/categories',
+    'core/freeform',
+    'core/latest-comments',
+    'core/latest-posts',
+    'core/more',
+    'core/nextpage',
+    'core/page-break',
+    'core/shortcode'
+  ])
 }
 
 /**
@@ -68,9 +83,11 @@ function setupMedia (options) {
   if (options.laravelFilemanager) {
     setupLaravelFilemanager(options.laravelFilemanager)
   } else {
-    data.dispatch('core/blocks').removeBlockTypes('core/cover')
-    data.dispatch('core/blocks').removeBlockTypes('core/gallery')
-    data.dispatch('core/blocks').removeBlockTypes('core/media-text')
+    data.dispatch('core/blocks').removeBlockTypes([
+      'core/cover',
+      'core/gallery',
+      'core/media-text'
+    ])
   }
 }
 
