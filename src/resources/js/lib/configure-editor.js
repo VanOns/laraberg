@@ -37,9 +37,7 @@ function setMaxHeight (maxHeight) {
   const editPostLayout = editor.querySelector('.edit-post-layout__content')
 
   editor.style.maxHeight = maxHeight
-
   editPostLayout.style.maxHeight = `calc(${maxHeight} - 56px)`
-  // editPostLayout.style.overflowY = 'auto'
 }
 
 /**
