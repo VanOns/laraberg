@@ -9671,7 +9671,9 @@ body.block-editor-page {
   height: auto; }
   .laraberg__editor .components-notice-list {
     position: -webkit-sticky;
-    position: sticky; }
+    position: sticky;
+    top: 0;
+    z-index: 100; }
   .laraberg__editor .edit-post-header {
     z-index: 100; }
   .laraberg__editor .edit-post-sidebar {
