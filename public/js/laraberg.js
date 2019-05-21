@@ -17921,97 +17921,164 @@ function (_Input) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _checkbox_input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkbox-input */ "./src/resources/js/sidebar/checkbox-input.js");
-/* harmony import */ var _radio_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./radio-input */ "./src/resources/js/sidebar/radio-input.js");
-/* harmony import */ var _select_input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./select-input */ "./src/resources/js/sidebar/select-input.js");
-/* harmony import */ var _text_input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./text-input */ "./src/resources/js/sidebar/text-input.js");
-/* harmony import */ var _textarea_input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./textarea-input */ "./src/resources/js/sidebar/textarea-input.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _checkbox_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./checkbox-input */ "./src/resources/js/sidebar/checkbox-input.js");
+/* harmony import */ var _radio_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./radio-input */ "./src/resources/js/sidebar/radio-input.js");
+/* harmony import */ var _select_input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./select-input */ "./src/resources/js/sidebar/select-input.js");
+/* harmony import */ var _text_input__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./text-input */ "./src/resources/js/sidebar/text-input.js");
+/* harmony import */ var _textarea_input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./textarea-input */ "./src/resources/js/sidebar/textarea-input.js");
 
 
 
 
 
-var registerPlugin = window.wp.plugins.registerPlugin;
-var PluginSidebar = window.wp.editPost.PluginSidebar;
+
+
+
+
+
+var _window$wp = window.wp,
+    editPost = _window$wp.editPost,
+    element = _window$wp.element,
+    plugins = _window$wp.plugins;
+var Component = element.Component;
+var registerPlugin = plugins.registerPlugin;
+var PluginSidebar = editPost.PluginSidebar;
 var el = window.wp.element.createElement;
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   registerPlugin('laraberg-sidebar', {
     render: function render() {
-      return el(PluginSidebar, {
-        name: 'laraberg-sidebar',
-        icon: 'media-text',
-        title: 'Laraberg'
-      }, renderElements());
+      return el(Sidebar);
     }
   });
 });
 
-function getElements(selector) {
-  return Array.from(document.querySelectorAll(".laraberg-sidebar ".concat(selector)));
-}
+var Sidebar =
+/*#__PURE__*/
+function (_Component) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(Sidebar, _Component);
 
-function renderInputCheckbox(element, index) {
-  return React.createElement(_checkbox_input__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    key: index,
-    element: element
-  });
-}
+  function Sidebar(props) {
+    var _this;
 
-function renderInputRadio(elements) {
-  return React.createElement(_radio_input__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    key: elements[0].name,
-    options: elements
-  });
-}
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, Sidebar);
 
-function renderInputSelect(element, index) {
-  return React.createElement(_select_input__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    key: index,
-    element: element
-  });
-}
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(Sidebar).call(this, props));
+    _this.state = {
+      elements: []
+    };
+    return _this;
+  }
 
-function renderInputText(element, index) {
-  return React.createElement(_text_input__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    key: index,
-    element: element
-  });
-}
-
-function renderInputTextarea(element, index) {
-  return React.createElement(_textarea_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    key: index,
-    element: element
-  });
-}
-
-function getRadios() {
-  var radios = getElements('input[type="radio"]');
-  var result = radios.reduce(function (object, radio) {
-    if (!object[radio.name]) {
-      object[radio.name] = [];
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(Sidebar, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getElements();
     }
+  }, {
+    key: "getElements",
+    value: function getElements() {
+      var _this2 = this;
 
-    object[radio.name].push(radio);
-    return object;
-  }, {});
-  return result;
-}
+      var elements = Array.from(document.querySelectorAll(".laraberg-sidebar *"));
+      var inputs = [];
+      var radios = [];
+      elements.forEach(function (element, index) {
+        if (radios.length > 0 && (element.type !== 'radio' || element.name !== radios[0].name)) {
+          inputs.push(_this2.addInputRadio(radios, index));
+          radios = [];
+        }
 
-function renderElements() {
-  var elements = [];
-  elements.push(getElements('input[type="text"]').map(renderInputText));
-  elements.push(getElements('input[type="checkbox"]').map(renderInputCheckbox));
-  elements.push(getElements('textarea').map(renderInputTextarea));
-  elements.push(getElements('select').map(renderInputSelect));
-  var radios = getRadios();
-  elements.push(Object.keys(radios).map(function (key) {
-    return renderInputRadio(radios[key]);
-  }));
-  return el('div', {
-    className: 'plugin-sidebar-content laraberg-sidebar-content'
-  }, elements);
-}
+        switch (element.type) {
+          case 'text':
+            inputs.push(_this2.addInputText(element, index));
+            break;
+
+          case 'textarea':
+            inputs.push(_this2.addInputTextarea(element, index));
+            break;
+
+          case 'select-one':
+            inputs.push(_this2.addInputSelect(element, index));
+            break;
+
+          case 'checkbox':
+            inputs.push(_this2.addInputCheckbox(element, index));
+            break;
+
+          case 'radio':
+            radios.push(element);
+            break;
+        }
+      });
+      this.setState({
+        elements: inputs
+      });
+    }
+  }, {
+    key: "addInputCheckbox",
+    value: function addInputCheckbox(element, index) {
+      return React.createElement(_checkbox_input__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        key: index,
+        element: element
+      });
+    }
+  }, {
+    key: "addInputRadio",
+    value: function addInputRadio(elements, index) {
+      return React.createElement(_radio_input__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        key: index,
+        options: elements
+      });
+    }
+  }, {
+    key: "addInputSelect",
+    value: function addInputSelect(element, index) {
+      return React.createElement(_select_input__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        key: index,
+        element: element
+      });
+    }
+  }, {
+    key: "addInputText",
+    value: function addInputText(element, index) {
+      return React.createElement(_text_input__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        key: index,
+        element: element
+      });
+    }
+  }, {
+    key: "addInputTextarea",
+    value: function addInputTextarea(element, index) {
+      return React.createElement(_textarea_input__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        key: index,
+        element: element
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement(PluginSidebar, {
+        name: "laraberg-sidebar",
+        icon: "media-text",
+        title: "Laraberg"
+      }, React.createElement("div", {
+        className: "plugin-sidebar-content laraberg-sidebar-content"
+      }, this.state.elements));
+    }
+  }]);
+
+  return Sidebar;
+}(Component);
 
 /***/ }),
 

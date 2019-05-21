@@ -1,7 +1,7 @@
 import { data } from '@frontkom/gutenberg-js'
 import { editorSettings } from '../gutenberg/settings'
 import { elementRendered } from './element-ready'
-import sidebar from '../sidebar/sidebar'
+import registerSidebar from '../sidebar/sidebar'
 import setupLaravelFilemanager from '../laravel-filemanager/laravel-filemanager'
 
 /**
@@ -78,7 +78,7 @@ function setupMedia (options) {
 
 function setupSidebar (options) {
   if (options.sidebar) {
-    sidebar()
+    registerSidebar()
   }
 }
 
