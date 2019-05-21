@@ -15686,7 +15686,7 @@ function setMaxHeight(maxHeight) {
   var editor = window.Laraberg.editor;
   var editPostLayout = editor.querySelector('.edit-post-layout__content');
   editor.style.maxHeight = maxHeight;
-  editPostLayout.style.maxHeight = "calc(".concat(maxHeight, " - 56px)"); // editPostLayout.style.overflowY = 'auto'
+  editPostLayout.style.maxHeight = "calc(".concat(maxHeight, " - 56px)");
 }
 /**
  * Sets the min-height style value
