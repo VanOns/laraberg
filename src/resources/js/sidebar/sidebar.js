@@ -24,7 +24,7 @@ class Sidebar extends Component {
     this.radioCache = []
     this.state = { elements: [] }
 
-    this.mustFlushRadio = this.mustFlushRadio.bind(this)
+    this.mustFlushRadioCache = this.mustFlushRadioCache.bind(this)
     this.handleElement = this.handleElement.bind(this)
   }
 
@@ -48,7 +48,7 @@ class Sidebar extends Component {
    * @param {Int} index
    */
   handleElement (element, index) {
-    if (this.mustFlushRadio(element)) this.flushRadioCache()
+    if (this.mustFlushRadioCache(element)) this.flushRadioCache()
 
     switch (element.type) {
       case 'text':
@@ -73,7 +73,7 @@ class Sidebar extends Component {
    * @param {Element} element
    * @returns {Bool} True if element does not belong to any previous radio input
    */
-  mustFlushRadio (element) {
+  mustFlushRadioCache (element) {
     if (!Array.isArray(this.radioCache) || this.radioCache.length < 1) return false
     return (element.type !== 'radio' || element.name !== this.radioCache[0].name)
   }
