@@ -47,7 +47,7 @@ composer require van-ons/laraberg
 Add vendor files to your project (CSS, JS & Config):
 
 ```bash
-php artisan vendor:publish --provider='VanOns\Laraberg\LarabergServiceProvider'
+php artisan vendor:publish --provider="VanOns\Laraberg\LarabergServiceProvider"
 ```
 
 In order to store the data for the Gutenberg editor, Laraberg needs to run a database migration:
@@ -86,7 +86,7 @@ The Gutenberg editor expects React, ReactDOM, Moment and JQuery to be in the env
 
 When updating Laraberg you have to publish the vendor files again by running this command:
 ```bash
-php artisan vendor:publish --provider='VanOns\Laraberg\LarabergServiceProvider' --tag="public" --force
+php artisan vendor:publish --provider="VanOns\Laraberg\LarabergServiceProvider" --tag="public" --force
 ```
 
 # Configuration
