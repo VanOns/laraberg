@@ -25,7 +25,7 @@ class Sidebar extends Component {
     this.state = { elements: [] }
 
     this.mustFlushRadioCache = this.mustFlushRadioCache.bind(this)
-    this.handleElement = this.handleElement.bind(this)
+    this.addElement = this.addElement.bind(this)
   }
 
   componentDidMount () {
@@ -37,7 +37,7 @@ class Sidebar extends Component {
    */
   getElements () {
     const elements = Array.from(document.querySelectorAll(`.laraberg-sidebar *`))
-    elements.forEach(this.handleElement)
+    elements.forEach(this.addElement)
     this.flushRadioCache()
     this.setState({ elements: this.inputs })
   }
@@ -47,7 +47,7 @@ class Sidebar extends Component {
    * @param {Element} element
    * @param {Int} index
    */
-  handleElement (element, index) {
+  addElement (element, index) {
     if (this.mustFlushRadioCache(element)) this.flushRadioCache()
 
     switch (element.type) {
