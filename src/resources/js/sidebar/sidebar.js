@@ -52,16 +52,16 @@ class Sidebar extends Component {
 
     switch (element.type) {
       case 'text':
-        this.inputs.push(this.getInputText(element, index))
+        this.inputs.push(<TextInput key={index} element={element} />)
         break
       case 'textarea':
-        this.inputs.push(this.getInputTextarea(element, index))
+        this.inputs.push(<TextareaInput key={index} element={element} />)
         break
       case 'select-one':
-        this.inputs.push(this.getInputSelect(element, index))
+        this.inputs.push(<SelectInput key={index} element={element} />)
         break
       case 'checkbox':
-        this.inputs.push(this.getInputCheckbox(element, index))
+        this.inputs.push(<CheckboxInput key={index} element={element} />)
         break
       case 'radio':
         this.radioCache.push(element)
@@ -84,31 +84,11 @@ class Sidebar extends Component {
    */
   flushRadioCache (index) {
     if (this.radioCache.length > 0) {
-      this.inputs.push(this.getInputRadio(this.radioCache, index))
+      this.inputs.push(<RadioInput key={index} options={this.radioCache} />)
       this.radioCache = []
     }
   }
-
-  getInputCheckbox (element, index) {
-    return <CheckboxInput key={index} element={element} />
-  }
-
-  getInputRadio (elements, index) {
-    return <RadioInput key={index} options={elements} />
-  }
-
-  getInputSelect (element, index) {
-    return <SelectInput key={index} element={element} />
-  }
-
-  getInputText (element, index) {
-    return <TextInput key={index} element={element} />
-  }
-
-  getInputTextarea (element, index) {
-    return <TextareaInput key={index} element={element} />
-  }
-
+  
   render () {
     return (
       <PluginSidebar name="laraberg-sidebar" icon="media-text" title="Laraberg">
