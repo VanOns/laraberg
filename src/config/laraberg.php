@@ -1,16 +1,24 @@
 <?php
 
+use VanOns\Laraberg\Models\Block;
+use VanOns\Laraberg\Models\Content;
+
 return [
-  /*
-  |--------------------------------------------------------------------------
-  | API Routes
-  |--------------------------------------------------------------------------
-  */
+    /*
+    |--------------------------------------------------------------------------
+    | API Routes
+    |--------------------------------------------------------------------------
+    */
 
-  'use_package_routes' => true,
+    'use_package_routes' => true,
 
-  'middlewares' => ['web', 'auth'],
+    'middlewares' => ['web', 'auth'],
 
-  'prefix' => 'laraberg'
+    'prefix' => 'laraberg',
 
+    "models" => [
+        "block" => Block::class,
+        "content" => Content::class,
+    ],
+    
 ];
