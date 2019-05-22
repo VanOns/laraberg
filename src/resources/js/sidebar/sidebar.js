@@ -52,16 +52,16 @@ class Sidebar extends Component {
 
     switch (element.type) {
       case 'text':
-        this.inputs.push(this.addInputText(element, index))
+        this.inputs.push(this.getInputText(element, index))
         break
       case 'textarea':
-        this.inputs.push(this.addInputTextarea(element, index))
+        this.inputs.push(this.getInputTextarea(element, index))
         break
       case 'select-one':
-        this.inputs.push(this.addInputSelect(element, index))
+        this.inputs.push(this.getInputSelect(element, index))
         break
       case 'checkbox':
-        this.inputs.push(this.addInputCheckbox(element, index))
+        this.inputs.push(this.getInputCheckbox(element, index))
         break
       case 'radio':
         this.radioCache.push(element)
@@ -84,28 +84,28 @@ class Sidebar extends Component {
    */
   flushRadioCache (index) {
     if (this.radioCache.length > 0) {
-      this.inputs.push(this.addInputRadio(this.radioCache, index))
+      this.inputs.push(this.getInputRadio(this.radioCache, index))
       this.radioCache = []
     }
   }
 
-  addInputCheckbox (element, index) {
+  getInputCheckbox (element, index) {
     return <CheckboxInput key={index} element={element} />
   }
 
-  addInputRadio (elements, index) {
+  getInputRadio (elements, index) {
     return <RadioInput key={index} options={elements} />
   }
 
-  addInputSelect (element, index) {
+  getInputSelect (element, index) {
     return <SelectInput key={index} element={element} />
   }
 
-  addInputText (element, index) {
+  getInputText (element, index) {
     return <TextInput key={index} element={element} />
   }
 
-  addInputTextarea (element, index) {
+  getInputTextarea (element, index) {
     return <TextareaInput key={index} element={element} />
   }
 
