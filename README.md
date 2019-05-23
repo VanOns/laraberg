@@ -385,9 +385,10 @@ In the [releasenotes for beta version 0.0.2](https://github.com/VanOns/laraberg/
 
 # Contributors
 
-[![Maurice Wijnia](https://github.com/mauricewijnia.png?size=100)](https://github.com/mauricewijnia) |
---- |
-[Maurice Wijnia](http://mauricewijnia.nl) |
+[![Maurice Wijnia](https://github.com/mauricewijnia.png?size=100)](https://github.com/mauricewijnia) | [![Mike Bronner](https://github.com/mikebronner.png?size=100)](https://github.com/mikebronner)
+--- | ---
+[Maurice Wijnia](http://mauricewijnia.nl) | [Mike Bronner](https://genealabs.com)
+
 
 <div align="center">
 	<br><br><br>
