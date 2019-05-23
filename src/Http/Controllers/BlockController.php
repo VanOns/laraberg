@@ -1,45 +1,54 @@
-<?php
-
-namespace VanOns\Laraberg\Http\Controllers;
+<?php namespace VanOns\Laraberg\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use VanOns\Laraberg\Models\Block;
-
 class BlockController extends ApplicationController
 {
+    protected $blockModel;
+
+    public function __construct()
+    {
+        $this->blockModel = config("laraberg.models.block");
+        $this->blockModel = new $this->blockModel;
+    }
+
     public function index()
     {
-        $blocks = Block::all();
+        $blocks = $this->blockModel->all();
         return $this->ok($blocks);
     }
-    // PHP
+
     public function store(Request $request)
     {
-        $block = new Block();
+        $block = $this->blockModel;
         $block->raw_title = $request->title;
         $block->status = $request->status;
         $block->setContent($request->content);
         $block->updateSlug();
         $block->save();
+
         return $this->ok($block->toJson(), 201);
     }
 
     public function show(Request $request, $id)
     {
-        $block = Block::find($id);
+        $block = $this->blockModel->find($id);
+
         if (!$block) {
             return $this->notFound();
         }
+
         return $this->ok($block);
     }
 
     public function update(Request $request, $id)
     {
-        $block = Block::find($id);
+        $block = $this->blockModel->find($id);
+
         if (!$block) {
             return $this->notFound();
         }
+
         $block->raw_title = $request->title;
         $block->status = $request->status;
         $block->setContent($request->content);
@@ -48,14 +57,16 @@ class BlockController extends ApplicationController
         return $this->ok($block);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $block = Block::find($id);
-        if (!$block) {
+        $block = $this->blockModel->find($id);
+
+        if (! $block) {
             return $this->notFound();
         }
+
         $block->delete();
+
         return $this->ok();
     }
 }
-
