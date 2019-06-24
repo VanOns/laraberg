@@ -1,19 +1,24 @@
-import { data } from '@frontkom/gutenberg-js'
+// import { data } from '@frontkom/gutenberg-js'
 import { editorSettings } from '../gutenberg/settings'
 import { elementRendered } from './element-ready'
 import registerSidebar from '../sidebar/sidebar'
-import setupLaravelFilemanager from '../laravel-filemanager/laravel-filemanager'
+import setupLaravelFilemanager from '../laravel-filemanager'
+import setupMockFilemanager from '../mock-file-uploader'
+import setupActions from './actions'
+
+const { data } = window.wp
 
 /**
  * Configures the editor according to the provided options object
  * @param {Object} options
  */
 export default function configureEditor (options) {
+  setupActions()
   setupMedia(options)
   setupSidebar(options)
   setupSubmit(editorSettings.target)
   disableWPBlocks()
-  removeBlockManagement()
+  removeElements()
   if (options.maxHeight) { setMaxHeight(options.maxHeight) }
   if (options.minHeight) { setMinHeight(options.minHeight) }
   if (options.height) { setHeight(options.height) }
@@ -39,7 +44,11 @@ function disableWPBlocks () {
     'core/more',
     'core/nextpage',
     'core/page-break',
-    'core/shortcode'
+    'core/shortcode',
+    'core/calendar',
+    'core/rss',
+    'core/search',
+    'core/tag-cloud'
   ])
 }
 
@@ -61,7 +70,9 @@ function setMaxHeight (maxHeight) {
  */
 function setMinHeight (minHeight) {
   const editor = window.Laraberg.editor
+  const sidebar = editor.querySelector('.edit-post-sidebar')
   editor.style.minHeight = minHeight
+  sidebar.style.minHeight = `calc(${minHeight} - 56px)`
 }
 
 /**
@@ -83,6 +94,7 @@ function setupMedia (options) {
   if (options.laravelFilemanager) {
     setupLaravelFilemanager(options.laravelFilemanager)
   } else {
+    setupMockFilemanager()
     data.dispatch('core/blocks').removeBlockTypes([
       'core/cover',
       'core/gallery',
@@ -122,8 +134,18 @@ function removeUploadButton () {
 }
 
 /**
- * Removes block management link in menu
+ * Removes some unnecessary elements from the editor
  */
-function removeBlockManagement () {
-  elementRendered('[aria-label^="Manage All Reusable Blocks"]', element => element.remove())
+function removeElements () {
+  // Manage All Reusable blocks
+  elementRendered('[href="edit.php?post_type=wp_block"]', element => { element.remove() })
+
+  // Publish button
+  elementRendered('.editor-post-publish-button', element => { element.style.display = 'none' })
+  elementRendered('.editor-post-publish-panel__toggle', element => { element.style.display = 'none' })
+
+  // Remove article button
+  elementRendered('.editor-post-trash', element => { element.remove() })
+
+  elementRendered('.editor-post-saved-state', element => { element.style.display = 'none' })
 }

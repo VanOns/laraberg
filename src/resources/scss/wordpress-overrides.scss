@@ -1,5 +1,9 @@
 
 .gutenberg__editor {
+
+  .block-editor-block-types-list__list-item {
+    width: 30%;
+  }
   .components-drop-zone__provider, .components-navigate-regions {
     height: auto;
     position: static;
@@ -15,7 +19,9 @@
 
   .edit-post-layout {
     height: auto;
-    position: static;
+    position: relative;
+    top: 0;
+    left: 0;
   }
 
   .edit-post-pinned-plugins {
@@ -27,13 +33,23 @@
     padding-bottom: 75px;
     height: auto;
   }
+}
 
-  @media (min-width: 600px) {
+@media (min-width: 600px) {
+  .gutenberg__editor {
     .edit-post-header {
       position: static;
       top: 0;
     }
+
+    .edit-post-layout {
+      padding-top: 0;
+    }
   }
+
+  // .block-editor__container {
+  //   position: static;
+  // }
 }
 
 .gutenberg__editor.fixed-height {

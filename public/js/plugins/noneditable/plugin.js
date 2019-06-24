@@ -1,5 +1,12 @@
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.0.11 (2019-07-04)
+ */
 (function () {
-var noneditable = (function () {
     'use strict';
 
     var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
@@ -106,13 +113,12 @@ var noneditable = (function () {
     };
     var FilterContent = { setup: setup };
 
-    global.add('noneditable', function (editor) {
-      FilterContent.setup(editor);
-    });
     function Plugin () {
+      global.add('noneditable', function (editor) {
+        FilterContent.setup(editor);
+      });
     }
 
-    return Plugin;
+    Plugin();
 
 }());
-})();

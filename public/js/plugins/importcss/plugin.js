@@ -1,5 +1,12 @@
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.0.11 (2019-07-04)
+ */
 (function () {
-var importcss = (function () {
     'use strict';
 
     var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
@@ -43,6 +50,150 @@ var importcss = (function () {
       getFileFilter: getFileFilter
     };
 
+    var constant = function (value) {
+      return function () {
+        return value;
+      };
+    };
+    var never = constant(false);
+    var always = constant(true);
+
+    var never$1 = never;
+    var always$1 = always;
+    var none = function () {
+      return NONE;
+    };
+    var NONE = function () {
+      var eq = function (o) {
+        return o.isNone();
+      };
+      var call = function (thunk) {
+        return thunk();
+      };
+      var id = function (n) {
+        return n;
+      };
+      var noop = function () {
+      };
+      var nul = function () {
+        return null;
+      };
+      var undef = function () {
+        return undefined;
+      };
+      var me = {
+        fold: function (n, s) {
+          return n();
+        },
+        is: never$1,
+        isSome: never$1,
+        isNone: always$1,
+        getOr: id,
+        getOrThunk: call,
+        getOrDie: function (msg) {
+          throw new Error(msg || 'error: getOrDie called on none.');
+        },
+        getOrNull: nul,
+        getOrUndefined: undef,
+        or: id,
+        orThunk: call,
+        map: none,
+        ap: none,
+        each: noop,
+        bind: none,
+        flatten: none,
+        exists: never$1,
+        forall: always$1,
+        filter: none,
+        equals: eq,
+        equals_: eq,
+        toArray: function () {
+          return [];
+        },
+        toString: constant('none()')
+      };
+      if (Object.freeze)
+        Object.freeze(me);
+      return me;
+    }();
+
+    var typeOf = function (x) {
+      if (x === null)
+        return 'null';
+      var t = typeof x;
+      if (t === 'object' && (Array.prototype.isPrototypeOf(x) || x.constructor && x.constructor.name === 'Array'))
+        return 'array';
+      if (t === 'object' && (String.prototype.isPrototypeOf(x) || x.constructor && x.constructor.name === 'String'))
+        return 'string';
+      return t;
+    };
+    var isType = function (type) {
+      return function (value) {
+        return typeOf(value) === type;
+      };
+    };
+    var isFunction = isType('function');
+
+    var slice = Array.prototype.slice;
+    var map = function (xs, f) {
+      var len = xs.length;
+      var r = new Array(len);
+      for (var i = 0; i < len; i++) {
+        var x = xs[i];
+        r[i] = f(x, i, xs);
+      }
+      return r;
+    };
+    var push = Array.prototype.push;
+    var flatten = function (xs) {
+      var r = [];
+      for (var i = 0, len = xs.length; i < len; ++i) {
+        if (!Array.prototype.isPrototypeOf(xs[i]))
+          throw new Error('Arr.flatten item ' + i + ' was not an array, input: ' + xs);
+        push.apply(r, xs[i]);
+      }
+      return r;
+    };
+    var bind = function (xs, f) {
+      var output = map(xs, f);
+      return flatten(output);
+    };
+    var from = isFunction(Array.from) ? Array.from : function (x) {
+      return slice.call(x);
+    };
+
+    var generate = function () {
+      var ungroupedOrder = [];
+      var groupOrder = [];
+      var groups = {};
+      var addItemToGroup = function (groupTitle, itemInfo) {
+        if (groups[groupTitle]) {
+          groups[groupTitle].push(itemInfo);
+        } else {
+          groupOrder.push(groupTitle);
+          groups[groupTitle] = [itemInfo];
+        }
+      };
+      var addItem = function (itemInfo) {
+        ungroupedOrder.push(itemInfo);
+      };
+      var toFormats = function () {
+        var groupItems = bind(groupOrder, function (g) {
+          var items = groups[g];
+          return items.length === 0 ? [] : [{
+              title: g,
+              items: items
+            }];
+        });
+        return groupItems.concat(ungroupedOrder);
+      };
+      return {
+        addItemToGroup: addItemToGroup,
+        addItem: addItem,
+        toFormats: toFormats
+      };
+    };
+
     var removeCacheSuffix = function (url) {
       var cacheSuffix = global$3.cacheSuffix;
       if (typeof url === 'string') {
@@ -51,10 +202,11 @@ var importcss = (function () {
       return url;
     };
     var isSkinContentCss = function (editor, href) {
-      var settings = editor.settings, skin = settings.skin !== false ? settings.skin || 'lightgray' : false;
+      var settings = editor.settings, skin = settings.skin !== false ? settings.skin || 'oxide' : false;
       if (skin) {
-        var skinUrl = settings.skin_url ? editor.documentBaseURI.toAbsolute(settings.skin_url) : global$2.baseURL + '/skins/' + skin;
-        return href === skinUrl + '/content' + (editor.inline ? '.inline' : '') + '.min.css';
+        var skinUrl = settings.skin_url ? editor.documentBaseURI.toAbsolute(settings.skin_url) : global$2.baseURL + '/skins/ui/' + skin;
+        var contentSkinUrlPart = global$2.baseURL + '/skins/content/';
+        return href === skinUrl + '/content' + (editor.inline ? '.inline' : '') + '.min.css' || href.indexOf(contentSkinUrlPart) !== -1;
       }
       return false;
     };
@@ -188,9 +340,10 @@ var importcss = (function () {
       return selectorConverter.call(plugin, selector, group);
     };
     var setup = function (editor) {
-      editor.on('renderFormatsMenu', function (e) {
+      editor.on('init', function (e) {
+        var model = generate();
         var globallyUniqueSelectors = {};
-        var selectorFilter = compileFilter(Settings.getSelectorFilter(editor)), ctrl = e.control;
+        var selectorFilter = compileFilter(Settings.getSelectorFilter(editor));
         var groups = compileUserDefinedGroups(Settings.getCssGroups(editor));
         var processSelector = function (selector, group) {
           if (isUniqueSelector(editor, selector, group, globallyUniqueSelectors)) {
@@ -199,18 +352,15 @@ var importcss = (function () {
             if (format) {
               var formatName = format.name || global$1.DOM.uniqueId();
               editor.formatter.register(formatName, format);
-              return global$4.extend({}, ctrl.settings.itemDefaults, {
-                text: format.title,
+              return global$4.extend({}, {
+                title: format.title,
                 format: formatName
               });
             }
           }
           return null;
         };
-        if (!Settings.shouldAppend(editor)) {
-          ctrl.items().remove();
-        }
-        global$4.each(getSelectors(editor, e.doc || editor.getDoc(), compileFilter(Settings.getFileFilter(editor))), function (selector) {
+        global$4.each(getSelectors(editor, editor.getDoc(), compileFilter(Settings.getFileFilter(editor))), function (selector) {
           if (selector.indexOf('.mce-') === -1) {
             if (!selectorFilter || selectorFilter(selector)) {
               var selectorGroups = getGroupsBySelector(groups, selector);
@@ -218,24 +368,23 @@ var importcss = (function () {
                 global$4.each(selectorGroups, function (group) {
                   var menuItem = processSelector(selector, group);
                   if (menuItem) {
-                    group.item.menu.push(menuItem);
+                    model.addItemToGroup(group.title, menuItem);
                   }
                 });
               } else {
                 var menuItem = processSelector(selector, null);
                 if (menuItem) {
-                  ctrl.add(menuItem);
+                  model.addItem(menuItem);
                 }
               }
             }
           }
         });
-        global$4.each(groups, function (group) {
-          if (group.item.menu.length > 0) {
-            ctrl.add(group.item);
-          }
+        var items = model.toFormats();
+        editor.fire('addStyleModifications', {
+          items: items,
+          replace: !Settings.shouldAppend(editor)
         });
-        e.control.renderNew();
       });
     };
     var ImportCss = {
@@ -251,14 +400,13 @@ var importcss = (function () {
     };
     var Api = { get: get };
 
-    global.add('importcss', function (editor) {
-      ImportCss.setup(editor);
-      return Api.get(editor);
-    });
     function Plugin () {
+      global.add('importcss', function (editor) {
+        ImportCss.setup(editor);
+        return Api.get(editor);
+      });
     }
 
-    return Plugin;
+    Plugin();
 
 }());
-})();

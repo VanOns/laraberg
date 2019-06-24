@@ -3,16 +3,14 @@ export default function (config) {
   const { Component } = element
 
   class LaravelFilemanager extends Component {
-    constructor () {
-      super(...arguments)
-      this.openModal = this.openModal.bind(this)
-      this.onSelect = this.onSelect.bind(this)
+    constructor (props) {
+      super(props)
       this.state = {
         media: []
       }
     }
 
-    getMediaType (path) {
+    getMediaType = (path) => {
       const video = ['mp4', 'm4v', 'mov', 'wmv', 'avi', 'mpg', 'ogv', '3gp', '3g2']
       const audio = ['mp3', 'm4a', 'ogg', 'wav']
       const extension = path.split('.').slice(-1).pop()
@@ -25,7 +23,7 @@ export default function (config) {
       }
     }
 
-    onSelect (url, path) {
+    onSelect = (url, path) => {
       this.props.value = null
       const { multiple, onSelect } = this.props
       const media = {
@@ -36,7 +34,7 @@ export default function (config) {
       onSelect(multiple ? this.state.media : media)
     }
 
-    openModal () {
+    openModal = () => {
       let type = 'file'
       if (this.props.allowedTypes.length === 1 && this.props.allowedTypes[0] === 'image') {
         type = 'image'
@@ -44,7 +42,7 @@ export default function (config) {
       this.openLFM(type, this.onSelect)
     }
 
-    openLFM (type, cb) {
+    openLFM = (type, cb) => {
       let routePrefix = (config && config.prefix) ? config.prefix : '/laravel-filemanager'
       window.open(routePrefix + '?type=' + type, 'FileManager', 'width=900,height=600')
       window.SetUrl = cb

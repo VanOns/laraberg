@@ -1,5 +1,12 @@
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.0.11 (2019-07-04)
+ */
 (function () {
-var autoresize = (function () {
     'use strict';
 
     var Cell = function (initial) {
@@ -26,20 +33,25 @@ var autoresize = (function () {
 
     var global$2 = tinymce.util.Tools.resolve('tinymce.util.Delay');
 
+    var fireResizeEditor = function (editor) {
+      return editor.fire('ResizeEditor');
+    };
+    var Events = { fireResizeEditor: fireResizeEditor };
+
     var getAutoResizeMinHeight = function (editor) {
-      return parseInt(editor.getParam('autoresize_min_height', editor.getElement().offsetHeight), 10);
+      return editor.getParam('min_height', editor.getElement().offsetHeight, 'number');
     };
     var getAutoResizeMaxHeight = function (editor) {
-      return parseInt(editor.getParam('autoresize_max_height', 0), 10);
+      return editor.getParam('max_height', 0, 'number');
     };
     var getAutoResizeOverflowPadding = function (editor) {
-      return editor.getParam('autoresize_overflow_padding', 1);
+      return editor.getParam('autoresize_overflow_padding', 1, 'number');
     };
     var getAutoResizeBottomMargin = function (editor) {
-      return editor.getParam('autoresize_bottom_margin', 50);
+      return editor.getParam('autoresize_bottom_margin', 50, 'number');
     };
     var shouldAutoResizeOnInit = function (editor) {
-      return editor.getParam('autoresize_on_init', true);
+      return editor.getParam('autoresize_on_init', true, 'boolean');
     };
     var Settings = {
       getAutoResizeMinHeight: getAutoResizeMinHeight,
@@ -71,11 +83,14 @@ var autoresize = (function () {
         }
       }
     };
+    var parseCssValueToInt = function (dom, elm, name, computed) {
+      var value = parseInt(dom.getStyle(elm, name, computed), 10);
+      return isNaN(value) ? 0 : value;
+    };
     var resize = function (editor, oldSize) {
-      var deltaSize, doc, body, resizeHeight, myHeight;
-      var marginTop, marginBottom, paddingTop, paddingBottom, borderTop, borderBottom;
+      var deltaSize, resizeHeight, contentHeight;
       var dom = editor.dom;
-      doc = editor.getDoc();
+      var doc = editor.getDoc();
       if (!doc) {
         return;
       }
@@ -83,23 +98,23 @@ var autoresize = (function () {
         toggleScrolling(editor, true);
         return;
       }
-      body = doc.body;
+      var docEle = doc.documentElement;
+      var resizeBottomMargin = Settings.getAutoResizeBottomMargin(editor);
       resizeHeight = Settings.getAutoResizeMinHeight(editor);
-      marginTop = dom.getStyle(body, 'margin-top', true);
-      marginBottom = dom.getStyle(body, 'margin-bottom', true);
-      paddingTop = dom.getStyle(body, 'padding-top', true);
-      paddingBottom = dom.getStyle(body, 'padding-bottom', true);
-      borderTop = dom.getStyle(body, 'border-top-width', true);
-      borderBottom = dom.getStyle(body, 'border-bottom-width', true);
-      myHeight = body.offsetHeight + parseInt(marginTop, 10) + parseInt(marginBottom, 10) + parseInt(paddingTop, 10) + parseInt(paddingBottom, 10) + parseInt(borderTop, 10) + parseInt(borderBottom, 10);
-      if (isNaN(myHeight) || myHeight <= 0) {
-        myHeight = global$1.ie ? body.scrollHeight : global$1.webkit && body.clientHeight === 0 ? 0 : body.offsetHeight;
+      var marginTop = parseCssValueToInt(dom, docEle, 'margin-top', true);
+      var marginBottom = parseCssValueToInt(dom, docEle, 'margin-bottom', true);
+      contentHeight = docEle.offsetHeight + marginTop + marginBottom + resizeBottomMargin;
+      if (contentHeight < 0) {
+        contentHeight = 0;
       }
-      if (myHeight > Settings.getAutoResizeMinHeight(editor)) {
-        resizeHeight = myHeight;
+      var containerHeight = editor.getContainer().offsetHeight;
+      var contentAreaHeight = editor.getContentAreaContainer().offsetHeight;
+      var chromeHeight = containerHeight - contentAreaHeight;
+      if (contentHeight + chromeHeight > Settings.getAutoResizeMinHeight(editor)) {
+        resizeHeight = contentHeight + chromeHeight;
       }
       var maxHeight = Settings.getAutoResizeMaxHeight(editor);
-      if (maxHeight && myHeight > maxHeight) {
+      if (maxHeight && resizeHeight > maxHeight) {
         resizeHeight = maxHeight;
         toggleScrolling(editor, true);
       } else {
@@ -107,8 +122,9 @@ var autoresize = (function () {
       }
       if (resizeHeight !== oldSize.get()) {
         deltaSize = resizeHeight - oldSize.get();
-        dom.setStyle(editor.iframeElement, 'height', resizeHeight + 'px');
+        dom.setStyle(editor.getContainer(), 'height', resizeHeight + 'px');
         oldSize.set(resizeHeight);
+        Events.fireResizeEditor(editor);
         if (global$1.webkit && deltaSize < 0) {
           resize(editor, oldSize);
         }
@@ -116,21 +132,15 @@ var autoresize = (function () {
     };
     var setup = function (editor, oldSize) {
       editor.on('init', function () {
-        var overflowPadding, bottomMargin;
+        var overflowPadding = Settings.getAutoResizeOverflowPadding(editor);
         var dom = editor.dom;
-        overflowPadding = Settings.getAutoResizeOverflowPadding(editor);
-        bottomMargin = Settings.getAutoResizeBottomMargin(editor);
-        if (overflowPadding !== false) {
-          dom.setStyles(editor.getBody(), {
-            paddingLeft: overflowPadding,
-            paddingRight: overflowPadding
-          });
-        }
-        if (bottomMargin !== false) {
-          dom.setStyles(editor.getBody(), { paddingBottom: bottomMargin });
-        }
+        dom.setStyles(editor.getBody(), {
+          'paddingLeft': overflowPadding,
+          'paddingRight': overflowPadding,
+          'min-height': 0
+        });
       });
-      editor.on('nodechange setcontent keyup FullscreenStateChanged', function (e) {
+      editor.on('NodeChange SetContent keyup FullscreenStateChanged ResizeContent', function (e) {
         resize(editor, oldSize);
       });
       if (Settings.shouldAutoResizeOnInit(editor)) {
@@ -153,17 +163,19 @@ var autoresize = (function () {
     };
     var Commands = { register: register };
 
-    global.add('autoresize', function (editor) {
-      if (!editor.inline) {
-        var oldSize = Cell(0);
-        Commands.register(editor, oldSize);
-        Resize.setup(editor, oldSize);
-      }
-    });
     function Plugin () {
+      global.add('autoresize', function (editor) {
+        if (!editor.settings.hasOwnProperty('resize')) {
+          editor.settings.resize = false;
+        }
+        if (!editor.inline) {
+          var oldSize = Cell(0);
+          Commands.register(editor, oldSize);
+          Resize.setup(editor, oldSize);
+        }
+      });
     }
 
-    return Plugin;
+    Plugin();
 
 }());
-})();

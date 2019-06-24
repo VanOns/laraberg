@@ -1,5 +1,12 @@
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.0.11 (2019-07-04)
+ */
 (function () {
-var pagebreak = (function () {
     'use strict';
 
     var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
@@ -81,29 +88,32 @@ var pagebreak = (function () {
     var ResolveName = { setup: setup$1 };
 
     var register$1 = function (editor) {
-      editor.addButton('pagebreak', {
-        title: 'Page break',
-        cmd: 'mcePageBreak'
+      editor.ui.registry.addButton('pagebreak', {
+        icon: 'page-break',
+        tooltip: 'Page break',
+        onAction: function () {
+          return editor.execCommand('mcePageBreak');
+        }
       });
-      editor.addMenuItem('pagebreak', {
+      editor.ui.registry.addMenuItem('pagebreak', {
         text: 'Page break',
-        icon: 'pagebreak',
-        cmd: 'mcePageBreak',
-        context: 'insert'
+        icon: 'page-break',
+        onAction: function () {
+          return editor.execCommand('mcePageBreak');
+        }
       });
     };
     var Buttons = { register: register$1 };
 
-    global.add('pagebreak', function (editor) {
-      Commands.register(editor);
-      Buttons.register(editor);
-      FilterContent.setup(editor);
-      ResolveName.setup(editor);
-    });
     function Plugin () {
+      global.add('pagebreak', function (editor) {
+        Commands.register(editor);
+        Buttons.register(editor);
+        FilterContent.setup(editor);
+        ResolveName.setup(editor);
+      });
     }
 
-    return Plugin;
+    Plugin();
 
 }());
-})();

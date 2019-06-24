@@ -1,4 +1,5 @@
 import * as MockData from './mock-data'
+import types from './data/types'
 import axios from 'axios'
 import { editorSettings } from '../gutenberg/settings'
 import * as Notices from '../lib/notices'
@@ -38,6 +39,11 @@ const requests = {
     regex: /\/wp\/v2\/blocks\/(\d*)/g,
     run: deleteBlock
   },
+  optionsBlocks: {
+    method: 'OPTIONS',
+    regex: /\/wp\/v2\/blocks.*/g,
+    run: optionsBlocks
+  },
   getEmbed: {
     method: 'GET',
     regex: /\/oembed\/1\.0\/proxy\?(.*)/g,
@@ -57,6 +63,11 @@ const requests = {
     method: 'PUT',
     regex: /\/wp\/v2\/pages\/(\d*)/g,
     run: putPage
+  },
+  postPage: {
+    method: 'POST',
+    regex: /\/wp\/v2\/pages\/(\d*)/g,
+    run: postPage
   },
   getSearch: {
     method: 'GET',
@@ -90,7 +101,7 @@ const requests = {
   },
   getUsers: {
     method: 'GET',
-    regex: /\/wp\/v2\/users\/\?(.*)/g,
+    regex: /\/wp\/v2\/users\/(.*)/g,
     run: getUsers
   }
 }
@@ -146,9 +157,18 @@ async function deleteBlock (options, matches) {
 }
 
 /**
+ * Options request for blocks
+ * @param {Object} options
+ * @param {Array} matches
+ */
+async function optionsBlocks (options, matches) {
+  return []
+}
+
+/**
  * Get OEmbed HTML
  * @param {Object} options
- * @param {ARRAY} matches
+ * @param {Array} matches
  */
 async function getEmbed (options, matches) {
   let response = await axios.get(`${routePrefix}/oembed?${matches[1]}`)
@@ -209,7 +229,7 @@ export async function putPage (options) {
  */
 export async function getSearch (options, matches) {
   if (!searchCb) return []
-  
+
   const search = matches[1]
   const perPage = matches[2]
   const type = matches[3]
@@ -255,7 +275,7 @@ async function getTypePage () {
  * Mock post types request
  */
 async function getTypes () {
-  return MockData.types
+  return types
 }
 
 /**
@@ -295,6 +315,7 @@ function matchPath (options) {
         }
       }))
     }).catch(error => {
+      console.log(error)
       Notices.error(`${error.message} ${error.data.data.path}`)
     })
   }
@@ -302,7 +323,12 @@ function matchPath (options) {
 }
 
 export default function apiFetch (options) {
-  return matchPath(options)
+  // console.log('apiFetch - options', options)
+  const result = matchPath(options)
+  result.then(res => {
+    // console.log('apiFetch - result', res)
+  })
+  return result
 }
 
 export function configureAPI (options) {

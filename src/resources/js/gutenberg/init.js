@@ -1,22 +1,9 @@
 import { configureAPI } from '../api/api-fetch'
 import configureEditor, { clearSubmitFromButtons } from '../lib/configure-editor'
-import { domReady, editPost } from '@frontkom/gutenberg-js'
 import { editorSettings, overridePost } from './settings'
 import { elementReady } from '../lib/element-ready'
 
-// Setup sidebar events
-window.customGutenberg = {
-  events: {
-    'OPEN_GENERAL_SIDEBAR': async (action, store) => {
-      // console.log('OPEN_GENERAL_SIDEBAR', action, store)
-      await elementReady('.edit-post-sidebar')
-      clearSubmitFromButtons()
-    },
-    'CLOSE_GENERAL_SIDEBAR': async (action, store) => {
-      // console.log('CLOSE_GENERAL_SIDEBAR', action, store)
-    }
-  }
-}
+const { data, domReady, editPost } = window.wp
 
 /**
  * Initialize the Gutenberg editor
@@ -24,10 +11,21 @@ window.customGutenberg = {
  */
 export default function init (target, options = {}) {
   configureAPI(options)
+
+  // Disable publish sidebar
+  data.dispatch('core/editor').disablePublishSidebar()
+
+  // Disable tips
+  data.dispatch('core/nux').disableTips()
+
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(async () => {
       const larabergEditor = createEditorElement(target)
-      resolve(editPost.initializeEditor(larabergEditor.id, 'page', 0, editorSettings, overridePost))
+      try {
+        resolve(editPost.initializeEditor(larabergEditor.id, 'page', 1, editorSettings, overridePost))
+      } catch (error) {
+        console.error(error)
+      }
       await elementReady('.edit-post-layout')
       configureEditor(options)
     })

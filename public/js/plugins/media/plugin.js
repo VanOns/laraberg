@@ -1,12 +1,254 @@
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.0.11 (2019-07-04)
+ */
 (function () {
-var media = (function () {
     'use strict';
 
     var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
 
-    var global$1 = tinymce.util.Tools.resolve('tinymce.Env');
+    var __assign = function () {
+      __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+          s = arguments[i];
+          for (var p in s)
+            if (Object.prototype.hasOwnProperty.call(s, p))
+              t[p] = s[p];
+        }
+        return t;
+      };
+      return __assign.apply(this, arguments);
+    };
 
-    var global$2 = tinymce.util.Tools.resolve('tinymce.util.Tools');
+    var constant = function (value) {
+      return function () {
+        return value;
+      };
+    };
+    var never = constant(false);
+    var always = constant(true);
+
+    var never$1 = never;
+    var always$1 = always;
+    var none = function () {
+      return NONE;
+    };
+    var NONE = function () {
+      var eq = function (o) {
+        return o.isNone();
+      };
+      var call = function (thunk) {
+        return thunk();
+      };
+      var id = function (n) {
+        return n;
+      };
+      var noop = function () {
+      };
+      var nul = function () {
+        return null;
+      };
+      var undef = function () {
+        return undefined;
+      };
+      var me = {
+        fold: function (n, s) {
+          return n();
+        },
+        is: never$1,
+        isSome: never$1,
+        isNone: always$1,
+        getOr: id,
+        getOrThunk: call,
+        getOrDie: function (msg) {
+          throw new Error(msg || 'error: getOrDie called on none.');
+        },
+        getOrNull: nul,
+        getOrUndefined: undef,
+        or: id,
+        orThunk: call,
+        map: none,
+        ap: none,
+        each: noop,
+        bind: none,
+        flatten: none,
+        exists: never$1,
+        forall: always$1,
+        filter: none,
+        equals: eq,
+        equals_: eq,
+        toArray: function () {
+          return [];
+        },
+        toString: constant('none()')
+      };
+      if (Object.freeze)
+        Object.freeze(me);
+      return me;
+    }();
+    var some = function (a) {
+      var constant_a = function () {
+        return a;
+      };
+      var self = function () {
+        return me;
+      };
+      var map = function (f) {
+        return some(f(a));
+      };
+      var bind = function (f) {
+        return f(a);
+      };
+      var me = {
+        fold: function (n, s) {
+          return s(a);
+        },
+        is: function (v) {
+          return a === v;
+        },
+        isSome: always$1,
+        isNone: never$1,
+        getOr: constant_a,
+        getOrThunk: constant_a,
+        getOrDie: constant_a,
+        getOrNull: constant_a,
+        getOrUndefined: constant_a,
+        or: self,
+        orThunk: self,
+        map: map,
+        ap: function (optfab) {
+          return optfab.fold(none, function (fab) {
+            return some(fab(a));
+          });
+        },
+        each: function (f) {
+          f(a);
+        },
+        bind: bind,
+        flatten: constant_a,
+        exists: bind,
+        forall: bind,
+        filter: function (f) {
+          return f(a) ? me : NONE;
+        },
+        equals: function (o) {
+          return o.is(a);
+        },
+        equals_: function (o, elementEq) {
+          return o.fold(never$1, function (b) {
+            return elementEq(a, b);
+          });
+        },
+        toArray: function () {
+          return [a];
+        },
+        toString: function () {
+          return 'some(' + a + ')';
+        }
+      };
+      return me;
+    };
+    var from = function (value) {
+      return value === null || value === undefined ? NONE : some(value);
+    };
+    var Option = {
+      some: some,
+      none: none,
+      from: from
+    };
+
+    var typeOf = function (x) {
+      if (x === null)
+        return 'null';
+      var t = typeof x;
+      if (t === 'object' && (Array.prototype.isPrototypeOf(x) || x.constructor && x.constructor.name === 'Array'))
+        return 'array';
+      if (t === 'object' && (String.prototype.isPrototypeOf(x) || x.constructor && x.constructor.name === 'String'))
+        return 'string';
+      return t;
+    };
+    var isType = function (type) {
+      return function (value) {
+        return typeOf(value) === type;
+      };
+    };
+    var isString = isType('string');
+    var isFunction = isType('function');
+
+    var slice = Array.prototype.slice;
+    var each = function (xs, f) {
+      for (var i = 0, len = xs.length; i < len; i++) {
+        var x = xs[i];
+        f(x, i, xs);
+      }
+    };
+    var push = Array.prototype.push;
+    var flatten = function (xs) {
+      var r = [];
+      for (var i = 0, len = xs.length; i < len; ++i) {
+        if (!Array.prototype.isPrototypeOf(xs[i]))
+          throw new Error('Arr.flatten item ' + i + ' was not an array, input: ' + xs);
+        push.apply(r, xs[i]);
+      }
+      return r;
+    };
+    var from$1 = isFunction(Array.from) ? Array.from : function (x) {
+      return slice.call(x);
+    };
+
+    var Cell = function (initial) {
+      var value = initial;
+      var get = function () {
+        return value;
+      };
+      var set = function (v) {
+        value = v;
+      };
+      var clone = function () {
+        return Cell(get());
+      };
+      return {
+        get: get,
+        set: set,
+        clone: clone
+      };
+    };
+
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var shallow = function (old, nu) {
+      return nu;
+    };
+    var baseMerge = function (merger) {
+      return function () {
+        var objects = new Array(arguments.length);
+        for (var i = 0; i < objects.length; i++)
+          objects[i] = arguments[i];
+        if (objects.length === 0)
+          throw new Error('Can\'t merge zero objects');
+        var ret = {};
+        for (var j = 0; j < objects.length; j++) {
+          var curObject = objects[j];
+          for (var key in curObject)
+            if (hasOwnProperty.call(curObject, key)) {
+              ret[key] = merger(ret[key], curObject[key]);
+            }
+        }
+        return ret;
+      };
+    };
+    var merge = baseMerge(shallow);
+
+    var hasOwnProperty$1 = Object.hasOwnProperty;
+    var get = function (obj, key) {
+      return has(obj, key) ? Option.from(obj[key]) : Option.none();
+    };
+    var has = function (obj, key) {
+      return hasOwnProperty$1.call(obj, key);
+    };
 
     var getScripts = function (editor) {
       return editor.getParam('media_scripts');
@@ -47,20 +289,11 @@ var media = (function () {
       hasDimensions: hasDimensions
     };
 
-    var global$3 = tinymce.util.Tools.resolve('tinymce.html.SaxParser');
+    var global$1 = tinymce.util.Tools.resolve('tinymce.util.Tools');
 
-    var global$4 = tinymce.util.Tools.resolve('tinymce.dom.DOMUtils');
+    var global$2 = tinymce.util.Tools.resolve('tinymce.html.SaxParser');
 
-    var getVideoScriptMatch = function (prefixes, src) {
-      if (prefixes) {
-        for (var i = 0; i < prefixes.length; i++) {
-          if (src.indexOf(prefixes[i].filter) !== -1) {
-            return prefixes[i];
-          }
-        }
-      }
-    };
-    var VideoScript = { getVideoScriptMatch: getVideoScriptMatch };
+    var global$3 = tinymce.util.Tools.resolve('tinymce.dom.DOMUtils');
 
     var trimPx = function (value) {
       return value.replace(/px$/, '');
@@ -87,7 +320,17 @@ var media = (function () {
       setMaxHeight: setSize('maxHeight')
     };
 
-    var DOM = global$4.DOM;
+    var getVideoScriptMatch = function (prefixes, src) {
+      if (prefixes) {
+        for (var i = 0; i < prefixes.length; i++) {
+          if (src.indexOf(prefixes[i].filter) !== -1) {
+            return prefixes[i];
+          }
+        }
+      }
+    };
+
+    var DOM = global$3.DOM;
     var getEphoxEmbedIri = function (elm) {
       return DOM.getAttrib(elm, 'data-ephox-embed-iri');
     };
@@ -97,10 +340,9 @@ var media = (function () {
     };
     var htmlToDataSax = function (prefixes, html) {
       var data = {};
-      global$3({
+      global$2({
         validate: false,
         allow_conditional_comments: true,
-        special: 'script,noscript',
         start: function (name, attrs) {
           if (!data.source1 && name === 'param') {
             data.source1 = attrs.map.movie;
@@ -109,18 +351,18 @@ var media = (function () {
             if (!data.type) {
               data.type = name;
             }
-            data = global$2.extend(attrs.map, data);
+            data = global$1.extend(attrs.map, data);
           }
           if (name === 'script') {
-            var videoScript = VideoScript.getVideoScriptMatch(prefixes, attrs.map.src);
+            var videoScript = getVideoScriptMatch(prefixes, attrs.map.src);
             if (!videoScript) {
               return;
             }
             data = {
               type: 'script',
               source1: attrs.map.src,
-              width: videoScript.width,
-              height: videoScript.height
+              width: String(videoScript.width),
+              height: String(videoScript.height)
             };
           }
           if (name === 'source') {
@@ -155,13 +397,13 @@ var media = (function () {
     var htmlToData = function (prefixes, html) {
       return isEphoxEmbed(html) ? ephoxEmbedHtmlToData(html) : htmlToDataSax(prefixes, html);
     };
-    var HtmlToData = { htmlToData: htmlToData };
 
-    var global$5 = tinymce.util.Tools.resolve('tinymce.util.Promise');
+    var global$4 = tinymce.util.Tools.resolve('tinymce.util.Promise');
 
     var guess = function (url) {
       var mimes = {
         mp3: 'audio/mpeg',
+        m4a: 'audio/x-m4a',
         wav: 'audio/wav',
         mp4: 'video/mp4',
         webm: 'video/webm',
@@ -174,11 +416,11 @@ var media = (function () {
     };
     var Mime = { guess: guess };
 
-    var global$6 = tinymce.util.Tools.resolve('tinymce.html.Writer');
+    var global$5 = tinymce.util.Tools.resolve('tinymce.html.Writer');
 
-    var global$7 = tinymce.util.Tools.resolve('tinymce.html.Schema');
+    var global$6 = tinymce.util.Tools.resolve('tinymce.html.Schema');
 
-    var DOM$1 = global$4.DOM;
+    var DOM$1 = global$3.DOM;
     var setAttributes = function (attrs, updatedAttrs) {
       var name;
       var i;
@@ -210,19 +452,18 @@ var media = (function () {
       }
     };
     var normalizeHtml = function (html) {
-      var writer = global$6();
-      var parser = global$3(writer);
+      var writer = global$5();
+      var parser = global$2(writer);
       parser.parse(html);
       return writer.getContent();
     };
     var updateHtmlSax = function (html, data, updateAll) {
-      var writer = global$6();
+      var writer = global$5();
       var sourceCount = 0;
       var hasImage;
-      global$3({
+      global$2({
         validate: false,
         allow_conditional_comments: true,
-        special: 'script,noscript',
         comment: function (text) {
           writer.comment(text);
         },
@@ -311,7 +552,7 @@ var media = (function () {
           }
           writer.end(name);
         }
-      }, global$7({})).parse(html);
+      }, global$6({})).parse(html);
       return writer.getContent();
     };
     var isEphoxEmbed$1 = function (html) {
@@ -414,7 +655,7 @@ var media = (function () {
         return pattern.regex.test(url);
       });
       if (pattern.length > 0) {
-        return global$2.extend({}, pattern[0], { url: getUrl(pattern[0], url) });
+        return global$1.extend({}, pattern[0], { url: getUrl(pattern[0], url) });
       } else {
         return null;
       }
@@ -450,9 +691,9 @@ var media = (function () {
       return '<script src="' + data.source1 + '"></script>';
     };
     var dataToHtml = function (editor, dataIn) {
-      var data = global$2.extend({}, dataIn);
+      var data = global$1.extend({}, dataIn);
       if (!data.source1) {
-        global$2.extend(data, HtmlToData.htmlToData(Settings.getScripts(editor), data.embed));
+        global$1.extend(data, htmlToData(Settings.getScripts(editor), data.embed));
         if (!data.source1) {
           return '';
         }
@@ -473,24 +714,24 @@ var media = (function () {
         data.source1 = pattern.url;
         data.type = pattern.type;
         data.allowFullscreen = pattern.allowFullscreen;
-        data.width = data.width || pattern.w;
-        data.height = data.height || pattern.h;
+        data.width = data.width || String(pattern.w);
+        data.height = data.height || String(pattern.h);
       }
       if (data.embed) {
         return UpdateHtml.updateHtml(data.embed, data, true);
       } else {
-        var videoScript = VideoScript.getVideoScriptMatch(Settings.getScripts(editor), data.source1);
+        var videoScript = getVideoScriptMatch(Settings.getScripts(editor), data.source1);
         if (videoScript) {
           data.type = 'script';
-          data.width = videoScript.width;
-          data.height = videoScript.height;
+          data.width = String(videoScript.width);
+          data.height = String(videoScript.height);
         }
         var audioTemplateCallback = Settings.getAudioTemplateCallback(editor);
         var videoTemplateCallback = Settings.getVideoTemplateCallback(editor);
-        data.width = data.width || 300;
-        data.height = data.height || 150;
-        global$2.each(data, function (value, key) {
-          data[key] = editor.dom.encode(value);
+        data.width = data.width || '300';
+        data.height = data.height || '150';
+        global$1.each(data, function (value, key) {
+          data[key] = editor.dom.encode('' + value);
         });
         if (data.type === 'iframe') {
           return getIframeHtml(data);
@@ -505,11 +746,10 @@ var media = (function () {
         }
       }
     };
-    var DataToHtml = { dataToHtml: dataToHtml };
 
     var cache = {};
     var embedPromise = function (data, dataToHtml, handler) {
-      return new global$5(function (res, rej) {
+      return new global$4(function (res, rej) {
         var wrappedResolve = function (response) {
           if (response.html) {
             cache[data.source1] = response;
@@ -527,7 +767,7 @@ var media = (function () {
       });
     };
     var defaultPromise = function (data, dataToHtml) {
-      return new global$5(function (res) {
+      return new global$4(function (res) {
         res({
           html: dataToHtml(data),
           url: data.source1
@@ -536,7 +776,7 @@ var media = (function () {
     };
     var loadedData = function (editor) {
       return function (data) {
-        return DataToHtml.dataToHtml(editor, data);
+        return dataToHtml(editor, data);
       };
     };
     var getEmbedHtml = function (editor, data) {
@@ -551,93 +791,46 @@ var media = (function () {
       isCached: isCached
     };
 
-    var doSyncSize = function (widthCtrl, heightCtrl) {
-      widthCtrl.state.set('oldVal', widthCtrl.value());
-      heightCtrl.state.set('oldVal', heightCtrl.value());
-    };
-    var doSizeControls = function (win, f) {
-      var widthCtrl = win.find('#width')[0];
-      var heightCtrl = win.find('#height')[0];
-      var constrained = win.find('#constrain')[0];
-      if (widthCtrl && heightCtrl && constrained) {
-        f(widthCtrl, heightCtrl, constrained.checked());
-      }
-    };
-    var doUpdateSize = function (widthCtrl, heightCtrl, isContrained) {
-      var oldWidth = widthCtrl.state.get('oldVal');
-      var oldHeight = heightCtrl.state.get('oldVal');
-      var newWidth = widthCtrl.value();
-      var newHeight = heightCtrl.value();
-      if (isContrained && oldWidth && oldHeight && newWidth && newHeight) {
-        if (newWidth !== oldWidth) {
-          newHeight = Math.round(newWidth / oldWidth * newHeight);
-          if (!isNaN(newHeight)) {
-            heightCtrl.value(newHeight);
-          }
-        } else {
-          newWidth = Math.round(newHeight / oldHeight * newWidth);
-          if (!isNaN(newWidth)) {
-            widthCtrl.value(newWidth);
-          }
-        }
-      }
-      doSyncSize(widthCtrl, heightCtrl);
-    };
-    var syncSize = function (win) {
-      doSizeControls(win, doSyncSize);
-    };
-    var updateSize = function (win) {
-      doSizeControls(win, doUpdateSize);
-    };
-    var createUi = function (onChange) {
-      var recalcSize = function () {
-        onChange(function (win) {
-          updateSize(win);
+    var unwrap = function (data) {
+      var unwrapped = merge(data, {
+        source1: data.source1.value,
+        source2: get(data, 'source2').bind(function (source2) {
+          return get(source2, 'value');
+        }).getOr(''),
+        poster: get(data, 'poster').bind(function (poster) {
+          return get(poster, 'value');
+        }).getOr('')
+      });
+      get(data, 'dimensions').each(function (dimensions) {
+        each([
+          'width',
+          'height'
+        ], function (prop) {
+          get(dimensions, prop).each(function (value) {
+            return unwrapped[prop] = value;
+          });
         });
-      };
-      return {
-        type: 'container',
-        label: 'Dimensions',
-        layout: 'flex',
-        align: 'center',
-        spacing: 5,
-        items: [
-          {
-            name: 'width',
-            type: 'textbox',
-            maxLength: 5,
-            size: 5,
-            onchange: recalcSize,
-            ariaLabel: 'Width'
-          },
-          {
-            type: 'label',
-            text: 'x'
-          },
-          {
-            name: 'height',
-            type: 'textbox',
-            maxLength: 5,
-            size: 5,
-            onchange: recalcSize,
-            ariaLabel: 'Height'
-          },
-          {
-            name: 'constrain',
-            type: 'checkbox',
-            checked: true,
-            text: 'Constrain proportions'
-          }
-        ]
-      };
+      });
+      return unwrapped;
     };
-    var SizeManager = {
-      createUi: createUi,
-      syncSize: syncSize,
-      updateSize: updateSize
+    var wrap = function (data) {
+      var wrapped = merge(data, {
+        source1: { value: get(data, 'source1').getOr('') },
+        source2: { value: get(data, 'source2').getOr('') },
+        poster: { value: get(data, 'poster').getOr('') }
+      });
+      each([
+        'width',
+        'height'
+      ], function (prop) {
+        get(data, prop).each(function (value) {
+          var dimensions = wrapped.dimensions || {};
+          dimensions[prop] = value;
+          wrapped.dimensions = dimensions;
+        });
+      });
+      return wrapped;
     };
-
-    var embedChange = global$1.ie && global$1.ie <= 8 ? 'onChange' : 'onInput';
     var handleError = function (editor) {
       return function (error) {
         var errorMessage = error && error.msg ? 'Media embed handler error: ' + error.msg : 'Media embed handler threw unknown error.';
@@ -647,43 +840,34 @@ var media = (function () {
         });
       };
     };
-    var getData = function (editor) {
+    var snippetToData = function (editor, embedSnippet) {
+      return htmlToData(Settings.getScripts(editor), embedSnippet);
+    };
+    var isMediaElement = function (element) {
+      return element.getAttribute('data-mce-object') || element.getAttribute('data-ephox-embed-iri');
+    };
+    var getEditorData = function (editor) {
       var element = editor.selection.getNode();
-      var dataEmbed = element.getAttribute('data-ephox-embed-iri');
-      if (dataEmbed) {
-        return {
-          'source1': dataEmbed,
-          'data-ephox-embed-iri': dataEmbed,
-          'width': Size.getMaxWidth(element),
-          'height': Size.getMaxHeight(element)
-        };
-      }
-      return element.getAttribute('data-mce-object') ? HtmlToData.htmlToData(Settings.getScripts(editor), editor.serializer.serialize(element, { selection: true })) : {};
+      var snippet = isMediaElement(element) ? editor.serializer.serialize(element, { selection: true }) : '';
+      return merge({ embed: snippet }, htmlToData(Settings.getScripts(editor), snippet));
     };
-    var getSource = function (editor) {
-      var elm = editor.selection.getNode();
-      if (elm.getAttribute('data-mce-object') || elm.getAttribute('data-ephox-embed-iri')) {
-        return editor.selection.getContent();
-      }
-    };
-    var addEmbedHtml = function (win, editor) {
+    var addEmbedHtml = function (api, editor) {
       return function (response) {
-        var html = response.html;
-        var embed = win.find('#embed')[0];
-        var data = global$2.extend(HtmlToData.htmlToData(Settings.getScripts(editor), html), { source1: response.url });
-        win.fromJSON(data);
-        if (embed) {
-          embed.value(html);
-          SizeManager.updateSize(win);
+        if (isString(response.url) && response.url.trim().length > 0) {
+          var html = response.html;
+          var snippetData = snippetToData(editor, html);
+          var nuData = __assign({}, snippetData, {
+            source1: response.url,
+            embed: html
+          });
+          api.setData(wrap(nuData));
         }
       };
     };
     var selectPlaceholder = function (editor, beforeObjects) {
-      var i;
-      var y;
       var afterObjects = editor.dom.select('img[data-mce-object]');
-      for (i = 0; i < beforeObjects.length; i++) {
-        for (y = afterObjects.length - 1; y >= 0; y--) {
+      for (var i = 0; i < beforeObjects.length; i++) {
+        for (var y = afterObjects.length - 1; y >= 0; y--) {
           if (beforeObjects[i] === afterObjects[y]) {
             afterObjects.splice(y, 1);
           }
@@ -697,141 +881,147 @@ var media = (function () {
       selectPlaceholder(editor, beforeObjects);
       editor.nodeChanged();
     };
-    var submitForm = function (win, editor) {
-      var data = win.toJSON();
-      data.embed = UpdateHtml.updateHtml(data.embed, data);
-      if (data.embed && Service.isCached(data.source1)) {
-        handleInsert(editor, data.embed);
+    var submitForm = function (prevData, newData, editor) {
+      newData.embed = UpdateHtml.updateHtml(newData.embed, newData);
+      if (newData.embed && (prevData.source1 === newData.source1 || Service.isCached(newData.source1))) {
+        handleInsert(editor, newData.embed);
       } else {
-        Service.getEmbedHtml(editor, data).then(function (response) {
+        Service.getEmbedHtml(editor, newData).then(function (response) {
           handleInsert(editor, response.html);
         }).catch(handleError(editor));
       }
     };
-    var populateMeta = function (win, meta) {
-      global$2.each(meta, function (value, key) {
-        win.find('#' + key).value(value);
-      });
-    };
     var showDialog = function (editor) {
-      var win;
-      var data;
-      var generalFormItems = [{
-          name: 'source1',
-          type: 'filepicker',
-          filetype: 'media',
-          size: 40,
-          autofocus: true,
-          label: 'Source',
-          onpaste: function () {
-            setTimeout(function () {
-              Service.getEmbedHtml(editor, win.toJSON()).then(addEmbedHtml(win, editor)).catch(handleError(editor));
-            }, 1);
-          },
-          onchange: function (e) {
-            Service.getEmbedHtml(editor, win.toJSON()).then(addEmbedHtml(win, editor)).catch(handleError(editor));
-            populateMeta(win, e.meta);
-          },
-          onbeforecall: function (e) {
-            e.meta = win.toJSON();
-          }
-        }];
-      var advancedFormItems = [];
-      var reserialise = function (update) {
-        update(win);
-        data = win.toJSON();
-        win.find('#embed').value(UpdateHtml.updateHtml(data.embed, data));
+      var editorData = getEditorData(editor);
+      var currentData = Cell(editorData);
+      var initialData = wrap(editorData);
+      var getSourceData = function (api) {
+        return unwrap(api.getData());
       };
+      var handleSource1 = function (prevData, api) {
+        var serviceData = getSourceData(api);
+        if (prevData.source1 !== serviceData.source1) {
+          addEmbedHtml(win, editor)({
+            url: serviceData.source1,
+            html: ''
+          });
+          Service.getEmbedHtml(editor, serviceData).then(addEmbedHtml(win, editor)).catch(handleError(editor));
+        }
+      };
+      var handleEmbed = function (api) {
+        var data = unwrap(api.getData());
+        var dataFromEmbed = snippetToData(editor, data.embed);
+        api.setData(wrap(dataFromEmbed));
+      };
+      var mediaInput = [{
+          name: 'source1',
+          type: 'urlinput',
+          filetype: 'media',
+          label: 'Source'
+        }];
+      var sizeInput = !Settings.hasDimensions(editor) ? [] : [{
+          type: 'sizeinput',
+          name: 'dimensions',
+          label: 'Constrain proportions',
+          constrain: true
+        }];
+      var generalTab = {
+        title: 'General',
+        name: 'general',
+        items: flatten([
+          mediaInput,
+          sizeInput
+        ])
+      };
+      var embedTextarea = {
+        type: 'textarea',
+        name: 'embed',
+        label: 'Paste your embed code below:'
+      };
+      var embedTab = {
+        title: 'Embed',
+        items: [embedTextarea]
+      };
+      var advancedFormItems = [];
       if (Settings.hasAltSource(editor)) {
         advancedFormItems.push({
           name: 'source2',
-          type: 'filepicker',
+          type: 'urlinput',
           filetype: 'media',
-          size: 40,
-          label: 'Alternative source'
+          label: 'Alternative source URL'
         });
       }
       if (Settings.hasPoster(editor)) {
         advancedFormItems.push({
           name: 'poster',
-          type: 'filepicker',
+          type: 'urlinput',
           filetype: 'image',
-          size: 40,
-          label: 'Poster'
+          label: 'Media poster (Image URL)'
         });
       }
-      if (Settings.hasDimensions(editor)) {
-        var control = SizeManager.createUi(reserialise);
-        generalFormItems.push(control);
-      }
-      data = getData(editor);
-      var embedTextBox = {
-        id: 'mcemediasource',
-        type: 'textbox',
-        flex: 1,
-        name: 'embed',
-        value: getSource(editor),
-        multiline: true,
-        rows: 5,
-        label: 'Source'
+      var advancedTab = {
+        title: 'Advanced',
+        name: 'advanced',
+        items: advancedFormItems
       };
-      var updateValueOnChange = function () {
-        data = global$2.extend({}, HtmlToData.htmlToData(Settings.getScripts(editor), this.value()));
-        this.parent().parent().fromJSON(data);
-      };
-      embedTextBox[embedChange] = updateValueOnChange;
-      var body = [
-        {
-          title: 'General',
-          type: 'form',
-          items: generalFormItems
-        },
-        {
-          title: 'Embed',
-          type: 'container',
-          layout: 'flex',
-          direction: 'column',
-          align: 'stretch',
-          padding: 10,
-          spacing: 10,
-          items: [
-            {
-              type: 'label',
-              text: 'Paste your embed code below:',
-              forId: 'mcemediasource'
-            },
-            embedTextBox
-          ]
-        }
+      var tabs = [
+        generalTab,
+        embedTab
       ];
       if (advancedFormItems.length > 0) {
-        body.push({
-          title: 'Advanced',
-          type: 'form',
-          items: advancedFormItems
-        });
+        tabs.push(advancedTab);
       }
-      win = editor.windowManager.open({
-        title: 'Insert/edit media',
-        data: data,
-        bodyType: 'tabpanel',
+      var body = {
+        type: 'tabpanel',
+        tabs: tabs
+      };
+      var win = editor.windowManager.open({
+        title: 'Insert/Edit Media',
+        size: 'normal',
         body: body,
-        onSubmit: function () {
-          SizeManager.updateSize(win);
-          submitForm(win, editor);
-        }
+        buttons: [
+          {
+            type: 'cancel',
+            name: 'cancel',
+            text: 'Cancel'
+          },
+          {
+            type: 'submit',
+            name: 'save',
+            text: 'Save',
+            primary: true
+          }
+        ],
+        onSubmit: function (api) {
+          var serviceData = getSourceData(api);
+          submitForm(currentData.get(), serviceData, editor);
+          api.close();
+        },
+        onChange: function (api, detail) {
+          switch (detail.name) {
+          case 'source1':
+            handleSource1(currentData.get(), api);
+            break;
+          case 'embed':
+            handleEmbed(api);
+            break;
+          default:
+            break;
+          }
+          currentData.set(getSourceData(api));
+        },
+        initialData: initialData
       });
-      SizeManager.syncSize(win);
     };
     var Dialog = { showDialog: showDialog };
 
-    var get = function (editor) {
+    var get$1 = function (editor) {
       var showDialog = function () {
         Dialog.showDialog(editor);
       };
       return { showDialog: showDialog };
     };
-    var Api = { get: get };
+    var Api = { get: get$1 };
 
     var register = function (editor) {
       var showDialog = function () {
@@ -841,18 +1031,19 @@ var media = (function () {
     };
     var Commands = { register: register };
 
-    var global$8 = tinymce.util.Tools.resolve('tinymce.html.Node');
+    var global$7 = tinymce.util.Tools.resolve('tinymce.html.Node');
+
+    var global$8 = tinymce.util.Tools.resolve('tinymce.Env');
 
     var sanitize = function (editor, html) {
       if (Settings.shouldFilterHtml(editor) === false) {
         return html;
       }
-      var writer = global$6();
+      var writer = global$5();
       var blocked;
-      global$3({
+      global$2({
         validate: false,
         allow_conditional_comments: false,
-        special: 'script,noscript',
         comment: function (text) {
           writer.comment(text);
         },
@@ -884,7 +1075,7 @@ var media = (function () {
           }
           writer.end(name);
         }
-      }, global$7({})).parse(html);
+      }, global$6({})).parse(html);
       return writer.getContent();
     };
     var Sanitize = { sanitize: sanitize };
@@ -892,14 +1083,14 @@ var media = (function () {
     var createPlaceholderNode = function (editor, node) {
       var placeHolder;
       var name = node.name;
-      placeHolder = new global$8('img', 1);
+      placeHolder = new global$7('img', 1);
       placeHolder.shortEnded = true;
       retainAttributesAndInnerHtml(editor, node, placeHolder);
       placeHolder.attr({
         'width': node.attr('width') || '300',
         'height': node.attr('height') || (name === 'audio' ? '30' : '150'),
         'style': node.attr('style'),
-        'src': global$1.transparentSrc,
+        'src': global$8.transparentSrc,
         'data-mce-object': name,
         'class': 'mce-object mce-object-' + name
       });
@@ -910,7 +1101,7 @@ var media = (function () {
       var previewNode;
       var shimNode;
       var name = node.name;
-      previewWrapper = new global$8('span', 1);
+      previewWrapper = new global$7('span', 1);
       previewWrapper.attr({
         'contentEditable': 'false',
         'style': node.attr('style'),
@@ -918,7 +1109,7 @@ var media = (function () {
         'class': 'mce-preview-object mce-object-' + name
       });
       retainAttributesAndInnerHtml(editor, node, previewWrapper);
-      previewNode = new global$8(name, 1);
+      previewNode = new global$7(name, 1);
       previewNode.attr({
         src: node.attr('src'),
         allowfullscreen: node.attr('allowfullscreen'),
@@ -928,7 +1119,7 @@ var media = (function () {
         height: node.attr('height'),
         frameborder: '0'
       });
-      shimNode = new global$8('span', 1);
+      shimNode = new global$7('span', 1);
       shimNode.attr('class', 'mce-shim');
       previewWrapper.append(previewNode);
       previewWrapper.append(shimNode);
@@ -958,9 +1149,13 @@ var media = (function () {
         targetNode.firstChild = null;
       }
     };
-    var isWithinEphoxEmbed = function (node) {
+    var isPageEmbedWrapper = function (node) {
+      var nodeClass = node.attr('class');
+      return nodeClass && /\btiny-pageembed\b/.test(nodeClass);
+    };
+    var isWithinEmbedWrapper = function (node) {
       while (node = node.parent) {
-        if (node.attr('data-ephox-embed-iri')) {
+        if (node.attr('data-ephox-embed-iri') || isPageEmbedWrapper(node)) {
           return true;
         }
       }
@@ -980,7 +1175,7 @@ var media = (function () {
             continue;
           }
           if (node.name === 'script') {
-            videoScript = VideoScript.getVideoScriptMatch(Settings.getScripts(editor), node.attr('src'));
+            videoScript = getVideoScriptMatch(Settings.getScripts(editor), node.attr('src'));
             if (!videoScript) {
               continue;
             }
@@ -993,12 +1188,12 @@ var media = (function () {
               node.attr('height', videoScript.height.toString());
             }
           }
-          if (node.name === 'iframe' && Settings.hasLiveEmbeds(editor) && global$1.ceFalse) {
-            if (!isWithinEphoxEmbed(node)) {
+          if (node.name === 'iframe' && Settings.hasLiveEmbeds(editor) && global$8.ceFalse) {
+            if (!isWithinEmbedWrapper(node)) {
               node.replace(createPreviewIframeNode(editor, node));
             }
           } else {
-            if (!isWithinEphoxEmbed(node)) {
+            if (!isWithinEmbedWrapper(node)) {
               node.replace(createPlaceholderNode(editor, node));
             }
           }
@@ -1014,11 +1209,11 @@ var media = (function () {
     var setup = function (editor) {
       editor.on('preInit', function () {
         var specialElements = editor.schema.getSpecialElements();
-        global$2.each('video audio iframe object'.split(' '), function (name) {
+        global$1.each('video audio iframe object'.split(' '), function (name) {
           specialElements[name] = new RegExp('</' + name + '[^>]*>', 'gi');
         });
         var boolAttrs = editor.schema.getBoolAttrs();
-        global$2.each('webkitallowfullscreen mozallowfullscreen allowfullscreen'.split(' '), function (name) {
+        global$1.each('webkitallowfullscreen mozallowfullscreen allowfullscreen'.split(' '), function (name) {
           boolAttrs[name] = {};
         });
         editor.parser.addNodeFilter('iframe,video,audio,object,embed,script', Nodes.placeHolderConverter(editor));
@@ -1038,7 +1233,7 @@ var media = (function () {
               continue;
             }
             realElmName = node.attr(name);
-            realElm = new global$8(realElmName, 1);
+            realElm = new global$7(realElmName, 1);
             if (realElmName !== 'audio' && realElmName !== 'script') {
               className = node.attr('class');
               if (className && className.indexOf('mce-preview-object') !== -1) {
@@ -1067,7 +1262,7 @@ var media = (function () {
             }
             innerHtml = node.attr('data-mce-html');
             if (innerHtml) {
-              innerNode = new global$8('#text', 3);
+              innerNode = new global$7('#text', 3);
               innerNode.raw = true;
               innerNode.value = Sanitize.sanitize(editor, unescape(innerHtml));
               realElm.append(innerNode);
@@ -1076,10 +1271,10 @@ var media = (function () {
           }
         });
       });
-      editor.on('setContent', function () {
+      editor.on('SetContent', function () {
         editor.$('span.mce-preview-object').each(function (index, elm) {
           var $elm = editor.$(elm);
-          if ($elm.find('span.mce-shim', elm).length === 0) {
+          if ($elm.find('span.mce-shim').length === 0) {
             $elm.append('<span class="mce-shim"></span>');
           }
         });
@@ -1112,7 +1307,7 @@ var media = (function () {
           e.preventDefault();
         }
       });
-      editor.on('objectResized', function (e) {
+      editor.on('ObjectResized', function (e) {
         var target = e.target;
         var html;
         if (target.getAttribute('data-mce-object')) {
@@ -1120,8 +1315,8 @@ var media = (function () {
           if (html) {
             html = unescape(html);
             target.setAttribute('data-mce-html', escape(UpdateHtml.updateHtml(html, {
-              width: e.width,
-              height: e.height
+              width: String(e.width),
+              height: String(e.height)
             })));
           }
         }
@@ -1129,38 +1324,45 @@ var media = (function () {
     };
     var Selection = { setup: setup$2 };
 
+    var stateSelectorAdapter = function (editor, selector) {
+      return function (buttonApi) {
+        return editor.selection.selectorChangedWithUnbind(selector.join(','), buttonApi.setActive).unbind;
+      };
+    };
     var register$1 = function (editor) {
-      editor.addButton('media', {
+      editor.ui.registry.addToggleButton('media', {
         tooltip: 'Insert/edit media',
-        cmd: 'mceMedia',
-        stateSelector: [
+        icon: 'embed',
+        onAction: function () {
+          editor.execCommand('mceMedia');
+        },
+        onSetup: stateSelectorAdapter(editor, [
           'img[data-mce-object]',
           'span[data-mce-object]',
           'div[data-ephox-embed-iri]'
-        ]
+        ])
       });
-      editor.addMenuItem('media', {
-        icon: 'media',
-        text: 'Media',
-        cmd: 'mceMedia',
-        context: 'insert',
-        prependToContext: true
+      editor.ui.registry.addMenuItem('media', {
+        icon: 'embed',
+        text: 'Media...',
+        onAction: function () {
+          editor.execCommand('mceMedia');
+        }
       });
     };
     var Buttons = { register: register$1 };
 
-    global.add('media', function (editor) {
-      Commands.register(editor);
-      Buttons.register(editor);
-      ResolveName.setup(editor);
-      FilterContent.setup(editor);
-      Selection.setup(editor);
-      return Api.get(editor);
-    });
     function Plugin () {
+      global.add('media', function (editor) {
+        Commands.register(editor);
+        Buttons.register(editor);
+        ResolveName.setup(editor);
+        FilterContent.setup(editor);
+        Selection.setup(editor);
+        return Api.get(editor);
+      });
     }
 
-    return Plugin;
+    Plugin();
 
 }());
-})();

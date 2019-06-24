@@ -1,5 +1,20 @@
-@import '~@frontkom/gutenberg-js/build/css/block-library/style.css';
-@import '~@frontkom/gutenberg-js/build/css/style.css';
+// @import '~@frontkom/gutenberg-js/build/css/block-library/style.css';
+// @import '~@frontkom/gutenberg-js/build/css/style.css';
+
+// Gutenberg imports
+@import '~@wordpress/components/build-style/style.css';
+@import '~@wordpress/block-editor/build-style/style.css';
+@import '~@wordpress/nux/build-style/style.css';
+@import '~@wordpress/editor/build-style/style.css';
+// §@import '~@wordpress/editor/build-style/editor-styles.css';
+@import '~@wordpress/block-library/build-style/style.css';
+@import '~@wordpress/block-library/build-style/editor.css';
+@import '~@wordpress/block-library/build-style/theme.css';
+@import '~@wordpress/edit-post/build-style/style.css';
+@import '~@wordpress/edit-widgets/build-style/style.css';
+@import '~@wordpress/format-library/build-style/style.css';
+@import '~@wordpress/list-reusable-blocks/build-style/style.css';
+
 @import './wordpress-overrides.scss';
 
 .laraberg__editor {
@@ -9,6 +24,15 @@
   box-sizing: border-box;
   min-height: 400px;
   height: auto;
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  *:focus {
+    outline: none;
+  }
 
   .components-notice-list {
     position: sticky;
@@ -18,10 +42,53 @@
 
   .edit-post-header {
     z-index: 100;
+    box-sizing: border-box;
+    position: sticky;
   }
   
   .edit-post-sidebar {
     position: absolute;
+    top: 56px;
+    min-height: calc(400px - 56px);
+
+    .edit-post-sidebar__panel-tabs {
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  .editor-media-placeholder__media-library-button {
+    margin-bottom: .5rem;
+  }
+
+  .components-placeholder {
+    width: auto;
+  }
+
+  .screen-reader-text, .screen-reader-text span, .ui-helper-hidden-accessible {
+    border: 0;
+    clip: rect(1px,1px,1px,1px);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal!important;
+  }
+
+  input[type=checkbox], input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=radio], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea {
+    border: 1px solid #ddd;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+    background-color: #fff;
+    color: #32373c;
+    outline: 0;
+    transition: 50ms border-color ease-in-out;
   }
 
   .editor-inserter__manage-reusable-blocks {

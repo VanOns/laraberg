@@ -1,5 +1,12 @@
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.0.11 (2019-07-04)
+ */
 (function () {
-var autolink = (function () {
     'use strict';
 
     var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
@@ -168,13 +175,12 @@ var autolink = (function () {
     };
     var Keys = { setup: setup };
 
-    global.add('autolink', function (editor) {
-      Keys.setup(editor);
-    });
     function Plugin () {
+      global.add('autolink', function (editor) {
+        Keys.setup(editor);
+      });
     }
 
-    return Plugin;
+    Plugin();
 
 }());
-})();

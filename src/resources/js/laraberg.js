@@ -1,11 +1,10 @@
-import 'babel-polyfill'
+// import 'babel-polyfill'
 
 import './../scss/laraberg.scss'
 
-// Gutenberg imports
-import './gutenberg/settings'
-import getContent from './lib/get-content'
+import './gutenberg/imports'
 import init from './gutenberg/init'
+import getContent from './lib/get-content'
 import { registerBlock, registerCategory } from './lib/custom-blocks'
 
 const Laraberg = {

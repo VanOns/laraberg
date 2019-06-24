@@ -1,5 +1,12 @@
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.0.11 (2019-07-04)
+ */
 (function () {
-var anchor = (function () {
     'use strict';
 
     var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
@@ -10,7 +17,7 @@ var anchor = (function () {
     var getId = function (editor) {
       var selectedNode = editor.selection.getNode();
       var isAnchor = selectedNode.tagName === 'A' && editor.dom.getAttrib(selectedNode, 'href') === '';
-      return isAnchor ? selectedNode.id || selectedNode.name : '';
+      return isAnchor ? selectedNode.getAttribute('id') || selectedNode.getAttribute('name') : '';
     };
     var insert = function (editor, id) {
       var selectedNode = editor.selection.getNode();
@@ -44,17 +51,33 @@ var anchor = (function () {
       var currentId = Anchor.getId(editor);
       editor.windowManager.open({
         title: 'Anchor',
+        size: 'normal',
         body: {
-          type: 'textbox',
-          name: 'id',
-          size: 40,
-          label: 'Id',
-          value: currentId
+          type: 'panel',
+          items: [{
+              name: 'id',
+              type: 'input',
+              label: 'ID',
+              placeholder: 'example'
+            }]
         },
-        onsubmit: function (e) {
-          var newId = e.data.id;
-          if (insertAnchor(editor, newId)) {
-            e.preventDefault();
+        buttons: [
+          {
+            type: 'cancel',
+            name: 'cancel',
+            text: 'Cancel'
+          },
+          {
+            type: 'submit',
+            name: 'save',
+            text: 'Save',
+            primary: true
+          }
+        ],
+        initialData: { id: currentId },
+        onSubmit: function (api) {
+          if (!insertAnchor(editor, api.getData().id)) {
+            api.close();
           }
         }
       });
@@ -89,30 +112,34 @@ var anchor = (function () {
     var FilterContent = { setup: setup };
 
     var register$1 = function (editor) {
-      editor.addButton('anchor', {
-        icon: 'anchor',
+      editor.ui.registry.addToggleButton('anchor', {
+        icon: 'bookmark',
         tooltip: 'Anchor',
-        cmd: 'mceAnchor',
-        stateSelector: 'a:not([href])'
+        onAction: function () {
+          return editor.execCommand('mceAnchor');
+        },
+        onSetup: function (buttonApi) {
+          return editor.selection.selectorChangedWithUnbind('a:not([href])', buttonApi.setActive).unbind;
+        }
       });
-      editor.addMenuItem('anchor', {
-        icon: 'anchor',
-        text: 'Anchor',
-        context: 'insert',
-        cmd: 'mceAnchor'
+      editor.ui.registry.addMenuItem('anchor', {
+        icon: 'bookmark',
+        text: 'Anchor...',
+        onAction: function () {
+          return editor.execCommand('mceAnchor');
+        }
       });
     };
     var Buttons = { register: register$1 };
 
-    global.add('anchor', function (editor) {
-      FilterContent.setup(editor);
-      Commands.register(editor);
-      Buttons.register(editor);
-    });
     function Plugin () {
+      global.add('anchor', function (editor) {
+        FilterContent.setup(editor);
+        Commands.register(editor);
+        Buttons.register(editor);
+      });
     }
 
-    return Plugin;
+    Plugin();
 
 }());
-})();

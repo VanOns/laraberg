@@ -1,5 +1,12 @@
-(function () {
-var tabfocus = (function () {
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.0.11 (2019-07-04)
+ */
+(function (domGlobals) {
     'use strict';
 
     var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
@@ -90,7 +97,7 @@ var tabfocus = (function () {
           } else {
             global$4.setTimeout(function () {
               if (!global$3.webkit) {
-                window.focus();
+                domGlobals.window.focus();
               }
               el.focus();
             }, 10);
@@ -112,13 +119,12 @@ var tabfocus = (function () {
     };
     var Keyboard = { setup: setup };
 
-    global.add('tabfocus', function (editor) {
-      Keyboard.setup(editor);
-    });
     function Plugin () {
+      global.add('tabfocus', function (editor) {
+        Keyboard.setup(editor);
+      });
     }
 
-    return Plugin;
+    Plugin();
 
-}());
-})();
+}(window));
