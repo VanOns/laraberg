@@ -12,6 +12,13 @@ class Block extends Model
 {
     protected $table = 'lb_blocks';
     protected $appends = ['content', 'title'];
+    protected $hidden = [
+        'created_at', 
+        'raw_content',
+        'raw_title',
+        'rendered_content',
+        'updated_at'
+    ];
 
     // TODO: Only here to make migration run, should be cleaned up on release
     protected $casts = ['old_title' => 'array'];
@@ -61,7 +68,9 @@ class Block extends Model
     {
         return [
             'raw' => $this->raw_content,
-            'rendered' => $this->rendered_content
+            'rendered' => $this->rendered_content,
+            'protected' => false,
+            'block_version' => 1
         ];
     }
 

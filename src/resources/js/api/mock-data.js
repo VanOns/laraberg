@@ -34,7 +34,7 @@ export const page = {
   theme_style: true,
   type: 'page',
   link: `${window.location.origin}/preview`,
-  categories: [ ],
+  categories: [],
   featured_media: 0,
   permalink_template: `${window.location.origin}/preview`,
   preview_link: `${window.location.origin}/preview`,
@@ -52,13 +52,24 @@ export const page = {
 
 export const themes = [{
   theme_supports: {
-    formats: ['standard', 'aside', 'image', 'video', 'quote', 'link', 'gallery', 'audio'],
-    'post-thumbnails': true
+    formats: [
+      'standard',
+      'aside',
+      'image',
+      'video',
+      'quote',
+      'link',
+      'gallery',
+      'audio'
+    ],
+    'post-thumbnails': true,
+    'responsive-embeds': true
   }
 }]
 
 export const types = {
   page: {
+    id: 1,
     labels: {},
     name: 'Page',
     rest_base: 'pages',
@@ -67,31 +78,50 @@ export const types = {
       author: false,
       comments: false, // hide discussion-panel
       'custom-fields': true,
-      document: true, // * hide document tab
       editor: true,
-      'media-library': false, // * hide media library
+      excerpt: false,
+      discussion: false,
       'page-attributes': false, // hide page-attributes panel
-      posts: false, // * hide posts-panel
       revisions: false,
-      'template-settings': false, // * hide template-settings panel
       thumbnail: false, // featured-image panel
-      title: false, // show title on editor
-      extras: false
+      title: false // show title on editor
     },
+    taxonomies: [],
     viewable: false,
-    saveable: true,
-    publishable: true,
+    saveable: false,
+    publishable: false,
     autosaveable: false
   },
   block: {
+    capabilities: {},
     name: 'Blocks',
     rest_base: 'blocks',
     slug: 'wp_block',
     description: '',
+    hierarchical: false,
     supports: {
       title: true,
       editor: true
     },
     viewable: true
+  }
+}
+
+export const user = {
+  id: 1,
+  name: 'Laraberg',
+  url: '',
+  description: '',
+  link: 'https://demo.wp-api.org/author/laraberg/',
+  slug: 'laraberg',
+  avatar_urls: {
+    24: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=24&d=mm&r=g',
+    48: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=48&d=mm&r=g',
+    96: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=96&d=mm&r=g'
+  },
+  meta: [],
+  _links: {
+    self: [],
+    collection: []
   }
 }

@@ -1,5 +1,4 @@
 import * as MockData from './mock-data'
-import types from './data/types'
 import axios from 'axios'
 import { editorSettings } from '../gutenberg/settings'
 import * as Notices from '../lib/notices'
@@ -14,6 +13,11 @@ let searchCb
  * the 'run' function gets executed.
  */
 const requests = {
+  getAutosaves: {
+    method: 'GET',
+    regex: /\/wp\/v2\/(.*)\/autosaves\?(.*)/g,
+    run: getAutosaves
+  },
   getBlock: {
     method: 'GET',
     regex: /\/wp\/v2\/blocks\/(\d*)/g,
@@ -26,7 +30,7 @@ const requests = {
   },
   postBlocks: {
     method: 'POST',
-    regex: /\/wp\/v2\/blocks.*/g,
+    regex: /\/wp\/v2\/blocks($|[?].*)/g,
     run: postBlocks
   },
   putBlock: {
@@ -56,7 +60,7 @@ const requests = {
   },
   getPage: {
     method: 'GET',
-    regex: /\/wp\/v2\/pages\/(\d*)/g,
+    regex: /\/wp\/v2\/pages\/(\d*)($|[?].*)/g,
     run: getPage
   },
   putPage: {
@@ -96,14 +100,23 @@ const requests = {
   },
   getTypes: {
     method: 'GET',
-    regex: /\/wp\/v2\/types\?(.*)/g,
+    regex: /\/wp\/v2\/types($|[?].*)/g,
     run: getTypes
+  },
+  getUser: {
+    method: 'GET',
+    regex: /\/wp\/v2\/users\/me($|[?].*)/g,
+    run: getUser
   },
   getUsers: {
     method: 'GET',
-    regex: /\/wp\/v2\/users\/(.*)/g,
+    regex: /\/wp\/v2\/users\/\?(.*)/g,
     run: getUsers
   }
+}
+
+async function getAutosaves () {
+  return []
 }
 
 /**
@@ -112,16 +125,30 @@ const requests = {
  * @param {Array} matches
  */
 async function getBlock (options, matches) {
-  let id = matches[1]
-  let response = await axios.get(`${routePrefix}/blocks/${id}`)
-  return response.data
+  // Because of a bug an OPTIONS request to specific resources (by ID) are sent as GET requests
+  // those requests contain a parse property that is set to false
+  if (options.parse === false) {
+    return {
+      headers: {
+        get: value => {
+          if (value === 'allow') {
+            return ['GET', 'POST', 'PUT', 'DELETE']
+          }
+        }
+      }
+    }
+  } else {
+    const id = matches[1]
+    const response = await axios.get(`${routePrefix}/blocks/${id}`)
+    return response.data
+  }
 }
 
 /**
  * Get all reusable blocks
  */
 async function getBlocks () {
-  let response = await axios.get(`${routePrefix}/blocks`)
+  const response = await axios.get(`${routePrefix}/blocks`)
   return response.data
 }
 
@@ -130,7 +157,7 @@ async function getBlocks () {
  * @param {Object} options
  */
 async function postBlocks (options) {
-  let response = await axios.post(`${routePrefix}/blocks`, options.data)
+  const response = await axios.post(`${routePrefix}/blocks`, options.data)
   return response.data
 }
 
@@ -140,8 +167,8 @@ async function postBlocks (options) {
  * @param {Array} matches
  */
 async function putBlock (options, matches) {
-  let id = matches[1]
-  let response = await axios.put(`${routePrefix}/blocks/${id}`, options.data)
+  const id = matches[1]
+  const response = await axios.put(`${routePrefix}/blocks/${id}`, options.data)
   return response.data
 }
 
@@ -151,8 +178,8 @@ async function putBlock (options, matches) {
  * @param {Array} matches
  */
 async function deleteBlock (options, matches) {
-  let id = matches[1]
-  let response = await axios.delete(`${routePrefix}/blocks/${id}`)
+  const id = matches[1]
+  const response = await axios.delete(`${routePrefix}/blocks/${id}`)
   return response.data
 }
 
@@ -162,7 +189,15 @@ async function deleteBlock (options, matches) {
  * @param {Array} matches
  */
 async function optionsBlocks (options, matches) {
-  return []
+  return {
+    headers: {
+      get: value => {
+        if (value === 'allow') {
+          return ['GET', 'POST', 'PUT', 'DELETE']
+        }
+      }
+    }
+  }
 }
 
 /**
@@ -171,7 +206,7 @@ async function optionsBlocks (options, matches) {
  * @param {Array} matches
  */
 async function getEmbed (options, matches) {
-  let response = await axios.get(`${routePrefix}/oembed?${matches[1]}`)
+  const response = await axios.get(`${routePrefix}/oembed?${matches[1]}`)
   return response.data
 }
 
@@ -186,7 +221,7 @@ async function optionsMedia () {
  * Get page from mockdata and target value
  */
 async function getPage () {
-  let content = document.getElementById(editorSettings.target).value || ''
+  const content = document.getElementById(editorSettings.target).value || ''
   return {
     ...MockData.page,
     content: {
@@ -246,8 +281,8 @@ export async function getSearch (options, matches) {
 /**
  * Mock GET taxonomies request
  */
-async function getTaxonomies (optons, matches) {
-  return 'ok'
+async function getTaxonomies (options, matches) {
+  return []
 }
 
 /**
@@ -275,14 +310,23 @@ async function getTypePage () {
  * Mock post types request
  */
 async function getTypes () {
-  return types
+  return MockData.types
+}
+
+/**
+ * Mock user request
+ */
+async function getUser () {
+  return MockData.user
 }
 
 /**
  * Mock users request
  */
-async function getUsers () {
-  return 'ok'
+function getUsers () {
+  return new Promise(resolve => {
+    resolve([MockData.user])
+  })
 }
 
 /**
@@ -293,13 +337,15 @@ async function getUsers () {
 function matchPath (options) {
   let promise
   Object.keys(requests).forEach((key) => {
-    let request = requests[key]
+    const request = requests[key]
     // Reset lastIndex so regex starts matching from the first character
     request.regex.lastIndex = 0
-    let matches = request.regex.exec(options.path)
+    const matches = request.regex.exec(options.path)
+
+    if (options.headers && options.headers['X-HTTP-Method-Override']) options.method = options.headers['X-HTTP-Method-Override']
+
     if ((options.method === request.method || (!options.method && request.method === 'GET')) && matches && matches.length > 0) {
       promise = request.run(options, matches)
-        .catch(() => Notices.error('Could not complete request.'))
     }
   })
 
@@ -314,21 +360,19 @@ function matchPath (options) {
           status: 404
         }
       }))
-    }).catch(error => {
-      console.log(error)
-      Notices.error(`${error.message} ${error.data.data.path}`)
     })
   }
+
   return promise
 }
 
 export default function apiFetch (options) {
-  // console.log('apiFetch - options', options)
   const result = matchPath(options)
-  result.then(res => {
-    // console.log('apiFetch - result', res)
+  return result.then(res => {
+    return res
+  }).catch(error => {
+    Notices.error(`${error.message} - ${error.data.data.path}`)
   })
-  return result
 }
 
 export function configureAPI (options) {

@@ -1,9 +1,10 @@
-import { configureAPI } from '../api/api-fetch'
-import configureEditor, { clearSubmitFromButtons } from '../lib/configure-editor'
 import { editorSettings, overridePost } from './settings'
+import { configureAPI } from '../api/api-fetch'
+import configureEditor from '../lib/configure-editor'
 import { elementReady } from '../lib/element-ready'
 
-const { data, domReady, editPost } = window.wp
+const { blocks, data, domReady, editPost } = window.wp
+const { unregisterBlockType, registerBlockType, getBlockType } = blocks
 
 /**
  * Initialize the Gutenberg editor
@@ -23,6 +24,7 @@ export default function init (target, options = {}) {
       const larabergEditor = createEditorElement(target)
       try {
         resolve(editPost.initializeEditor(larabergEditor.id, 'page', 1, editorSettings, overridePost))
+        fixReusableBlocks()
       } catch (error) {
         console.error(error)
       }
@@ -49,4 +51,15 @@ function createEditorElement (target) {
   window.Laraberg.editor = editor
 
   return editor
+}
+
+function fixReusableBlocks () {
+  const coreBlock = getBlockType('core/block')
+  unregisterBlockType('core/block')
+  coreBlock.attributes = {
+    ref: {
+      type: 'number'
+    }
+  }
+  registerBlockType('core/block', coreBlock)
 }

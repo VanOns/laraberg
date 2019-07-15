@@ -20,30 +20,11 @@
       "post_tag"
     ],
     "viewable": "true",
-    "rest_base": "posts",
-    "_links": {
-      "collection": [
-        {
-          "href": "https://demo.wp-api.org/wp-json/wp/v2/types"
-        }
-      ],
-      "wp:items": [
-        {
-          "href": "https://demo.wp-api.org/wp-json/wp/v2/posts"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
+    "rest_base": "posts"
   },
   "page": {
     "description": "",
-    "hierarchical": true,
+    "hierarchical": false,
     "name": "Pages",
     "slug": "page",
     "supports": {
@@ -59,27 +40,8 @@
       "title": false
     },
     "taxonomies": [],
-    "viewable": "true",
-    "rest_base": "pages",
-    "_links": {
-      "collection": [
-        {
-          "href": "https://demo.wp-api.org/wp-json/wp/v2/types"
-        }
-      ],
-      "wp:items": [
-        {
-          "href": "https://demo.wp-api.org/wp-json/wp/v2/pages"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
+    "viewable": false,
+    "rest_base": "pages"
   },
   "attachment": {
     "description": "",
@@ -87,52 +49,34 @@
     "name": "Media",
     "slug": "attachment",
     "taxonomies": [],
-    "rest_base": "media",
-    "_links": {
-      "collection": [
-        {
-          "href": "https://demo.wp-api.org/wp-json/wp/v2/types"
-        }
-      ],
-      "wp:items": [
-        {
-          "href": "https://demo.wp-api.org/wp-json/wp/v2/media"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
+    "rest_base": "media"
   },
   "wp_block": {
     "description": "",
+    "capabilities": {},
     "hierarchical": false,
     "name": "Blocks",
     "slug": "wp_block",
     "taxonomies": [],
     "rest_base": "blocks",
-    "_links": {
-      "collection": [
-        {
-          "href": "https://demo.wp-api.org/wp-json/wp/v2/types"
-        }
-      ],
-      "wp:items": [
-        {
-          "href": "https://demo.wp-api.org/wp-json/wp/v2/blocks"
-        }
-      ],
-      "curies": [
-        {
-          "name": "wp",
-          "href": "https://api.w.org/{rel}",
-          "templated": true
-        }
-      ]
-    }
+    "supports": {
+      "title": true,
+      "editor": true
+    },
+    "viewable": true
+  },
+  "block": {
+    "description": "",
+    "capabilities": {},
+    "hierarchical": false,
+    "name": "Blocks",
+    "slug": "wp_block",
+    "taxonomies": [],
+    "rest_base": "blocks",
+    "supports": {
+      "title": true,
+      "editor": true
+    },
+    "viewable": true
   }
 }

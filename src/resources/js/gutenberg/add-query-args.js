@@ -13,9 +13,19 @@ import { stringify } from 'querystring'
 * @return {String}       Updated URL
 */
 export default function addQueryArgs (url, args) {
-  const queryStringIndex = url.indexOf('?')
-  const query = queryStringIndex !== -1 ? URL(url.substr(queryStringIndex + 1)) : {}
-  const baseUrl = queryStringIndex !== -1 ? url.substr(0, queryStringIndex) : url
+  const qs = Object.keys(args).map(key => {
+    if (key === '_locale' || key === 'per_page') {
+      return ''
+    } else {
+      return `${key}=${encodeURIComponent(args[key])}`
+    }
+  })
 
-  return baseUrl + '?' + stringify({ ...query, ...args })
+  // if (url === 'edit.php') {
+  //   // 'Manage All Reusable Blocks'
+  //   if (args.post_type && args.post_type === 'wp_block') {
+  //     return `${drupalSettings.path.baseUrl}admin/content/reusable-blocks`
+  //   }
+  // }
+  return url + (qs ? `?${qs.join('&')}` : '')
 }

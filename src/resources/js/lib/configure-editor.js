@@ -28,7 +28,7 @@ export default function configureEditor (options) {
  * Set all editor button types to 'button' to prevent submitting the form
  */
 export function clearSubmitFromButtons () {
-  let buttons = document.getElementById('laraberg__editor').getElementsByTagName('button')
+  const buttons = document.getElementById('laraberg__editor').getElementsByTagName('button')
   if (buttons.length > 0) {
     Array.from(buttons).forEach(button => { button.type = 'button' })
   }

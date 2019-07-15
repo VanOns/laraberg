@@ -18,6 +18,7 @@ Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
 - [Usage](#usage)
   - [Initializing the Editor](#initializing-the-editor)
     - [Using the Editor Wihout a Form](#using-the-editor-wihout-a-form)
+    - [Setting the editor content](#setting-the-editor-content)
   - [Models](#models)
     - [Renaming Gutenbergable method names](#renaming-gutenbergable-method-names)
   - [Rendering Gutenberg Content](#rendering-gutenberg-content)
@@ -73,11 +74,11 @@ The package provides a JS and CSS file that should be present on the page you wa
 The Gutenberg editor expects React, ReactDOM, Moment and JQuery to be in the environment it runs in. An easy way to do this would be to add the following lines to your page:
 
 ```html
-<script src="https://unpkg.com/react@16.6.3/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react@16.8.6/umd/react.production.min.js"></script>
 
-<script src="https://unpkg.com/react-dom@16.6.3/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js"></script>
 
-<script src="https://unpkg.com/moment@2.22.1/min/moment.min.js"></script>
+<script src="https://unpkg.com/moment@2.24.0/min/moment.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 ```
@@ -169,6 +170,14 @@ If you want to use the editor, but for some reason do not want to deal with subm
 
 ```js
 let content = Laraberg.getContent()
+```
+
+### Setting the editor content
+
+It's possible to set the the editor's content using JavaScript:
+
+```js
+Laraberg.setContent('content')
 ```
 
 ## Models
