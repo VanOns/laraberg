@@ -73,9 +73,8 @@ The package provides a JS and CSS file that should be present on the page you wa
 The Gutenberg editor expects React, ReactDOM, Moment and JQuery to be in the environment it runs in. An easy way to do this would be to add the following lines to your page:
 
 ```html
-<script src="https://unpkg.com/react@16.6.3/umd/react.production.min.js"></script>
-
-<script src="https://unpkg.com/react-dom@16.6.3/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 
 <script src="https://unpkg.com/moment@2.22.1/min/moment.min.js"></script>
 
