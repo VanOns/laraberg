@@ -18,6 +18,8 @@ trait Gutenbergable
      * Get the rendered content
      */
     public function getLbContentAttribute() {
+        if (!$this->content) return '';
+        
         return $this->content->render();
     }
 
@@ -38,6 +40,8 @@ trait Gutenbergable
      * Get the raw gutenberg output
      */
     public function getLbRawContentAttribute() {
+        if (!$this->content) return '';
+
         return $this->content->raw_content;
     }
 
