@@ -9,7 +9,7 @@ use VanOns\Laraberg\Events\ContentUpdated;
 trait Gutenbergable
 {
 
-    public function content()
+    public function laraberg_content()
     {
         return $this->morphOne(Content::class, 'contentable');
     }
@@ -18,9 +18,9 @@ trait Gutenbergable
      * Get the rendered content
      */
     public function getLbContentAttribute() {
-        if (!$this->content) return '';
-        
-        return $this->content->render();
+        if (!$this->laraberg_content) return '';
+
+        return $this->laraberg_content->render();
     }
 
     /**
@@ -29,20 +29,20 @@ trait Gutenbergable
      */
     public function setLbContentAttribute($content)
     {   
-        if (!$this->content) { $this->createContent(); }
+        if (!$this->laraberg_content) { $this->createContent(); }
 
-        $this->content->setContent($content);
-        $this->content->save();
-        event(new ContentUpdated($this->content));
+        $this->laraberg_content->setContent($content);
+        $this->laraberg_content->save();
+        event(new ContentUpdated($this->laraberg_content));
     }
 
     /**
      * Get the raw gutenberg output
      */
     public function getLbRawContentAttribute() {
-        if (!$this->content) return '';
+        if (!$this->laraberg_content) return '';
 
-        return $this->content->raw_content;
+        return $this->laraberg_content->raw_content;
     }
 
     /**
@@ -51,8 +51,8 @@ trait Gutenbergable
     private function createContent()
     {
         $content = new Content;
-        $this->content()->save($content);
-        $this->content = $content;
+        $this->laraberg_content()->save($content);
+        $this->laraberg_content = $content;
         event(new ContentCreated($content));
     }
 
@@ -76,7 +76,7 @@ trait Gutenbergable
      */
     public function renderContent()
     {
-        return $this->content->render();
+        return $this->laraberg_content->render();
     }
 
     /**
@@ -85,7 +85,7 @@ trait Gutenbergable
      */
     public function getRawContent()
     {
-        return $this->content->raw_content;
+        return $this->laraberg_content->raw_content;
     }
 
     /**
@@ -94,7 +94,7 @@ trait Gutenbergable
      */
     public function getRenderedContent()
     {
-        return $this->content->rendered_content;
+        return $this->laraberg_content->rendered_content;
     }
 
     /**
@@ -104,10 +104,10 @@ trait Gutenbergable
      */
     public function setContent($content, $save = false)
     {   
-        if (!$this->content) { $this->createContent(); }
+        if (!$this->laraberg_content) { $this->createContent(); }
 
-        $this->content->setContent($content);
-        if ($save) { $this->content->save(); }
-        event(new ContentUpdated($this->content));
+        $this->laraberg_content->setContent($content);
+        if ($save) { $this->laraberg_content->save(); }
+        event(new ContentUpdated($this->laraberg_content));
     }
 }
