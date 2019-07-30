@@ -53,6 +53,11 @@ const requests = {
     regex: /\/oembed\/1\.0\/proxy\?(.*)/g,
     run: getEmbed
   },
+  postMedia: {
+    method: 'POST',
+    regex: /\/wp\/v2\/media/g,
+    run: postMedia
+  },
   optionsMedia: {
     method: 'OPTIONS',
     regex: /\/wp\/v2\/media/g,
@@ -208,6 +213,19 @@ async function optionsBlocks (options, matches) {
 async function getEmbed (options, matches) {
   const response = await axios.get(`${routePrefix}/oembed?${matches[1]}`)
   return response.data
+}
+
+/**
+ * Handle unsupported media upload request
+ */
+async function postMedia () {
+  Notices.error('Drag & drop file uploads are not supported yet.')
+  // We need to return those values to prevent additional error messages
+  return {
+    caption: {},
+    title: {},
+    description: {}
+  }
 }
 
 /**
@@ -367,6 +385,7 @@ function matchPath (options) {
 }
 
 export default function apiFetch (options) {
+  console.log('Request', options)
   const result = matchPath(options)
   return result.then(res => {
     return res
