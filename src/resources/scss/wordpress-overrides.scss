@@ -1,10 +1,9 @@
-
 .gutenberg__editor {
-
   .block-editor-block-types-list__list-item {
     width: 30%;
   }
-  .components-drop-zone__provider, .components-navigate-regions {
+  .components-drop-zone__provider,
+  .components-navigate-regions {
     height: auto;
     position: static;
   }
@@ -53,12 +52,13 @@
 }
 
 .gutenberg__editor.fixed-height {
-  .components-drop-zone__provider, .components-navigate-regions{
+  .components-drop-zone__provider,
+  .components-navigate-regions {
     height: 100%;
   }
 
   .edit-post-layout__content {
-    height: calc(100% - 56px)
+    height: calc(100% - 56px);
   }
 
   .edit-post-layout {
