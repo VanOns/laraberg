@@ -10940,7 +10940,8 @@ body.block-editor-page {
 .gutenberg__editor .block-editor-block-types-list__list-item {
   width: 30%; }
 
-.gutenberg__editor .components-drop-zone__provider, .gutenberg__editor .components-navigate-regions {
+.gutenberg__editor .components-drop-zone__provider,
+.gutenberg__editor .components-navigate-regions {
   height: auto;
   position: static; }
 
@@ -10973,7 +10974,8 @@ body.block-editor-page {
   .gutenberg__editor .edit-post-layout {
     padding-top: 0; } }
 
-.gutenberg__editor.fixed-height .components-drop-zone__provider, .gutenberg__editor.fixed-height .components-navigate-regions {
+.gutenberg__editor.fixed-height .components-drop-zone__provider,
+.gutenberg__editor.fixed-height .components-navigate-regions {
   height: 100%; }
 
 .gutenberg__editor.fixed-height .edit-post-layout__content {
@@ -11022,10 +11024,12 @@ body.block-editor-page {
       margin: 0;
       padding: 0; }
   .laraberg__editor .editor-media-placeholder__media-library-button {
-    margin-bottom: .5rem; }
+    margin-bottom: 0.5rem; }
   .laraberg__editor .components-placeholder {
     width: auto; }
-  .laraberg__editor .screen-reader-text, .laraberg__editor .screen-reader-text span, .laraberg__editor .ui-helper-hidden-accessible {
+  .laraberg__editor .screen-reader-text,
+  .laraberg__editor .screen-reader-text span,
+  .laraberg__editor .ui-helper-hidden-accessible {
     border: 0;
     clip: rect(1px, 1px, 1px, 1px);
     -webkit-clip-path: inset(50%);
@@ -11037,7 +11041,24 @@ body.block-editor-page {
     position: absolute;
     width: 1px;
     word-wrap: normal !important; }
-  .laraberg__editor input[type=checkbox], .laraberg__editor input[type=color], .laraberg__editor input[type=date], .laraberg__editor input[type=datetime-local], .laraberg__editor input[type=datetime], .laraberg__editor input[type=email], .laraberg__editor input[type=month], .laraberg__editor input[type=number], .laraberg__editor input[type=password], .laraberg__editor input[type=radio], .laraberg__editor input[type=search], .laraberg__editor input[type=tel], .laraberg__editor input[type=text], .laraberg__editor input[type=time], .laraberg__editor input[type=url], .laraberg__editor input[type=week], .laraberg__editor select, .laraberg__editor textarea {
+  .laraberg__editor input[type="checkbox"],
+  .laraberg__editor input[type="color"],
+  .laraberg__editor input[type="date"],
+  .laraberg__editor input[type="datetime-local"],
+  .laraberg__editor input[type="datetime"],
+  .laraberg__editor input[type="email"],
+  .laraberg__editor input[type="month"],
+  .laraberg__editor input[type="number"],
+  .laraberg__editor input[type="password"],
+  .laraberg__editor input[type="radio"],
+  .laraberg__editor input[type="search"],
+  .laraberg__editor input[type="tel"],
+  .laraberg__editor input[type="text"],
+  .laraberg__editor input[type="time"],
+  .laraberg__editor input[type="url"],
+  .laraberg__editor input[type="week"],
+  .laraberg__editor select,
+  .laraberg__editor textarea {
     border: 1px solid #ddd;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
     background-color: #fff;
