@@ -57,10 +57,11 @@ function disableWPBlocks () {
  */
 function setMaxHeight (maxHeight) {
   const editor = window.Laraberg.editor
-  const editPostLayout = editor.querySelector('.edit-post-layout__content')
-
   editor.style.maxHeight = maxHeight
-  editPostLayout.style.maxHeight = `calc(${maxHeight} - 56px)`
+
+  elementRendered('.edit-post-layout__content', (el) => {
+    el.style.minHeight = `calc(${maxHeight} - 56px)`
+  })
 }
 
 /**
@@ -69,9 +70,11 @@ function setMaxHeight (maxHeight) {
  */
 function setMinHeight (minHeight) {
   const editor = window.Laraberg.editor
-  const sidebar = editor.querySelector('.edit-post-sidebar')
   editor.style.minHeight = minHeight
-  sidebar.style.minHeight = `calc(${minHeight} - 56px)`
+
+  elementRendered('.edit-post-sidebar', (el) => {
+    el.style.minHeight = `calc(${minHeight} - 56px)`
+  })
 }
 
 /**
