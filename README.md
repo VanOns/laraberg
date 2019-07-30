@@ -139,6 +139,7 @@ Laraberg.init('[id_here]', options)
 ```
 
 The `options` object can contain the following optional keys:
+
 |Key                        |Type         |Description                                                                                  |
 |---------------------------|-------------|---------------------------------------------------------------------------------------------|
 |**sidebar**                |Boolean      |Enables the Laraberg sidebar if `true`                                                       |
