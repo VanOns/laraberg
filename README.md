@@ -4,21 +4,18 @@
 [![Gitter](https://badges.gitter.im/VanOns/laraberg.svg)](https://gitter.im/VanOns/laraberg?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 
-Laraberg aims to provide an easy way to integrate the Gutenberg editor with your Laravel projects. It is built on top of the [GutenbergJS](https://github.com/front/gutenberg-js) project, implements all the necessary communication and adds an easy to use API. A demo can be found at [demo.laraberg.io](http://demo.laraberg.io/). If you would like to see an example of how to implement Laraberg you can take a look at the code from the demo  [over here](https://github.com/VanOns/laraberg-demo).
+Laraberg aims to provide an easy way to integrate the Gutenberg editor with your Laravel projects. It takes the Gutenberg editor and adds all the communication and data it needs function in a Laravel environment. A demo can be found at [demo.laraberg.io](http://demo.laraberg.io/). If you would like to see an example of how to implement Laraberg you can take a look at the code from the demo  [over here](https://github.com/VanOns/laraberg-demo).
 
 # Table of Contents <!-- omit in toc -->
 - [Installation](#installation)
   - [JavaScript and CSS files](#javascript-and-css-files)
   - [Dependencies](#dependencies)
 - [Updating](#updating)
-- [Configuration](#configuration)
-  - [Styling](#styling)
-  - [API Routes](#api-routes)
-  - [Laravel File Manager](#laravel-file-manager)
 - [Usage](#usage)
   - [Initializing the Editor](#initializing-the-editor)
     - [Using the Editor Wihout a Form](#using-the-editor-wihout-a-form)
     - [Setting the editor content](#setting-the-editor-content)
+    - [Configuration options](#configuration-options)
   - [Models](#models)
     - [Renaming Gutenbergable method names](#renaming-gutenbergable-method-names)
   - [Rendering Gutenberg Content](#rendering-gutenberg-content)
@@ -32,9 +29,12 @@ Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
     - [Select](#select)
     - [Text](#text)
     - [Textarea](#textarea)
+- [Configuration](#configuration)
+  - [Styling](#styling)
+  - [API Routes](#api-routes)
+  - [Laravel File Manager](#laravel-file-manager)
 - [Search Callback](#search-callback)
 - [Missing Blocks](#missing-blocks)
-- [Updating from 0.0.1 to 0.0.2-or-later](#updating-from-001-to-002-or-later)
 - [Contributors](#contributors)
 
 # Installation
@@ -90,56 +90,6 @@ When updating Laraberg you have to publish the vendor files again by running thi
 php artisan vendor:publish --provider="VanOns\Laraberg\LarabergServiceProvider" --tag="public" --force
 ```
 
-# Configuration
-
-When initializing the editor there are a number of configuration options you can provide. This is still a work in progress!
-
-## Styling
-
-It is possible to set the height, maxHeight, and minHeight of the editor by providing the desired values in the options object:
-
-```js
-Laraberg.init('[id_here]', { height: '500px' })
-
-Laraberg.init('[id_here]', { maxHeight: '500px' })
-
-Laraberg.init('[id_here]', { minHeight: '500px' })
-```
-## API Routes
-
-After publishing the vendor files you can find the 'laraberg.php' file in your config folder. This file allows you to configure the API Routes. Here you can change the URL prefix and the middleware for the routes.
-
-When you change the route prefix you also have to provide the prefix when you initialize the editor like this:
-
-```js
-Laraberg.init('[id_here]', { prefix: '/[prefix_here]' })
-```
-
-If you wish to define the routes yourself you can do that by setting 'use_package_routes' to 'false' in the config. Then you can take the following routes and make changes as you see fit:
-
-```php
-Route::group(['prefix' => 'laraberg', 'middleware' => ['web', 'auth']], function() {
-  Route::apiResource('blocks', 'VanOns\Laraberg\Http\Controllers\BlockController');
-  Route::get('oembed', 'VanOns\Laraberg\Http\Controllers\OEmbedController');
-});
-```
-
-## Laravel File Manager
-
-Laraberg supports [Laravel File Manager](https://unisharp.github.io/laravel-filemanager/) for uploading files. To enable uploading media through Laravel File Manager the laravelFilemanager field should be set to true. This will add a 'File Manager' button to the Gutenberg media blocks that will open Laravel File Manager for uploading and selecting media files.
-
-```js
-Laraberg.init('[id_here]', { laravelFilemanager: true })
-```
-
-If you are not using the default routes for Laravel File Manager you can provide the location of your Laravel File Manager endpoints in the options object like this:
-
-```js
-Laraberg.init('[id_here]', { laravelFilemanager: { prefix: '/[lfm_prefix_here]' } })
-```
-
-> Note: Laraberg does not do any configuration on your Laravel File Manager setup. By default a lot of media filetypes can not be uploaded unless they are whitelisted in the Laravel File Manager configuration file. For more information on this you can check the [Laravel File Manager documentation](https://unisharp.github.io/laravel-filemanager/config).
-
 # Usage
 
 ## Initializing the Editor
@@ -179,6 +129,26 @@ It's possible to set the the editor's content using JavaScript:
 ```js
 Laraberg.setContent('content')
 ```
+
+### Configuration options
+
+The `init()` function takes an optional configuration object which can be used to change Laraberg's behaviour in some ways.
+```js
+const options = {}
+Laraberg.init('[id_here]', options)
+```
+
+The `options` object can contain the following optional keys:
+|Key                        |Type         |Description                                                                                  |
+|---------------------------|-------------|---------------------------------------------------------------------------------------------|
+|**sidebar**                |Boolean      |Enables the Laraberg sidebar if `true`                                                       |
+|**prefix**                 |String       |The API prefix to use for requests (only use this if you changed the API location manually)  |
+|**laravelFilemanager**     |Bool/Object  |Enables Laravel Filemanager for fileuploads if value is truth. Can be an object that contains configuration options. See [Laravel File Manager](#laravel-file-manager).                                                                             |
+|**sidebar**                |Boolean      |Enables the Laraberg sidebar if `true`                                                       |
+|**searchCb**               |Function     |Will be called when using certain search fields within Gutenberg. See [Search Callback](#search-callback).|
+|**height**                 |String       |Sets the height of the editor. Value must be a valid css height value (e.g. '10px', '50%', '100vh').|
+|**minHeight**              |String       |Sets the minHeight of the editor. Value must be a valid css min-height value (e.g. '10px', '50%', '100vh').|
+|**maxHeight**              |String       |Sets the maxHeight of the editor. Value must be a valid css max-height value (e.g. '10px', '50%', '100vh').|
 
 ## Models
 
@@ -360,6 +330,56 @@ Laraberg.init('[id_here]', { sidebar: true })
 </div>
 ```
 
+# Configuration
+
+When initializing the editor there are a number of configuration options you can provide. This is still a work in progress!
+
+## Styling
+
+It is possible to set the height, maxHeight, and minHeight of the editor by providing the desired values in the options object:
+
+```js
+Laraberg.init('[id_here]', { height: '500px' })
+
+Laraberg.init('[id_here]', { maxHeight: '500px' })
+
+Laraberg.init('[id_here]', { minHeight: '500px' })
+```
+## API Routes
+
+After publishing the vendor files you can find the 'laraberg.php' file in your config folder. This file allows you to configure the API Routes. Here you can change the URL prefix and the middleware for the routes.
+
+When you change the route prefix you also have to provide the prefix when you initialize the editor like this:
+
+```js
+Laraberg.init('[id_here]', { prefix: '/[prefix_here]' })
+```
+
+If you wish to define the routes yourself you can do that by setting 'use_package_routes' to 'false' in the config. Then you can take the following routes and make changes as you see fit:
+
+```php
+Route::group(['prefix' => 'laraberg', 'middleware' => ['web', 'auth']], function() {
+  Route::apiResource('blocks', 'VanOns\Laraberg\Http\Controllers\BlockController');
+  Route::get('oembed', 'VanOns\Laraberg\Http\Controllers\OEmbedController');
+});
+```
+
+## Laravel File Manager
+
+Laraberg supports [Laravel File Manager](https://unisharp.github.io/laravel-filemanager/) for uploading files. To enable uploading media through Laravel File Manager the laravelFilemanager field should be set to true. This will add a 'File Manager' button to the Gutenberg media blocks that will open Laravel File Manager for uploading and selecting media files.
+
+```js
+Laraberg.init('[id_here]', { laravelFilemanager: true })
+```
+
+If you are not using the default routes for Laravel File Manager you can provide the location of your Laravel File Manager endpoints in the options object like this:
+
+```js
+Laraberg.init('[id_here]', { laravelFilemanager: { prefix: '/[lfm_prefix_here]' } })
+```
+
+> Note: Laraberg does not do any configuration on your Laravel File Manager setup. By default a lot of media filetypes can not be uploaded unless they are whitelisted in the Laravel File Manager configuration file. For more information on this you can check the [Laravel File Manager documentation](https://unisharp.github.io/laravel-filemanager/config).
+
 # Search Callback
 
 The **button block** has a field that searches for pages or aritcles. In order to use this functionality you can pass a
@@ -386,11 +406,6 @@ This means that the following blocks will only be enabled when you're using Lara
 - Cover
 - Gallery
 - Media & Text
-
-# Updating from 0.0.1 to 0.0.2-or-later
-
-In beta version 0.0.1 we used JSON column types for block titles. This was not supported by MariaDB, so we had to change that.
-In the [releasenotes for beta version 0.0.2](https://github.com/VanOns/laraberg/releases/tag/v0.0.2-beta) you can find how to deal with this problem if you do not want to lose your data from version 0.0.1.
 
 # Contributors
 
