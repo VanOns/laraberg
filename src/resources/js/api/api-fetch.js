@@ -385,7 +385,6 @@ function matchPath (options) {
 }
 
 export default function apiFetch (options) {
-  console.log('Request', options)
   const result = matchPath(options)
   return result.then(res => {
     return res
