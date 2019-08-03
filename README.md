@@ -71,7 +71,7 @@ The package provides a JS and CSS file that should be present on the page you wa
 
 ## Dependencies
 
-The Gutenberg editor expects React, ReactDOM, Moment and JQuery to be in the environment it runs in. An easy way to do this would be to add the following lines to your page:
+The Gutenberg editor expects React, ReactDOM, Moment and JQuery to be in the environment it runs in. An easy way to do this would be to add the following lines to your page before the inclusion of `laraberg.js`:
 
 ```html
 <script src="https://unpkg.com/react@16.8.6/umd/react.production.min.js"></script>
