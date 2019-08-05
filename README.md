@@ -79,8 +79,6 @@ The Gutenberg editor expects React, ReactDOM, Moment and JQuery to be in the env
 <script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js"></script>
 
 <script src="https://unpkg.com/moment@2.24.0/min/moment.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 ```
 
 # Updating

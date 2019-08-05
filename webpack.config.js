@@ -5,8 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const externals = {
   react: 'React',
   'react-dom': 'ReactDOM',
-  moment: 'moment',
-  jquery: 'jQuery'
+  moment: 'moment'
 }
 
 module.exports = {
