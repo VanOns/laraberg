@@ -1,5 +1,5 @@
 # <img height="300px" src="./logo-text.svg"> <!-- omit in toc -->
-[![Latest Unstable Version](https://img.shields.io/packagist/vpre/van-ons/laraberg.svg)](https://packagist.org/packages/van-ons/laraberg)
+[![Latest Version](https://img.shields.io/packagist/v/van-ons/laraberg)](https://packagist.org/packages/van-ons/laraberg)
 ![License](https://img.shields.io/github/license/VanOns/laraberg.svg)
 [![Gitter](https://badges.gitter.im/VanOns/laraberg.svg)](https://gitter.im/VanOns/laraberg?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
