@@ -4,8 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const externals = {
   react: 'React',
-  'react-dom': 'ReactDOM',
-  moment: 'moment'
+  'react-dom': 'ReactDOM'
 }
 
 module.exports = {
