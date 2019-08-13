@@ -163,4 +163,6 @@ function removeElements () {
   elementRendered('.editor-post-trash', element => { element.remove() })
 
   elementRendered('.editor-post-saved-state', element => { element.style.display = 'none' })
+
+  elementRendered('.components-popover__content div .components-menu-group:last-of-type', element => { element.style.display = 'none' })
 }
