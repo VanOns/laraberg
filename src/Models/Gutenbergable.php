@@ -62,7 +62,7 @@ trait Gutenbergable
     protected static function bootGutenbergable()
     {   
         self::deleting(function ($model) {
-            $model->content()->delete();
+            $model->laraberg_content()->delete();
         });
     }
 
