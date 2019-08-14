@@ -8,106 +8,107 @@ use VanOns\Laraberg\Events\ContentUpdated;
 
 trait Gutenbergable
 {
+    /**
+     * Delete content when model gets deleted
+     */
+    protected static function bootGutenbergable()
+    {
+        // Persisting laraberg contents only when the current model has been updated
+        self::saved(function ($model) {
+            $model->larabergContent->save();
+        });
 
-    public function laraberg_content()
+        // Permanently deleting laravel content when this model has been deleted
+        self::deleted(function ($model) {
+            $model->larabergContent()->delete();
+        });
+    }
+
+    /**
+     * Relationship to the lb_contents table.
+     *
+     * @return mixed
+     */
+    public function larabergContent()
     {
         return $this->morphOne(Content::class, 'contentable');
     }
 
     /**
-     * Get the rendered content
+     * Get the rendered content.
+     *
+     * @return string
      */
-    public function getLbContentAttribute() {
-        if (!$this->laraberg_content) return '';
-
-        return $this->laraberg_content->render();
+    public function getLbContentAttribute()
+    {
+        return $this->larabergContent ? $this->larabergContent->render() : '';
     }
 
     /**
-     * Set the content
-     * @param String $content - Gutenberg output
+     * Set the laraberg content.
+     * 
+     * @param $content
      */
     public function setLbContentAttribute($content)
-    {   
-        if (!$this->laraberg_content) { $this->createContent(); }
-
-        $this->laraberg_content->setContent($content);
-        $this->laraberg_content->save();
-        event(new ContentUpdated($this->laraberg_content));
-    }
-
-    /**
-     * Get the raw gutenberg output
-     */
-    public function getLbRawContentAttribute() {
-        if (!$this->laraberg_content) return '';
-
-        return $this->laraberg_content->raw_content;
-    }
-
-    /**
-     * Creates a content object and associates it with the parent object
-     */
-    private function createContent()
     {
-        $content = new Content;
-        $this->laraberg_content()->save($content);
-        $this->laraberg_content = $content;
-        event(new ContentCreated($content));
+        if (! $this->larabergContent) {
+            $this->setRelation('larabergContent', new Content);
+        }
+
+        $this->larabergContent->setContent($content);
     }
 
     /**
-     * Delete content when model gets deleted
+     * Get the raw laraberg content.
      */
-    protected static function bootGutenbergable()
-    {   
-        self::deleting(function ($model) {
-            $model->content()->delete();
-        });
-    }
-
-    /**
-     * DEPRECATED
-     */
-
-    /**
-     * Returns the rendered HTML from the Content object
-     * @return String
-     */
-    public function renderContent()
+    public function getLbRawContentAttribute()
     {
-        return $this->laraberg_content->render();
+        if (! $this->larabergContent) {
+            return '';
+        };
+
+        return $this->larabergContent->raw_content;
     }
 
     /**
      * Returns the raw content that came out of Gutenberg
+     *
+     * @deprecated
      * @return String
      */
     public function getRawContent()
     {
-        return $this->laraberg_content->raw_content;
+        return $this->getLbRawContentAttribute();
     }
 
     /**
      * Returns the Gutenberg content with some initial rendering done to it
+     *
+     * @deprecated
      * @return String
      */
     public function getRenderedContent()
     {
-        return $this->laraberg_content->rendered_content;
+        return $this->larabergContent->rendered_content;
     }
 
     /**
      * Sets the content object using the raw editor content
+     *
+     * @deprecated
      * @param String $content
      * @param String $save - Calls .save() on the Content object if true
      */
     public function setContent($content, $save = false)
-    {   
-        if (!$this->laraberg_content) { $this->createContent(); }
+    {
+        if (! $this->larabergContent) {
+            $this->createContent();
+        }
 
-        $this->laraberg_content->setContent($content);
-        if ($save) { $this->laraberg_content->save(); }
-        event(new ContentUpdated($this->laraberg_content));
+        $this->larabergContent->setContent($content);
+        if ($save) {
+            $this->larabergContent->save();
+        }
+        event(new ContentUpdated($this->larabergContent));
     }
 }
