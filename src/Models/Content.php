@@ -3,10 +3,10 @@
 namespace VanOns\Laraberg\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 use VanOns\Laraberg\Helpers\EmbedHelper;
 use VanOns\Laraberg\Helpers\BlockHelper;
 use VanOns\Laraberg\Events\ContentCreated;
+use VanOns\Laraberg\Events\ContentUpdated;
 use VanOns\Laraberg\Events\ContentRendered;
 
 class Content extends Model
