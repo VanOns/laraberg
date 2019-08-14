@@ -15,7 +15,10 @@ trait Gutenbergable
     {
         // Persisting laraberg contents only when the current model has been updated
         self::saved(function ($model) {
-            $model->larabergContent->save();
+            if ($content = $model->larabergContent) {
+                $content->contentable()
+                        ->associate($model)->save();
+            }
         });
 
         // Permanently deleting laravel content when this model has been deleted
@@ -46,7 +49,7 @@ trait Gutenbergable
 
     /**
      * Set the laraberg content.
-     * 
+     *
      * @param $content
      */
     public function setLbContentAttribute($content)
@@ -73,8 +76,8 @@ trait Gutenbergable
     /**
      * Returns the raw content that came out of Gutenberg
      *
-     * @deprecated
      * @return String
+     * @deprecated
      */
     public function getRawContent()
     {
@@ -84,8 +87,8 @@ trait Gutenbergable
     /**
      * Returns the Gutenberg content with some initial rendering done to it
      *
-     * @deprecated
      * @return String
+     * @deprecated
      */
     public function getRenderedContent()
     {
@@ -95,9 +98,9 @@ trait Gutenbergable
     /**
      * Sets the content object using the raw editor content
      *
-     * @deprecated
      * @param String $content
      * @param String $save - Calls .save() on the Content object if true
+     * @deprecated
      */
     public function setContent($content, $save = false)
     {
