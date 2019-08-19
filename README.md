@@ -165,11 +165,11 @@ This adds multiple attributes to your model that will help you with creating/upd
 $content // This is the raw content from the Gutenberg editor
 $model = new MyModel;
 
-// The model has to exist or else the link between your model and the content can't be made
-$model->save();
-
 // Add or update the content
 $model->lb_content = $content;
+
+// Save the model
+$model->save();
 
 // Get the rendered HTML
 $model->lb_content;
