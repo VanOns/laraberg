@@ -1,6 +1,6 @@
 {
   "name": "laraberg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Gutenberg implementation for Laravel",
   "main": "src/resources/laraberg.js",
   "directories": {
