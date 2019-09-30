@@ -28,20 +28,13 @@ export default function configureEditor (options) {
  * Set all editor button types to 'button' to prevent submitting the form
  */
 export function clearSubmitFromButtons () {
-  // Add button selectors here if they should keep submit type
-  const whitelist = [
-    '.reusable-block-edit-panel button'
-  ]
-
-  const whitelistString = whitelist.reduce((string, item) => {
-    if (string !== '') {
-      string = `${string}, `
-    }
-    return `${string}.laraberg__editor ${item}`
-  }, '')
-
-  elementRendered('.laraberg__editor button', (el) => {
-    if (document.querySelector(whitelistString)) return
+  // Add class to all buttons that are in a form inside the editor
+  elementRendered('.laraberg__editor form button', (el) => {
+    el.classList.add('lb-form__button')
+  })
+  // Set type to 'button' for all buttons not in a form
+  // We'll assume that Gutenberg correctly sets the button types for buttons that are in a form
+  elementRendered('.laraberg__editor button:not(.lb-form__button)', (el) => {
     el.type = 'button'
   })
 }
