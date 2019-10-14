@@ -19,7 +19,10 @@
       "category",
       "post_tag"
     ],
-    "viewable": "true",
+    "viewable": false,
+    "saveable": false,
+    "publishable": false,
+    "autosaveable": false,
     "rest_base": "posts"
   },
   "page": {
@@ -41,6 +44,9 @@
     },
     "taxonomies": [],
     "viewable": false,
+    "saveable": false,
+    "publishable": false,
+    "autosaveable": false,
     "rest_base": "pages"
   },
   "attachment": {
