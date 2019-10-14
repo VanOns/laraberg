@@ -3,6 +3,7 @@
 namespace VanOns\Laraberg\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use mysql_xdevapi\Exception;
 use VanOns\Laraberg\Helpers\EmbedHelper;
 use VanOns\Laraberg\Helpers\BlockHelper;
 use VanOns\Laraberg\Events\ContentCreated;
@@ -52,7 +53,7 @@ class Content extends Model
     public function setContent($html)
     {
         $this->raw_content = $html;
-
+        $this->fixEmptyImages();
         $this->renderRaw();
     }
 
@@ -66,5 +67,18 @@ class Content extends Model
         event(new ContentRendered($this));
 
         return $this->rendered_content;
+    }
+    
+    /**
+     * TODO: Remove this temporary fix for Image block crashing when no image is selected
+     */
+    private function fixEmptyImages() {
+        $regex = '/<img(.*)\/>/';
+        $this->raw_content = preg_replace_callback($regex, function ($matches) {
+            if (isset($matches[1]) && strpos($matches[1], 'src="') === false) {
+                return str_replace('<img ', '<img src="/vendor/laraberg/img/placeholder.jpg" ', $matches[0]);
+            }
+            return $matches[0];
+        }, $this->raw_content);
     }
 }
