@@ -240,8 +240,11 @@ async function optionsMedia () {
  */
 async function getPage () {
   const content = document.getElementById(editorSettings.target).value || ''
+  const date = (new Date()).toISOString()
   return {
     ...MockData.page,
+    date: date,
+    date_gtm: date,
     content: {
       raw: content
     }
@@ -253,8 +256,11 @@ async function getPage () {
  * @param {Object} options
  */
 export async function postPage (options) {
+  const date = (new Date()).toISOString()
   return {
     ...MockData.page,
+    date: date,
+    date_gtm: date,
     content: {
       raw: options.data
     }
@@ -266,8 +272,11 @@ export async function postPage (options) {
  * @param {Object} options
  */
 export async function putPage (options) {
+  const date = (new Date()).toISOString()
   return {
     ...MockData.page,
+    date: date,
+    date_gtm: date,
     content: {
       raw: options.data
     }

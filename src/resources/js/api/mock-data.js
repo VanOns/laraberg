@@ -10,16 +10,12 @@ export const media = {
   }
 }
 
-const date = (new Date()).toISOString()
-
 export const page = {
   id: 1,
   content: {
     raw: '',
     rendered: ''
   },
-  date,
-  date_gmt: date,
   title: {
     raw: 'Preview page',
     rendered: 'Preview page'
