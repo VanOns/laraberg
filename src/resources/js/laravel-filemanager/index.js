@@ -23,16 +23,26 @@ export default function (config) {
       }
     }
 
-    onSelect = (url, path) => {
-      this.props.value = null
-      const { multiple, onSelect } = this.props
-      const media = {
-        url: url,
-        type: this.getMediaType(path)
-      }
-      if (multiple) { this.state.media.push(media) }
-      onSelect(multiple ? this.state.media : media)
-    }
+    onSelect = (url) => {
+
+            const { multiple, onSelect } = this.props
+
+            this.state.media = []
+
+            for (let i = 0, len = url.length; i < len; i++) {
+                this.state.media.push({
+                    id: url[i].url,
+                    caption: '',
+                    url: url[i].url,
+                    type: this.getMediaType(url[i].url)
+                })
+            }
+            if (this.state.media.length > 0) {
+                onSelect(multiple ? this.state.media : this.state.media[0])
+            } else {
+                onSelect([])
+            }
+        }
 
     openModal = () => {
       let type = 'file'
