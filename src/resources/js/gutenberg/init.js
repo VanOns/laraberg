@@ -18,6 +18,7 @@ export default function init (target, options = {}) {
 
   // Disable tips
   data.dispatch('core/nux').disableTips()
+    wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'welcomeGuide' )
 
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(async () => {
