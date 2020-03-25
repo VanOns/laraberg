@@ -3,7 +3,7 @@ import { configureAPI } from '../api/api-fetch'
 import configureEditor from '../lib/configure-editor'
 import { elementReady } from '../lib/element-ready'
 
-const { blocks, data, domReady, editPost } = window.wp
+const { blocks, data, domReady, editPost, plugins } = window.wp
 const { unregisterBlockType, registerBlockType, getBlockType } = blocks
 
 /**
@@ -13,11 +13,13 @@ const { unregisterBlockType, registerBlockType, getBlockType } = blocks
 export default function init (target, options = {}) {
   configureAPI(options)
 
-  // Disable publish sidebar
-  data.dispatch('core/editor').disablePublishSidebar()
+  // Toggle features
+  const { toggleFeature } = data.dispatch('core/edit-post')
+  toggleFeature('welcomeGuide')
+  toggleFeature('fullscreenMode')
 
-  // Disable tips
-  data.dispatch('core/nux').disableTips()
+  // Disable block patterns
+  plugins.unregisterPlugin('edit-post');
 
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(async () => {

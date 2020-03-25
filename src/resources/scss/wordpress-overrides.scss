@@ -32,6 +32,16 @@
     padding-bottom: 75px;
     height: auto;
   }
+
+  .block-editor-block-breadcrumb {
+    .components-button.is-tertiary {
+      padding: 0 8px;
+    }
+  }
+
+  .components-button.has-icon {
+    padding: 0;
+  }
 }
 
 @media (min-width: 600px) {
@@ -51,6 +61,11 @@
   .components-drop-zone__provider,
   .components-navigate-regions {
     height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
   }
 
   .edit-post-layout__content {

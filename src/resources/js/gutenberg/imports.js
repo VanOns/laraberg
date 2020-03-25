@@ -22,7 +22,6 @@ import * as coreData from 'gutenberg/packages/core-data'
 import * as date from 'gutenberg/packages/date'
 import deprecated from 'gutenberg/packages/deprecated'
 import * as notices from 'gutenberg/packages/notices'
-import * as nux from 'gutenberg/packages/nux'
 import * as tokenList from 'gutenberg/packages/token-list'
 import * as viewport from 'gutenberg/packages/viewport'
 import * as wordcount from 'gutenberg/packages/wordcount'
@@ -75,7 +74,6 @@ const imports = {
   // listReusableBlocks,
   mediaUtils,
   notices,
-  nux,
   plugins,
   priorityQueue,
   reduxRoutine,
