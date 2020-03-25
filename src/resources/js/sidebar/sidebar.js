@@ -88,7 +88,7 @@ class Sidebar extends Component {
       this.radioCache = []
     }
   }
-  
+
   render () {
     return (
       <PluginSidebar name="laraberg-sidebar" icon="media-text" title="Laraberg">

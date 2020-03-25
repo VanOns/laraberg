@@ -42,10 +42,6 @@
   }
 
   .edit-post-sidebar {
-    position: absolute;
-    top: 56px;
-    min-height: calc(400px - 56px);
-
     .edit-post-sidebar__panel-tabs {
       ul {
         list-style: none;
@@ -171,4 +167,8 @@
 
 .laraberg-sidebar {
   display: none;
+}
+
+.wp-block-html .block-editor-plain-text {
+  width: 100%;
 }
