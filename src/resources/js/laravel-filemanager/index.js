@@ -43,9 +43,13 @@ export default function (config) {
     }
 
     openLFM = (type, cb) => {
-      let routePrefix = (config && config.prefix) ? config.prefix : '/laravel-filemanager'
+      const routePrefix = (config && config.prefix) ? config.prefix : '/filemanager'
       window.open(routePrefix + '?type=' + type, 'FileManager', 'width=900,height=600')
-      window.SetUrl = cb
+      window.SetUrl = function (items) {
+        if (items[0]) {
+          cb(items[0].url, items[0].name)
+        }
+      }
     }
 
     render () {
