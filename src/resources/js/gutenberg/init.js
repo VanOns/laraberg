@@ -19,13 +19,13 @@ export default function init (target, options = {}) {
   toggleFeature('fullscreenMode')
 
   // Disable block patterns
-  plugins.unregisterPlugin('edit-post');
+  plugins.unregisterPlugin('edit-post')
 
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(async () => {
       const larabergEditor = createEditorElement(target)
       try {
-        resolve(editPost.initializeEditor(larabergEditor.id, 'page', 1, editorSettings, overridePost))
+        resolve(editPost.initializeEditor(larabergEditor.id, 'page', 1, getEditorSettings(), overridePost))
         fixReusableBlocks()
       } catch (error) {
         console.error(error)
@@ -64,4 +64,14 @@ function fixReusableBlocks () {
     }
   }
   registerBlockType('core/block', coreBlock)
+}
+
+function getEditorSettings() {
+  const targetElement = document.getElementById(editorSettings.target)
+
+  if (targetElement && targetElement.placeholder) {
+    editorSettings.bodyPlaceholder = targetElement.placeholder
+  }
+
+  return editorSettings
 }
