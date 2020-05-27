@@ -127,8 +127,6 @@ function setupSubmit (target) {
   if (textarea.form) {
     textarea.form.addEventListener('submit', event => {
       textarea.value = data.select('core/editor').getEditedPostContent()
-      // Clear content "dirty" state.
-      // data.dispatch('core/editor').savePost()
       return true
     })
   }
