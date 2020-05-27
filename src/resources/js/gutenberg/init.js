@@ -19,7 +19,7 @@ export default function init (target, options = {}) {
   toggleFeature('fullscreenMode')
 
   // Disable block patterns
-  plugins.unregisterPlugin('edit-post');
+  plugins.unregisterPlugin('edit-post')
 
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(async () => {
