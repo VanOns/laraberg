@@ -342,6 +342,15 @@ Laraberg.init('[id_here]', { maxHeight: '500px' })
 
 Laraberg.init('[id_here]', { minHeight: '500px' })
 ```
+
+## Placeholder
+
+You can change the default Gutenberg placeholder by adding a placeholder attribute to your textarea:
+
+```html
+<textarea placeholder="[placeholder_here]" id="[id_here]" name="[name_here]" hidden></textarea>
+```
+
 ## API Routes
 
 After publishing the vendor files you can find the 'laraberg.php' file in your config folder. This file allows you to configure the API Routes. Here you can change the URL prefix and the middleware for the routes.
