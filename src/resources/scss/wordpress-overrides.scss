@@ -2,6 +2,11 @@
   .block-editor-block-types-list__list-item {
     width: 30%;
   }
+  
+  .components-popover {
+    z-index: 101;
+  }
+  
   .components-drop-zone__provider,
   .components-navigate-regions {
     height: auto;
@@ -31,10 +36,6 @@
     padding-top: 25px;
     padding-bottom: 75px;
     height: auto;
-  }
-  
-  .block-editor-block-toolbar {
-    background-color: white;
   }
 
   .block-editor-block-breadcrumb {
