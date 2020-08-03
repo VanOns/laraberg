@@ -34,11 +34,15 @@
     top: 0;
     z-index: 100;
   }
-
+  
   .edit-post-header {
     z-index: 100;
     box-sizing: border-box;
     position: sticky;
+  }
+
+  .components-popover {
+    z-index: 101;
   }
 
   .edit-post-sidebar {
