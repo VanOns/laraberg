@@ -1,14 +1,14 @@
 // Gutenberg imports
-@import "~gutenberg/packages/components/build-style/style.css";
-@import "~gutenberg/packages/block-editor/build-style/style.css";
-@import "~gutenberg/packages/nux/build-style/style.css";
-@import "~gutenberg/packages/editor/build-style/style.css";
-@import "~gutenberg/packages/block-library/build-style/style.css";
-@import "~gutenberg/packages/block-library/build-style/editor.css";
-@import "~gutenberg/packages/block-library/build-style/theme.css";
-@import "~gutenberg/packages/edit-post/build-style/style.css";
-@import "~gutenberg/packages/format-library/build-style/style.css";
-@import "~gutenberg/packages/list-reusable-blocks/build-style/style.css";
+@import "../../../vendor/wordpress/gutenberg/packages/components/build-style/style.css";
+@import "../../../vendor/wordpress/gutenberg/packages/block-editor/build-style/style.css";
+@import "../../../vendor/wordpress/gutenberg/packages/nux/build-style/style.css";
+@import "../../../vendor/wordpress/gutenberg/packages/editor/build-style/style.css";
+@import "../../../vendor/wordpress/gutenberg/packages/block-library/build-style/style.css";
+@import "../../../vendor/wordpress/gutenberg/packages/block-library/build-style/editor.css";
+@import "../../../vendor/wordpress/gutenberg/packages/block-library/build-style/theme.css";
+@import "../../../vendor/wordpress/gutenberg/packages/edit-post/build-style/style.css";
+@import "../../../vendor/wordpress/gutenberg/packages/format-library/build-style/style.css";
+@import "../../../vendor/wordpress/gutenberg/packages/list-reusable-blocks/build-style/style.css";
 
 @import "./wordpress-overrides.scss";
 

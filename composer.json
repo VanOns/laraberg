@@ -8,10 +8,17 @@
             "email": "maurice@van-ons.nl"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/WordPress/gutenberg.git"
+        }
+    ],
     "require": {
         "embed/embed": "^3.3"
     },
     "require-dev": {
+        "wordpress/gutenberg": "^8.5",
         "orchestra/testbench": "^3.7",
         "phpunit/phpunit": "^7.0"
     },
@@ -28,7 +35,22 @@
     "extra": {
         "laravel": {
             "providers": "VanOns\\Laraberg\\LarabergServiceProvider"
+        },
+        "installer-paths": {
+            "vendor/{$vendor}/{$name}/": [
+                "type:wordpress-plugin"
+            ]
         }
-    }
-
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "npm install --prefix=vendor/wordpress/gutenberg",
+            "npm run build --prefix=vendor/wordpress/gutenberg"
+        ]
+    },
+    "config": {
+        "process-timeout":0
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
