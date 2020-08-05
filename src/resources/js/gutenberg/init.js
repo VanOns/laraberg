@@ -25,7 +25,7 @@ export default function init (target, options = {}) {
     domReady(async () => {
       const larabergEditor = createEditorElement(target)
       try {
-        resolve(editPost.initializeEditor(larabergEditor.id, 'page', 1, getEditorSettings(), overridePost))
+        resolve(editPost.initializeEditor(larabergEditor.id, 'page', options.pageId || 1, getEditorSettings(), overridePost))
         fixReusableBlocks()
       } catch (error) {
         console.error(error)

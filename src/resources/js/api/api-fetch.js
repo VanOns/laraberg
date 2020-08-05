@@ -5,6 +5,7 @@ import * as Notices from '../lib/notices'
 
 let routePrefix
 let searchCb
+let pageId
 
 /**
  * Requests Gutenberg can make.
@@ -243,6 +244,7 @@ async function getPage () {
   const date = (new Date()).toISOString()
   return {
     ...MockData.page,
+    id: pageId,
     date: date,
     date_gtm: date,
     content: {
@@ -359,7 +361,7 @@ function getUsers () {
 /**
  * Matches a Gutenberg request to the available requests in the requests variable
  * @param {Object} options - options object provided by Gutenberg
- * @returns {Promsie} - promise containing results
+ * @returns {Promise} - promise containing results
  */
 function matchPath (options) {
   let promise
@@ -405,6 +407,7 @@ export default function apiFetch (options) {
 export function configureAPI (options) {
   routePrefix = options.prefix || '/laraberg'
   searchCb = options.searchCb || null
+  pageId = options.pageId || 1
 }
 
 class FetchError extends Error {
