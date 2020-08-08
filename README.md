@@ -6,6 +6,8 @@
 
 Laraberg aims to provide an easy way to integrate the Gutenberg editor with your Laravel projects. It takes the Gutenberg editor and adds all the communication and data it needs function in a Laravel environment. A demo can be found at [demo.laraberg.io](http://demo.laraberg.io/). If you would like to see an example of how to implement Laraberg you can take a look at the code from the demo  [over here](https://github.com/VanOns/laraberg-demo).
 
+If you're using Vue.js as your frontend, you can use [Laraberg Vue](https://github.com/evryn/laraberg-vue) package for the editor along with Laraberg as your backend.
+
 # Table of Contents <!-- omit in toc -->
 - [Installation](#installation)
   - [JavaScript and CSS files](#javascript-and-css-files)
