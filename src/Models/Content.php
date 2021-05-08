@@ -12,8 +12,15 @@ use VanOns\Laraberg\Events\ContentRendered;
 
 class Content extends Model
 {
-
     protected $table = 'lb_contents';
+
+	/**
+	 * Returns table name statically to use in migrations
+	 */
+	public static function tableName()
+	{
+		return with(new static)->getTable();
+	}
 
     public static function boot()
     {

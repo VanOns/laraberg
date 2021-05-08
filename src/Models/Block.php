@@ -23,6 +23,14 @@ class Block extends Model
     // TODO: Only here to make migration run, should be cleaned up on release
     protected $casts = ['old_title' => 'array'];
 
+	/**
+	 * Returns table name statically to use in migrations
+	 */
+	public static function tableName()
+	{
+		return with(new static)->getTable();
+	}
+
     /**
      * Updates slug according to title
      */
