@@ -13,7 +13,7 @@ class CreateBlocksContentsTables extends Migration
      */
     public function up()
     {
-        Schema::create('lb_blocks', function (Blueprint $table) {
+        Schema::create(config('laraberg.models.block', \VanOns\Laraberg\Models\Block::class)::tableName(), function (Blueprint $table) {
             $table->increments('id');
             $table->string('raw_title')->nullable();
             $table->text('raw_content')->nullable();
@@ -24,7 +24,7 @@ class CreateBlocksContentsTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('lb_contents', function (Blueprint $table) {
+        Schema::create(config('laraberg.models.content', \VanOns\Laraberg\Models\Content::class)::tableName(), function (Blueprint $table) {
             $table->increments('id');
             $table->text('raw_content')->nullable();
             $table->text('rendered_content')->nullable();
@@ -41,8 +41,8 @@ class CreateBlocksContentsTables extends Migration
      */
     public function down()
     {
-        Schema::drop('lb_blocks');
-        Schema::drop('lb_contents');
+        Schema::drop(config('laraberg.models.block', \VanOns\Laraberg\Models\Block::class)::tableName());
+        Schema::drop(config('laraberg.models.content', \VanOns\Laraberg\Models\Content::class)::tableName());
     }
 }
 
