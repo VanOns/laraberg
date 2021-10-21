@@ -1,11 +1,17 @@
+import '../scss/laraberg.scss'
+
 import { initializeEditor } from '@mauricewijnia/block-editor'
 
-const init = (target, options = {}) => {
-  initializeEditor(target)
-}
+export const init = (target, options = {}) => {
+  let element = document.getElementById(target)
 
-const Laraberg = {
-  init
-}
+  if (!element) {
+    element = document.querySelector(target)
+  }
 
-export default Laraberg
+  if (!element) {
+    element = target
+  }
+
+  initializeEditor(element)
+}

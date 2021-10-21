@@ -1,0 +1,8 @@
+html {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
