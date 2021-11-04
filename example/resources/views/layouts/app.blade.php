@@ -12,7 +12,17 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 </head>
 <body>
+    <header>
+        <h1>{{config('app.name')}}</h1>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="{{route('home')}}">Home</a></li>
+                <li><a href="{{route('posts.index')}}">Posts</a></li>
+            </ul>
+        </nav>
+    </header>
     @yield('content')
 </body>
-@yield('scripts')
+@stack('scripts')
 </html>

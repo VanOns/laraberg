@@ -860,20 +860,20 @@
 
 "@mauricewijnia/block-editor@file:../../js/block-editor":
   "resolved" "file:../../js/block-editor"
-  "version" "1.0.0-alpha.0"
+  "version" "1.0.0-alpha.2"
   dependencies:
     "@types/react" "^16.8.0"
-    "@wordpress/api-fetch" "^5.1.1"
-    "@wordpress/base-styles" "^3.5.4"
-    "@wordpress/block-editor" "^6.1.8"
-    "@wordpress/block-library" "^3.2.12"
-    "@wordpress/blocks" "^9.1.4"
-    "@wordpress/components" "^14.1.5"
-    "@wordpress/data" "^5.1.2"
-    "@wordpress/element" "^3.1.1"
-    "@wordpress/hooks" "^3.1.1"
-    "@wordpress/interface" "^3.1.6"
-    "@wordpress/keyboard-shortcuts" "^2.1.2"
+    "@wordpress/api-fetch" "~5.2.2"
+    "@wordpress/base-styles" "~4.0.0"
+    "@wordpress/block-editor" "~7.0.2"
+    "@wordpress/block-library" "~6.0.0"
+    "@wordpress/blocks" "~11.1.0"
+    "@wordpress/components" "~18.0.0"
+    "@wordpress/data" "~6.1.0"
+    "@wordpress/element" "~4.0.1"
+    "@wordpress/format-library" "~3.0.2"
+    "@wordpress/hooks" "~3.2.0"
+    "@wordpress/keyboard-shortcuts" "~3.0.2"
     "axios" "^0.21.1"
     "uuid" "^8.3.2"
 
@@ -3148,6 +3148,7 @@
   dependencies:
     "bindings" "^1.5.0"
     "nan" "^2.12.1"
+    "node-pre-gyp" "*"
 
 "fstream@^1.0.0", "fstream@^1.0.12":
   "integrity" "sha512-WvJ193OHa0GHPEL+AycEJgxvBEwyfRkN1vhjca23OaPVMCaLCXTd5qAu82AjTcgP1UJmytkOKb63Ypde7raDIg=="
@@ -4661,6 +4662,20 @@
     "url" "^0.11.0"
     "util" "^0.11.0"
     "vm-browserify" "^1.0.1"
+
+"node-pre-gyp@*":
+  "version" "0.14.0"
+  dependencies:
+    "detect-libc" "^1.0.2"
+    "mkdirp" "^0.5.1"
+    "needle" "^2.2.1"
+    "nopt" "^4.0.1"
+    "npm-packlist" "^1.1.6"
+    "npmlog" "^4.0.2"
+    "rc" "^1.2.7"
+    "rimraf" "^2.6.1"
+    "semver" "^5.3.0"
+    "tar" "^4.4.2"
 
 "node-releases@^1.1.52":
   "integrity" "sha512-snSiT1UypkgGt2wxPqS6ImEUICbNCMb31yaxWrOLXjhlt2z2/IBpaOxzONExqSm4y5oLnAqjjRWu+wsDzK5yNQ=="

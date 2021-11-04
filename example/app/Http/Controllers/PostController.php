@@ -21,8 +21,16 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store(Request $request, Post $post) {
+    public function store(Request $request) {
+        $data = $request->validate([
+            'title' => ['required', 'string'],
+            'slug' => ['string'],
+            'content' => ['string']
+        ]);
 
+        $post = Post::create($data);
+
+        return view('posts.show', compact('post'));
     }
 
     public function edit(Post $post) {

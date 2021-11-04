@@ -7,13 +7,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Posts Index</h1>
+    <div class="container">
+        <h2>Posts</h2>
 
-    @foreach($posts as $post)
-        <div>
-            <h2>{{$post->title}}</h2>
-            <a href="{{route('posts.show', $post)}}">Show</a>
-            <a href="{{route('posts.edit', $post)}}">Edit</a>
-        </div>
-    @endforeach
+        @foreach($posts as $post)
+            <div class="post-item">
+                <h3 class="post-item__title">{{$post->title}}</h3>
+                <div>
+                    <a href="{{route('posts.show', $post)}}" class="button">Read</a>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
 @endsection

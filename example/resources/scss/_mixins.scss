@@ -1,0 +1,10 @@
+@mixin focus() {
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(var(--color-focus), 0.33);
+    }
+}
+
+@mixin animate() {
+    transition: all .2s ease-in-out;
+}

@@ -1,8 +1,199 @@
+@use 'mixins';
+
+$color-light-gray: #F2F2F2;
+$color-medium-gray: #D4D4D4;
+$color-dark-gray: #8a8a8a;
+$color-darkest-gray: #525252;
+$color-black: #151515;
+$color-white: #ffffff;
+
+$color-primary: #003CFB;
+$color-secondary: #02C758;
+$color-tertiary: #E7461E;
+$color-success: #3adb76;
+$color-warning: #ffae00;
+$color-alert: #cc4b37;
+
+$border: 1px solid var(--color-border);
+$border-radius-round: 100rem;
+$border-radius-square: 4px;
+
+:root {
+    --color-light-gray: #{$color-light-gray};
+    --color-medium-gray: #{$color-medium-gray};
+    --color-dark-gray: #{$color-dark-gray};
+    --color-darkest-gray: #{$color-darkest-gray};
+    --color-black: #{$color-black};
+    --color-white: #{$color-white};
+
+    --color-primary:  #{$color-primary};
+    --color-secondary: #{$color-secondary};
+    --color-tertiary: #{$color-tertiary};
+    --color-success: #{$color-success};
+    --color-warning: #{$color-warning};
+    --color-alert: #{$color-alert};
+
+    --color-focus:
+        #{red($color-primary)},
+        #{green($color-primary)},
+        #{blue($color-primary)};
+    --color-border: var(--color-medium-gray);
+
+    --border: #{$border};
+    --border-radius-round: #{$border-radius-round};
+    --border-radius-square: #{$border-radius-square};
+
+
+    --wp-admin-theme-color: #{$color-primary};
+    --wp-admin-theme-color--rgb: rgb($color-primary);
+    --wp-admin-theme-color-darker-10: #{darken($color-primary, 10%)};
+    --wp-admin-theme-color-darker-10--rgb:
+        #{red(darken($color-primary, 10%))},
+        #{green(darken($color-primary, 10%))},
+        #{blue(darken($color-primary, 10%))};
+    --wp-admin-theme-color-darker-20: #{darken($color-primary, 20%)};
+    --wp-admin-theme-color-darker-20--rgb:
+        #{red(darken($color-primary, 20%))},
+        #{green(darken($color-primary, 20%))},
+        #{blue(darken($color-primary, 20%))};;
+    --wp-admin-border-width-focus: 2px;
+}
+
+body {
+    margin: 0;
+}
+
 html {
     font-family: Helvetica, Arial, sans-serif;
+}
+
+header {
+    background: var(--color-black);
+    color: var(--color-white);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        margin: 0;
+    }
+}
+
+nav.menu {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        margin: 0 .5rem;
+        display: inline-block;
+    }
+
+    a {
+        color: var(--color-white);
+
+        &:hover {
+            color: var(--color-primary);
+            filter: brightness(1);
+        }
+    }
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--color-primary);
+        filter: brightness(0.5);
+    }
+
+    @include mixins.animate;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+input {
+    transition: all .2s ease-in-out;
+    width: 100%;
+    border: var(--border);
+    border-radius: var(--border-radius-round);
+    padding: .5rem .75rem;
+    box-sizing: border-box;
+
+    @include mixins.focus;
+    @include mixins.animate;
+}
+
+.button, .button--primary {
+    transition: all .2s ease-in-out;
+    border-radius: var(--border-radius-round);
+    border: none;
+    padding: .75rem 1.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    cursor: pointer;
+
+    &:hover {
+        color: var(--color-white);
+        filter: brightness(0.8);
+    }
+
+    @include mixins.focus;
+    @include mixins.animate;
+}
+
+.button--secondary {
+    @extend .button;
+
+    background-color: var(--color-secondary);
+}
+
+.button--tertiary {
+    @extend .button;
+
+    background-color: var(--color-tertiary);
+}
+
+.button--edit {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: .5rem;
+    margin-bottom: .5rem;
+}
+
+
+.form-group {
+    margin: 1rem 0;
+
+    label {
+        display: block;
+        margin-bottom: .5rem;
+    }
+
+    input {
+        display: block;
+    }
+
+    .validation--error {
+        margin-bottom: .5rem;
+        color: var(--color-alert)
+    }
+}
+
+.post-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: var(--border);
+    border-radius: var(--border-radius-square);
+    margin-bottom: .5rem;
+    padding: 0 .75rem;
 }
