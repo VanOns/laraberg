@@ -9,7 +9,7 @@ const externals = {
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './src/resources/js/laraberg.js',
+  entry: './resources/js/laraberg.js',
   output: {
     filename: 'laraberg.js',
     path: path.resolve(__dirname, 'public/js'),

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use VanOns\Laraberg\Laraberg;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Laraberg::registerBlockType('example/example-block', [], function ($attributes, $content) {
+            return "<h1>Dynamic</h1>";
+        });
     }
 }
