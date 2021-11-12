@@ -43,7 +43,6 @@ $border-radius-square: 4px;
     --border-radius-round: #{$border-radius-round};
     --border-radius-square: #{$border-radius-square};
 
-
     --wp-admin-theme-color: #{$color-primary};
     --wp-admin-theme-color--rgb: rgb($color-primary);
     --wp-admin-theme-color-darker-10: #{darken($color-primary, 10%)};
@@ -61,19 +60,25 @@ $border-radius-square: 4px;
 
 body {
     margin: 0;
+    padding: 70px 0;
 }
 
 html {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Nunito', Helvetica, Arial, sans-serif;
 }
 
 header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
     background: var(--color-black);
     color: var(--color-white);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 10;
 
     h1 {
         margin: 0;
@@ -163,13 +168,13 @@ input {
 }
 
 .button--edit {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     margin-left: .5rem;
     margin-bottom: .5rem;
+    z-index: 10;
 }
-
 
 .form-group {
     margin: 1rem 0;

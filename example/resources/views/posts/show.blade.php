@@ -6,5 +6,5 @@
         <div>{!! $post->content !!}</div>
     </div>
 
-    <a href="{{route('posts.edit', $post)}}" class="button button--edit">Edit</a>
+    <a href="{{route('posts.edit', $post)}}" class="button--primary button--edit">Edit</a>
 @endsection

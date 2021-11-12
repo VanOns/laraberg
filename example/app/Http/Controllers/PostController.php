@@ -30,7 +30,9 @@ class PostController extends Controller
 
         $post = Post::create($data);
 
-        return view('posts.show', compact('post'));
+        return redirect(
+            route('posts.show', compact('post'))
+        );
     }
 
     public function edit(Post $post) {
@@ -46,6 +48,8 @@ class PostController extends Controller
 
         $post->update($data);
 
-        return redirect(route('posts.edit', $post));
+        return redirect(
+            route('posts.show', $post)
+        );
     }
 }

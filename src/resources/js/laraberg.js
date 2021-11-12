@@ -1,8 +1,12 @@
 import '../scss/laraberg.scss'
 
-import { initializeEditor } from '@mauricewijnia/block-editor'
+import {
+  Editor,
+  initializeEditor,
+  registerBlockType
+} from '@mauricewijnia/block-editor'
 
-export const init = (target, options = {}) => {
+const init = (target, options = {}) => {
   let element = document.getElementById(target)
 
   if (!element) {
@@ -14,4 +18,11 @@ export const init = (target, options = {}) => {
   }
 
   initializeEditor(element)
+}
+
+export {
+  Editor,
+  init,
+  initializeEditor,
+  registerBlockType
 }

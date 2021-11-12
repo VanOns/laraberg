@@ -16,5 +16,8 @@
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.37.0",
         "sass-loader": "^12.1.0"
+    },
+    "dependencies": {
+        "react": "^17.0.2"
     }
 }
