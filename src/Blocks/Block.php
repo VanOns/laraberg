@@ -11,7 +11,7 @@ class Block
     /**
      * @var array
      */
-    public $attrs;
+    public $attributes;
     /**
      * @var array
      */
@@ -29,14 +29,14 @@ class Block
     protected $registry;
 
     public function __construct(
-        string $name,
-        array $attrs = [],
+        string $blockName,
+        array $attributes = [],
         array $innerBlocks = [],
         string $innerHTML = '',
         array $innerContent = []
     ) {
-        $this->blockName = $name;
-        $this->attrs     = $attrs;
+        $this->blockName   = $blockName;
+        $this->attributes  = $attributes;
         $this->innerBlocks = $innerBlocks;
         $this->innerHTML = $innerHTML;
         $this->innerContent = $innerContent;
@@ -57,7 +57,7 @@ class Block
 
         $blockType = $this->registry->getBlockType($this->blockName);
         if ($blockType && $blockType->isDynamic()) {
-            $output = ($blockType->renderCallback)($this->attrs, $output, );
+            $output = call_user_func($blockType->renderCallback, $this->attributes, $output, $this);
         }
 
         return $output;
