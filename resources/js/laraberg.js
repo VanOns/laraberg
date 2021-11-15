@@ -1,12 +1,10 @@
 import '../scss/laraberg.scss'
 
-import {
-  Editor,
-  initializeEditor,
-  registerBlockType
-} from '@mauricewijnia/block-editor'
+import { Editor, initializeEditor, registerBlockType } from '@mauricewijnia/block-editor'
 
-const init = (target, options = {}) => {
+import defaultSettings from './default-settings'
+
+const init = (target, settings = {}) => {
   let element = document.getElementById(target)
 
   if (!element) {
@@ -17,7 +15,7 @@ const init = (target, options = {}) => {
     element = target
   }
 
-  initializeEditor(element)
+  initializeEditor(element, { ...defaultSettings, ...settings })
 }
 
 export {
