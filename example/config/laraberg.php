@@ -1,8 +1,5 @@
 <?php
 
-use VanOns\Laraberg\Models\Block;
-use VanOns\Laraberg\Models\Content;
-
 return [
     /*
     |--------------------------------------------------------------------------
@@ -11,14 +8,6 @@ return [
     */
 
     'use_package_routes' => true,
-
-    'middlewares' => ['web', 'auth'],
-
+    'middlewares' => ['web'],
     'prefix' => 'laraberg',
-
-    "models" => [
-        "block" => Block::class,
-        "content" => Content::class,
-    ],
-    
 ];

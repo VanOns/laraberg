@@ -1,7 +1,6 @@
 import '../scss/laraberg.scss'
 
 import { Editor, initializeEditor, registerBlockType } from '@mauricewijnia/block-editor'
-
 import defaultSettings from './default-settings'
 
 const init = (target, settings = {}) => {
@@ -21,6 +20,5 @@ const init = (target, settings = {}) => {
 export {
   Editor,
   init,
-  initializeEditor,
   registerBlockType
 }

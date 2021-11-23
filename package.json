@@ -10,12 +10,11 @@
     "clean": "rm -rf public/css public/js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "predevelopment": "npm run clean",
-    "development": "webpack --config webpack/webpack.dev.js",
-    "dev": "npm run development",
-    "watch": "npm run development -- --watch",
+    "dev": "webpack --config webpack/webpack.dev.js",
+    "watch": "npm run dev -- --watch",
     "start": "npm run watch",
-    "prebuild": "npm run clean",
-    "build": "webpack --config webpack/webpack.prod.js"
+    "preprod": "npm run clean",
+    "prod": "webpack --config webpack/webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -27,29 +26,17 @@
     "url": "https://github.com/VanOns/laraberg/issues"
   },
   "homepage": "https://github.com/VanOns/laraberg#readme",
-  "browserslist": "> 0.25%, not dead",
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-transform-runtime": "^7.6.2",
-    "@babel/preset-env": "^7.6.3",
-    "@wordpress/dependency-extraction-webpack-plugin": "^1.2.0",
-    "babel-eslint": "^10.0.3",
-    "babel-loader": "^8.0.6",
-    "babel-polyfill": "^6.26.0",
-    "css-loader": "^3.2.0",
-    "mini-css-extract-plugin": "^0.7.0",
+    "css-loader": "^6.5.1",
+    "css-minimizer-webpack-plugin": "^3.1.4",
+    "mini-css-extract-plugin": "^2.4.5",
     "sass": "^1.43.4",
     "sass-loader": "^12.3.0",
-    "style-loader": "^0.23.1",
-    "webpack": "^5.61.0",
+    "webpack": "^5.64.2",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.4.0",
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@babel/preset-react": "^7.6.3",
-    "@babel/runtime": "^7.6.3",
     "@mauricewijnia/block-editor": "file:../../js/block-editor"
   }
 }

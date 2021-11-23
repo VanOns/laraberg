@@ -1,4 +1,7 @@
+import fetchHandler from './fetch-handler'
+
 export default {
+  fetchHandler,
   mediaUpload: undefined,
   disabledCoreBlocks: [
     'core/freeform',

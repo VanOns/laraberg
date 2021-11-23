@@ -20,7 +20,9 @@ class LarabergServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->publishes([__DIR__ . '/../public' => public_path('vendor/laraberg')], 'public');
 
-        require __DIR__ . '/Http/routes.php';
+        if (config('laraberg.use_package_routes')) {
+            require_once __DIR__ . '/Http/routes.php';
+        };
 
         /**
          * Bindings
