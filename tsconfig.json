@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "public",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "module": "esnext",
+    "target": "es2015",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowJs": true,
+  },
+  "include": [
+    "./resources/**/*"
+  ],
+  "exclude": [
+    "./public"
+  ]
+}

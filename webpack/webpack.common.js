@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        laraberg: './resources/js/laraberg.js'
+        laraberg: './resources/ts/laraberg.ts'
     },
     output: {
         filename: 'js/[name].js',
@@ -14,6 +14,11 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.ts?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+            {
                 test: /\.(s[ac]ss|css)$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
@@ -22,6 +27,9 @@ module.exports = {
                 ]
             }
         ]
+    },
+    resolve: {
+        extensions: ['.ts', '.js'],
     },
     optimization: {
         minimizer: [ `...`, new CssMinimizerPlugin() ]
