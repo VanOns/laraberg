@@ -1,16 +1,9 @@
 import { APIFetchOptions, FetchHandler } from '@mauricewijnia/block-editor/dist/interfaces/fetch-handler'
-import Route from './route'
 import Router from './router'
-import FetchError from "./fetch-error";
+import FetchError from "./fetch-error"
+import routes from './routes'
 
-const router = new Router([
-    new Route('GET', /\/oembed\/1\.0\/proxy\?(.*)/g, (params) => {
-        console.log('OEMBED', params)
-    }),
-    new Route('GET', /\/wp\/v2\/themes/g, (params) => {
-        console.log('THEMES', params)
-    }),
-])
+const router = new Router(routes)
 
 const handlerNotFound = (options: APIFetchOptions): Promise<object> => {
     return new Promise((resolve, reject) => {

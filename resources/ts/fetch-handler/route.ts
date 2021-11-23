@@ -11,8 +11,25 @@ class Route {
         this.handler = handler
     }
 
+    static get(regex: RegExp, handler: (params: object) => any): Route {
+        return new Route('GET', regex, handler)
+    }
+
+    static put(regex: RegExp, handler: (params: object) => any): Route {
+        return new Route('PUT', regex, handler)
+    }
+
+    static post(regex: RegExp, handler: (params: object) => any): Route {
+        return new Route('POST', regex, handler)
+    }
+
+    static delete(regex: RegExp, handler: (params: object) => any): Route {
+        return new Route('DELETE', regex, handler)
+    }
+
     handle (options: APIFetchOptions): Promise<any> {
         const params = this.getParams(options)
+        console.log('Route', this, params)
         return Promise.resolve(
             this.handler(params)
         )
