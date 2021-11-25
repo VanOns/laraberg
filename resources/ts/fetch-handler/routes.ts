@@ -1,4 +1,4 @@
-import Route from "./route";
+import Route from "./routing/route";
 import oembedHandler from "./handlers/oembed-handler";
 import themesHandler from "./handlers/themes-handler";
 
