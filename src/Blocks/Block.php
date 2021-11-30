@@ -2,6 +2,8 @@
 
 namespace VanOns\Laraberg\Blocks;
 
+use VanOns\Laraberg\Services\OEmbedService;
+
 class Block
 {
     /**
@@ -28,6 +30,9 @@ class Block
     /** @var BlockTypeRegistry */
     protected $registry;
 
+    /** @var OEmbedService  */
+    protected $embedService;
+
     public function __construct(
         string $blockName,
         array $attributes = [],
@@ -42,6 +47,7 @@ class Block
         $this->innerContent = $innerContent;
 
         $this->registry = app('laraberg.registry');
+        $this->embedService = app('laraberg.embed');
     }
 
     public function render(): string
@@ -60,7 +66,22 @@ class Block
             $output = call_user_func($blockType->renderCallback, $this->attributes, $output, $this);
         }
 
+        if ($this->blockName === 'core/embed') {
+            $output = $this->embed($output);
+        }
+
         return $output;
+    }
+
+    public function embed(string $content): string
+    {
+        $embed = $this->embedService->parse($this->attributes['url']);
+
+        return str_replace(
+            htmlspecialchars($this->attributes['url']),
+            $embed['html'],
+            $content
+        );
     }
 
     public static function fromArray(array $args): Block

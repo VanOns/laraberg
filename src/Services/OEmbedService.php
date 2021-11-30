@@ -2,6 +2,7 @@
 
 namespace VanOns\Laraberg\Services;
 
+use Cache;
 use Http;
 use Illuminate\Support\Arr;
 use VanOns\Laraberg\Exceptions\OEmbedFetchException;
@@ -19,10 +20,23 @@ class OEmbedService
      */
     public function parse(string $url): ?array
     {
-        return $this->fetch(
+        $cache = config('laraberg.embed.cache.enabled', true);
+        $key = "laraberg_embed_parse_{$url}";
+
+        if ($cache && $cached = Cache::get($key)) {
+            return $cached;
+        }
+
+        $data = $this->fetch(
             $this->getEndpointUrl($url),
             compact('url')
         );
+
+        if ($cache) {
+            Cache::set($key, $data, config('laraberg.embed.cache.duration', 3600));
+        }
+
+        return $data;
     }
 
     /**

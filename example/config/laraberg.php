@@ -10,4 +10,19 @@ return [
     'use_package_routes' => true,
     'middlewares' => ['web'],
     'prefix' => 'laraberg',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Embed settings
+    |--------------------------------------------------------------------------
+    */
+    'embed' => [
+        'maxwidth' => 1200,
+        'maxheight' => 1200,
+
+        'cache' => [
+            'enabled' => true,
+            'duration' => 86400
+        ]
+    ]
 ];
