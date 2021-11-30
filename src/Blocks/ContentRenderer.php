@@ -25,9 +25,4 @@ class ContentRenderer
 
         return $output;
     }
-
-    public function embed(string $content): string
-    {
-        return '';
-    }
 }
