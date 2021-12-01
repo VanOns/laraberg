@@ -1,6 +1,5 @@
 {
   "name": "laraberg",
-  "version": "2.0.0-rc1",
   "description": "A Gutenberg implementation for Laravel",
   "main": "resources/laraberg.js",
   "directories": {
@@ -9,7 +8,7 @@
   "scripts": {
     "clean": "rm -rf public/css public/js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "predevelopment": "npm run clean",
+    "predev": "npm run clean",
     "dev": "webpack --config webpack/webpack.dev.js",
     "watch": "npm run dev -- --watch",
     "start": "npm run watch",
@@ -39,6 +38,6 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@mauricewijnia/block-editor": "1.0.0-rc.2"
+    "@mauricewijnia/block-editor": "1.0.0-rc.3"
   }
 }
