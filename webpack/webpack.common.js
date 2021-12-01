@@ -3,13 +3,14 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const path = require('path');
 
 module.exports = {
-    entry: {
-        laraberg: './resources/ts/laraberg.ts'
-    },
+    entry: './resources/ts/laraberg.ts',
     output: {
-        filename: 'js/[name].js',
+        filename: 'js/laraberg.js',
         path: path.resolve(__dirname, '../public'),
-        library: 'Laraberg'
+        library: {
+            name: 'Laraberg',
+            type: 'umd'
+        }
     },
     module: {
         rules: [
@@ -36,7 +37,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
+            filename: 'css/laraberg.css',
         }),
     ]
 };
