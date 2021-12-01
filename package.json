@@ -1,6 +1,6 @@
 {
   "name": "laraberg",
-  "version": "1.1.1",
+  "version": "2.0.0-rc1",
   "description": "A Gutenberg implementation for Laravel",
   "main": "resources/laraberg.js",
   "directories": {
@@ -39,6 +39,6 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@mauricewijnia/block-editor": "file:../../js/block-editor"
+    "@mauricewijnia/block-editor": "1.0.0-rc.2"
   }
 }

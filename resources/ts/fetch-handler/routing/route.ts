@@ -29,7 +29,6 @@ class Route {
 
     handle (options: APIFetchOptions): Promise<any> {
         const params = this.getParams(options)
-        console.log('Route', this, params)
         return Promise.resolve(
             this.handler(params)
         )
