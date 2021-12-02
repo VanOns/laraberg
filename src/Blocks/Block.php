@@ -92,7 +92,7 @@ class Block
         }
 
         return new static(
-            $args['blockName'],
+            $args['blockName'] ?? '',
             $args['attrs'] ?? [],
             $innerBlocks,
             $args['innerHTML'] ?? '',
