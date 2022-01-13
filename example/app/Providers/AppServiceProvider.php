@@ -24,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Laraberg::registerBlockType('example/example-block-2', [], function ($attributes, $content) {
+            return "<div>Test</div>";
+        });
+
         Laraberg::registerBlockType('example/example-block', [], function ($attributes, $content) {
             return "<div style='background-color: black; color: white; padding: 1rem'>{$content}<p>Dynamic block</p></div>";
         });

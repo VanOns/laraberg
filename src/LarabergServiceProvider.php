@@ -25,18 +25,7 @@ class LarabergServiceProvider extends ServiceProvider
             require_once __DIR__ . '/Http/routes.php';
         };
 
-        /**
-         * Bindings
-         */
-
-        $this->app->bind('laraberg.renderer', ContentRenderer::class);
-        $this->app->bind('laraberg.parser', BlockParser::class);
-        $this->app->bind('laraberg.embed', OEmbedService::class);
-        $this->app->bind('laraberg.registry', BlockTypeRegistry::class);
-
-        $this->app->singleton(BlockTypeRegistry::class, function () {
-            return BlockTypeRegistry::getInstance();
-        });
+        require_once __DIR__ . '/Blocks/wp.php';
     }
     /**
      * Register the application services.
@@ -45,6 +34,14 @@ class LarabergServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton(BlockTypeRegistry::class, function () {
+            return BlockTypeRegistry::getInstance();
+        });
+
+        $this->app->alias(ContentRenderer::class, 'laraberg.renderer');
+        $this->app->alias(BlockParser::class, 'laraberg.parser');
+        $this->app->alias(OEmbedService::class, 'laraberg.embed');
+        $this->app->alias(BlockTypeRegistry::class, 'laraberg.registry');
     }
 }
 

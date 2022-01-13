@@ -38,6 +38,6 @@ class BlockTypeRegistry
             return $blockType->name === $name;
         });
 
-        return $arr[0] ?? null;
+        return array_shift($arr);
     }
 }
