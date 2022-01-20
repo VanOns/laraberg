@@ -28,26 +28,9 @@ class Route {
     }
 
     handle (options: APIFetchOptions): Promise<any> {
-        const params = this.getParams(options)
         return Promise.resolve(
-            this.handler(params)
+            this.handler(options)
         )
-    }
-
-    getParams (options: APIFetchOptions): object {
-        if (options.path === undefined) {
-            return {}
-        }
-
-        this.regex.lastIndex = 0
-        const matches = this.regex.exec(options.path)
-
-        if (!matches || !matches[1]) {
-            return {}
-        }
-
-        const searchParams = new URLSearchParams(matches[1])
-        return Object.fromEntries(searchParams.entries())
     }
 }
 

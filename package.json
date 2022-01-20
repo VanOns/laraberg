@@ -38,6 +38,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@mauricewijnia/block-editor": "1.0.0-rc.9"
+    "@mauricewijnia/block-editor": "1.0.0-rc.10",
+    "qs": "^6.10.3"
   }
 }

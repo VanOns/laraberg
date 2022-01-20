@@ -14,5 +14,9 @@ export const init = (
         element = target
     }
 
+    if (!element) {
+        return
+    }
+
     initializeEditor(element, { ...defaultSettings, ...settings })
 }

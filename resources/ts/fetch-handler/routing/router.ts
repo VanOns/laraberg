@@ -24,7 +24,7 @@ class Router {
 
             route.regex.lastIndex = 0
             const matches = route.regex.exec(options.path)
-
+            
             return matches && matches.length > 0
         })
     }
