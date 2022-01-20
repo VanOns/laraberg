@@ -1,1 +1,169 @@
-:root{--color-light-gray:#f2f2f2;--color-medium-gray:#d4d4d4;--color-dark-gray:#8a8a8a;--color-darkest-gray:#525252;--color-black:#151515;--color-white:#fff;--color-primary:#003cfb;--color-secondary:#02c758;--color-tertiary:#e7461e;--color-success:#3adb76;--color-warning:#ffae00;--color-alert:#cc4b37;--color-focus:0,60,251;--color-border:var(--color-medium-gray);--border:1px solid var(--color-border);--border-radius-round:100rem;--border-radius-square:4px;--wp-admin-theme-color:#003cfb;--wp-admin-theme-color--rgb:rgb($color-primary);--wp-admin-theme-color-darker-10:#0030c8;--wp-admin-theme-color-darker-10--rgb:0,48,200;--wp-admin-theme-color-darker-20:#002495;--wp-admin-theme-color-darker-20--rgb:0,36,149;--wp-admin-border-width-focus:2px}body{margin:0;padding:70px 0}html{font-family:Nunito,Helvetica,Arial,sans-serif}header{align-items:center;background:var(--color-black);box-sizing:border-box;color:var(--color-white);display:flex;justify-content:space-between;padding:1rem 2rem;position:fixed;top:0;width:100%;z-index:10}header h1{margin:0}nav.menu ul{list-style:none;margin:0;padding:0}nav.menu li{display:inline-block;margin:0 .5rem}nav.menu a{color:var(--color-white)}nav.menu a:hover{-webkit-filter:brightness(1);filter:brightness(1)}a,nav.menu a:hover{color:var(--color-primary)}a{text-decoration:none;transition:all .2s ease-in-out}a:hover{color:var(--color-primary);-webkit-filter:brightness(.5);filter:brightness(.5)}.container{margin:0 auto;max-width:1200px;padding:0 .5rem}input{border:var(--border);border-radius:var(--border-radius-round);box-sizing:border-box;padding:.5rem .75rem;transition:all .2s ease-in-out;width:100%}input:focus{box-shadow:0 0 0 3px rgba(var(--color-focus),.33);outline:none}.button,.button--primary,.button--secondary,.button--tertiary{background-color:var(--color-primary);border:none;border-radius:var(--border-radius-round);color:var(--color-white);cursor:pointer;padding:.75rem 1.5rem;transition:all .2s ease-in-out}.button--primary:hover,.button--secondary:hover,.button--tertiary:hover,.button:hover{color:var(--color-white);-webkit-filter:brightness(.8);filter:brightness(.8)}.button--primary:focus,.button--secondary:focus,.button--tertiary:focus,.button:focus{box-shadow:0 0 0 3px rgba(var(--color-focus),.33);outline:none}.button--secondary{background-color:var(--color-secondary)}.button--tertiary{background-color:var(--color-tertiary)}.button--edit{bottom:0;left:0;margin-bottom:.5rem;margin-left:.5rem;position:fixed;z-index:10}.form-group{margin:1rem 0}.form-group label{display:block;margin-bottom:.5rem}.form-group input{display:block}.form-group .validation--error{color:var(--color-alert);margin-bottom:.5rem}.post-item{align-items:center;border:var(--border);border-radius:var(--border-radius-square);display:flex;justify-content:space-between;margin-bottom:.5rem;padding:0 .75rem}
+:root {
+  --color-light-gray: #F2F2F2;
+  --color-medium-gray: #D4D4D4;
+  --color-dark-gray: #8a8a8a;
+  --color-darkest-gray: #525252;
+  --color-black: #151515;
+  --color-white: #ffffff;
+  --color-primary: #003CFB;
+  --color-secondary: #02C758;
+  --color-tertiary: #E7461E;
+  --color-success: #3adb76;
+  --color-warning: #ffae00;
+  --color-alert: #cc4b37;
+  --color-focus:
+      0,
+      60,
+      251;
+  --color-border: var(--color-medium-gray);
+  --border: 1px solid var(--color-border);
+  --border-radius-round: 100rem;
+  --border-radius-square: 4px;
+  --wp-admin-theme-color: #003CFB;
+  --wp-admin-theme-color--rgb: rgb($color-primary);
+  --wp-admin-theme-color-darker-10: #0030c8;
+  --wp-admin-theme-color-darker-10--rgb:
+      0,
+      48,
+      200;
+  --wp-admin-theme-color-darker-20: #002495;
+  --wp-admin-theme-color-darker-20--rgb:
+      0,
+      36,
+      149;
+  --wp-admin-border-width-focus: 2px;
+}
+
+body {
+  margin: 0;
+  padding: 70px 0;
+}
+
+html {
+  font-family: "Nunito", Helvetica, Arial, sans-serif;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+header h1 {
+  margin: 0;
+}
+
+nav.menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav.menu li {
+  margin: 0 0.5rem;
+  display: inline-block;
+}
+nav.menu a {
+  color: var(--color-white);
+}
+nav.menu a:hover {
+  color: var(--color-primary);
+  filter: brightness(1);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+a:hover {
+  color: var(--color-primary);
+  filter: brightness(0.5);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+}
+
+input {
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  border: var(--border);
+  border-radius: var(--border-radius-round);
+  padding: 0.5rem 0.75rem;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+}
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--color-focus), 0.33);
+}
+
+.button, .button--tertiary, .button--secondary, .button--primary {
+  transition: all 0.2s ease-in-out;
+  border-radius: var(--border-radius-round);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.button:hover, .button--tertiary:hover, .button--secondary:hover, .button--primary:hover {
+  color: var(--color-white);
+  filter: brightness(0.8);
+}
+.button:focus, .button--tertiary:focus, .button--secondary:focus, .button--primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--color-focus), 0.33);
+}
+
+.button--secondary {
+  background-color: var(--color-secondary);
+}
+
+.button--tertiary {
+  background-color: var(--color-tertiary);
+}
+
+.button--edit {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+  z-index: 10;
+}
+
+.form-group {
+  margin: 1rem 0;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.form-group input {
+  display: block;
+}
+.form-group .validation--error {
+  margin-bottom: 0.5rem;
+  color: var(--color-alert);
+}
+
+.post-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: var(--border);
+  border-radius: var(--border-radius-square);
+  margin-bottom: 0.5rem;
+  padding: 0 0.75rem;
+}

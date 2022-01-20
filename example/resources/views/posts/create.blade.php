@@ -25,9 +25,3 @@
     </div>
 
 @endsection
-
-@push('scripts')
-    <script>
-        Laraberg.init('content')
-    </script>
-@endpush

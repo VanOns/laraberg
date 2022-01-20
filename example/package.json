@@ -11,9 +11,11 @@
     },
     "devDependencies": {
         "@babel/preset-react": "^7.16.0",
+        "autoprefixer": "^10.4.2",
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
+        "postcss": "^8.4.5",
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.37.0",
         "sass-loader": "^12.1.0"
