@@ -3,8 +3,6 @@ import React from 'react'
 const { MediaPlaceholder } = Laraberg.wordpress.blockEditor
 
 const Edit = ({attributes: { media }, setAttributes}) => {
-    console.log(media)
-    console.log(Object.keys(media).length)
     return (
         <div>
             <h1>Media Upload Block</h1>

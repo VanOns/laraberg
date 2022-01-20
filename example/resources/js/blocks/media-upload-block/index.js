@@ -1,5 +1,6 @@
 import React from 'react'
 import Edit from './edit'
+import Save from './save'
 
 const { registerBlockType } = Laraberg
 
@@ -15,6 +16,6 @@ export default () => {
             }
         },
         edit: Edit,
-        save: () => <h1>Save</h1>
+        save: Save
     })
 }
