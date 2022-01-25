@@ -2074,6 +2074,9 @@ __webpack_require__.r(__webpack_exports__);
 (0,_blocks_example_block__WEBPACK_IMPORTED_MODULE_1__["default"])();
 (0,_blocks_media_upload_block__WEBPACK_IMPORTED_MODULE_2__["default"])();
 (0,_blocks_server_side_render_block__WEBPACK_IMPORTED_MODULE_3__["default"])();
+document.addEventListener('block-editor/init', function () {
+  console.log('block-editor/init');
+});
 
 var mediaUpload = function mediaUpload(_ref) {
   var filesList = _ref.filesList,

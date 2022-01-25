@@ -8,6 +8,10 @@ exampleBlock()
 mediaUploadBlock()
 serverSideRenderBlock()
 
+document.addEventListener('block-editor/init', () => {
+    console.log('block-editor/init')
+})
+
 const mediaUpload = ({filesList, onFileChange}) => {
     setTimeout(() => {
         const uploadedFiles = Array.from(filesList).map(file => {
