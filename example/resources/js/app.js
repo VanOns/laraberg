@@ -9,10 +9,6 @@ mediaUploadBlock()
 serverSideRenderBlock()
 
 const mediaUpload = ({filesList, onFileChange}) => {
-    const files = Array.from(filesList).map(window.URL.createObjectURL)
-
-    onFileChange(files)
-
     setTimeout(() => {
         const uploadedFiles = Array.from(filesList).map(file => {
             return {

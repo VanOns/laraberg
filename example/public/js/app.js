@@ -2078,8 +2078,6 @@ __webpack_require__.r(__webpack_exports__);
 var mediaUpload = function mediaUpload(_ref) {
   var filesList = _ref.filesList,
       onFileChange = _ref.onFileChange;
-  var files = Array.from(filesList).map(window.URL.createObjectURL);
-  onFileChange(files);
   setTimeout(function () {
     var uploadedFiles = Array.from(filesList).map(function (file) {
       return {
