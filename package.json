@@ -38,7 +38,11 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@mauricewijnia/block-editor": "1.0.0-rc.14",
+    "@mauricewijnia/block-editor": "1.0.0-rc.17",
     "qs": "^6.10.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   }
 }

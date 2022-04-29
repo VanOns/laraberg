@@ -32,6 +32,10 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js'],
     },
+    externals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM'
+    },
     optimization: {
         minimizer: [ `...`, new CssMinimizerPlugin() ]
     },
