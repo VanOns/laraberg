@@ -22,8 +22,8 @@ class LarabergServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../public' => public_path('vendor/laraberg')], 'public');
 
         if (config('laraberg.use_package_routes')) {
-            require_once __DIR__ . '/Http/routes.php';
-        };
+            $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
+        }
 
         require_once __DIR__ . '/Blocks/wp.php';
     }
