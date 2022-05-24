@@ -1,8 +1,6 @@
 # <img height="300px" src="./logo-text.svg"> <!-- omit in toc -->
 [![Latest Version](https://img.shields.io/packagist/v/van-ons/laraberg)](https://packagist.org/packages/van-ons/laraberg)
 ![License](https://img.shields.io/github/license/VanOns/laraberg.svg)
-[![Gitter](https://badges.gitter.im/VanOns/laraberg.svg)](https://gitter.im/VanOns/laraberg?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
 
 Laraberg aims to provide an easy way to integrate the Gutenberg editor with your Laravel projects. It takes the Gutenberg editor and adds all the communication and data it needs function in a Laravel environment.
 
