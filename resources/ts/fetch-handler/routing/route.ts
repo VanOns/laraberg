@@ -1,4 +1,4 @@
-import { APIFetchOptions } from "@mauricewijnia/block-editor/dist/interfaces/fetch-handler"
+import { APIFetchOptions } from "@van-ons/block-editor/dist/interfaces/fetch-handler"
 
 class Route {
     public method: string

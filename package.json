@@ -12,8 +12,8 @@
     "dev": "webpack --config webpack/webpack.dev.js",
     "watch": "npm run dev -- --watch",
     "start": "npm run watch",
-    "preprod": "npm run clean",
-    "prod": "webpack --config webpack/webpack.prod.js"
+    "prebuild": "npm run clean",
+    "build": "webpack --config webpack/webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -38,7 +38,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@mauricewijnia/block-editor": "1.0.0-rc.17",
+    "@van-ons/block-editor": "^1.0.0",
     "qs": "^6.10.3"
   },
   "peerDependencies": {

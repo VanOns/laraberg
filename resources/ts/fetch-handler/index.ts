@@ -1,4 +1,4 @@
-import { APIFetchOptions, FetchHandler } from '@mauricewijnia/block-editor/dist/interfaces/fetch-handler'
+import { APIFetchOptions, FetchHandler } from '@van-ons/block-editor/dist/interfaces/fetch-handler'
 import Router from './routing/router'
 import routes from './routes'
 import handlerNotFound from "./handlers/handler-not-found";

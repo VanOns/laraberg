@@ -1,5 +1,5 @@
-import EditorSettings from "@mauricewijnia/block-editor/dist/interfaces/editor-settings";
-import { initializeEditor } from "@mauricewijnia/block-editor";
+import EditorSettings from "@van-ons/block-editor/dist/interfaces/editor-settings";
+import { initializeEditor } from "@van-ons/block-editor";
 import defaultSettings from "./default-settings";
 
 export const init = (

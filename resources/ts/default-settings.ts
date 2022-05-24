@@ -1,5 +1,5 @@
 import fetchHandler from './fetch-handler'
-import EditorSettings from "@mauricewijnia/block-editor/dist/interfaces/editor-settings"
+import EditorSettings from "@van-ons/block-editor/dist/interfaces/editor-settings"
 
 const defaultSettings: EditorSettings = {
     fetchHandler,

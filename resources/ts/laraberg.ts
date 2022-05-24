@@ -1,4 +1,4 @@
-import '@mauricewijnia/block-editor/dist/styles.css'
+import '@van-ons/block-editor/dist/styles.css'
 
-export { wordpress, Editor, registerBlockType, removeEditor } from '@mauricewijnia/block-editor'
+export { wordpress, Editor, registerBlockType, removeEditor } from '@van-ons/block-editor'
 export { init } from './init'
