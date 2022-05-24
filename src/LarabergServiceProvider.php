@@ -25,6 +25,8 @@ class LarabergServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/config/laraberg.php', 'laraberg');
+        
         $this->app->singleton(Laraberg::class, function () {
             return new Laraberg();
         });
