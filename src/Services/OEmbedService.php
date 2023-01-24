@@ -27,8 +27,13 @@ class OEmbedService
             return $cached;
         }
 
+        $endpoint = $this->getEndpointUrl($url);
+        if ($endpoint === null) {
+            return null;
+        }
+
         $data = $this->fetch(
-            $this->getEndpointUrl($url),
+            $endpoint,
             compact('url')
         );
 
