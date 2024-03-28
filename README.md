@@ -74,7 +74,7 @@ In order to edit content on an already existing model we have to set the value o
 <textarea id="[id_here]" name="[name_here]" hidden>{{ $model->content }}</textarea>
 ```
 
-To initialize the editor all we have to do is call the initialize function with the id of the textarea. You probably want to do this insde a DOMContentLoaded event.
+To initialize the editor all we have to do is call the initialize function with the id of the textarea. You probably want to do this inside a DOMContentLoaded event.
 
 And that's it! The editor will replace the textarea in the DOM and on a form submit the editor content will be available in the textarea's value attribute.
 
