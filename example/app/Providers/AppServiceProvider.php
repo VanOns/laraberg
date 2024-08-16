@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         Laraberg::registerBlockType('example/server-side-render-block', [], function ($attributes, $content) {
             ob_start();
             dump($attributes);
+
             return ob_get_clean();
         });
 
