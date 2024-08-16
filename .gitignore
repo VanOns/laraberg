@@ -2,3 +2,5 @@
 /node_modules
 /.vscode
 /.idea
+.php-cs-fixer.cache
+.php-cs-fixer.php

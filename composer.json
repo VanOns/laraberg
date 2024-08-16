@@ -9,11 +9,14 @@
         }
     ],
     "require": {
-        "embed/embed": "^3.3"
+        "php": "^8.2",
+        "embed/embed": "^4.4"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.7",
-        "phpunit/phpunit": "^7.0"
+        "orchestra/testbench": "^9.3",
+        "phpunit/phpunit": "^11.3",
+        "friendsofphp/php-cs-fixer": "^3.62",
+        "phpstan/phpstan": "^1.11"
     },
     "autoload": {
         "psr-4": {
@@ -29,6 +32,9 @@
         "laravel": {
             "providers": "VanOns\\Laraberg\\LarabergServiceProvider"
         }
+    },
+    "scripts": {
+        "fix": "vendor/bin/php-cs-fixer fix",
+        "analyse": "vendor/bin/phpstan analyse"
     }
-
 }
