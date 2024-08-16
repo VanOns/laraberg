@@ -24,8 +24,6 @@ class LarabergServiceProvider extends ServiceProvider
         if (config('laraberg.use_package_routes')) {
             $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
         }
-
-        require_once __DIR__ . '/Blocks/wp.php';
     }
     /**
      * Register the application services.

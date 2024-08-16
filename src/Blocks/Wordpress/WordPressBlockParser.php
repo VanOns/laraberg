@@ -1,172 +1,6 @@
 <?php
 
-namespace VanOns\Laraberg\Blocks;
-
-/**
- * Block Serialization Parser
- *
- * @package WordPress
- */
-
-/**
- * Class WP_Block_Parser_Block
- *
- * Holds the block structure in memory
- *
- * @since 5.0.0
- */
-class WP_Block_Parser_Block
-{
-    /**
-     * Name of block
-     *
-     * @example "core/paragraph"
-     *
-     * @since 5.0.0
-     * @var string
-     */
-    public $blockName;
-
-    /**
-     * Optional set of attributes from block comment delimiters
-     *
-     * @example null
-     * @example array( 'columns' => 3 )
-     *
-     * @since 5.0.0
-     * @var array|null
-     */
-    public $attrs;
-
-    /**
-     * List of inner blocks (of this same class)
-     *
-     * @since 5.0.0
-     * @var WP_Block_Parser_Block[]
-     */
-    public $innerBlocks;
-
-    /**
-     * Resultant HTML from inside block comment delimiters
-     * after removing inner blocks
-     *
-     * @example "...Just <!-- wp:test /--> testing..." -> "Just testing..."
-     *
-     * @since 5.0.0
-     * @var string
-     */
-    public $innerHTML;
-
-    /**
-     * List of string fragments and null markers where inner blocks were found
-     *
-     * @example array(
-     *   'innerHTML'    => 'BeforeInnerAfter',
-     *   'innerBlocks'  => array( block, block ),
-     *   'innerContent' => array( 'Before', null, 'Inner', null, 'After' ),
-     * )
-     *
-     * @since 4.2.0
-     * @var array
-     */
-    public $innerContent;
-
-    /**
-     * Constructor.
-     *
-     * Will populate object properties from the provided arguments.
-     *
-     * @since 5.0.0
-     *
-     * @param string $name         Name of block.
-     * @param array  $attrs        Optional set of attributes from block comment delimiters.
-     * @param array  $innerBlocks  List of inner blocks (of this same class).
-     * @param string $innerHTML    Resultant HTML from inside block comment delimiters after removing inner blocks.
-     * @param array  $innerContent List of string fragments and null markers where inner blocks were found.
-     */
-    public function __construct($name, $attrs, $innerBlocks, $innerHTML, $innerContent)
-    {
-        $this->blockName    = $name;
-        $this->attrs        = $attrs;
-        $this->innerBlocks  = $innerBlocks;
-        $this->innerHTML    = $innerHTML;
-        $this->innerContent = $innerContent;
-    }
-}
-
-/**
- * Class WP_Block_Parser_Frame
- *
- * Holds partial blocks in memory while parsing
- *
- * @internal
- * @since 5.0.0
- */
-class WP_Block_Parser_Frame
-{
-    /**
-     * Full or partial block
-     *
-     * @since 5.0.0
-     * @var WP_Block_Parser_Block
-     */
-    public $block;
-
-    /**
-     * Byte offset into document for start of parse token
-     *
-     * @since 5.0.0
-     * @var int
-     */
-    public $token_start;
-
-    /**
-     * Byte length of entire parse token string
-     *
-     * @since 5.0.0
-     * @var int
-     */
-    public $token_length;
-
-    /**
-     * Byte offset into document for after parse token ends
-     * (used during reconstruction of stack into parse production)
-     *
-     * @since 5.0.0
-     * @var int
-     */
-    public $prev_offset;
-
-    /**
-     * Byte offset into document where leading HTML before token starts
-     *
-     * @since 5.0.0
-     * @var int
-     */
-    public $leading_html_start;
-
-    /**
-     * Constructor
-     *
-     * Will populate object properties from the provided arguments.
-     *
-     * @since 5.0.0
-     *
-     * @param WP_Block_Parser_Block $block              Full or partial block.
-     * @param int                   $token_start        Byte offset into document for start of parse token.
-     * @param int                   $token_length       Byte length of entire parse token string.
-     * @param int                   $prev_offset        Byte offset into document for after parse token ends.
-     * @param int                   $leading_html_start Byte offset into document where leading HTML before token starts.
-     */
-    public function __construct($block, $token_start, $token_length, $prev_offset = null, $leading_html_start = null)
-    {
-        $this->block              = $block;
-        $this->token_start        = $token_start;
-        $this->token_length       = $token_length;
-        $this->prev_offset        = isset($prev_offset) ? $prev_offset : $token_start + $token_length;
-        $this->leading_html_start = $leading_html_start;
-    }
-}
+namespace VanOns\Laraberg\Blocks\Wordpress;
 
 /**
  * Class WP_Block_Parser
@@ -176,7 +10,7 @@ class WP_Block_Parser_Frame
  * @since 5.0.0
  * @since 4.0.0 returns arrays not objects, all attributes are arrays
  */
-class WP_Block_Parser
+class WordPressBlockParser
 {
     /**
      * Input document being parsed
@@ -200,7 +34,7 @@ class WP_Block_Parser
      * List of parsed blocks
      *
      * @since 5.0.0
-     * @var WP_Block_Parser_Block[]
+     * @var WordPressBlockParserBlock[]
      */
     public $output;
 
@@ -208,7 +42,7 @@ class WP_Block_Parser
      * Stack of partially-parsed structures in memory during parse
      *
      * @since 5.0.0
-     * @var WP_Block_Parser_Frame[]
+     * @var WordPressBlockParserFrame[]
      */
     public $stack;
 
@@ -230,7 +64,7 @@ class WP_Block_Parser
      * @since 5.0.0
      *
      * @param string $document Input document being parsed.
-     * @return WP_Block_Parser_Block[]
+     * @return WordPressBlockParserBlock[]
      */
     public function parse($document)
     {
@@ -319,14 +153,14 @@ class WP_Block_Parser
                         );
                     }
 
-                    $this->output[] = (array) new WP_Block_Parser_Block($block_name, $attrs, [], '', []);
+                    $this->output[] = (array) new WordPressBlockParserBlock($block_name, $attrs, [], '', []);
                     $this->offset   = $start_offset + $token_length;
                     return true;
                 }
 
                 // otherwise we found an inner block.
                 $this->add_inner_block(
-                    new WP_Block_Parser_Block($block_name, $attrs, [], '', []),
+                    new WordPressBlockParserBlock($block_name, $attrs, [], '', []),
                     $start_offset,
                     $token_length
                 );
@@ -337,8 +171,8 @@ class WP_Block_Parser
                 // track all newly-opened blocks on the stack.
                 array_push(
                     $this->stack,
-                    new WP_Block_Parser_Frame(
-                        new WP_Block_Parser_Block($block_name, $attrs, [], '', []),
+                    new WordPressBlockParserFrame(
+                        new WordPressBlockParserBlock($block_name, $attrs, [], '', []),
                         $start_offset,
                         $token_length,
                         $start_offset + $token_length,
@@ -482,11 +316,11 @@ class WP_Block_Parser
      * @since 3.9.0
      *
      * @param string $innerHTML HTML content of block.
-     * @return WP_Block_Parser_Block freeform block object.
+     * @return WordPressBlockParserBlock freeform block object.
      */
     public function freeform($innerHTML)
     {
-        return new WP_Block_Parser_Block(null, $this->empty_attrs, [], $innerHTML, [ $innerHTML ]);
+        return new WordPressBlockParserBlock(null, $this->empty_attrs, [], $innerHTML, [ $innerHTML ]);
     }
 
     /**
@@ -514,12 +348,12 @@ class WP_Block_Parser
      *
      * @internal
      * @since 5.0.0
-     * @param WP_Block_Parser_Block $block        The block to add to the output.
+     * @param WordPressBlockParserBlock $block        The block to add to the output.
      * @param int                   $token_start  Byte offset into the document where the first token for the block starts.
      * @param int                   $token_length Byte length of entire block from start of opening token to end of closing token.
      * @param int|null              $last_offset  Last byte offset into document if continuing form earlier output.
      */
-    public function add_inner_block(WP_Block_Parser_Block $block, $token_start, $token_length, $last_offset = null)
+    public function add_inner_block(WordPressBlockParserBlock $block, $token_start, $token_length, $last_offset = null)
     {
         $parent                       = $this->stack[ count($this->stack) - 1 ];
         $parent->block->innerBlocks[] = (array) $block;
