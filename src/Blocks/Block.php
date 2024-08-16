@@ -27,10 +27,14 @@ class Block
      */
     public $innerContent;
 
-    /** @var BlockTypeRegistry */
+    /**
+     * @var BlockTypeRegistry
+     */
     protected $registry;
 
-    /** @var OEmbedService  */
+    /**
+     * @var OEmbedService
+     */
     protected $embedService;
 
     public function __construct(

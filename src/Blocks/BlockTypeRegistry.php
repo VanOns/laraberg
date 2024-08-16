@@ -4,10 +4,14 @@ namespace VanOns\Laraberg\Blocks;
 
 class BlockTypeRegistry
 {
-    /** @var static */
+    /**
+     * @var static|BlockTypeRegistry|null
+     */
     protected static $instance;
 
-    /** @var BlockType[] */
+    /**
+     * @var BlockType[]
+     */
     protected $blockTypes = [];
 
     public static function getInstance(): BlockTypeRegistry
@@ -19,11 +23,14 @@ class BlockTypeRegistry
         return static::$instance;
     }
 
-    public function register(string $name, array $attributes = [], callable $renderCallback = null)
+    public function register(string $name, array $attributes = [], callable $renderCallback = null): void
     {
         $this->blockTypes[] = new BlockType($name, $attributes, $renderCallback);
     }
 
+    /**
+     * @return array
+     */
     public function blockTypes(): array
     {
         return $this->blockTypes;
@@ -33,7 +40,7 @@ class BlockTypeRegistry
      * @param string $name
      * @return BlockType|null
      */
-    public function getBlockType(string $name)
+    public function getBlockType(string $name): ?BlockType
     {
         $arr = array_filter($this->blockTypes(), function ($blockType) use ($name) {
             return $blockType->name === $name;

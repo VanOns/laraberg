@@ -8,7 +8,7 @@ use VanOns\Laraberg\Services\OEmbedService;
 
 class OEmbedController extends Controller
 {
-    public function show(Request $request, OEmbedService $oembed)
+    public function show(Request $request, OEmbedService $oembed): ?array
     {
         try {
             return $oembed->parse(

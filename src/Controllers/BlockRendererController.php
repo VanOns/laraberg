@@ -7,7 +7,7 @@ use VanOns\Laraberg\Blocks\Block;
 
 class BlockRendererController
 {
-    public function show(Request $request)
+    public function show(Request $request): array
     {
         $request->validate([
             'blockName' => ['required', 'string'],

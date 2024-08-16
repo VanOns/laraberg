@@ -4,13 +4,19 @@ namespace VanOns\Laraberg\Blocks;
 
 class BlockType
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     public $name;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $attributes;
 
-    /** @var callable */
+    /**
+     * @var callable
+     */
     public $renderCallback;
 
     public function __construct(string $name, array $attributes = [], callable $renderCallback = null)

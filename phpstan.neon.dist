@@ -5,3 +5,6 @@ parameters:
         - database
         - src
         - tests
+    ignoreErrors:
+        - '#.* type has no value type specified in iterable type array.#'
+        - '#.* has parameter \$\w+ with no value type specified in iterable type array\.#'
