@@ -44,4 +44,3 @@ class LarabergServiceProvider extends ServiceProvider
         $this->app->alias(BlockTypeRegistry::class, 'laraberg.registry');
     }
 }
-

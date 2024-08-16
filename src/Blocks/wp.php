@@ -1,6 +1,7 @@
 <?php
 
 namespace VanOns\Laraberg\Blocks;
+
 /**
  * Block Serialization Parser
  *
@@ -14,7 +15,8 @@ namespace VanOns\Laraberg\Blocks;
  *
  * @since 5.0.0
  */
-class WP_Block_Parser_Block {
+class WP_Block_Parser_Block
+{
     /**
      * Name of block
      *
@@ -82,7 +84,8 @@ class WP_Block_Parser_Block {
      * @param string $innerHTML    Resultant HTML from inside block comment delimiters after removing inner blocks.
      * @param array  $innerContent List of string fragments and null markers where inner blocks were found.
      */
-    function __construct( $name, $attrs, $innerBlocks, $innerHTML, $innerContent ) {
+    public function __construct($name, $attrs, $innerBlocks, $innerHTML, $innerContent)
+    {
         $this->blockName    = $name;
         $this->attrs        = $attrs;
         $this->innerBlocks  = $innerBlocks;
@@ -99,7 +102,8 @@ class WP_Block_Parser_Block {
  * @internal
  * @since 5.0.0
  */
-class WP_Block_Parser_Frame {
+class WP_Block_Parser_Frame
+{
     /**
      * Full or partial block
      *
@@ -154,11 +158,12 @@ class WP_Block_Parser_Frame {
      * @param int                   $prev_offset        Byte offset into document for after parse token ends.
      * @param int                   $leading_html_start Byte offset into document where leading HTML before token starts.
      */
-    function __construct( $block, $token_start, $token_length, $prev_offset = null, $leading_html_start = null ) {
+    public function __construct($block, $token_start, $token_length, $prev_offset = null, $leading_html_start = null)
+    {
         $this->block              = $block;
         $this->token_start        = $token_start;
         $this->token_length       = $token_length;
-        $this->prev_offset        = isset( $prev_offset ) ? $prev_offset : $token_start + $token_length;
+        $this->prev_offset        = isset($prev_offset) ? $prev_offset : $token_start + $token_length;
         $this->leading_html_start = $leading_html_start;
     }
 }
@@ -171,7 +176,8 @@ class WP_Block_Parser_Frame {
  * @since 5.0.0
  * @since 4.0.0 returns arrays not objects, all attributes are arrays
  */
-class WP_Block_Parser {
+class WP_Block_Parser
+{
     /**
      * Input document being parsed
      *
@@ -226,16 +232,17 @@ class WP_Block_Parser {
      * @param string $document Input document being parsed.
      * @return WP_Block_Parser_Block[]
      */
-    function parse( $document ) {
+    public function parse($document)
+    {
         $this->document    = $document;
         $this->offset      = 0;
-        $this->output      = array();
-        $this->stack       = array();
-        $this->empty_attrs = json_decode( '{}', true );
+        $this->output      = [];
+        $this->stack       = [];
+        $this->empty_attrs = json_decode('{}', true);
 
         do {
             // twiddle our thumbs.
-        } while ( $this->proceed() );
+        } while ($this->proceed());
 
         return $this->output;
     }
@@ -254,18 +261,19 @@ class WP_Block_Parser {
      * @since 5.0.0
      * @return bool
      */
-    function proceed() {
+    public function proceed()
+    {
         $next_token = $this->next_token();
-        list( $token_type, $block_name, $attrs, $start_offset, $token_length ) = $next_token;
-        $stack_depth = count( $this->stack );
+        list($token_type, $block_name, $attrs, $start_offset, $token_length) = $next_token;
+        $stack_depth = count($this->stack);
 
         // we may have some HTML soup before the next block.
         $leading_html_start = $start_offset > $this->offset ? $this->offset : null;
 
-        switch ( $token_type ) {
+        switch ($token_type) {
             case 'no-more-tokens':
                 // if not in a block then flush output.
-                if ( 0 === $stack_depth ) {
+                if (0 === $stack_depth) {
                     $this->add_freeform();
                     return false;
                 }
@@ -280,7 +288,7 @@ class WP_Block_Parser {
                  */
 
                 // for the easy case we'll assume an implicit closer.
-                if ( 1 === $stack_depth ) {
+                if (1 === $stack_depth) {
                     $this->add_block_from_stack();
                     return false;
                 }
@@ -290,7 +298,7 @@ class WP_Block_Parser {
                  * have to assume that multiple closers are missing
                  * and so we'll collapse the whole stack piecewise
                  */
-                while ( 0 < count( $this->stack ) ) {
+                while (0 < count($this->stack)) {
                     $this->add_block_from_stack();
                 }
                 return false;
@@ -300,8 +308,8 @@ class WP_Block_Parser {
                  * easy case is if we stumbled upon a void block
                  * in the top-level of the document
                  */
-                if ( 0 === $stack_depth ) {
-                    if ( isset( $leading_html_start ) ) {
+                if (0 === $stack_depth) {
+                    if (isset($leading_html_start)) {
                         $this->output[] = (array) $this->freeform(
                             substr(
                                 $this->document,
@@ -311,14 +319,14 @@ class WP_Block_Parser {
                         );
                     }
 
-                    $this->output[] = (array) new WP_Block_Parser_Block( $block_name, $attrs, array(), '', array() );
+                    $this->output[] = (array) new WP_Block_Parser_Block($block_name, $attrs, [], '', []);
                     $this->offset   = $start_offset + $token_length;
                     return true;
                 }
 
                 // otherwise we found an inner block.
                 $this->add_inner_block(
-                    new WP_Block_Parser_Block( $block_name, $attrs, array(), '', array() ),
+                    new WP_Block_Parser_Block($block_name, $attrs, [], '', []),
                     $start_offset,
                     $token_length
                 );
@@ -330,7 +338,7 @@ class WP_Block_Parser {
                 array_push(
                     $this->stack,
                     new WP_Block_Parser_Frame(
-                        new WP_Block_Parser_Block( $block_name, $attrs, array(), '', array() ),
+                        new WP_Block_Parser_Block($block_name, $attrs, [], '', []),
                         $start_offset,
                         $token_length,
                         $start_offset + $token_length,
@@ -345,7 +353,7 @@ class WP_Block_Parser {
                  * if we're missing an opener we're in trouble
                  * This is an error
                  */
-                if ( 0 === $stack_depth ) {
+                if (0 === $stack_depth) {
                     /*
                      * we have options
                      * - assume an implicit opener
@@ -357,8 +365,8 @@ class WP_Block_Parser {
                 }
 
                 // if we're not nesting then this is easy - close the block.
-                if ( 1 === $stack_depth ) {
-                    $this->add_block_from_stack( $start_offset );
+                if (1 === $stack_depth) {
+                    $this->add_block_from_stack($start_offset);
                     $this->offset = $start_offset + $token_length;
                     return true;
                 }
@@ -367,8 +375,8 @@ class WP_Block_Parser {
                  * otherwise we're nested and we have to close out the current
                  * block and add it as a new innerBlock to the parent
                  */
-                $stack_top                        = array_pop( $this->stack );
-                $html                             = substr( $this->document, $stack_top->prev_offset, $start_offset - $stack_top->prev_offset );
+                $stack_top                        = array_pop($this->stack);
+                $html                             = substr($this->document, $stack_top->prev_offset, $start_offset - $stack_top->prev_offset);
                 $stack_top->block->innerHTML     .= $html;
                 $stack_top->block->innerContent[] = $html;
                 $stack_top->prev_offset           = $start_offset + $token_length;
@@ -400,7 +408,8 @@ class WP_Block_Parser {
      * @since 4.6.1 fixed a bug in attribute parsing which caused catastrophic backtracking on invalid block comments
      * @return array
      */
-    function next_token() {
+    public function next_token()
+    {
         $matches = null;
 
         /*
@@ -420,50 +429,50 @@ class WP_Block_Parser {
         );
 
         // if we get here we probably have catastrophic backtracking or out-of-memory in the PCRE.
-        if ( false === $has_match ) {
-            return array( 'no-more-tokens', null, null, null, null );
+        if (false === $has_match) {
+            return [ 'no-more-tokens', null, null, null, null ];
         }
 
         // we have no more tokens.
-        if ( 0 === $has_match ) {
-            return array( 'no-more-tokens', null, null, null, null );
+        if (0 === $has_match) {
+            return [ 'no-more-tokens', null, null, null, null ];
         }
 
-        list( $match, $started_at ) = $matches[0];
+        list($match, $started_at) = $matches[0];
 
-        $length    = strlen( $match );
-        $is_closer = isset( $matches['closer'] ) && -1 !== $matches['closer'][1];
-        $is_void   = isset( $matches['void'] ) && -1 !== $matches['void'][1];
+        $length    = strlen($match);
+        $is_closer = isset($matches['closer']) && -1 !== $matches['closer'][1];
+        $is_void   = isset($matches['void']) && -1 !== $matches['void'][1];
         $namespace = $matches['namespace'];
-        $namespace = ( isset( $namespace ) && -1 !== $namespace[1] ) ? $namespace[0] : 'core/';
+        $namespace = (isset($namespace) && -1 !== $namespace[1]) ? $namespace[0] : 'core/';
         $name      = $namespace . $matches['name'][0];
-        $has_attrs = isset( $matches['attrs'] ) && -1 !== $matches['attrs'][1];
+        $has_attrs = isset($matches['attrs']) && -1 !== $matches['attrs'][1];
 
         /*
          * Fun fact! It's not trivial in PHP to create "an empty associative array" since all arrays
          * are associative arrays. If we use `array()` we get a JSON `[]`
          */
         $attrs = $has_attrs
-            ? json_decode( $matches['attrs'][0], /* as-associative */ true )
+            ? json_decode($matches['attrs'][0], /* as-associative */ true)
             : $this->empty_attrs;
 
         /*
          * This state isn't allowed
          * This is an error
          */
-        if ( $is_closer && ( $is_void || $has_attrs ) ) {
+        if ($is_closer && ($is_void || $has_attrs)) {
             // we can ignore them since they don't hurt anything.
         }
 
-        if ( $is_void ) {
-            return array( 'void-block', $name, $attrs, $started_at, $length );
+        if ($is_void) {
+            return [ 'void-block', $name, $attrs, $started_at, $length ];
         }
 
-        if ( $is_closer ) {
-            return array( 'block-closer', $name, null, $started_at, $length );
+        if ($is_closer) {
+            return [ 'block-closer', $name, null, $started_at, $length ];
         }
 
-        return array( 'block-opener', $name, $attrs, $started_at, $length );
+        return [ 'block-opener', $name, $attrs, $started_at, $length ];
     }
 
     /**
@@ -475,8 +484,9 @@ class WP_Block_Parser {
      * @param string $innerHTML HTML content of block.
      * @return WP_Block_Parser_Block freeform block object.
      */
-    function freeform( $innerHTML ) {
-        return new WP_Block_Parser_Block( null, $this->empty_attrs, array(), $innerHTML, array( $innerHTML ) );
+    public function freeform($innerHTML)
+    {
+        return new WP_Block_Parser_Block(null, $this->empty_attrs, [], $innerHTML, [ $innerHTML ]);
     }
 
     /**
@@ -487,14 +497,15 @@ class WP_Block_Parser {
      * @since 5.0.0
      * @param null $length how many bytes of document text to output.
      */
-    function add_freeform( $length = null ) {
-        $length = $length ? $length : strlen( $this->document ) - $this->offset;
+    public function add_freeform($length = null)
+    {
+        $length = $length ? $length : strlen($this->document) - $this->offset;
 
-        if ( 0 === $length ) {
+        if (0 === $length) {
             return;
         }
 
-        $this->output[] = (array) $this->freeform( substr( $this->document, $this->offset, $length ) );
+        $this->output[] = (array) $this->freeform(substr($this->document, $this->offset, $length));
     }
 
     /**
@@ -508,12 +519,13 @@ class WP_Block_Parser {
      * @param int                   $token_length Byte length of entire block from start of opening token to end of closing token.
      * @param int|null              $last_offset  Last byte offset into document if continuing form earlier output.
      */
-    function add_inner_block( WP_Block_Parser_Block $block, $token_start, $token_length, $last_offset = null ) {
-        $parent                       = $this->stack[ count( $this->stack ) - 1 ];
+    public function add_inner_block(WP_Block_Parser_Block $block, $token_start, $token_length, $last_offset = null)
+    {
+        $parent                       = $this->stack[ count($this->stack) - 1 ];
         $parent->block->innerBlocks[] = (array) $block;
-        $html                         = substr( $this->document, $parent->prev_offset, $token_start - $parent->prev_offset );
+        $html                         = substr($this->document, $parent->prev_offset, $token_start - $parent->prev_offset);
 
-        if ( ! empty( $html ) ) {
+        if (! empty($html)) {
             $parent->block->innerHTML     .= $html;
             $parent->block->innerContent[] = $html;
         }
@@ -529,20 +541,21 @@ class WP_Block_Parser {
      * @since 5.0.0
      * @param int|null $end_offset byte offset into document for where we should stop sending text output as HTML.
      */
-    function add_block_from_stack( $end_offset = null ) {
-        $stack_top   = array_pop( $this->stack );
+    public function add_block_from_stack($end_offset = null)
+    {
+        $stack_top   = array_pop($this->stack);
         $prev_offset = $stack_top->prev_offset;
 
-        $html = isset( $end_offset )
-            ? substr( $this->document, $prev_offset, $end_offset - $prev_offset )
-            : substr( $this->document, $prev_offset );
+        $html = isset($end_offset)
+            ? substr($this->document, $prev_offset, $end_offset - $prev_offset)
+            : substr($this->document, $prev_offset);
 
-        if ( ! empty( $html ) ) {
+        if (! empty($html)) {
             $stack_top->block->innerHTML     .= $html;
             $stack_top->block->innerContent[] = $html;
         }
 
-        if ( isset( $stack_top->leading_html_start ) ) {
+        if (isset($stack_top->leading_html_start)) {
             $this->output[] = (array) $this->freeform(
                 substr(
                     $this->document,

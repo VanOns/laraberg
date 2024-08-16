@@ -7,7 +7,8 @@ class BlockParser
     /** @var WP_Block_Parser */
     protected WP_Block_Parser $parser;
 
-    public function __construct(WP_Block_Parser $parser) {
+    public function __construct(WP_Block_Parser $parser)
+    {
         $this->parser = $parser;
     }
     /**

@@ -8,12 +8,11 @@ use function app;
 
 trait RendersContent
 {
-
     public function render(string $column = null): string
     {
         $column = $column ?: $this->getContentColumn();
         $renderer = app(ContentRenderer::class);
-        $content = $this->$column;
+        $content = $this->{$column};
         return $renderer->render(is_string($content) ? $content : '');
     }
 
