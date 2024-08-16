@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -32,7 +33,10 @@ class PostController extends Controller
             'content' => ['string'],
         ]);
 
-        $post = Post::create($data);
+        $post = Post::create([
+            ...$data,
+            'slug' => Str::slug($data['title']),
+        ]);
 
         return redirect(
             route('posts.show', compact('post'))
