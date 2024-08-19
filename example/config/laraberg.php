@@ -22,7 +22,7 @@ return [
 
         'cache' => [
             'enabled' => true,
-            'duration' => 86400
-        ]
-    ]
+            'duration' => 86400,
+        ],
+    ],
 ];
