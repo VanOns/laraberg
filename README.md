@@ -1,27 +1,16 @@
-<img height="300px" src="./logo-text.svg"> <!-- omit in toc -->
+<p align="center"><img height="300px" src="./logo-text.svg" alt="logo"></p>
 
-[![Latest Version](https://img.shields.io/packagist/v/van-ons/laraberg)](https://packagist.org/packages/van-ons/laraberg)
-![License](https://img.shields.io/github/license/VanOns/laraberg.svg)
+# Laraberg
+
+<!-- BADGES -->
 
 Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
 Laravel projects. It takes the Gutenberg editor and adds all the communication
 and data it needs function in a Laravel environment.
 
-# Table of Contents <!-- omit in toc -->
+## Quick start
 
-- [Installation](#installation)
-  - [JavaScript and CSS files](#javascript-and-css-files)
-  - [Dependencies](#dependencies)
-- [Updating](#updating)
-- [Usage](#usage)
-  - [Initializing the Editor](#initializing-the-editor)
-  - [Configuration options](#configuration-options)
-  - [Models](#models)
-  - [Custom Blocks](#custom-blocks)
-    - [Server-side blocks](#server-side-blocks)
-  - [WordPress exports](#wordpress-exports)
-
-## Installation
+### Installation
 
 Install package using composer:
 
@@ -35,7 +24,7 @@ Add vendor files to your project (CSS, JS & Config):
 php artisan vendor:publish --provider="VanOns\Laraberg\LarabergServiceProvider"
 ```
 
-### JavaScript and CSS files
+#### JavaScript and CSS files
 
 The package provides a JS and CSS file that should be present on the page you
 want to use the editor on:
@@ -46,7 +35,7 @@ want to use the editor on:
 <script src="{{ asset('vendor/laraberg/js/laraberg.js') }}"></script>
 ```
 
-### Dependencies
+#### Dependencies
 
 The Gutenberg editor expects React, ReactDOM, Moment and JQuery to be in the
 environment it runs in. An easy way to do this would be to add the following
@@ -58,7 +47,7 @@ lines to your page:
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 ```
 
-## Updating
+### Updating
 
 When updating Laraberg you have to publish the vendor files again by running
 this command:
@@ -67,9 +56,9 @@ this command:
 php artisan vendor:publish --provider="VanOns\Laraberg\LarabergServiceProvider" --tag="public" --force
 ```
 
-## Usage
+### Usage
 
-### Initializing the Editor
+#### Initializing the Editor
 
 The Gutenberg editor should replace an existing textarea in a form. On submit the
 raw content from the editor will be put in the 'value' attribute of this textarea.
@@ -95,7 +84,7 @@ submit the editor content will be available in the textarea's value attribute.
 Laraberg.init('[id_here]')
 ```
 
-### Configuration options
+#### Configuration options
 
 The `init()` function takes an optional configuration object which can be used
 to change Laraberg's behaviour in some ways.
@@ -123,7 +112,7 @@ interface EditorSettings {
 }
 ```
 
-### Models
+#### Models
 
 In order to add the editor content to a model Laraberg provides the
 'RendersContent' trait.
@@ -157,7 +146,7 @@ Or by passing the column name to the render method.
 $model->render('my_column');
 ```
 
-### Custom Blocks
+#### Custom Blocks
 
 Gutenberg allows developers to create custom blocks. For information on how to
 create a custom block you should read the
@@ -185,7 +174,7 @@ const myBlock =  {
 Laraberg.registerBlockType('my-namespace/my-block', myBlock)
 ```
 
-#### Server-side blocks
+##### Server-side blocks
 
 Server-side blocks can be registered in Laravel. You probably want to create a
 ServiceProvider and register your server-side blocks in it's `boot` method.
@@ -204,7 +193,7 @@ class BlockServiceProvider extends ServiceProvider {
 }
 ```
 
-### WordPress exports
+#### WordPress exports
 
 Laraberg uses the WordPress Gutenberg packages under the hood, a lot of those
 packages expose functionality that let's you customize the editor. You can find
@@ -221,7 +210,54 @@ these packages in Javascript in the global `Laraberg` object.
 <div align="center">
  <br><br><br>
  <a href="https://van-ons.nl">
-     <img src="https://van-ons.nl/assets/mail/logo-vo-groen-2019-mail.png"/>
+     <img src="https://van-ons.nl/assets/mail/logo-vo-groen-2019-mail.png"
+        alt="van-ons-logo"/>
  </a>
   <br>
 </div>
+
+## Documentation
+
+Please see the [documentation] for detailed information about installation and usage.
+
+## Contributing
+
+Please see [contributing] for more information about how you can contribute.
+
+## Changelog
+
+Please see [changelog] for more information about what has changed recently.
+
+## Upgrading
+
+Please see [upgrading] for more information about how to upgrade.
+
+## Security
+
+Please see [security] for more information about how we deal with security.
+
+## Credits
+
+We would like to thank the following contributors for their contributions to this project:
+
+- [All Contributors][all-contributors]
+
+## License
+
+The scripts and documentation in this project are released under the [MIT License][license].
+
+---
+
+<p align="center">
+    <a href="https://van-ons.nl/" target="_blank">
+        <img src="https://opensource.van-ons.nl/files/cow.png" width="50" alt="Logo of Van Ons">
+    </a>
+</p>
+
+[documentation]: docs/README.md#contents
+[contributing]: CONTRIBUTING.md
+[changelog]: CHANGELOG.md
+[upgrading]: UPGRADING.md
+[security]: SECURITY.md
+[all-contributors]: ../../contributors
+[license]: LICENSE.md
