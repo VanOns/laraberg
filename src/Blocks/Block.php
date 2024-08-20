@@ -9,23 +9,23 @@ class Block
     /**
      * @var string
      */
-    public $blockName;
+    public string $blockName;
     /**
-     * @var array
+     * @var array<mixed>
      */
-    public $attributes;
+    public array $attributes;
     /**
-     * @var array
+     * @var array<mixed>
      */
-    public $innerBlocks;
+    public array $innerBlocks;
     /**
      * @var string
      */
-    public $innerHTML;
+    public string $innerHTML;
     /**
-     * @var array
+     * @var array<mixed>
      */
-    public $innerContent;
+    public array $innerContent;
 
     /**
      * @var BlockTypeRegistry
@@ -59,7 +59,7 @@ class Block
         $output = '';
 
         $index = 0;
-        foreach($this->innerContent as $innerContent) {
+        foreach ($this->innerContent as $innerContent) {
             $output .= is_string($innerContent)
                 ? $innerContent
                 : $this->innerBlocks[$index++]->render();
@@ -67,7 +67,12 @@ class Block
 
         $blockType = $this->registry->getBlockType($this->blockName);
         if ($blockType && $blockType->isDynamic()) {
-            $output = call_user_func($blockType->renderCallback, $this->attributes, $output, $this);
+            $output = call_user_func(
+                $blockType->renderCallback,
+                $this->attributes,
+                $output,
+                $this
+            );
         }
 
         if (strpos($this->blockName, 'embed') !== false) {

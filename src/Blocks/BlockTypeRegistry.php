@@ -12,7 +12,7 @@ class BlockTypeRegistry
     /**
      * @var BlockType[]
      */
-    protected $blockTypes = [];
+    protected array $blockTypes = [];
 
     public static function getInstance(): BlockTypeRegistry
     {
@@ -23,8 +23,11 @@ class BlockTypeRegistry
         return static::$instance;
     }
 
-    public function register(string $name, array $attributes = [], callable $renderCallback = null): void
-    {
+    public function register(
+        string $name,
+        array $attributes = [],
+        callable $renderCallback = null
+    ): void {
         $this->blockTypes[] = new BlockType($name, $attributes, $renderCallback);
     }
 
@@ -42,9 +45,12 @@ class BlockTypeRegistry
      */
     public function getBlockType(string $name): ?BlockType
     {
-        $arr = array_filter($this->blockTypes(), function ($blockType) use ($name) {
-            return $blockType->name === $name;
-        });
+        $arr = array_filter(
+            $this->blockTypes(),
+            function ($blockType) use ($name) {
+                return $blockType->name === $name;
+            }
+        );
 
         return array_shift($arr);
     }

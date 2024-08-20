@@ -10,17 +10,20 @@ class BlockType
     public $name;
 
     /**
-     * @var array
+     * @var array<mixed>
      */
-    public $attributes;
+    public array $attributes;
 
     /**
      * @var callable
      */
     public $renderCallback;
 
-    public function __construct(string $name, array $attributes = [], callable $renderCallback = null)
-    {
+    public function __construct(
+        string $name,
+        array $attributes = [],
+        callable $renderCallback = null
+    ) {
         $this->name = $name;
         $this->attributes = $attributes;
         $this->renderCallback = $renderCallback;
