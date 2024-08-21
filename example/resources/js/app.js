@@ -12,17 +12,25 @@ document.addEventListener('block-editor/init', () => {
     console.log('block-editor/init')
 })
 
-const mediaUpload = ({filesList, onFileChange}) => {
-    setTimeout(() => {
-        const uploadedFiles = Array.from(filesList).map(file => {
-            return {
-                id: file.name,
-                name: file.name,
-                url: `https://dummyimage.com/600x400/000/fff&text=${file.name}`
-            }
-        })
-        onFileChange(uploadedFiles)
-    }, 1000)
+const mediaUpload = async ({ filesList, onFileChange }) => {
+    const formData = new FormData();
+    formData.append('file', filesList[0]);
+
+    try {
+        const response = await fetch('http://laraberg.test/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const uploadedFiles = await response.json();
+        onFileChange([uploadedFiles]);
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
 }
 
 Laraberg.init('content', { mediaUpload })
