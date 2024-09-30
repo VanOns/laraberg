@@ -26,7 +26,7 @@ class WordPressBlockParserFrame
      * @since 5.0.0
      * @var int
      */
-    public $token_start;
+    public $tokenStart;
 
     /**
      * Byte length of entire parse token string
@@ -34,7 +34,7 @@ class WordPressBlockParserFrame
      * @since 5.0.0
      * @var int
      */
-    public $token_length;
+    public $tokenLength;
 
     /**
      * Byte offset into document for after parse token ends
@@ -43,7 +43,7 @@ class WordPressBlockParserFrame
      * @since 5.0.0
      * @var int
      */
-    public $prev_offset;
+    public $prevOffset;
 
     /**
      * Byte offset into document where leading HTML before token starts
@@ -51,7 +51,7 @@ class WordPressBlockParserFrame
      * @since 5.0.0
      * @var int
      */
-    public $leading_html_start;
+    public $leadingHtmlStart;
 
     /**
      * Constructor
@@ -69,9 +69,9 @@ class WordPressBlockParserFrame
     public function __construct($block, $token_start, $token_length, $prev_offset = null, $leading_html_start = null)
     {
         $this->block              = $block;
-        $this->token_start        = $token_start;
-        $this->token_length       = $token_length;
-        $this->prev_offset        = isset($prev_offset) ? $prev_offset : $token_start + $token_length;
-        $this->leading_html_start = $leading_html_start;
+        $this->tokenStart        = $token_start;
+        $this->tokenLength       = $token_length;
+        $this->prevOffset        = isset($prev_offset) ? $prev_offset : $token_start + $token_length;
+        $this->leadingHtmlStart = $leading_html_start;
     }
 }

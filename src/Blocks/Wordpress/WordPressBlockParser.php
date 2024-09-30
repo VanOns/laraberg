@@ -210,15 +210,15 @@ class WordPressBlockParser
                  * block and add it as a new innerBlock to the parent
                  */
                 $stack_top                        = array_pop($this->stack);
-                $html                             = substr($this->document, $stack_top->prev_offset, $start_offset - $stack_top->prev_offset);
+                $html                             = substr($this->document, $stack_top->prevOffset, $start_offset - $stack_top->prevOffset);
                 $stack_top->block->innerHTML     .= $html;
                 $stack_top->block->innerContent[] = $html;
-                $stack_top->prev_offset           = $start_offset + $token_length;
+                $stack_top->prevOffset           = $start_offset + $token_length;
 
                 $this->add_inner_block(
                     $stack_top->block,
-                    $stack_top->token_start,
-                    $stack_top->token_length,
+                    $stack_top->tokenStart,
+                    $stack_top->tokenLength,
                     $start_offset + $token_length
                 );
                 $this->offset = $start_offset + $token_length;
@@ -357,7 +357,7 @@ class WordPressBlockParser
     {
         $parent                       = $this->stack[ count($this->stack) - 1 ];
         $parent->block->innerBlocks[] = (array) $block;
-        $html                         = substr($this->document, $parent->prev_offset, $token_start - $parent->prev_offset);
+        $html                         = substr($this->document, $parent->prevOffset, $token_start - $parent->prevOffset);
 
         if (! empty($html)) {
             $parent->block->innerHTML     .= $html;
@@ -365,7 +365,7 @@ class WordPressBlockParser
         }
 
         $parent->block->innerContent[] = null;
-        $parent->prev_offset           = $last_offset ? $last_offset : $token_start + $token_length;
+        $parent->prevOffset           = $last_offset ? $last_offset : $token_start + $token_length;
     }
 
     /**
@@ -378,7 +378,7 @@ class WordPressBlockParser
     public function add_block_from_stack($end_offset = null)
     {
         $stack_top   = array_pop($this->stack);
-        $prev_offset = $stack_top->prev_offset;
+        $prev_offset = $stack_top->prevOffset;
 
         $html = isset($end_offset)
             ? substr($this->document, $prev_offset, $end_offset - $prev_offset)
@@ -389,12 +389,12 @@ class WordPressBlockParser
             $stack_top->block->innerContent[] = $html;
         }
 
-        if (isset($stack_top->leading_html_start)) {
+        if (isset($stack_top->leadingHtmlStart)) {
             $this->output[] = (array) $this->freeform(
                 substr(
                     $this->document,
-                    $stack_top->leading_html_start,
-                    $stack_top->token_start - $stack_top->leading_html_start
+                    $stack_top->leadingHtmlStart,
+                    $stack_top->tokenStart - $stack_top->leadingHtmlStart
                 )
             );
         }
