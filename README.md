@@ -61,14 +61,14 @@ php artisan vendor:publish --provider="VanOns\Laraberg\LarabergServiceProvider" 
 #### Initializing the Editor
 
 The Gutenberg editor should replace an existing textarea in a form. On submit, the
-raw content from the editor will be put in the 'value' attribute of this textarea.
+raw content from the editor will be put in the 'value' attribute of this textarea:
 
 ```html
 <textarea id="[id_here]" name="[name_here]" hidden></textarea>
 ```
 
 In order to edit the content on an already existing model we have to set the value
-of the textarea to the raw content that the Gutenberg editor provided.
+of the textarea to the raw content that the Gutenberg editor provided:
 
 ```html
 <textarea id="[id_here]" name="[name_here]" hidden>{{ $model->content }}</textarea>
@@ -87,14 +87,14 @@ Laraberg.init('[id_here]')
 #### Configuration options
 
 The `init()` function takes an optional configuration object which can be used
-to change Laraberg's behaviour in some ways.
+to change Laraberg's behaviour in some ways:
 
 ```js
 const options = {}
 Laraberg.init('[id_here]', options)
 ```
 
-The `options` object should be a EditorSettings object.
+The `options` object should be a EditorSettings object:
 
 ```typescript
 interface EditorSettings {
@@ -115,7 +115,7 @@ interface EditorSettings {
 #### Models
 
 In order to add the editor content to a model Laraberg provides the
-'RendersContent' trait.
+'RendersContent' trait:
 
 ```php
 use VanOns\Laraberg\Traits\RendersContent;
@@ -128,7 +128,7 @@ class MyModel extends Model {
 This adds the `render` method to your model which takes care of rendering the
 raw editor content. By default the `render` methods renders the content in the
 `content` column, the column can be changed by changing the `$contentColumn`
-property on your model to the column that you want to use instead.
+property on your model to the column that you want to use instead:
 
 ```php
 use VanOns\Laraberg\Traits\RendersContent;
@@ -140,7 +140,7 @@ class MyModel extends Model {
 }
 ```
 
-Or by passing the column name to the render method.
+Or by passing the column name to the render method:
 
 ```php
 $model->render('my_column');
@@ -154,7 +154,7 @@ create a custom block you should read the
 
 Registering custom blocks is fairly easy. A Gutenberg block requires the
 properties `title`, `icon`, and `categories`. It also needs to implement the
-functions `edit()` and `save()`.
+functions `edit()` and `save()`:
 
 ```js
 const myBlock =  {
@@ -177,7 +177,7 @@ Laraberg.registerBlockType('my-namespace/my-block', myBlock)
 ##### Server-side blocks
 
 Server-side blocks can be registered in Laravel. You probably want to create a
-ServiceProvider and register your server-side blocks in it's `boot` method.
+ServiceProvider and register your server-side blocks in its `boot` method:
 
 ```php
 class BlockServiceProvider extends ServiceProvider {
