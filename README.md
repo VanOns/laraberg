@@ -6,19 +6,19 @@
 
 Laraberg aims to provide an easy way to integrate the Gutenberg editor with your
 Laravel projects. It takes the Gutenberg editor and adds all the communication
-and data it needs function in a Laravel environment.
+and data it needs to function in a Laravel environment.
 
 ## Quick start
 
 ### Installation
 
-Install package using composer:
+Install the package using Composer:
 
 ```bash
 composer require van-ons/laraberg
 ```
 
-Add vendor files to your project (CSS, JS & Config):
+Add the vendor files to your project (CSS, JS & Config):
 
 ```bash
 php artisan vendor:publish --provider="VanOns\Laraberg\LarabergServiceProvider"
@@ -60,14 +60,14 @@ php artisan vendor:publish --provider="VanOns\Laraberg\LarabergServiceProvider" 
 
 #### Initializing the Editor
 
-The Gutenberg editor should replace an existing textarea in a form. On submit the
+The Gutenberg editor should replace an existing textarea in a form. On submit, the
 raw content from the editor will be put in the 'value' attribute of this textarea.
 
 ```html
 <textarea id="[id_here]" name="[name_here]" hidden></textarea>
 ```
 
-In order to edit content on an already existing model we have to set the value
+In order to edit the content on an already existing model we have to set the value
 of the textarea to the raw content that the Gutenberg editor provided.
 
 ```html
@@ -196,7 +196,7 @@ class BlockServiceProvider extends ServiceProvider {
 #### WordPress exports
 
 Laraberg uses the WordPress Gutenberg packages under the hood, a lot of those
-packages expose functionality that let's you customize the editor. You can find
+packages expose functionality that lets you customize the editor. You can find
 these packages in Javascript in the global `Laraberg` object.
 
 - `Laraberg.wordpress.blockEditor`
@@ -208,12 +208,11 @@ these packages in Javascript in the global `Laraberg` object.
 - `Laraberg.wordpress.serverSideRender`
 
 <div align="center">
- <br><br><br>
- <a href="https://van-ons.nl">
-     <img src="https://van-ons.nl/assets/mail/logo-vo-groen-2019-mail.png"
-        alt="van-ons-logo"/>
- </a>
-  <br>
+    <a href="https://van-ons.nl">
+        <img src="https://van-ons.nl/assets/mail/logo-vo-groen-2019-mail.png"
+            alt="van-ons-logo"/>
+    </a>
+    <br>
 </div>
 
 ## Documentation
