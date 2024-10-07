@@ -1,6 +1,5 @@
 import qs from 'qs'
 
-
 const blockRendererHandler = async (options) => {
     const matches = /\/wp\/v2\/block-renderer\/(?<namespace>.*)\/(?<block>.*)\?.*/g.exec(options.path)
     const blockName = `${matches?.groups?.namespace}/${matches?.groups?.block}`
@@ -15,7 +14,7 @@ const blockRendererHandler = async (options) => {
 }
 
 const parseAttributesGet = (options) => {
-    const [path, query] = options.path.split('?')
+    const [, query] = options.path.split('?')
     const params = qs.parse(query)
     return params.attributes
 }

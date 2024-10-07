@@ -1,5 +1,5 @@
-import {APIFetchOptions} from "@van-ons/block-editor/dist/interfaces/fetch-handler"
-import FetchError from "../../errors/fetch-error";
+import { APIFetchOptions } from '@van-ons/block-editor/dist/interfaces/fetch-handler'
+import FetchError from '../../errors/fetch-error'
 
 const handlerNotFound = (options: APIFetchOptions): Promise<object> => {
     return new Promise((resolve, reject) => {
