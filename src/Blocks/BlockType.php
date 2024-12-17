@@ -7,7 +7,7 @@ class BlockType
     /**
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * @var array<mixed>

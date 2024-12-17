@@ -14,7 +14,7 @@ class OEmbedController extends Controller
             return $oembed->parse(
                 $request->get('url')
             );
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return [];
         }
     }

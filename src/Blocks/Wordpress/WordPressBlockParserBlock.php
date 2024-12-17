@@ -3,7 +3,7 @@
 namespace VanOns\Laraberg\Blocks\Wordpress;
 
 /**
- * Class WP_Block_Parser_Block
+ * Class WordPressBlockParserBlock
  *
  * Holds the block structure in memory
  *
@@ -19,7 +19,7 @@ class WordPressBlockParserBlock
      * @since 5.0.0
      * @var string
      */
-    public $blockName;
+    public string $blockName;
 
     /**
      * Optional set of attributes from block comment delimiters
@@ -30,7 +30,7 @@ class WordPressBlockParserBlock
      * @since 5.0.0
      * @var array|null
      */
-    public $attrs;
+    public ?array $attrs;
 
     /**
      * List of inner blocks (of this same class)
@@ -38,7 +38,7 @@ class WordPressBlockParserBlock
      * @since 5.0.0
      * @var WordPressBlockParserBlock[]
      */
-    public $innerBlocks;
+    public array $innerBlocks;
 
     /**
      * Resultant HTML from inside block comment delimiters
@@ -49,7 +49,7 @@ class WordPressBlockParserBlock
      * @since 5.0.0
      * @var string
      */
-    public $innerHTML;
+    public string $innerHTML;
 
     /**
      * List of string fragments and null markers where inner blocks were found
@@ -63,7 +63,7 @@ class WordPressBlockParserBlock
      * @since 4.2.0
      * @var array
      */
-    public $innerContent;
+    public array $innerContent;
 
     /**
      * Constructor.
@@ -78,7 +78,7 @@ class WordPressBlockParserBlock
      * @param string $innerHTML    Resultant HTML from inside block comment delimiters after removing inner blocks.
      * @param array  $innerContent List of string fragments and null markers where inner blocks were found.
      */
-    public function __construct($name, $attrs, $innerBlocks, $innerHTML, $innerContent)
+    public function __construct(string $name, array $attrs, array $innerBlocks, string $innerHTML, array $innerContent)
     {
         $this->blockName    = $name;
         $this->attrs        = $attrs;

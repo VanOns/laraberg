@@ -15,6 +15,7 @@ class BlockParser
     {
         $this->parser = $parser;
     }
+
     /**
      * @param string $content
      * @return Block[]

@@ -7,7 +7,7 @@ class ContentRenderer
     /**
      * @var BlockParser
      */
-    private $parser;
+    private BlockParser $parser;
 
     public function __construct(BlockParser $parser)
     {

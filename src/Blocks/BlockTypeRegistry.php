@@ -7,7 +7,7 @@ class BlockTypeRegistry
     /**
      * @var static|BlockTypeRegistry|null
      */
-    protected static $instance;
+    protected static ?BlockTypeRegistry $instance;
 
     /**
      * @var BlockType[]
@@ -17,7 +17,7 @@ class BlockTypeRegistry
     public static function getInstance(): BlockTypeRegistry
     {
         if (!isset(static::$instance)) {
-            static::$instance = new BlockTypeRegistry();
+            static::$instance = new static();
         }
 
         return static::$instance;

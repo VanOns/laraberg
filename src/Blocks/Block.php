@@ -10,32 +10,38 @@ class Block
      * @var string
      */
     public string $blockName;
+
     /**
      * @var array<mixed>
      */
     public array $attributes;
+
     /**
      * @var array<mixed>
      */
     public array $innerBlocks;
+
     /**
      * @var string
      */
     public string $innerHTML;
+
     /**
      * @var array<mixed>
      */
     public array $innerContent;
 
+
     /**
      * @var BlockTypeRegistry
      */
-    protected $registry;
+    protected BlockTypeRegistry $registry;
+
 
     /**
      * @var OEmbedService
      */
-    protected $embedService;
+    protected OEmbedService $embedService;
 
     public function __construct(
         string $blockName,
@@ -75,7 +81,7 @@ class Block
             );
         }
 
-        if (strpos($this->blockName, 'embed') !== false) {
+        if (str_contains($this->blockName, 'embed')) {
             $output = $this->embed($output);
         }
 

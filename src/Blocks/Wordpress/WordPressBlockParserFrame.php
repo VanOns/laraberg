@@ -3,7 +3,7 @@
 namespace VanOns\Laraberg\Blocks\Wordpress;
 
 /**
- * Class WP_Block_Parser_Frame
+ * Class WordPressBlockParserFrame
  *
  * Holds partial blocks in memory while parsing
  *
@@ -18,7 +18,7 @@ class WordPressBlockParserFrame
      * @since 5.0.0
      * @var WordPressBlockParserBlock
      */
-    public $block;
+    public WordPressBlockParserBlock $block;
 
     /**
      * Byte offset into document for start of parse token
@@ -26,7 +26,7 @@ class WordPressBlockParserFrame
      * @since 5.0.0
      * @var int
      */
-    public $tokenStart;
+    public int $tokenStart;
 
     /**
      * Byte length of entire parse token string
@@ -34,7 +34,7 @@ class WordPressBlockParserFrame
      * @since 5.0.0
      * @var int
      */
-    public $tokenLength;
+    public int $tokenLength;
 
     /**
      * Byte offset into document for after parse token ends
@@ -43,15 +43,15 @@ class WordPressBlockParserFrame
      * @since 5.0.0
      * @var int
      */
-    public $prevOffset;
+    public int $prevOffset;
 
     /**
      * Byte offset into document where leading HTML before token starts
      *
      * @since 5.0.0
-     * @var int
+     * @var int|null
      */
-    public $leadingHtmlStart;
+    public ?int $leadingHtmlStart;
 
     /**
      * Constructor
@@ -60,18 +60,18 @@ class WordPressBlockParserFrame
      *
      * @since 5.0.0
      *
-     * @param WordPressBlockParserBlock $block              Full or partial block.
-     * @param int                   $token_start        Byte offset into document for start of parse token.
-     * @param int                   $token_length       Byte length of entire parse token string.
-     * @param int                   $prev_offset        Byte offset into document for after parse token ends.
-     * @param int                   $leading_html_start Byte offset into document where leading HTML before token starts.
+     * @param WordPressBlockParserBlock $block            Full or partial block.
+     * @param int                       $tokenStart       Byte offset into document for start of parse token.
+     * @param int                       $tokenLength      Byte length of entire parse token string.
+     * @param int|null                  $prevOffset       Byte offset into document for after parse token ends.
+     * @param int|null                  $leadingHtmlStart Byte offset into document where leading HTML before token starts.
      */
-    public function __construct($block, $token_start, $token_length, $prev_offset = null, $leading_html_start = null)
+    public function __construct(WordPressBlockParserBlock $block, int $tokenStart, int $tokenLength, int $prevOffset = null, ?int $leadingHtmlStart = null)
     {
-        $this->block              = $block;
-        $this->tokenStart        = $token_start;
-        $this->tokenLength       = $token_length;
-        $this->prevOffset        = isset($prev_offset) ? $prev_offset : $token_start + $token_length;
-        $this->leadingHtmlStart = $leading_html_start;
+        $this->block            = $block;
+        $this->tokenStart       = $tokenStart;
+        $this->tokenLength      = $tokenLength;
+        $this->prevOffset       = $prevOffset ?? $tokenStart + $tokenLength;
+        $this->leadingHtmlStart = $leadingHtmlStart;
     }
 }
