@@ -17,13 +17,13 @@ the [discussions][discussions]. If your issue does not exist already, go ahead a
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [MIT License][license].
+By contributing, you agree that your contributions will be licensed under the [GPL-3.0 License][license].
 
 ## Resources
 
 - [How to contribute to Open Source](https://opensource.guide/how-to-contribute/)
 
 [code-of-conduct]: CODE_OF_CONDUCT.md
-[issues]: https://github.com/VanOns/laravel-attachment-library/issues
-[discussions]: https://github.com/VanOns/laravel-attachment-library/discussions
+[issues]: https://github.com/VanOns/laraberg/issues
+[discussions]: https://github.com/VanOns/laraberg/discussions
 [license]: LICENSE.md
