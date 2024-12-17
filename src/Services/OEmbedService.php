@@ -9,7 +9,7 @@ use VanOns\Laraberg\Exceptions\OEmbedFetchException;
 
 class OEmbedService
 {
-    const FORMATS = ['json', 'xml'];
+    public const FORMATS = ['json', 'xml'];
 
     /**
      * Get OEmbed data from a URL

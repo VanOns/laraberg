@@ -1,0 +1,211 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\Block\\:\\:__construct\\(\\) has parameter \\$attributes with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Block.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\Block\\:\\:__construct\\(\\) has parameter \\$innerBlocks with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Block.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\Block\\:\\:__construct\\(\\) has parameter \\$innerContent with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Block.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\Block\\:\\:fromArray\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Block.php
+
+		-
+			message: "#^Property VanOns\\\\Laraberg\\\\Blocks\\\\Block\\:\\:\\$attributes type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Block.php
+
+		-
+			message: "#^Property VanOns\\\\Laraberg\\\\Blocks\\\\Block\\:\\:\\$innerBlocks type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Block.php
+
+		-
+			message: "#^Property VanOns\\\\Laraberg\\\\Blocks\\\\Block\\:\\:\\$innerContent type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Block.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: src/Blocks/Block.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\BlockType\\:\\:__construct\\(\\) has parameter \\$attributes with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/BlockType.php
+
+		-
+			message: "#^Property VanOns\\\\Laraberg\\\\Blocks\\\\BlockType\\:\\:\\$attributes type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/BlockType.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\BlockTypeRegistry\\:\\:blockTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/BlockTypeRegistry.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\BlockTypeRegistry\\:\\:register\\(\\) has parameter \\$attributes with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/BlockTypeRegistry.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\Wordpress\\\\WordPressBlockParser\\:\\:add_block_from_stack\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParser.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\Wordpress\\\\WordPressBlockParser\\:\\:add_freeform\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParser.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\Wordpress\\\\WordPressBlockParser\\:\\:add_inner_block\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParser.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\Wordpress\\\\WordPressBlockParser\\:\\:next_token\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParser.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of class VanOns\\\\Laraberg\\\\Blocks\\\\Wordpress\\\\WordPressBlockParserBlock constructor expects string, null given\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParser.php
+
+		-
+			message: "#^Property VanOns\\\\Laraberg\\\\Blocks\\\\Wordpress\\\\WordPressBlockParser\\:\\:\\$empty_attrs type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParser.php
+
+		-
+			message: "#^Ternary operator condition is always false\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParser.php
+
+		-
+			message: "#^Variable \\$namespace in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParser.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\Wordpress\\\\WordPressBlockParserBlock\\:\\:__construct\\(\\) has parameter \\$attrs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParserBlock.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\Wordpress\\\\WordPressBlockParserBlock\\:\\:__construct\\(\\) has parameter \\$innerBlocks with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParserBlock.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Blocks\\\\Wordpress\\\\WordPressBlockParserBlock\\:\\:__construct\\(\\) has parameter \\$innerContent with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParserBlock.php
+
+		-
+			message: "#^Property VanOns\\\\Laraberg\\\\Blocks\\\\Wordpress\\\\WordPressBlockParserBlock\\:\\:\\$attrs type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParserBlock.php
+
+		-
+			message: "#^Property VanOns\\\\Laraberg\\\\Blocks\\\\Wordpress\\\\WordPressBlockParserBlock\\:\\:\\$innerContent type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Blocks/Wordpress/WordPressBlockParserBlock.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Controllers\\\\BlockRendererController\\:\\:show\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Controllers/BlockRendererController.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Controllers\\\\OEmbedController\\:\\:show\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Controllers/OEmbedController.php
+
+		-
+			message: "#^Call to static method get\\(\\) on an unknown class Route\\.$#"
+			count: 2
+			path: src/Http/routes.php
+
+		-
+			message: "#^Call to static method group\\(\\) on an unknown class Route\\.$#"
+			count: 1
+			path: src/Http/routes.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Laraberg\\:\\:registerBlockType\\(\\) has parameter \\$attributes with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Laraberg.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Services\\\\OEmbedService\\:\\:defaultArgs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Services/OEmbedService.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Services\\\\OEmbedService\\:\\:fetch\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Services/OEmbedService.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Services\\\\OEmbedService\\:\\:fetch\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Services/OEmbedService.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Services\\\\OEmbedService\\:\\:getProviders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Services/OEmbedService.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Services\\\\OEmbedService\\:\\:parse\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Services/OEmbedService.php
+
+		-
+			message: "#^Call to static method doStuff\\(\\) on an unknown class Laraberg\\.$#"
+			count: 1
+			path: tests/LarabergTest.php
+
+		-
+			message: "#^Class Orchestra\\\\Testbench\\\\TestCase referenced with incorrect case\\: Orchestra\\\\Testbench\\\\Testcase\\.$#"
+			count: 2
+			path: tests/TestCase.php
+
+		-
+			message: "#^Class VanOns\\\\Laraberg\\\\LarabergFacade not found\\.$#"
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Test\\\\TestCase\\:\\:getPackageAliases\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Test\\\\TestCase\\:\\:getPackageProviders\\(\\) has invalid return type VanOns\\\\Laraberg\\\\Test\\\\VanOns\\\\Laraberg\\\\LarabergServiceProvider\\.$#"
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: "#^Method VanOns\\\\Laraberg\\\\Test\\\\TestCase\\:\\:getPackageProviders\\(\\) should return VanOns\\\\Laraberg\\\\Test\\\\VanOns\\\\Laraberg\\\\LarabergServiceProvider but returns array\\<int, string\\>\\.$#"
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: "#^Return type \\(VanOns\\\\Laraberg\\\\Test\\\\VanOns\\\\Laraberg\\\\LarabergServiceProvider\\) of method VanOns\\\\Laraberg\\\\Test\\\\TestCase\\:\\:getPackageProviders\\(\\) should be compatible with return type \\(array\\<int, class\\-string\\>\\) of method Orchestra\\\\Testbench\\\\TestCase\\:\\:getPackageProviders\\(\\)$#"
+			count: 1
+			path: tests/TestCase.php

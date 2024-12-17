@@ -1,7 +1,7 @@
-import Route from "./routing/route";
-import oembedHandler from "./handlers/oembed-handler";
-import themesHandler from "./handlers/themes-handler";
-import blockRendererHandler from "./handlers/block-renderer-handler";
+import Route from './routing/route'
+import oembedHandler from './handlers/oembed-handler'
+import themesHandler from './handlers/themes-handler'
+import blockRendererHandler from './handlers/block-renderer-handler'
 
 const routes: Route[] = [
     Route.get(/\/oembed\/1\.0\/proxy\?(.*)/g, oembedHandler),

@@ -45,4 +45,3 @@ class CreateBlocksContentsTables extends Migration
         Schema::drop('lb_contents');
     }
 }
-

@@ -13,7 +13,8 @@
     "watch": "npm run dev -- --watch",
     "start": "npm run watch",
     "prebuild": "npm run clean",
-    "build": "webpack --config webpack/webpack.prod.js"
+    "build": "webpack --config webpack/webpack.prod.js",
+    "lint": "npx eslint resources/ts/"
   },
   "repository": {
     "type": "git",
@@ -28,11 +29,14 @@
   "devDependencies": {
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.1.4",
+    "eslint": "^9.9.0",
+    "globals": "^15.9.0",
     "mini-css-extract-plugin": "^2.4.5",
     "sass": "^1.43.4",
     "sass-loader": "^12.3.0",
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.2",
+    "typescript-eslint": "^8.1.0",
     "webpack": "^5.64.2",
     "webpack-cli": "^4.9.1",
     "webpack-merge": "^5.8.0"

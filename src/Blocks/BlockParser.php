@@ -2,14 +2,20 @@
 
 namespace VanOns\Laraberg\Blocks;
 
+use VanOns\Laraberg\Blocks\Wordpress\WordPressBlockParser;
+
 class BlockParser
 {
-    /** @var WP_Block_Parser */
-    protected WP_Block_Parser $parser;
+    /**
+     * @var WordPressBlockParser
+     */
+    protected WordPressBlockParser $parser;
 
-    public function __construct(WP_Block_Parser $parser) {
+    public function __construct(WordPressBlockParser $parser)
+    {
         $this->parser = $parser;
     }
+
     /**
      * @param string $content
      * @return Block[]

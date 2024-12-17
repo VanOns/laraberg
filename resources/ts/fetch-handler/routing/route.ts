@@ -1,11 +1,11 @@
-import { APIFetchOptions } from "@van-ons/block-editor/dist/interfaces/fetch-handler"
+import { APIFetchOptions } from '@van-ons/block-editor/dist/interfaces/fetch-handler'
 
 class Route {
     public method: string
     public regex: RegExp
     public handler: (params: object) => any
 
-    constructor (method: string, regex: RegExp, handler: (params: object) => any) {
+    constructor(method: string, regex: RegExp, handler: (params: object) => any) {
         this.method = method
         this.regex = regex
         this.handler = handler
@@ -27,7 +27,7 @@ class Route {
         return new Route('DELETE', regex, handler)
     }
 
-    handle (options: APIFetchOptions): Promise<any> {
+    handle(options: APIFetchOptions): Promise<any> {
         return Promise.resolve(
             this.handler(options)
         )
