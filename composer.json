@@ -36,5 +36,7 @@
     "scripts": {
         "fix": "vendor/bin/php-cs-fixer fix",
         "analyse": "vendor/bin/phpstan analyse"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
