@@ -13,4 +13,23 @@ the following command:
 php artisan vendor:publish --provider="VanOns\Laraberg\LarabergServiceProvider" --tag="public" --force
 ```
 
+## v1 to v2
+
+There are some big changes in Laraberg v2.
+
+- Content is now stored in a column of the model's table.
+- WordPress packages are available in Javascript. This means we can use a lot of the functionality, like hooks, that's already available in Gutenberg.
+- `@van-ons/block-editor` is used to render the editor. This makes it a lot easier to keep up with the latest Gutenberg versions.
+- Server side rendered blocks are now supported.
+
+Unfortunately this means that updating to v2 is not as straight-forward as we would like it to be.
+
+- `Gutenbergable` is no longer used, instead use `RendersContent`.
+    - Rendered content is no longer stored in a table, so to migrate to v2 you have to move all content from the `raw_content` column in the `lb_contents` table to a column on your model's table.
+- `Laraberg.registerBlock` was renamed to `Laraberg.registerBlockType`.
+- `Laraberg.registerCategory` was removed, you can use the WordPress exports to register categories.
+- The configurable sidebar was removed.
+- Laravel File Manager is no longer supported.
+    - This can be solved by implementing your own `mediaUpload` function and passing it as an editor setting.
+
 [issues]: https://github.com/VanOns/laraberg/issues
